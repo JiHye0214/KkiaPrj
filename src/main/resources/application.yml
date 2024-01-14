@@ -1,0 +1,47 @@
+# 서버 포트 번호
+server:
+  port: 8080
+
+spring:
+  # 콘솔 ANSI 색상
+  output:
+    ansi:
+      enabled: always
+
+  # Thymeleaf 설정
+  thymeleaf:
+    cache: false
+    prefix: classpath:templates/views/
+
+  # datasource 설정
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kkiatigers?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: kkia
+    password: rldkdntmd
+
+  # JPA설정
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+    hibernate:
+      ddl-auto: update
+
+  # Security 설정
+  security:
+    user:
+      name: user
+      password: 1111
+
+app:
+  # 페이징 관련 세팅값
+  pagination:
+    write_pages: 10
+    page_rows: 10
+
+  #파일 업로드 경로
+  upload:
+    path: upload
