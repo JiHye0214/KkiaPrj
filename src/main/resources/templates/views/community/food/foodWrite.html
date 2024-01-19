@@ -9,12 +9,9 @@
         <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/community/foodWrite.css}" />
-        <script defer th:src="@{/js/community/foodWrite.js}"></script>
-        <script
-            type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02d9a33ac12fb7a7edb7579360286569&libraries=services"
-        ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02d9a33ac12fb7a7edb7579360286569&libraries=services"></script>
+        <script defer th:src="@{/js/community/foodWrite.js}"></script>
         <title>구장별 맛집 작성</title>
     </head>
     <body>
@@ -45,12 +42,13 @@
                     </div>
                 </div>
 
+                <p class="search-err-msg"></p>
                 <div id="search-map-wrap" class="display-flex padding-line">
                     <div id="menu-wrap">
                         <div id="search-wrap" class="display-flex">
-                            <form method="post" th:action="@{#}" onsubmit="searchPlaces(); return false;" class="display-flex">
-                                <input type="text" id="keyword" placeholder="맛집 검색" name="keyword" :value="" />
-                                <button type="submit" id="search-btn" style="font-size: 16px">검색</button>
+                            <form method="post" th:action="@{#}" onsubmit="searchPlaces(); return false;" id="search-form" class="display-flex" autocomplete="off">
+                                <input type="text" id="keyword" placeholder="맛집 검색" name="keyword" />
+                                <button type="submit" id="search-btn"></button>
                             </form>
                         </div>
 

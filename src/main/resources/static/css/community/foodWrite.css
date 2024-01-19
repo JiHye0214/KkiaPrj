@@ -69,7 +69,7 @@ main {
     display: none;
     position: absolute;
     width: 140.4px;
-    top: 98.5px;
+    top: 97.5px;
     right: 0;
     font-size: 20px;
     z-index: 10;
@@ -123,9 +123,9 @@ main {
     padding: 20px;
     width: 90%;
     border: none;
-    border-right: 2px solid;
+    /* border-right: 2px solid; */
     border-radius: 3px 0 0 0;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 600;
 
     &:focus {
@@ -136,21 +136,17 @@ main {
         color: rgb(190, 190, 190);
     }
 }
-
+#search-form {
+    align-items: center;
+}
 #search-btn {
-    padding-left: 4px;
-    font-size: 20px;
-    font-weight: 500;
+    margin-right: 14px;
     width: 12%;
+    height: 45px;
     outline: none;
     border: none;
-    letter-spacing: 5px;
     cursor: pointer;
-    background-color: white;
-
-    &:hover {
-        background-color: var(--yellow-btn);
-    }
+    background: url(../../img/search.png) no-repeat center / 30px auto;
 }
 
 /* ------------------------------------------------------------ */
@@ -161,7 +157,7 @@ main {
     cursor: pointer;
 }
 #placesList .item h5 {
-    font-size: 18px;
+    font-size: 16px;
 }
 #placesList .item span {
     display: block;
@@ -182,58 +178,58 @@ main {
 }
 #placesList .info .jibun {
     padding-left: 34px;
-    background: url(../img/jibun.png) no-repeat 0% 180% / 30px auto;
+    background: url(../../img/jibun.png) no-repeat 0% 180% / 30px auto;
 }
 #placesList .item .markerbg {
     width: 11%;
     height: 44px;
-    margin: 12px 0 10px 5px;
-    background: url(../img/markers.png) no-repeat top / 42px;
+    margin: 12px 0 10px 10px;
+    background: url(../../img/markers.png) no-repeat top / 38px;
 }
 #placesList .item .marker_1 {
     background-position: 0 0;
 }
 #placesList .item .marker_2 {
-    background-position: 0 -51px;
+    background-position: 0 -52px;
 }
 #placesList .item .marker_3 {
-    background-position: 0 -101px;
+    background-position: 0 -105px;
 }
 #placesList .item .marker_4 {
-    background-position: 0 -152px;
+    background-position: 0 -157px;
 }
 #placesList .item .marker_5 {
-    background-position: 0 -203px;
+    background-position: 0 -209px;
 }
 #placesList .item .marker_6 {
-    background-position: 0 -253px;
+    background-position: 0 -262px;
 }
 #placesList .item .marker_7 {
-    background-position: 0 -304px;
+    background-position: 0 -314px;
 }
 #placesList .item .marker_8 {
-    background-position: 0 -355px;
+    background-position: 0 -366px;
 }
 #placesList .item .marker_9 {
-    background-position: 0 -406px;
+    background-position: 0 -419px;
 }
 #placesList .item .marker_10 {
-    background-position: 0 -456px;
+    background-position: 0 -471px;
 }
 #placesList .item .marker_11 {
-    background-position: 0 -507px;
+    background-position: 0 -523px;
 }
 #placesList .item .marker_12 {
-    background-position: 0 -558px;
+    background-position: 0 -576px;
 }
 #placesList .item .marker_13 {
-    background-position: 0 -609px;
+    background-position: 0 -628px;
 }
 #placesList .item .marker_14 {
-    background-position: 0 -660px;
+    background-position: 0 -680px;
 }
 #placesList .item .marker_15 {
-    background-position: 0 -710px;
+    background-position: 0 -733px;
 }
 
 #pagination {
@@ -255,10 +251,11 @@ main {
 #map {
     width: 70%;
     border: 2px solid;
+    border-radius: 0 5px 5px 0;
 }
 .infoWindow {
     width: 250px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 /* ------------------------------------------------------------ */
@@ -266,17 +263,20 @@ main {
 .err-wrap {
     column-gap: 25px;
 }
-.err-msg {
+.err-wrap > :nth-child(1) {
+    width: 86%;
+}
+.err-msg,
+.info-err-msg,
+.search-err-msg {
     font-size: 14px;
     color: red;
     margin-bottom: 7px;
     display: none;
 }
-.err-wrap > :nth-child(1) {
-    width: 86%;
-}
-.content-err-msg {
+.info-err-msg {
     margin-top: 7px;
+    margin-bottom: 0;
 }
 
 /* ------------------------------------------------------------ */
@@ -346,7 +346,7 @@ main {
     width: 100%;
     content: "\00d7";
     font-size: 14pt;
-    font-weight: 600;
+    font-weight: 800;
     color: rgb(255, 61, 39);
     cursor: pointer;
 }

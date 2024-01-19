@@ -93,7 +93,7 @@ main {
         padding: 0;
     }
 }
-.store-name {
+.store-name-wrap {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -107,7 +107,7 @@ main {
 .info {
     font-size: 18px;
     text-align: justify;
-    
+
 }
 
 /* ------------------------------------------------------------ */
@@ -134,5 +134,3 @@ main {
         background-color: var(--yellow-btn);
     }
 }
-
-
