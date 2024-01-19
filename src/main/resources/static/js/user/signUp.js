@@ -82,7 +82,7 @@ const setErrMsg = (message) => {
     setTimeout(function () {
         $errorMsg.classList.remove("login-valid");
     }, 2000);
-    $errorMsg.innerHTML = `<div class="display-flex-set"><img src="./img/warning.png" width="35px"/> ${message}</div>`;
+    $errorMsg.innerHTML = `<div class="display-flex-set"><img src="/img/warning.png" width="35px"/> ${message}</div>`;
 };
 
 $signupBtn.addEventListener("click", clickSignupBtn);

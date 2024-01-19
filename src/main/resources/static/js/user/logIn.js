@@ -20,7 +20,7 @@ const clickLoginBtn = () => {
                 setTimeout(function () {
                     $errorMsg.classList.remove("login-valid");
                 }, 2000);
-                $errorMsg.innerHTML = `<div class="display-flex-set"><img src="./img/warning.png" width="35px"/> ${input.placeholder} 을(를) 입력해 주세요</div>`;
+                $errorMsg.innerHTML = `<div class="display-flex-set"><img src="/img/warning.png" width="35px"/> ${input.placeholder} 을(를) 입력해 주세요</div>`;
                 stop = true;
             }
         }
