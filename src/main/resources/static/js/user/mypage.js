@@ -7,8 +7,9 @@ const $modal = document.querySelector("#diray-modal-wrap");
 const $modalAddBtn = document.querySelector("#modal-add-btn");
 const $closeModalBtn = document.querySelector("#close-btn");
 const $modalDate = document.querySelector("#modal-date");
-const $modalPlace = document.querySelector("#modal-place");
+const $modalPlace = document.querySelector("#modal-region");
 const $modalResultArr = document.querySelectorAll("#result-wrap > div");
+const $modalMemo = document.querySelector("#memo");
 const resultArr = ["win", "draw", "lose", "cancel"];
 
 // 왼쪽 ------------------------------------------------------------------------
@@ -78,11 +79,11 @@ $userModifyBtn.addEventListener("click", clickUserModifyBtn);
 
 // Diary --------------------------------------------------------------------------
 const recordArr = [
-    { recordDate: "2024.1.3", recordResult: "cancel" },
-    { recordDate: "2024.1.15", recordResult: "win" },
-    { recordDate: "2024.1.9", recordResult: "lose" },
-    { recordDate: "2024.1.31", recordResult: "draw" },
-    { recordDate: "2024.1.19", recordResult: "win" },
+    { recordDate: "2024.1.3", recordResult: "cancel", recordRegion: "광주기아챔피언스필드", recordMemo: "굿"},
+    { recordDate: "2024.1.15", recordResult: "win", recordRegion: "잠실종합운동장", recordMemo: "굿" },
+    { recordDate: "2024.1.9", recordResult: "lose", recordRegion: "고척스카이돔", recordMemo: "굿" },
+    { recordDate: "2024.1.31", recordResult: "draw", recordRegion: "수원KT위즈파크", recordMemo: "굿" },
+    { recordDate: "2024.1.19", recordResult: "win", recordRegion: "인천SSG랜더스필드", recordMemo: "굿" },
 ];
 
 const diraySetting = () => {
@@ -97,13 +98,13 @@ const diraySetting = () => {
 
         recordArr.forEach((record) => {
             if (record.recordDate == that) { // 기록 있으면
-                date.classList.add(`${record.recordResult}`);
+                date.classList.add(`${record.recordResult}`); // 달력에 표시하기
             }
         })
 
         date.onclick = () => {
             $modal.style.visibility = `visible`;
-            $modalDate.innerHTML = `${$month.innerText}.${date.innerText}`;
+            $modalDate.innerHTML = `${$month.innerText}.${date.innerText}`; // 모달 날짜 표시 (기본)
 
             // 시작 셋팅
             $modalResultArr.forEach((modalResult) => {
@@ -114,8 +115,9 @@ const diraySetting = () => {
                 let recordDateLast = record.recordDate.split(".")[2];
                 if(recordDateLast == date.innerHTML) { // 기록 있으면
                     index = resultArr.indexOf(`${record.recordResult}`);
-                    $modalResultArr[index].style.opacity = `1`;
-                    console.log($modalPlace);
+                    $modalResultArr[index].style.opacity = `1`; // 모달 결과 표시
+                    $modalPlace.value = record.recordRegion; // 모달 지역 표시
+                    $modalMemo.value = record.recordMemo; // 모달 메모 표시
                 }
             })
 
@@ -127,7 +129,7 @@ const diraySetting = () => {
     };
 };
 
-// submit setting ------------------
+// 모달 작성하기 ------------------------------------------------------------
 const $date = document.querySelector("#modal-date");
 const $dateInput = document.querySelector("#modal-date-input");
 const $resultArr = document.querySelectorAll("#result-wrap > div");
@@ -151,7 +153,7 @@ $resultArr.forEach((text, index) => {
 });
 
 // ✅ 직관기록 submit
-const clickAddBtn = () => {
+$modalAddBtn.onclick = () => {
     $dateInput.value = $date.innerText;
     if (!resultCheck) {
         $dirayErrMsg.innerHTML = `* 경기 결과를 체크해 주세요`;
@@ -160,9 +162,7 @@ const clickAddBtn = () => {
     }
 };
 
-$modalAddBtn.addEventListener("click", clickAddBtn);
-
-// 달력 ------------------
+// 달력 그리기 ------------------------------------------------------------
 $(document).ready(function () {
     calendarInit();
 });
