@@ -545,7 +545,7 @@ input[name="memo"] {
     line-height: 50px;
     font-weight: 500;
     color: white;
-    opacity: 0.5;
+    opacity: 0.3;
 
     &:nth-child(1) {
         background-color: var(--kia-red);
