@@ -265,6 +265,7 @@ $("#drop-user-btn").click(function() {
 
 $("#drop-close-btn").click(function() {
     $("#drop-modal-wrap").css('visibility', '');
+    $(".drop-input").val("");
 })
 
 $("#drop-submit-btn").click(function() {
@@ -273,7 +274,7 @@ $("#drop-submit-btn").click(function() {
         $("#drop-title").css('marginBottom', '15px');
         $("#drop-valid-msg").css('display', 'block');
     } else {
-        $("#drop-title").css('marginBottom', '40px');
-        $("#drop-valid-msg").css('display', 'none');
+        $("#drop-content").submit();
+        $(".drop-input").val("");
     }
 })
