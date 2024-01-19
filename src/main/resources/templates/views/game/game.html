@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/game/game.css}" />
+        <script defer th:src="@{/js/game/game.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <title>공식 일정</title>
+    </head>
+    <body>
+        <!--/* header */-->
+        <th:block th:insert="~{fragment/header::header}"></th:block>
+
+    <div id="game-wrapper" class="display-flex">
+            <div class="cal-wrap display-flex">
+                <div id="game-banner" class="display-flex-set">
+                    <div id="game-banner-text">기아 타이거즈 공식 일정</div>
+                </div>
+                <div id="cal-banner" class="display-flex">
+                    <div id="cal-color" class="display-flex-set">
+                        <div>🟥HOME</div>
+                        <div>⬜AWAY</div>
+                    </div>
+                    <div id="win-graph" class="display-flex-set">
+                        <div>🔥</div>
+                        <div>0.666</div>
+                    </div>
+                </div>
+                <div class="cal-nav display-flex-set">
+                    <a href="javascript:;" class="nav-btn go-prev"></a>
+                    <div class="year-month"></div>
+                    <a href="javascript:;" class="nav-btn go-next"></a>
+                </div>
+                
+                <div class="cal-main">
+                    <div class="cal-days display-flex">
+                        <div class="day">MON</div>
+                        <div class="day">TUE</div>
+                        <div class="day">WED</div>
+                        <div class="day">THU</div>
+                        <div class="day">FRI</div>
+                        <div class="day">SAT</div>
+                        <div class="day">SUN</div>
+                    </div>
+                    <div class="dates"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

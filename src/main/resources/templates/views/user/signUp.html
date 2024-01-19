@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/user/logIn.css}" />
+        <script defer th:src="@{/js/user/signUp.js}"></script>
+        <title>회원가입</title>
+    </head>
+    <body>
+        <div class="auth-wrapper">
+            <div id="signup-wrapper" class="display-flex-set">
+                <div class="error-msg"></div>
+                <a th:href="@{/home}"><img src="/img/KKIA2-removebg.png" class="logo" /></a>
+                <form method="post" id="signup-content" class="display-flex-set">
+                    <input name="loginId" class="login-items signup-input" type="text" placeholder="아이디" />
+                    <input name="password" class="login-items signup-input" type="password" placeholder="비밀번호" />
+                    <input class="login-items signup-input" type="password" placeholder="비밀번호 확인" />
+                    <input name="name" class="login-items signup-input" type="text" placeholder="이름" />
+                    <input name="email" class="login-items signup-input" type="text" placeholder="이메일" />
+                    <input name="nickname" class="login-items signup-input" type="text" placeholder="닉네임" />
+                    <div id="add-wrap" class="display-flex-set login-items signup-input">
+                        <label>
+                            생년월일
+                            <input name="birth" class="choice-wrap" type="date" value="0000-00-00" />
+                        </label>
+                        <div class="display-flex">
+                            <div id="gender">성별</div>
+                            <div class="choice-wrap">
+                                <label for="radio-female">
+                                    <input name="gender" id="radio-female" type="radio" value="여자" />
+                                    여
+                                </label>
+                                <label for="radio-male">
+                                    <input name="gender" id="radio-male" type="radio" value="남자" />
+                                    남
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="login-items" id="signup-btn" type="button" value="회원가입" />
+                </form>
+            </div>
+            
+            <div>
+                <img id="login-picture" src="/img/챔필.jpg" />
+            </div>
+        </div>
+    </body>
+</html>

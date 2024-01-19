@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/community/favoriteWrite.css}" />
+        <script defer th:src="@{/js/common/attachment.js}"></script>
+        <script defer th:src="@{/js/community/favoriteWrite.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <title>최애 자랑 게시판 작성</title>
+    </head>
+    <body>
+        <!--/* header */-->
+        <th:block th:insert="~{fragment/header::header}"></th:block>
+
+        <div id="favorite-wrap">
+            <div id="writer-wrap" class="display-flex">
+                <img src="/img/핑구1.jpg" />
+                <div id="nickname">어우기</div>
+            </div>
+
+            <form method="post" name="write-form" th:action="@{#}" autocomplete="off">
+                <div id="write-info-wrap">
+                    <div class="err-wrap display-flex">
+                        <div>
+                            <p class="err-msg">* 제목을 입력해 주세요</p>
+                        </div>
+                        <div>
+                            <p class="err-msg">* 선수 이름을 입력해 주세요</p>
+                        </div>
+                        <div>
+                            <p class="err-msg">* 번호를 입력해 주세요</p>
+                        </div>
+                    </div>
+
+                    <div id="write-info" class="display-flex">
+                        <input type="text" id="title" class="valid" placeholder="제목" name="title" />
+                        <input type="text" id="playerName" class="valid" placeholder="선수 이름" name="playerName" />
+                        <input type="text" id="num" class="valid" placeholder="번호" name="num" />
+                    </div>
+                </div>
+
+                <div class="fileBox">
+                    <div>선수 이미지</div>
+                    <p class="file-err-msg">* 사진을 하나 이상 업로드 해 주세요</p>
+                    <div class="picture-btn">파일 추가</div>
+                    <div class="confirm-box-wrap display-flex"></div>
+                </div>
+
+                <div id="btn-wrap" class="display-flex">
+                    <button type="button" id="submit-btn">작성완료</button>
+                    <a th:href="@{/community/favorite/favoriteList}">목록</a>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

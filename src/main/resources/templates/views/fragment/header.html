@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="header">
+    <head>
+        <link rel="stylesheet" th:href="@{/css/common/header.css}" />
+        <script defer th:src="@{/js/common/header.js}"></script>
+    </head>
+    <header>
+        <div class="display-flex-set">
+            <a th:href="@{/home}"><img src="/img/KKIA2-removebg.png" id="logo" /></a>
+            <a th:href="@{/game/game}" class="header-menu">GAME</a>
+            <a th:href="@{/market/marketList}" class="header-menu">MARKET</a>
+            <a th:href="@{/community/community}" class="header-menu">COMMUNITY</a>
+        </div>
+        <div class="display-flex-set">
+            <a th:href="@{/user/mypage}">
+                <img class="header-mypage" src="/img/tiger.png" />
+            </a>
+            <a id="login-btn" th:href="@{/user/login}">LOGIN</a>
+            <!-- intelliJ : login/logout 텍스트만 바꾸기 -->
+        </div>
+    </header>
+</th:block>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/market/marketDetail.css}" />
+        <title>마켓 상세</title>
+    </head>
+    <body>
+        <!--/* header */-->
+        <th:block th:insert="~{fragment/header::header}"></th:block>
+
+
+        <div id="marketDetail-wrap">
+            <div id="content-wrap" class="display-flex">
+                <div id="detail-wrap" class="display-flex">
+                    <div id="detail-header-wrap" class="display-flex-set">
+                        <div id="writer-wrap" class="display-flex">
+                            <img class="writer-pic" src="/img/핑구1.jpg" />
+                            <div class="writer-nickname">어우기</div>
+                        </div>
+
+                        <div id="num-wrap" class="display-flex">
+                            <div class="display-flex-set">
+                                <div>조회수</div>
+                                <div>13</div>
+                            </div>
+                            <div class="display-flex-set">
+                                <div>작성일</div>
+                                <div>2023-12-05</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="txt-content-wrap" class="display-flex">
+                        <div class="txt-wrap display-flex">
+                            <div id="product-price">50,000원</div>
+                            <div id="product-region" class="display-flex-set">
+                                <img id="map-mark" src="/img/location.png">
+                                광주광역시 북구
+                            </div>
+                        </div>
+                        <div id="product-title">안녕하세요안녕하세요</div>
+                    </div>
+                    <div id="product-content">챔필 앞에서 직거래 원합니다</div>
+                </div>
+
+                <div class="swiper padding-line display-flex">
+                    <div class="swiper-slide">
+                        <img src="/img/goods.jpg" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="btn-wrap" class="display-flex">
+                <a th:href="@{/market/marketWrite}">작성</a>
+                <a th:href="@{/market/marketUpdate}">수정</a>
+                <form method="post" th:action="@{#}">
+                    <button type="button">삭제</button>
+                </form>
+                <a th:href="@{/market/marketList}">목록</a>
+            </div>
+
+            <!--/* comment */-->
+            <th:block th:insert="~{fragment/comment::comment}"></th:block>
+        </div>
+    </body>
+</html>

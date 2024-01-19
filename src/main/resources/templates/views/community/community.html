@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/community/community.css}" />
+        <script defer th:src="@{/js/community/community.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <title>커뮤니티</title>
+    </head>
+    <body>
+        <!--/* header */-->
+        <th:block th:insert="~{fragment/header::header}"></th:block>
+
+        <div id="community-home-wrapper">
+            <div class="community-home-content display-flex">
+                <div id="chatting-live">REAL-TIME CHAT</div>
+                
+                <div id="chatting-wrap" class="display-flex">
+                    <div class="chatting-items">
+                        <div class="chatting-writer">작성자</div>
+                        <div class="chatting-content">안녕</div>
+                    </div>
+                </div>
+
+                <form method="post" th:action="@{#}" id="chatting-form" class="display-flex">
+                    <input name="chat" type="text" />
+                    <input type="submit" value="전송" />
+                </form>
+            </div>
+
+            <div class="community-home-content display-flex-set">
+                <div id="food-wrapper" class="community-common-wrap display-flex-set">
+                    <a th:href="@{/community/food/foodList}" class="community-common-title">구장별 맛집 추천</a>
+                </div>
+            </div>
+
+            <div class="community-home-content display-flex-set">
+                <div id="love-wrapper" class="community-common-wrap display-flex-set">
+                    <a th:href="@{/community/favorite/favoriteList}" class="community-common-title">최애 자랑 게시판</a>
+                </div>
+            </div>
+
+            <div class="community-home-content display-flex-set">
+                <div id="free-wrapper" class="community-common-wrap display-flex-set">
+                    <a th:href="@{/community/post/postList}" class="community-common-title">자유 게시판</a>
+                </div>
+            </div>
+
+            <div class="community-home-content display-flex-set">
+                <div id="site-wrapper" class="community-common-wrap display-flex-set">
+                    <div id="site-content">
+                        <a href="https://tigers.co.kr/">
+                            <div>공식 사이트<br />바로가기</div>
+                        </a>
+                        <a href="https://www.youtube.com/@kiatigerstv">
+                            <div>공식 유튜브<br />바로가기</div>
+                        </a>
+                        <a href="https://teamstore.tigers.co.kr/">
+                            <div>팀스토어<br />바로가기</div>
+                        </a>
+                        <a href="https://cafe.naver.com/kiawin">
+                            <div>네이버 팬카페<br />바로가기</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

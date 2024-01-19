@@ -1,0 +1,148 @@
+/* 공통 ---------------------------------- */
+.logo {
+    width: 300px;
+}
+
+#login-wrapper,
+#signup-wrapper {
+    float: left;
+    width: 450px;
+    height: 100vh;
+    flex-direction: column;
+}
+
+#login-content,
+#signup-content {
+    margin-top: 40px;
+    position: relative;
+    flex-direction: column;
+}
+
+.login-items {
+    width: 350px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    background-color: #ffeded;
+    &:focus {
+        outline: none;
+    }
+}
+
+.login-input {
+    padding: 0 18px 0 60px;
+
+    &::placeholder {
+        opacity: 0;
+    }
+}
+
+.signup-input {
+    padding: 0 18px;
+    color: #eb6780;
+
+    &:nth-child(7) {
+        background-color: rgb(235, 235, 235);
+    }
+
+    &::placeholder {
+        color: #eb6780;
+    }
+}
+
+#login-btn,
+#signup-btn {
+    background-color: var(--yellow-btn);
+    color: rgb(214, 147, 2);
+    font-weight: 500;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--yellow-btn-hover);
+    }
+}
+
+#login-picture {
+    width: calc(100% - 450px);
+    height: 100vh;
+    position: absolute;
+}
+
+/* 로그인 ---------------------------------- */
+#login-menu-wrap {
+    justify-content: space-between;
+    width: 350px;
+    font-size: 14px;
+}
+
+#login-menu-wrap > a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* 로그인 이미지 */
+label > img {
+    position: absolute;
+    left: 0px;
+    background: #ffdae1;
+    border-radius: 20px 0 0 20px;
+    padding: 5px;
+    width: 50px;
+}
+
+#login-id-img {
+    top: 0px;
+}
+
+#login-pw-img {
+    top: 60px;
+    padding: 10px;
+}
+
+/* 회원가입 ---------------------------------- */
+#add-wrap {
+    justify-content: space-between;
+}
+
+#gender {
+    margin-right: 5px;
+    line-height: 26px;
+}
+
+.choice-wrap {
+    background-color: white;
+    padding: 2px 5px;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+}
+
+/* validation ---------------------------------- */
+.error-msg {
+    background-color: rgb(227, 227, 227);
+    font-weight: 500;
+    width: 350px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+    position: fixed;
+    top: -70px;
+}
+
+.login-valid {
+    animation: slide 3s cubic-bezier(0, 1, 0, 1);
+}
+
+@keyframes slide {
+    from {
+        top: -70px;
+    }
+    50% {
+        top: 0px;
+    }
+    to {
+        top: -70px;
+    }
+}

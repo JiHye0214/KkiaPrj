@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/community/foodWrite.css}" />
+        <script defer th:src="@{/js/community/foodWrite.js}"></script>
+        <title>구장별 맛집 수정</title>
+    </head>
+    <body>
+        <!--/* header */-->
+        <th:block th:insert="~{fragment/header::header}"></th:block>
+
+        <!-- foodWrite 완료 후 foodUpdate 수정 -->
+        <div id="foodWrite-wrap">
+            <div id="writer-wrap" class="display-flex padding-line">
+                <img src="/img/핑구1.jpg" />
+                <div id="nickname">어우기</div>
+            </div>
+
+            <form method="post" name="write-form" th:action="@{#}" autocomplete="off">
+                <div id="write-info-wrap">
+                    <div id="write-info" class="padding-line display-flex">
+                        <input type="text" id="productName" placeholder="제목" name="productName" th:value="광주 찐맛집 추천" />
+                        <input type="text" id="price" placeholder="식당 이름" name="price" th:value="준식당" />
+                        <input type="text" id="region" placeholder="지역선택" name="region" th:value="광주" />
+                    </div>
+
+                    <div class="err-wrap display-flex">
+                        <div>
+                            <p class="err-msg">제목을 입력해 주세요</p>
+                        </div>
+                        <div>
+                            <p class="err-msg">식당 이름을 입력해 주세요</p>
+                        </div>
+                        <div>
+                            <p class="err-msg">지역을 입력해 주세요</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="write-content-wrap">
+                    <textarea id="content" name="content" placeholder="소개 내용을 입력해 주세요">
+                        로컬 식당이라 주민들밖에 모르는데 택시 기사님 추천받아서 갔다 왔어요. 저렴하고 맛있고 푸짐해요. 완전 추천합니다!
+                    </textarea>
+                    <p class="err-msg">내용을 입력해 주세요</p>
+                </div>
+
+                <!-- <div class="fileBox padding-line">
+                    <div>상품 이미지</div>
+                    <label for="file" class="picture-btn">파일 선택</label>
+                    <input type="file" id="file" class="product-pic" name="productImg" accept="image/*" style="display: none" />
+                    <div class="confirmBox">pic.jpg</div>
+                </div> -->
+
+                <div id="btn-wrap" class="display-flex">
+                    <button type="button" id="submit-btn">작성완료</button>
+                    <a th:href="@{/community/food/foodList}">목록</a>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

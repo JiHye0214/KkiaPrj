@@ -1,0 +1,111 @@
+.logo {
+    width: 300px;
+}
+
+#find-wrapper {
+    float: left;
+    width: 450px;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.find-content {
+    position: relative;
+    flex-direction: column;
+    text-align: center;
+}
+
+#login-picture {
+    width: calc(100% - 450px);
+    height: 100vh;
+    position: absolute;
+}
+
+#find-menu-wrap {
+    background-color: #f0f0f0;
+    margin: 40px 0 10px;
+    width: 350px;
+    height: 50px;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.find-menu-item {
+    width: 175px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+
+    &:first-of-type {
+        background-color: rgb(222, 222, 222);
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.find-items {
+    width: 350px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    background-color: #ffeded;
+    padding: 0 18px;
+    color: #eb6780;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::placeholder {
+        color: #eb6780;
+    }
+}
+
+.find-btn {
+    background-color: rgb(255, 239, 158);
+    color: rgb(214, 147, 2);
+    font-weight: 500;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgb(255, 234, 129);
+    }
+}
+
+form[name="find-pw"] {
+    display: none;
+}
+
+.error-msg {
+    background-color: rgb(227, 227, 227);
+    font-weight: 500;
+    width: 350px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+    position: fixed;
+    top: -70px;
+}
+
+.login-valid {
+    animation: slide 3s cubic-bezier(0, 1, 0, 1);
+}
+
+@keyframes slide {
+    from {
+        top: -70px;
+    }
+    50% {
+        top: 0px;
+    }
+    to {
+        top: -70px;
+    }
+}

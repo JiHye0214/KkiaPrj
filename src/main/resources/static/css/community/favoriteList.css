@@ -1,0 +1,114 @@
+main {
+    width: 1200px;
+    margin: 0px auto 50px;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 20px;
+}
+button {
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------ */
+#list-header-wrap {
+    flex-direction: column;
+    row-gap: 20px;
+}
+#list-header-txt {
+    text-align: center;
+    border-bottom: 2px solid;
+    padding: 20px 0 40px;
+    font-size: 30px;
+    font-weight: 600;
+}
+#list-search-wrap {
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+[name="search-form"] {
+    column-gap: 20px;
+}
+#write-btn, [name="search-form"] * {
+    font-size: 16px;
+    font-weight: 600;
+    height: 39px;
+    line-height: 34px;
+    border-radius: 5px;
+    border: 2px solid;
+    padding: 0 10px;
+    background-color: white;
+    outline: none;
+}
+#write-btn, #initial-btn, #search-btn {
+    &:hover {
+        background-color: var(--yellow-btn);
+    }
+}
+#search-input::placeholder {
+    color: rgb(207, 207, 207);
+}
+
+/* ------------------------------------------------------------ */
+
+#list-wrap {
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-bottom: 20px;
+    min-height: 400px;
+}
+.list-content {
+    width: 215px;
+    height: 215px;
+    position: relative;
+    border-radius: 5px;
+    border: 2px solid;
+    overflow: hidden;
+}
+.list-content > a {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.favorite-img {
+    position: absolute;
+    width: 100%;
+}
+
+.player-info-wrap {
+    position: absolute;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    font-weight: 600;
+    font-size: 20px;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+.player-info-wrap * {
+    color: white;
+}
+.num-name-wrap {
+    column-gap: 10px;
+    font-size: 32px;
+}
+
+.content-zzimBtn {
+    position: absolute;
+    bottom: 8px;
+    right: 20px;
+}
+#heart {
+    /* fill: rgb(255, 110, 110); */
+    fill: white;
+    width: 40px;
+    stroke: #333;
+    stroke-width: 60px;
+    cursor: pointer;
+}
+

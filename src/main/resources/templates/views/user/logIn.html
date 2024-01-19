@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/user/logIn.css}" />
+        <script defer th:src="@{/js/user/logIn.js}"></script>
+        <title>로그인</title>
+    </head>
+    <body>
+        <div class="auth-wrapper">
+            <div id="login-wrapper" class="display-flex-set">
+                <div class="error-msg"></div>
+                <a th:href="@{/user}"><img src="/img/KKIA2-removebg.png" class="logo" /></a>
+                <form method="post" th:action="@{#}" id="login-content" class="display-flex-set">
+                    <label for="login-id">
+                        <img src="/img/loginTiger.png" id="login-id-img" />
+                        <input id="login-id" name="loginId" class="login-items login-input" type="text" placeholder="아이디" />
+                    </label>
+                    <label for="login-pw">
+                        <img src="/img/loginPassword.png" id="login-pw-img" />
+                        <input
+                            id="login-pw"
+                            name="password"
+                            class="login-items login-input"
+                            type="password"
+                            placeholder="비밀번호"/>
+                    </label>
+                    <input class="login-items" id="login-btn" type="button" value="로그인" />
+                </form>
+                <div id="login-menu-wrap" class="display-flex">
+                    <a th:href="@{/user/find}">아이디/비밀번호 찾기</a>
+                    <a th:href="@{/user/signUp}">회원가입</a>
+                </div>
+            </div>
+            
+            <div>
+                <img id="login-picture" src="/img/2017.jpg" />
+            </div>
+        </div>
+    </body>
+</html>

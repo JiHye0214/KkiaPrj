@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="comment">
+    <head>
+        <link rel="stylesheet" th:href="@{/css/common/comment.css}" />
+        <script defer th:src="@{/js/common/comment.js}"></script>
+    </head>
+    <div id="comment-wrap">
+        <div id="comment-content-wrap" class="display-flex">
+            <form method="post" th:action="@{#}" autocomplete="off" class="comment-content display-flex">
+                <input type="hidden" name="id" />
+                <img class="writer-pic" src="/img/핑구1.jpg" />
+                <div class="writer-nickname">djdnrl</div>
+                <div class="write-content">거래하고 싶습니다 ~</div>
+                <div class="write-time">2023-12-05</div>
+                <input type="button" class="comment-delete-btn" value="삭제" />
+            </form>
+        </div>
+
+        <form method="post" th:action="@{#}" id="comment-write-wrap" class="comment-content display-flex">
+            <input type="hidden" name="marketId" />
+            <input type="hidden" name="userId" />
+            <img class="writer-pic" src="/img/핑구1.jpg" />
+            <div class="writer-nickname">어우기</div>
+            <input class="comment-input" type="text" placeholder="댓글을 입력하세요" />
+            <button type="button" class="comment-write-btn">작성</button>
+        </form>
+    </div>
+</th:block>
+</html>

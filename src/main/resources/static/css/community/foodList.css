@@ -1,0 +1,107 @@
+main {
+    width: 1200px;
+    margin: 0px auto 50px;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#list-header-wrap {
+    flex-direction: column;
+    row-gap: 20px;
+}
+#header-txt {
+    width: 100%;
+    padding: 20px 0 40px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    border-bottom: 2px solid;
+}
+#btn-wrap {
+    width: 100%;
+    justify-content: space-between;
+    column-gap: 20px;
+}
+#region-btn-wrap {
+    column-gap: 20px;
+}
+#write-btn,
+#region-btn-wrap > div {
+    padding: 0 10px;
+    line-height: 35px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 2px solid;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+#write-btn:hover {
+    background-color: var(--yellow-btn);
+}
+#region-btn-wrap > div > p {
+    &:hover {
+        color: black;
+    }
+}
+
+/* ------------------------------------------------------------ */
+
+#list-wrap {
+    margin: 20px 0;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    min-height: 300px;
+}
+.list-content {
+    position: relative;
+    height: 140px;
+}
+.list-content > a {
+    width: 372px;
+    height: 140px;
+    border: 2px solid;
+    border-radius: 5px;
+    background-color: #ebf0f2;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#region {
+    background-color: var(--kia-red);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 20px;
+}
+#title {
+    display: block;
+    font-weight: 600;
+    font-size: 24px;
+    width: 332px;
+    height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.content-zzimBtn {
+    position: absolute;
+    bottom: 36px;
+    right: 21px;
+    transform: translateY(50%);
+}
+#star{
+    /* fill: var(--yellow-btn); */
+    fill: white;
+    width: 40px;
+    stroke: #333;
+    stroke-width: 1;
+    cursor: pointer;
+}
+
