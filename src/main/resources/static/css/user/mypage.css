@@ -480,6 +480,7 @@
     position: relative;
 }
 
+#drop-close-btn,
 #close-btn {
     position: absolute;
     width: 40px;
@@ -634,5 +635,64 @@ input[name="memo"] {
     
     &:hover {
         color: red;
+    }
+}
+
+#drop-modal-wrap {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    background-color: rgba(193, 193, 193, 0.525);
+    visibility: hidden;
+}
+#drop-content {
+    width: 500px;
+    height: 250px;
+    background-color: white;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
+    flex-direction: column;
+}
+#drop-title {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 40px;
+}
+#drop-warn {
+    color: red;
+    font-size: 15px;
+    font-weight: 500;
+}
+#drop-valid-msg {
+    display: none;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+#drop-modal-wrap input {
+    width: 460px;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 500;
+
+    &:focus {
+        outline: none;
+    }
+    &:last-child {
+        margin-top: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: hsl(0, 100%, 79%);
+        }
     }
 }

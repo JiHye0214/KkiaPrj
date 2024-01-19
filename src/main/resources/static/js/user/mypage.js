@@ -254,3 +254,26 @@ function calendarInit() {
         renderCalender(thisMonth);
     });
 }
+
+// drop user ------------------------------------------------------------
+$("#drop-user-btn").click(function() {
+    let drop = confirm("정말 탈퇴하시겠습니까?");
+    if(drop) {
+        $("#drop-modal-wrap").css('visibility', 'visible');
+    }
+})
+
+$("#drop-close-btn").click(function() {
+    $("#drop-modal-wrap").css('visibility', '');
+})
+
+$("#drop-submit-btn").click(function() {
+
+    if(!$(".drop-input").val()) {
+        $("#drop-title").css('marginBottom', '15px');
+        $("#drop-valid-msg").css('display', 'block');
+    } else {
+        $("#drop-title").css('marginBottom', '40px');
+        $("#drop-valid-msg").css('display', 'none');
+    }
+})
