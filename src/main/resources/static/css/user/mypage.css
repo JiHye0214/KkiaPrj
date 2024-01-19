@@ -590,19 +590,19 @@ input[name="memo"] {
 }
 
 .win {
-    background-image: url("../img/win.png");
+    background-image: url("/img/win.png");
     background-size: 100%;
 } 
 .draw {
-    background-image: url("../img/draw.png");
+    background-image: url("/img/draw.png");
     background-size: 100%;
 }
 .lose {
-    background-image: url("../img/lose.png");
+    background-image: url("/img/lose.png");
     background-size: 100%;
 }
 .cancel {
-    background-image: url("../img/cancel.png");
+    background-image: url("/img/cancel.png");
     background-size: 100%;
 }
 
