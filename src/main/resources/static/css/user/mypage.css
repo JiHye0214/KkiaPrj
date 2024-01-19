@@ -589,21 +589,38 @@ input[name="memo"] {
     }
 }
 
-.win {
+/* 기록했을 때 */
+.cal-wrap .cal-main .dates .day > span.win {
     background-image: url("/img/win.png");
     background-size: 100%;
-} 
-.draw {
+    &:hover {
+        background-color: transparent;
+        border-radius: 0px;
+    }
+}
+.cal-wrap .cal-main .dates .day > span.draw {
     background-image: url("/img/draw.png");
     background-size: 100%;
+    &:hover {
+        background-color: transparent;
+        border-radius: 0px;
+    }
 }
-.lose {
+.cal-wrap .cal-main .dates .day > span.lose {
     background-image: url("/img/lose.png");
     background-size: 100%;
+    &:hover {
+        background-color: transparent;
+        border-radius: 0px;
+    }
 }
-.cancel {
+.cal-wrap .cal-main .dates .day > span.cancel {
     background-image: url("/img/cancel.png");
     background-size: 100%;
+    &:hover {
+        background-color: transparent;
+        border-radius: 0px;
+    }
 }
 
 /* drop user --------------------------------------------------------- */
