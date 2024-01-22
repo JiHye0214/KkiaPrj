@@ -2,6 +2,7 @@ const $loginBtn = document.querySelector("#login-btn");
 const $loginForm = document.querySelector("#login-content");
 const $loginInputArr = document.querySelectorAll("#login-content > label > input");
 const $errorMsg = document.querySelector(".error-msg");
+const $errText = document.querySelector(".error-msg-text");
 
 // login validation
 const clickLoginBtn = () => {
@@ -12,7 +13,7 @@ const clickLoginBtn = () => {
     $loginInputArr.forEach((input) => {
         if (!stop) {
             if (input.value) {
-                $errorMsg.innerHTML = ``;
+                $errText.innerHTML = ``;
                 count++;
             } else {
                 $errorMsg.classList.add("login-valid");
@@ -20,7 +21,7 @@ const clickLoginBtn = () => {
                 setTimeout(function () {
                     $errorMsg.classList.remove("login-valid");
                 }, 2000);
-                $errorMsg.innerHTML = `<div class="display-flex-set"><img src="/img/warning.png" width="35px"/> ${input.placeholder} 을(를) 입력해 주세요</div>`;
+                $errText.innerHTML = `${input.placeholder} 을(를) 입력해 주세요`;
                 stop = true;
             }
         }
@@ -32,3 +33,25 @@ const clickLoginBtn = () => {
 };
 
 $loginBtn.addEventListener("click", clickLoginBtn);
+$loginInputArr[0].addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $loginBtn.click();
+    }
+});
+$loginInputArr[1].addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $loginBtn.click();
+    }
+});
+
+// 서버 validation 보여주기
+$(document).ready(function() {
+    if($errText.innerText) {
+        $errorMsg.classList.add("login-valid");
+        setTimeout(function () {
+            $errorMsg.classList.remove("login-valid");
+        }, 2000);
+    }
+})

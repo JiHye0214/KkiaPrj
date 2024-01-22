@@ -2,9 +2,11 @@ const $signupBtn = document.querySelector("#signup-btn");
 const $signupForm = document.querySelector("#signup-content");
 const $signupInputArr = document.querySelectorAll("input.signup-input");
 const $errorMsg = document.querySelector(".error-msg");
+const $errText = document.querySelector(".error-msg-text");
 
 let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
 let message = "";
+
 let stop = false;
 let count = 0;
 let checkId = (checkPw1 = checkPw2 = checkEmail = false);
@@ -82,7 +84,18 @@ const setErrMsg = (message) => {
     setTimeout(function () {
         $errorMsg.classList.remove("login-valid");
     }, 2000);
-    $errorMsg.innerHTML = `<div class="display-flex-set"><img src="/img/warning.png" width="35px"/> ${message}</div>`;
+    $errText.innerHTML = `${message}`;
 };
 
 $signupBtn.addEventListener("click", clickSignupBtn);
+
+// 이거 되면 나 천재임 --> 나 천재다 !
+// 서버 validation 보여주기
+$(document).ready(function() {
+    if($errText.innerText) {
+        $errorMsg.classList.add("login-valid");
+        setTimeout(function () {
+            $errorMsg.classList.remove("login-valid");
+        }, 2000);
+    }
+})

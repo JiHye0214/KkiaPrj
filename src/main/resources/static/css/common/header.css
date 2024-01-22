@@ -52,7 +52,7 @@ header {
     height: 50px;
 }
 
-#login-btn {
+#login-btn, #logout-btn {
     height: 35px;
     font-weight: 900;
     font-size: 20px;
@@ -61,6 +61,7 @@ header {
     color: white;
     border-radius: 5px;
     padding: 3px 10px;
+    border: none;
 
     &:hover {
         background-color: var(--kia-red);

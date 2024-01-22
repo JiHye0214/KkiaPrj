@@ -79,23 +79,10 @@
     font-weight: 500;
 }
 
-/* 내 채팅 */
-.chatting-items.my-chat {
-    margin-left: auto; /* 내가 쓴 것만 오른쪽 정렬 */
-}
-
-.my-chat .chatting-content {
-    background-color: var(--yellow-btn);
-}
-
-.my-chat .chatting-writer {
-    text-align: right;
-    padding-right: 1px;
-}
-
 /* 실시간 댓글 작성 */
+#chat-anonymous,
 #chatting-form {
-    width: 350px;
+    width: 341px;
     height: 50px;
     background-color: white;
     border: 2px solid ;
@@ -106,7 +93,13 @@
     top: 647px;
 }
 
-#chatting-form > input[name="chat"] {
+/* 로그인 안 했을 때 */
+#chat-anonymous {
+    justify-content: center;
+    font-weight: 500;
+}
+
+#chatting-form > input[name="content"] {
     width: calc(100% - 50px);
     border: none;
     padding: 0 10px;
@@ -117,7 +110,7 @@
     }
 }
 
-#chatting-form > input[type="submit"] {
+#chatting-form > input[type="button"] {
     background-color: var(--yellow-btn);
     border: none;
     width: 60px;

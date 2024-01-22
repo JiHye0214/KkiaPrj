@@ -10,24 +10,28 @@
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/user/logIn.css}" />
         <script defer th:src="@{/js/user/signUp.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <title>회원가입</title>
     </head>
     <body>
         <div class="auth-wrapper">
             <div id="signup-wrapper" class="display-flex-set">
-                <div class="error-msg"></div>
+                <div class="error-msg display-flex-set">
+                    <img src="/img/warning.png" width="35px"/>
+                    <div class="error-msg-text" th:text="${error}"></div>
+                </div>
                 <a th:href="@{/home}"><img src="/img/KKIA2-removebg.png" class="logo" /></a>
                 <form method="post" id="signup-content" class="display-flex-set">
-                    <input name="loginId" class="login-items signup-input" type="text" placeholder="아이디" />
-                    <input name="password" class="login-items signup-input" type="password" placeholder="비밀번호" />
+                    <input name="loginId" class="login-items signup-input" th:value="${loginId}" type="text" placeholder="아이디" />
+                    <input name="password" class="login-items signup-input" th:value="${password}" type="password" placeholder="비밀번호" />
                     <input class="login-items signup-input" type="password" placeholder="비밀번호 확인" />
-                    <input name="name" class="login-items signup-input" type="text" placeholder="이름" />
-                    <input name="email" class="login-items signup-input" type="text" placeholder="이메일" />
-                    <input name="nickname" class="login-items signup-input" type="text" placeholder="닉네임" />
+                    <input name="name" class="login-items signup-input" type="text" th:value="${name}" placeholder="이름" />
+                    <input name="email" class="login-items signup-input" type="text" th:value="${email}" placeholder="이메일" />
+                    <input name="nickname" class="login-items signup-input" type="text" th:value="${nickname}" placeholder="닉네임" />
                     <div id="add-wrap" class="display-flex-set login-items signup-input">
                         <label>
                             생년월일
-                            <input name="birth" class="choice-wrap" type="date" value="0000-00-00" />
+                            <input name="birth" class="choice-wrap" type="date" />
                         </label>
                         <div class="display-flex">
                             <div id="gender">성별</div>

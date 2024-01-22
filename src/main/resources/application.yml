@@ -20,6 +20,12 @@ spring:
     username: kkia
     password: rldkdntmd
 
+  # 파일 크기 설정
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
   # JPA설정
   jpa:
     show-sql: true
@@ -29,6 +35,9 @@ spring:
 
     hibernate:
       ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
   # Security 설정
   security:
@@ -45,3 +54,10 @@ app:
   #파일 업로드 경로
   upload:
     path: upload
+
+  #api_key
+  #날씨 공공데이터, 네이버클라이언트 ID,PW
+  api:
+    weatherKey: df44ad6a3a8f46202abee4c297e535e7
+    client-id: RpfhAy8G_tHGeYN_xmVR
+    client-secret: UTl7gGDH0X

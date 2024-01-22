@@ -27,5 +27,4 @@ public class BaseEntity {
     @JsonProperty("createdDate")
     private LocalDateTime createdDate;
 
-
 }

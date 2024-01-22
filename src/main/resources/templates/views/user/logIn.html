@@ -10,12 +10,16 @@
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/user/logIn.css}" />
         <script defer th:src="@{/js/user/logIn.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <title>로그인</title>
     </head>
     <body>
         <div class="auth-wrapper">
             <div id="login-wrapper" class="display-flex-set">
-                <div class="error-msg"></div>
+                <div class="error-msg display-flex-set">
+                    <img src="/img/warning.png" width="35px"/>
+                    <div class="error-msg-text" th:text="${errorMessage}"></div>
+                </div>
                 <a th:href="@{/home}"><img src="/img/KKIA2-removebg.png" class="logo" /></a>
                 <form method="post" th:action="@{#}" id="login-content" class="display-flex-set">
                     <label for="login-id">
@@ -24,12 +28,7 @@
                     </label>
                     <label for="login-pw">
                         <img src="/img/loginPassword.png" id="login-pw-img" />
-                        <input
-                            id="login-pw"
-                            name="password"
-                            class="login-items login-input"
-                            type="password"
-                            placeholder="비밀번호"/>
+                        <input id="login-pw" name="password" class="login-items login-input" type="password" placeholder="비밀번호"/>
                     </label>
                     <input class="login-items" id="login-btn" type="button" value="로그인" />
                 </form>
