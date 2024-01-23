@@ -69,7 +69,7 @@ button {
     font-size: 16px;
     text-align: center;
     line-height: 45px;
-    background: var(--light-blue);
+    background: var(--basic-pink);
 
     &:hover:not(:first-child) {
         .post-title {

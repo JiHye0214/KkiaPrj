@@ -64,7 +64,7 @@ button {
     overflow: hidden;
     border-radius: 5px;
     border: 2px solid;
-    background-color: var(--light-blue);
+    background-color: var(--basic-pink);
 }
 .product-img {
     width: 100%;

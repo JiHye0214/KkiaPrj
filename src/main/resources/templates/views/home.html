@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <meta charset="UTF-8" />
@@ -10,6 +9,7 @@
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/home.css}" />
         <script defer th:src="@{/js/home.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <title>KKIA TIGERS</title>
     </head>
     <body>
@@ -17,12 +17,23 @@
         <th:block th:insert="~{fragment/header::header}"></th:block>
 
         <div id="main-wrapper">
+            <!--/* DB 넣기 */-->
+            <div class="game-wrap" th:each="schedule : ${schedules}">
+                <span class="game-item" th:text="|${schedule.gameDate}/${schedule.homeGame}/${schedule.opponent}|"></span>
+            </div>
+
             <div id="main-today" class="display-flex-set">
-                <img id="main-today-title" src="/img/ball.png" />
+                <div id="not-today" class="display-flex-set">
+                    오늘은 경기가 없습니다
+                </div>
+                <div id="main-today-title" class="display-flex">
+                    <div>TODAY</div>
+                    <div id="today-date"></div>
+                </div>
                 <ul id="main-today-opponent" class="display-flex-set">
-                    <li>Twins</li>
+                    <li id="away"><span></span></li>
                     <img src="/img/baseball.png" />
-                    <li>Tigers</li>
+                    <li id="home"><span></span></li>
                 </ul>
                 <ul id="main-today-entry" class="display-flex">
                     <li>1</li>

@@ -175,7 +175,7 @@
 
     &:first-of-type {
         width: 8%;
-        background-color: var(--light-blue);
+        background-color: var(--basic-pink);
     }
     &:last-of-type {
         width: 92%;

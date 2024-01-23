@@ -1,3 +1,81 @@
+// 일정 넣기
+const gameArr = [];
+const teamArr = {
+    NCHT: "/img/team-dinos.png",
+    HTSK: "/img/team-landers.png",
+    OBHT: "/img/team-bears.png",
+    HHHT: "/img/team-eagles.png",
+    HTWO: "/img/team-heros.png",
+    SSHT: "/img/team-lions.png",
+    HTLT: "/img/team-giants.png",
+    HTLG: "/img/team-twins.png",
+    KTHT: "/img/team-wiz.png"
+};
+
+const $game = document.querySelectorAll(".game-wrap .game-item");
+$game.forEach((game) => {
+    let arr = game.innerText.split("/");
+    gameArr.push({
+        gameDate : arr[0],
+        homeGame : arr[1],
+        opponent : arr[2],
+    })
+})
+
+const gameSetting = () => {
+
+    const $month = document.querySelector(".year-month");
+    const $dateArr = document.querySelectorAll(".dates .day span");
+    const $aTag = document.querySelectorAll(".tag");
+
+    $dateArr.forEach((date, index) => {
+        // 일정 셋팅
+        let that = `${$month.innerText}.${date.innerText}`;
+        gameArr.forEach((game) => {
+            if(game.gameDate == that) { // 기록 있으면
+
+                date.style.backgroundImage = `url(${teamArr[game.opponent]})`;
+
+                if(game.homeGame == "true") {
+                    date.style.backgroundColor = '#ffeeee';
+                } else {
+                    date.style.backgroundColor = '';
+                }
+            }
+        })
+
+        // 공식으로 이동
+        date.onclick= () => {
+
+            let setMonth = $month.innerText;
+            let setDate = date.innerText;
+            let dateComplete = "";
+            let setTeamCode = "";
+
+            // year month 가공
+            let arr = setMonth.split(".");
+            if(arr[1].length == 1) {
+                arr[1] = `0${arr[1]}`;
+                setMonth = arr.join("");
+            }
+            // date 가공
+            if(date.innerText.length == 1){
+                setDate = `0${date.innerText}`;
+            }
+
+            dateComplete = setMonth + setDate;
+
+            gameArr.forEach((game) => {
+                if(game.gameDate == that) { // 기록 있으면
+                    setTeamCode = game.opponent;
+                    $aTag[index].href = `https://tigers.co.kr/game/schedule/view?type=major&gameKey=${dateComplete}${setTeamCode}0&gameDate=${dateComplete}`
+                }
+            })
+
+        }
+    })
+};
+
 // 달력 ------------------
 $(document).ready(function () {
     calendarInit();
@@ -70,17 +148,16 @@ function calendarInit() {
         // 높이 조절
         const $mainHeight = $(".cal-main").height();
 
-        if ($mainHeight == 845) {
-            $(".cal-wrap").css("height", 1114);
-            $("#game-wrapper").css("height", 1170);
-        } else if ($mainHeight == 1005) {
-            $(".cal-wrap").css("height", 1274);
-            $("#game-wrapper").css("height", 1330);
+        if ($mainHeight == 745) {
+            $(".cal-wrap").css("height", 1014);
+            $("#game-wrapper").css("height", 1070);
+        } else if ($mainHeight == 885) {
+            $(".cal-wrap").css("height", 1174);
+            $("#game-wrapper").css("height", 1230);
         }
 
         gameSetting();
     }
-
 
     // 이전달로 이동
     $(".go-prev").on("click", function () {
@@ -93,35 +170,4 @@ function calendarInit() {
         thisMonth = new Date(currentYear, currentMonth + 1, 1);
         renderCalender(thisMonth);
     });
-}
-
-const gameSetting = () => {
-    const $month = document.querySelector(".year-month");
-    const $dateArr = document.querySelectorAll(".dates .day span");
-    const $aTag = document.querySelectorAll(".tag");
-    
-    $dateArr.forEach((date, index) => {
-        date.onclick= () => {
-
-            let setMonth = $month.innerText;
-            let setDate = date.innerText;
-            let dateComplete = "";
-
-            // year month 가공
-            let arr = setMonth.split(".");
-            if(arr[1].length == 1) {
-                arr[1] = `0${arr[1]}`;
-                setMonth = arr.join("");
-            }
-            // date 가공 
-            if(date.innerText.length == 1){
-                setDate = `0${date.innerText}`;
-            }
-    
-            dateComplete = setMonth + setDate;
-
-            // ⚠️ 이거 구단 코드 있음 구단 인식 + 배열 찾기 해야 됨 
-            $aTag[index].href = `https://tigers.co.kr/game/schedule/view?type=major&gameKey=${dateComplete}KTHT0&gameDate=${dateComplete}`
-        }
-    })
 }

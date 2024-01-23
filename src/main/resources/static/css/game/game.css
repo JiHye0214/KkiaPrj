@@ -6,6 +6,10 @@
     flex-direction: column;
 }
 
+.game-wrap {
+    display: none;
+}
+
 /* title */
 #game-banner {
     width: 100%;
@@ -19,25 +23,10 @@
 #cal-banner {
     width: 1156px;
     position: absolute;
-    justify-content: space-between;
     font-weight: 600;
-    font-size: 15px;
     top: 205px;
-}
-
-#cal-color, #win-graph {
-    justify-content: space-between;
-    border-radius: 5px;
-    text-align: center;
-}
-
-#cal-color {
+    left: 20px;
     column-gap: 5px;
-}
-
-#win-graph > div {
-    font-size: 17px;
-    color: var(--kia-red);
 }
 
 /* calendar */
@@ -108,7 +97,7 @@
 
 .cal-wrap .cal-main .day {
     width: calc(100% / 7);
-    height: 160px;
+    height: 140px;
     font-size: 17px;
     font-weight: 700;
     text-align: center;
@@ -120,7 +109,6 @@
     display: flex;
     flex-flow: wrap;
     width: 100%;
-    background-color: var(--light-blue);
 }
 
 .cal-wrap .cal-main .dates .day > span {
@@ -129,6 +117,14 @@
     color: gray;
     font-size: 15px;
     padding-top: 10px;
+    background-size: 45%;
+    background-repeat: no-repeat;
+    background-position: 45px 40px;
+
+    &:hover {
+        background-color: transparent;
+        border-radius: 0px;
+    }
 }
 
 .cal-wrap .cal-main .day:nth-child(7n -1) {
@@ -140,5 +136,5 @@
 }
 
 .cal-wrap .cal-main .day.disable {
-    color: var(--light-blue);
+    color: transparent;
 }
