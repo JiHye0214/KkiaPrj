@@ -75,7 +75,8 @@ public class UserMypageServiceImpl implements UserMypageService {
     }
     @Override
     public void deleteGameRecord(GameRecord gameRecord) {
-        gameRecordRepository.delete(gameRecord);
+        GameRecord deleteRecord = gameRecordRepository.findByUserIdAndRecordDate(gameRecord.getUser().getId(), gameRecord.getRecordDate());
+        gameRecordRepository.delete(deleteRecord);
     }
 
     // 회원 정보 ----------------------------------------------------------------------------------

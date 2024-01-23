@@ -132,7 +132,7 @@ if($diaryWrapper != null) {
 
             recordArr.forEach((record) => {
                 if(record.recordDate == that) { // 기록 있으면
-                    date.classList.add(`record`); // 달력에 표시하기 (공통 class)
+                    date.classList.add('record'); // 달력에 표시하기 (공통 class)
                     date.classList.add(`${record.recordResult}`); // 달력에 표시하기
                 }
             })
