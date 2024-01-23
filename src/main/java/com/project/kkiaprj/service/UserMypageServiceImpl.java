@@ -64,8 +64,18 @@ public class UserMypageServiceImpl implements UserMypageService {
     }
 
     @Override
-    public void addGameRecord(GameRecord gameRecord) {
-        gameRecordRepository.saveAndFlush(gameRecord);
+    public void addOrUpdateGameRecord(GameRecord gameRecord) {
+        GameRecord prevRecord = gameRecordRepository.findByUserIdAndRecordDate(gameRecord.getUser().getId(), gameRecord.getRecordDate());
+        if(prevRecord != null) { // 같은 게 있으면
+            gameRecordRepository.delete(prevRecord);
+            gameRecordRepository.saveAndFlush(gameRecord);
+        } else {
+            gameRecordRepository.saveAndFlush(gameRecord);
+        }
+    }
+    @Override
+    public void deleteGameRecord(GameRecord gameRecord) {
+        gameRecordRepository.delete(gameRecord);
     }
 
     // 회원 정보 ----------------------------------------------------------------------------------

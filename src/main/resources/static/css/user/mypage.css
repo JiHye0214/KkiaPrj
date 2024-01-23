@@ -544,7 +544,7 @@
     }
 }
 
-form[name="diary-add-form"] {
+form#diary-form {
     flex-direction: column;
 }
 
@@ -602,7 +602,7 @@ input[name="recordMemo"] {
     font-size: 13px;
 }
 
-#modal-add-btn {
+#modal-btn-wrap input {
     margin-top: 20px;
     width: 450px;
     height: 50px;
@@ -611,18 +611,21 @@ input[name="recordMemo"] {
     font-size: 18px;
     font-weight: 600;
     background-color: white;
+    cursor: pointer;
 
     &:hover {
-        cursor: pointer;
         background-color: #eaeaea;
     }
 }
-#diary-modal .modal-delete-btn {
-    background-color : #ff8383;
+#modal-btn-wrap #update-delete-wrap > input {
+    width: 225px;
 
-    &:hover {
-        cursor: pointer;
-        background-color: #ff6161;
+    &:first-child {
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+    }
+    &:last-child {
+        border-radius: 0 5px 5px 0;
     }
 }
 

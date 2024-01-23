@@ -139,10 +139,12 @@ if($diaryWrapper != null) {
 
             date.onclick = () => {
                 $("#diary-wrapper > #diary-modal-wrap").css("visibility", "visible");
-                $("#modal-add-btn").val("추가");
-                $("#modal-add-btn").removeClass("modal-delete-btn");
+                $("#modal-add-btn").css("display", "block");
+                $("#update-delete-wrap").css("display", "none");
+
                 // 시작 셋팅
                 $modalDate.innerHTML = `${$month.innerText}.${date.innerText}`; // 모달 날짜 표시 (공통)
+                $("#modal-date-input").val($("#modal-date").html());
                 $modalPlace.value = `광주기아챔피언스필드`;
                 $modalMemo.value = ``;
                 $modalResultArr.forEach((modalResult) => {
@@ -156,8 +158,8 @@ if($diaryWrapper != null) {
                         $modalResultArr[index].style.opacity = `1`; // 모달 결과 표시
                         $modalPlace.value = record.recordPlace; // 모달 지역 표시
                         $modalMemo.value = record.recordMemo; // 모달 메모 표시
-                        $("#modal-add-btn").val("삭제");
-                        $("#modal-add-btn").addClass("modal-delete-btn");
+                        $("#modal-add-btn").css("display", "none");
+                        $("#update-delete-wrap").css("display", "flex");
                     }
                 })
 
@@ -169,13 +171,13 @@ if($diaryWrapper != null) {
         });
     };
 
-    // 모달 작성하기 ------------------------------------------------------------
+    // 모달 작성 ------------------------------------------------------------
     let resultCheck = false;
 
     // 결과 선택
     $modalResultArr.forEach((result, index) => {
         result.onclick = () => {
-            $resultInput.value = resultArr[index];
+            $("#modal-result-input").val(resultArr[index]);
             resultCheck = true;
             for (let i = 0; i < $modalResultArr.length; i++) {
                 if (i == index) {
@@ -187,13 +189,25 @@ if($diaryWrapper != null) {
         };
     });
 
-    // ✅ 직관기록 submit
+    // ✅ 직관 기록 추가
     $("#modal-add-btn").on("click", function() {
-        $("#modal-date-input").val($("#modal-date").html());
         if (!resultCheck) {
             $(".diary-modal-items .error-msg").html(`* 경기 결과를 체크해 주세요`);
         } else {
-            document.forms["diary-add-form"].submit();
+            $("#diary-form").submit();
+        }
+    })
+
+    // 직관 기록 수정
+    $("#modal-update-btn").on("click", function() {
+        $("#diary-form").submit();
+    })
+    // 직관 기록 삭제
+    $("#modal-delete-btn").on("click", function() {
+        let ask = confirm("삭제하시겠습니까?");
+        if(ask) {
+            $("#diary-form").attr("action", "/user/deleteGameRecord");
+            $("#diary-form").submit();
         }
     })
 

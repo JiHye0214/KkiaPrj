@@ -20,8 +20,10 @@ public interface UserMypageService {
     // 직관 기록 가져오기
     List<GameRecord> getGameRecord(Long userId);
 
-    // 직관 기록 추가
-    void addGameRecord(GameRecord gameRecord);
+    // 직관 기록 추가 + 수정
+    void addOrUpdateGameRecord(GameRecord gameRecord);
+    // 직관 기록 삭제
+    void deleteGameRecord(GameRecord gameRecord);
 
     // 회원 정보 ------------------------------------------
 

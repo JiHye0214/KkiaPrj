@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface GameRecordRepository extends JpaRepository<GameRecord, Long> {
     List<GameRecord> findByUserId(Long userId);
+    GameRecord findByUserIdAndRecordDate(Long userId, String recordDate);
 }

@@ -107,7 +107,7 @@
                                 <img id="close-btn" src="/img/close.png" />
                                 <div id="modal-title">오늘의 직관</div>
                                 <div id="modal-content">
-                                    <form method="post" th:action="@{/user/addGameRecord}" name="diary-add-form" class="display-flex">
+                                    <form method="post" th:action="@{/user/addOrUpdateGameRecord}" id="diary-form" class="display-flex">
                                         <label class="diary-modal-items">
                                             <input id="modal-date-input" name="recordDate" type="hidden" />
                                             <div>일시</div>
@@ -143,7 +143,13 @@
                                         </label>
                                     </form>
                                 </div>
-                                <input type="button" id="modal-add-btn" value="추가" />
+                                <div id="modal-btn-wrap">
+                                    <input type="button" id="modal-add-btn" value="추가" />
+                                    <div id="update-delete-wrap" class="display-flex">
+                                        <input type="button" id="modal-update-btn" value="수정" />
+                                        <input type="button" id="modal-delete-btn" value="삭제" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

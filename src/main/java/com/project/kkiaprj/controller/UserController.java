@@ -10,6 +10,7 @@ import com.project.kkiaprj.service.UserMypageService;
 import com.project.kkiaprj.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -112,14 +113,17 @@ public class UserController {
         return "redirect:/user/mypage";
     }
 
-    @PostMapping("/addGameRecord")
+    @PostMapping("/addOrUpdateGameRecord")
     public String addGameRecord(GameRecord gameRecord, RedirectAttributes redirectAttrs){
-
-        System.out.println("gameRecord +===============================");
-        System.out.println(gameRecord);
         gameRecord.setUser(U.getLoggedUser());
-        userMypageService.addGameRecord(gameRecord);
-
+        userMypageService.addOrUpdateGameRecord(gameRecord);
+        redirectAttrs.addAttribute("menu", "직관기록");
+        return "redirect:/user/mypage";
+    }
+    @PostMapping("/deleteGameRecord")
+    public String deleteGameRecord(GameRecord gameRecord, RedirectAttributes redirectAttrs) {
+        gameRecord.setUser(U.getLoggedUser());
+        userMypageService.deleteGameRecord(gameRecord);
         redirectAttrs.addAttribute("menu", "직관기록");
         return "redirect:/user/mypage";
     }

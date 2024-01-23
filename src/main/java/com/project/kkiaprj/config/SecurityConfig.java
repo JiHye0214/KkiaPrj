@@ -32,12 +32,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 로그인만 하면 들어갈 수 있도록 !
                         .requestMatchers("/post/detail/*").authenticated()
+                        .requestMatchers("/post/update/*").authenticated()
                         .requestMatchers("/post/write").authenticated()
                         .requestMatchers("/market/detail/*").authenticated()
+                        .requestMatchers("/market/update/*").authenticated()
                         .requestMatchers("/market/write").authenticated()
                         .requestMatchers("/favorite/detail/*").authenticated()
+                        .requestMatchers("/favorite/update/*").authenticated()
                         .requestMatchers("/favorite/write").authenticated()
                         .requestMatchers("/food/detail/*").authenticated()
+                        .requestMatchers("/food/update/*").authenticated()
                         .requestMatchers("/food/write").authenticated()
                         .requestMatchers("/user/mypage").authenticated()
                         .anyRequest().permitAll()
