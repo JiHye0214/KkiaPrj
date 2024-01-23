@@ -617,8 +617,13 @@ input[name="recordMemo"] {
         background-color: #eaeaea;
     }
 }
-#diary-modal .change-btn {
-    background-color : red;
+#diary-modal .modal-delete-btn {
+    background-color : #ff8383;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #ff6161;
+    }
 }
 
 /* 기록 있을 때 */

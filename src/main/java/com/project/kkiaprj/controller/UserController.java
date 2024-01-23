@@ -115,6 +115,8 @@ public class UserController {
     @PostMapping("/addGameRecord")
     public String addGameRecord(GameRecord gameRecord, RedirectAttributes redirectAttrs){
 
+        System.out.println("gameRecord +===============================");
+        System.out.println(gameRecord);
         gameRecord.setUser(U.getLoggedUser());
         userMypageService.addGameRecord(gameRecord);
 

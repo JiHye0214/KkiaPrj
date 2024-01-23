@@ -34,12 +34,11 @@ $menuBtn.forEach((btn, index) => {
 // 오른쪽 ------------------------------------------------------------------------
 // User --------------------------------------------------------------------------
 if($userWrapper != null){
-    const $userModifyBtn = document.querySelector("#user-modify-btn");
     const $passwordInputArr = document.querySelectorAll("#user-password > input");
     const $userErrMsg = document.querySelectorAll(".user-inform-items > .error-msg");
     const $userForm = document.querySelector("#user-content-wrap");
 
-    const clickUserModifyBtn = () => {
+    $("#user-modify-btn").on("click", function() {
         let count = 0;
         let pwValidMode = false;
         let pwValid = false;
@@ -76,41 +75,33 @@ if($userWrapper != null){
         } else if (!pwValidMode) {
             $userForm.submit();
         }
-    };
-
-    $userModifyBtn.addEventListener("click", clickUserModifyBtn);
+    });
 
     // onchange --> 이미지 바꾸기
     const userPic = document.querySelector("#user-picture-wrap #user-pic");
-    const fileInput = document.querySelector("#user-picture-wrap > #file");
-    const imgResetBtn = document.querySelector("#img-reset-btn");
-    const imgResetState = document.querySelector("#img-reset-state");
 
-    fileInput.onchange = (event) => {
+    $("#user-picture-wrap > #file").on("change", function(event) {
         var reader = new FileReader();
         reader.onload = function(event) {
           userPic.setAttribute("src", event.target.result);
         };
         reader.readAsDataURL(event.target.files[0]);
-
-        console.log(fileInput.value);
-    }
+    });
 }
 
 // Diary --------------------------------------------------------------------------
 if($diaryWrapper != null) {
-    const $modal = document.querySelector("#diary-wrapper > #diary-modal-wrap");
-    const $modalAddBtn = document.querySelector("#modal-add-btn");
-    const $closeModalBtn = document.querySelector("#close-btn");
     const $modalDate = document.querySelector("#modal-date");
     const $modalPlace = document.querySelector("#modal-region");
     const $modalResultArr = document.querySelectorAll("#result-wrap > div");
     const $modalMemo = document.querySelector("#memo");
+
     const resultArr = ["win", "draw", "lose", "cancel"];
     const recordArr = [];
+    let recordWin= 0;
 
     // DB 받아온 기록
-    const $record = document.querySelectorAll(".record");
+    const $record = document.querySelectorAll(".record-wrap .record-item");
     $record.forEach((record) => {
         let arr = record.innerText.split("/");
         recordArr.push({
@@ -119,10 +110,18 @@ if($diaryWrapper != null) {
             recordResult : arr[2],
             recordMemo : arr[3]
         })
+        if(arr[2] == "win") {
+            recordWin++;
+        }
     })
 
+    // 승률 계산
+    let rate = recordWin / recordArr.length;
+    $("#win-rate").text(rate.toFixed(3));
+    $("#win-whole").text(`(${recordWin} / ${recordArr.length})`);
+
+    // 매달 배열 셋팅
     const diarySetting = () => {
-        // 매달 배열 셋팅
         const $month = document.querySelector(".year-month");
         const $dateArr = document.querySelectorAll(".dates .day span");
 
@@ -139,10 +138,13 @@ if($diaryWrapper != null) {
             })
 
             date.onclick = () => {
-                $modal.style.visibility = `visible`;
-                $modalDate.innerHTML = `${$month.innerText}.${date.innerText}`; // 모달 날짜 표시 (공통)
-
+                $("#diary-wrapper > #diary-modal-wrap").css("visibility", "visible");
+                $("#modal-add-btn").val("추가");
+                $("#modal-add-btn").removeClass("modal-delete-btn");
                 // 시작 셋팅
+                $modalDate.innerHTML = `${$month.innerText}.${date.innerText}`; // 모달 날짜 표시 (공통)
+                $modalPlace.value = `광주기아챔피언스필드`;
+                $modalMemo.value = ``;
                 $modalResultArr.forEach((modalResult) => {
                     modalResult.style.opacity = ``;
                 })
@@ -154,48 +156,46 @@ if($diaryWrapper != null) {
                         $modalResultArr[index].style.opacity = `1`; // 모달 결과 표시
                         $modalPlace.value = record.recordPlace; // 모달 지역 표시
                         $modalMemo.value = record.recordMemo; // 모달 메모 표시
+                        $("#modal-add-btn").val("삭제");
+                        $("#modal-add-btn").addClass("modal-delete-btn");
                     }
                 })
 
             };
         });
         // 모달창 닫기
-        $closeModalBtn.onclick = () => {
-            $modal.style.visibility = `hidden`;
-        };
+        $("#close-btn").on("click", function() {
+            $("#diary-wrapper > #diary-modal-wrap").css("visibility", "hidden");
+        });
     };
 
     // 모달 작성하기 ------------------------------------------------------------
-    const $dateInput = document.querySelector("#modal-date-input");
-    const $resultArr = document.querySelectorAll("#result-wrap > div");
-    const $resultInput = document.querySelector("#modal-result-input");
     let resultCheck = false;
-    const $diaryErrMsg = document.querySelector(".diary-modal-items .error-msg");
 
-    // 경기결과 setting
-    $resultArr.forEach((text, index) => {
-        text.onclick = () => {
+    // 결과 선택
+    $modalResultArr.forEach((result, index) => {
+        result.onclick = () => {
             $resultInput.value = resultArr[index];
             resultCheck = true;
-            for (let i = 0; i < $resultArr.length; i++) {
+            for (let i = 0; i < $modalResultArr.length; i++) {
                 if (i == index) {
-                    $resultArr[i].style.opacity = `1`;
+                    $modalResultArr[i].style.opacity = `1`;
                 } else {
-                    $resultArr[i].style.opacity = ``;
+                    $modalResultArr[i].style.opacity = ``;
                 }
             }
         };
     });
 
     // ✅ 직관기록 submit
-    $modalAddBtn.onclick = () => {
-        $dateInput.value = $modalDate.innerText;
+    $("#modal-add-btn").on("click", function() {
+        $("#modal-date-input").val($("#modal-date").html());
         if (!resultCheck) {
-            $diaryErrMsg.innerHTML = `* 경기 결과를 체크해 주세요`;
+            $(".diary-modal-items .error-msg").html(`* 경기 결과를 체크해 주세요`);
         } else {
-            document.forms["diary-add-form"].submit(); // 누른 거 controller 전달
+            document.forms["diary-add-form"].submit();
         }
-    };
+    })
 
     // 달력 그리기 ------------------------------------------------------------
     $(document).ready(function () {

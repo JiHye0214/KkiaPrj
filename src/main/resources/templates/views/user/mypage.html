@@ -98,7 +98,7 @@
                     <div th:if="${menu.toString().equals('직관기록')}" class="fragment" id="diary-wrapper">
 
                         <div class="record-wrap" th:each="record : ${gameRecords}">
-                            <span class="record" th:text="|${record.recordDate}/${record.recordPlace}/${record.recordResult}/${record.recordMemo}|"></span>
+                            <span class="record-item" th:text="|${record.recordDate}/${record.recordPlace}/${record.recordResult}/${record.recordMemo}|"></span>
                         </div>
 
                         <!-- diary modal -->
@@ -149,7 +149,10 @@
 
                         <div id="my-graph" class="display-flex">
                             <div>직관 승률</div>
-                            <div><span>50%</span> (5/10)</div>
+                            <div>
+                                <span id="win-rate"></span>
+                                <span id="win-whole"></span>
+                            </div>
                         </div>
                         <div class="cal-wrap display-flex-set">
                             <div class="cal-nav display-flex-set">
