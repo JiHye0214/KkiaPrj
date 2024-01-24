@@ -3,6 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+<script th:unless="${listItem}" th:inline="javascript">
+    alert("페이지가 존재하지 않습니다.");
+    location.href = "/community/food/list";
+</script>
+
+<th:block th:if="${listItem}">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,83 +21,88 @@
         <title>구장별 맛집 상세</title>
     </head>
     <body>
-        <!--/* header */-->
-        <th:block th:insert="~{fragment/header::header}"></th:block>
+    <!--/* header */-->
+    <th:block th:insert="~{fragment/header::header}"></th:block>
 
-        <main>
-            <div id="detail-wrap">
-                <div id="detail-header-wrap" class="display-flex-set padding-line">
-                    <div id="writer-wrap" class="display-flex">
-                        <img class="writer-pic" src="/img/핑구1.jpg" />
-                        <div class="writer-nickname">어우기</div>
-                    </div>
-
-                    <div id="num-wrap" class="display-flex">
-                        <div class="display-flex-set">
-                            <div>저장수</div>
-                            <div>13</div>
-                        </div>
-                        <div class="display-flex-set">
-                            <div>조회수</div>
-                            <div>13</div>
-                        </div>
-                        <div class="display-flex-set">
-                            <div>작성일</div>
-                            <div>2023-12-05</div>
-                        </div>
-                    </div>
+    <main>
+        <div id="detail-wrap">
+            <div id="detail-header-wrap" class="display-flex-set padding-line">
+                <div id="writer-wrap" class="display-flex">
+                    <img class="writer-pic" src="/img/핑구1.jpg" />
+                    <div class="writer-nickname" th:text="${listItem.user.nickname}"></div>
                 </div>
 
-                <div id="title" class="padding-line display-flex">
+                <div id="num-wrap" class="display-flex">
+                    <div class="display-flex-set">
+                        <div>저장수</div>
+                        <div th:text="${listItem.saveCnt}"></div>
+                    </div>
+                    <div class="display-flex-set">
+                        <div>조회수</div>
+                        <div th:text="${listItem.viewCnt}"></div>
+                    </div>
+                    <div class="display-flex-set">
+                        <div>작성일</div>
+                        <div th:text="${#temporals.format(listItem.createdDate, 'yyyy.MM.dd')}"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="title-wrap" class="display-flex-set">
+                <div id="title" class="display-flex">
                     <div class="content-zzimBtn">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="bi bi-star-fill"
-                            width="35"
-                            height="35"
-                            viewBox="0 0 16 16"
-                            id="star"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="bi bi-star-fill"
+                                width="35"
+                                height="35"
+                                viewBox="0 0 16 16"
+                                id="star"
                         >
                             <path
-                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
                             />
                         </svg>
                     </div>
-                    <div>토박이의 광주찐맛집</div>
+                    <div th:text="${listItem.title}"></div>
                 </div>
+                <div id="region" class="display-flex">
+                    <div th:text="${listItem.region}"></div>
+                </div>
+            </div>
 
-                <div id="detail-content-wrap" class="display-flex">
-                    <div id="map"></div>
+            <div id="detail-content-wrap" class="display-flex">
+                <div id="map"></div>
 
-                    <div id="txt-content-wrap" class="display-flex">
-                        <div class="txt-wrap">
-                            <div class="store-name-wrap display-flex">
-                                <img id="map-mark" src="/img/location.png" />
-                                <p class="store-name">라스트춘선 안양점</p>
-                            </div>
-                            <div class="info">
-                                로컬 식당이라 주민들밖에 모르는데 택시 기사님 추천받아서 갔다. 로컬 식당이라 주민들밖에 모르는데
-                                택시 기사님 추천받아서 갔다.
-                            </div>
-                            <input type="hidden" value="경기 성남시 분당구 서현동 245-4" class="store-address">
-                            <input type="hidden" class="lat" value="37.3908408022861"  />
-                            <input type="hidden" class="lng" value="126.953373087799" />
+                <div id="txt-content-wrap" class="display-flex">
+                    <div class="txt-wrap" th:each="foodItem : ${listItem.foodItems}">
+                        <div class="store-name-wrap display-flex">
+                            <img id="map-mark" src="/img/location.png" />
+                            <p class="store-name" th:text="${foodItem.restaurantName}"></p>
                         </div>
+                        <div class="info" th:text="${foodItem.content}"></div>
+                        <input type="hidden" class="store-address" th:value="${foodItem.address}">
+                        <input type="hidden" class="lat" th:value="${foodItem.lat}" />
+                        <input type="hidden" class="lng" th:value="${foodItem.lng}" />
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="btn-wrap" class="display-flex">
-                <a th:href="@{/community/food/write}">작성</a>
-                <a th:href="@{/community/food/update}">수정</a>
-                <form method="post" th:action="@{#}">
-                    <button type="button">삭제</button>
-                </form>
-                <a th:href="@{/community/food/list}">목록</a>
-            </div>
+        <div id="btn-wrap" class="display-flex">
+            <a th:href="@{/community/food/write}">작성</a>
+            <a th:href="@{'/community/food/update/' + ${listItem.id}}">수정</a>
+            <form name="delete-form" th:action="@{/community/food/delete}" method="post">
+                <input type="hidden" name="id" th:value="${listItem.id}" />
+                <input type="hidden" name="action" th:value="삭제" />
+                <button type="button" id="delete-btn">삭제</button>
+            </form>
+            <a th:href="@{/community/food/list}">목록</a>
+        </div>
 
-            <!--/* comment */-->
-            <th:block th:insert="~{fragment/comment::comment}"></th:block>
-        </main>
+        <!--/* comment */-->
+        <th:block th:insert="~{fragment/comment::comment}"></th:block>
+    </main>
     </body>
+</th:block>
 </html>

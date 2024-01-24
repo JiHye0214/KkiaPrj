@@ -4,23 +4,19 @@ SELECT TABLE_NAME FROM information_schema.TABLES
 WHERE TABLE_SCHEMA = 'kkiatigers'
 ;
 
-DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS diary;
-DROP TABLE IF EXISTS favorite;
-DROP TABLE IF EXISTS favoriteimg;
 DROP TABLE IF EXISTS favoritelike;
-DROP TABLE IF EXISTS food;
-DROP TABLE IF EXISTS foodimg;
-DROP TABLE IF EXISTS foodsave;
+DROP TABLE IF EXISTS favoriteimg;
+DROP TABLE IF EXISTS favorite;
 DROP TABLE IF EXISTS live_chat;
 DROP TABLE IF EXISTS livechat;
-DROP TABLE IF EXISTS market;
 DROP TABLE IF EXISTS marketcomment;
 DROP TABLE IF EXISTS marketimg;
-DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS market;
 DROP TABLE IF EXISTS postcomment;
-DROP TABLE IF EXISTS postimg;
 DROP TABLE IF EXISTS postrecommend;
+DROP TABLE IF EXISTS postimg;
+DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS user_authority;
 DROP TABLE IF EXISTS authority;
 DROP TABLE IF EXISTS user_img;
@@ -29,13 +25,19 @@ DROP TABLE IF EXISTS today_game;
 DROP TABLE IF EXISTS today;
 DROP TABLE IF EXISTS game_details;
 DROP TABLE IF EXISTS game_schedule;
-
+DROP TABLE IF EXISTS game_player;
+DROP TABLE IF EXISTS food_save;
+DROP TABLE IF EXISTS food_comment;
+DROP TABLE IF EXISTS food_item;
+DROP TABLE IF EXISTS food;
+DROP TABLE IF EXISTS `user`;
 
 SELECT * FROM user ;
 SELECT * FROM user_img ;
 SELECT * FROM live_chat ;
 SELECT * FROM game_record ;
 SELECT * FROM game_schedule ;
+SELECT * FROM game_player ;
 
 INSERT INTO user_img (fileName, sourceName, userId)
 VALUES ("2017.jpg", "2017.jpg", 1); 
@@ -46,6 +48,50 @@ INSERT INTO game_record (userId, recordDate, recordMemo, recordPlace, recordResu
 (1, "2024.1.24", "우승", "잠실종합운동장", "win"),
 (1, "2024.1.3", "무조건", "잠실종합운동장", "win");
 
+-- api 대신 
+INSERT INTO game_player (name, number) VALUES
+("박찬호", 1),
+("김선빈", 3),
+("김도영", 5),
+("홍종표", 6),
+("김태군", 8),
+("윤영철", 13),
+("김규성", 14),
+("최원준", 16),
+("임기영", 17),
+("윤중현", 19),
+("이준영", 20),
+("최정용", 23),
+("이우성", 25),
+("김호령", 27),
+("소크라테스", 30),
+("박준표", 31),
+("최형우", 34),
+("최지민", 39),
+("김건국", 43),
+("나성범", 47),
+("이의리", 48),
+("장현식", 50),
+("전상현", 51),
+("김기훈", 53),
+("양현종", 54),
+("한준수", 55),
+("고종욱", 57),
+("오선우", 59),
+("정해영", 62),
+("이창진", 66),
+
+("진갑용", 70),
+("이범호", 71),
+("김상훈", 72),
+("조재영", 75),
+("박기남", 76),
+("이현곤", 80),
+("곽정철", 96),
+("서재응", 98)
+;
+
+-- api 대신
 INSERT INTO game_schedule (gameDate, homeGame, opponent) VALUES
 -- boolean 0 / 1
 ("2024.3.23", TRUE, "HTWO"),

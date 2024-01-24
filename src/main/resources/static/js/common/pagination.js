@@ -1,4 +1,12 @@
-// pagination move-btn border-radius
-const $paginationArr = document.querySelectorAll(".move-btn");
-$paginationArr[0].style.borderRadius = `5px 0 0 5px`;
-$paginationArr[1].style.borderRadius = `0 5px 5px 0`;
+// 1 페이지밖에 없을 때 border-radius
+const pageNums = document.querySelectorAll(".num");
+if (pageNums.length == 1) {
+    console.log("하나");
+    pageNums[0].style.borderRadius = "3px";
+}
+
+// 항목이 하나도 없을 때 페이지네이션 border 없애기
+const pagingWrap = document.querySelector("#pagination-content");
+if (!pagingWrap.childElementCount) {
+    pagingWrap.style.border = "none";
+}

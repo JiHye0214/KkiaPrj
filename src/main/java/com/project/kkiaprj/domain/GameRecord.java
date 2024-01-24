@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Builder
 @Entity(name = "game_record")
 public class GameRecord {
+    // 나의 직관 기록
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

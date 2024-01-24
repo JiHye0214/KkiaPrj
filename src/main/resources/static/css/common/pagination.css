@@ -24,3 +24,9 @@
 #pagination-content > li > a.active {
     background-color: var(--yellow-btn);
 }
+#pagination-content > li:first-child > a {
+    border-radius: 3px 0 0 3px;
+}
+#pagination-content > li:last-child > a {
+    border-radius: 0 3px 3px 0;
+}

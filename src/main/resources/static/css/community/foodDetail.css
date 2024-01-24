@@ -37,12 +37,21 @@ main {
     column-gap: 10px;
 }
 
-#title {
-    height: 96px;
+/* ------------------------------------------------------------ */
+
+#title-wrap {
+    justify-content: space-between;
+    border-bottom: 2px solid;
+    height: 100px;
+}
+#title-wrap > * {
     font-size: 30px;
     font-weight: 600;
-    line-height: 56px;
 }
+#title {
+    width: 88%;
+}
+
 #star{
     /* fill: var(--yellow-btn); */
     fill: white;
@@ -51,7 +60,16 @@ main {
     stroke-width: 1;
     cursor: pointer;
     margin-right: 20px;
-    transform: translateY(15%);
+    transform: translateY(10%);
+}
+
+#region {
+    width: 12%;
+    height: 100%;
+    justify-content: center;
+    padding: 0 20px;
+    border-left: 2px solid;
+    align-items: center;
 }
 
 /* ------------------------------------------------------------ */
@@ -67,6 +85,12 @@ main {
     border: 2px solid;
     border-radius: 5px;
     background-color: #e9e9e9;
+}
+.infoWindow {
+    padding: 5px 10px 8px 10px;
+    width: 250px;
+    font-size: 16px;
+    z-index: 1;
 }
 
 #txt-content-wrap {
@@ -87,6 +111,7 @@ main {
     width: 100%;
     border-bottom: 2px solid;
     padding-bottom: 20px;
+    cursor: pointer;
 
     &:last-child {
         border: none;

@@ -24,7 +24,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 장소검색 객체 생성
 var ps = new kakao.maps.services.Places();
 
-// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우 생성
+// 검색 결과 목록 또는 마커에 mouseover 했을 때 장소명을 표출할 인포윈도우 생성
 var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
 // 키워드로 장소 검색
@@ -86,7 +86,7 @@ function displayPlaces(places) {
         // LatLngBounds 객체에 좌표를 추가
         bounds.extend(placePosition);
 
-        // 마커와 검색 결과 항목에 mouseover 했을 때
+        // 검색 결과 항목 또는 마커에 mouseover 했을 때
         // 해당 장소에 인포윈도우에 장소명을 표시
         // mouseout 했을 때는 인포윈도우를 닫음
         (function (marker, title) {
@@ -171,7 +171,7 @@ function addMarker(position, idx, title) {
         });
 
     marker.setMap(map); // 지도 위에 마커를 표출
-    markers.push(marker); // 배열에 생성된 마커를 추가
+    markers.push(marker); // 생성된 마커를 배열에 추가
 
     return marker;
 }
@@ -215,10 +215,10 @@ function displayPagination(pagination) {
     paginationEl.appendChild(fragment);
 }
 
-// 검색 결과 목록 또는 마커를 클릭했을 때 호출되는 함수
+// 검색 결과 목록 또는 마커에 mouseover 했을 때 호출되는 함수
 // 인포윈도우에 장소명을 표시
 function displayInfowindow(marker, title) {
-    var content = '<div class="infoWindow" style="padding: 5px 10px 7px 10px; z-index: 1;">' + title + "</div>";
+    var content = '<div class="infoWindow">' + title + "</div>";
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
@@ -232,8 +232,6 @@ function removeAllChildNods(el) {
 }
 
 // ====================================================================================================
-
-let j = 0;
 
 // 검색 결과 항목 선택 시 추천 맛집 아이템 추가하는 함수
 function addTxtContent(listItems, itemTitles, itemAddresses, lats, lngs) {
@@ -262,25 +260,25 @@ function addTxtContent(listItems, itemTitles, itemAddresses, lats, lngs) {
                         <div class="item-wrap">
                             <div class="txt-wrap display-flex">
                                 <div class="store-name">${itemTitles[i].textContent}</div>
-                                <textarea class="store-info" placeholder="소개 내용을 입력해 주세요" spellcheck="false" name="info-${j}"></textarea>
+                                <textarea class="store-info" placeholder="소개 내용을 입력해 주세요" spellcheck="false" name="content"></textarea>
                                 <button type="button" class="item-delete-btn"></button>
-                                <input type="hidden" value="${itemAddresses[i].textContent}" class="store-address" />
-                                <input type="hidden" value="${lats[i].value}" name="lat-${j}" />
-                                <input type="hidden" value="${lngs[i].value}" name="lng-${j}" />
+                                <input type="hidden" value="${itemTitles[i].textContent}" name="restaurantName" />
+                                <input type="hidden" value="${itemAddresses[i].textContent}" class="store-address" name="address" />
+                                <input type="hidden" value="${lats[i].value}" name="lat" />
+                                <input type="hidden" value="${lngs[i].value}" name="lng" />
                             </div>
                             <p class="info-err-msg">* 내용을 입력해 주세요</p>
                         </div>
                     `);
 
-                var itemWraps = document.querySelectorAll(".item-wrap");
-                var itemDeletBtns = document.querySelectorAll(".item-delete-btn");
+                let itemWraps = document.querySelectorAll(".item-wrap");
+                let itemDeletBtns = document.querySelectorAll(".item-delete-btn");
+
                 itemDeletBtns.forEach((btn, i) => {
                     btn.onclick = () => {
                         itemWraps[i].remove();
                     };
                 });
-
-                j++;
             } else {
                 searchErrMsg.textContent = "* 이미 선택한 항목입니다.";
                 searchErrMsg.style.display = "block";
@@ -292,6 +290,7 @@ function addTxtContent(listItems, itemTitles, itemAddresses, lats, lngs) {
 
 // ====================================================================================================
 
+// 지역 선택창
 const regionNames = ["고척", "광주", "대구", "대전", "부산", "수원", "인천", "잠실", "창원"];
 
 const titleInput = document.querySelector("#input-title");
@@ -301,16 +300,52 @@ const regionSubmitInput = document.querySelector("#submit-region");
 const selectedRegion = document.querySelector("#selected-region");
 const regionWrap = document.querySelector("#region-wrap");
 
+titleSubmitInput.value = titleInput.value;
 titleInput.onchange = () => {
     titleSubmitInput.value = titleInput.value;
 };
 
-// 지역 선택창
+// regionNames 로 지역 버튼 랩 생성
 regionNames.forEach((regionName) => {
     regionWrap.innerHTML += `<div class="region">${regionName}</div>`;
 });
 const regionDiv = document.querySelectorAll(".region");
 
+// update 페이지에서 지역 선택되어 있을 시 지역 글자 색 검정으로 하기 위함
+if (selectedRegion.textContent != "지역") {
+    selectedRegion.classList.add("clicked");
+    regionDiv.forEach((region) => {
+        if (region.textContent == selectedRegion.textContent) {
+            region.classList.add("clicked");
+        }
+    })
+    regionSubmitInput.value = selectedRegion.textContent;
+}
+
+// 지역 선택창 제어
+selectedRegion.addEventListener("click", () => {
+    // 지역 선택창 닫혀있었다면
+    if (regionWrap.style.display !== "block") {
+        $("#region-wrap").slideDown("fast");
+    }
+    // 지역 선택창 열려있었다면
+    else {
+        $("#region-wrap").slideUp("fast");
+    }
+
+    // 지역 선택 버튼 클릭되어 있었고
+    // 글자가 "지역" 이라면
+    if (selectedRegion.classList.contains("clicked") && selectedRegion.textContent == "지역") {
+        selectedRegion.classList.remove("clicked");
+    }
+        // 지역 선택 버튼 클릭되어 있지 않았거나
+    // 글자가 특정 지역이라면
+    else {
+        selectedRegion.classList.add("clicked");
+    }
+});
+
+// 지역 선택창 활성화 후 각 지역 버튼 클릭 시
 regionDiv.forEach((region) => {
     region.addEventListener("click", () => {
         // 방금 클릭한 지역이 이미 클릭되어 있었다면
@@ -335,28 +370,6 @@ regionDiv.forEach((region) => {
 
         regionSubmitInput.value = region.textContent;
     });
-});
-
-selectedRegion.addEventListener("click", () => {
-    // 지역 선택창 닫혀있었다면
-    if (regionWrap.style.display !== "block") {
-        $("#region-wrap").slideDown("fast");
-    }
-    // 지역 선택창 열려있었다면
-    else {
-        $("#region-wrap").slideUp("fast");
-    }
-
-    // 지역 선택 버튼 클릭되어 있었고
-    // 글자가 "지역" 이라면
-    if (selectedRegion.classList.contains("clicked") && selectedRegion.textContent == "지역") {
-        selectedRegion.classList.remove("clicked");
-    }
-        // 지역 선택 버튼 클릭되어 있지 않았거나
-    // 글자가 특정 지역이라면
-    else {
-        selectedRegion.classList.add("clicked");
-    }
 });
 
 $(document).click(function (e) {

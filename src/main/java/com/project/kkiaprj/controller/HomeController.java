@@ -1,18 +1,30 @@
 package com.project.kkiaprj.controller;
 
+import com.project.kkiaprj.domain.GamePlayer;
 import com.project.kkiaprj.domain.GameSchedule;
 import com.project.kkiaprj.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @Controller
+//@RestController
 @RequestMapping("/")
 public class HomeController {
+
+    @Value("${app.api.mapKey}")
+    private String mapKey;
+    @Value("${app.api.weatherKey}")
+    private String weatherKey;
+    @Value("${app.api.clientId}")
+    private String clientId;
+    @Value("${app.api.clientSecret}")
+    private String clientSecret;
 
     @Autowired
     GameService gameService;
@@ -25,53 +37,45 @@ public class HomeController {
     @GetMapping("/home")
     public void home(Model model) {
         List<GameSchedule> gameSchedules = gameService.getSchedule();
-        model.addAttribute("schedules", gameSchedules);
-    }
-//    @GetMapping("/user/find")
-//    public void func2() {
-//    }@GetMapping("/user/login")
-//    public void func3() {
-//    }@GetMapping("/user/mypage")
-//    public void func4() {
-//    }@GetMapping("/user/signUp")
-//    public void func5() {
-//    }@GetMapping("/market/marketDetail")
-//    public void func6() {
-//    }@GetMapping("/market/marketList")
-//    public void func7() {
-//    }@GetMapping("/market/marketUpdate")
-//    public void func8() {
-//    }@GetMapping("/market/marketWrite")
-//    public void func9() {
-//    }@GetMapping("/game/game")
-//    public void func11() {
-//    }@GetMapping("/community/favorite/favoriteDetail")
-//    public void func12() {
-//    }@GetMapping("/community/favorite/favoriteList")
-//    public void func13() {
-//    }@GetMapping("/community/favorite/favoriteUpdate")
-//    public void func14() {
-//    }@GetMapping("/community/favorite/favoriteWrite")
-//    public void func15() {
-//    }@GetMapping("/community/food/foodDetail")
-//    public void func16() {
-//    }@GetMapping("/community/food/foodList")
-//    public void func17() {
-//    }@GetMapping("/community/food/foodUpdate")
-//    public void func18() {
-//    }@GetMapping("/community/food/foodWrite")
-//    public void func19() {
-//    }@GetMapping("/community/post/postDetail")
-//    public void func20() {
-//    }@GetMapping("/community/post/postList")
-//    public void func21() {
-//    }@GetMapping("/community/post/postUpdate")
-//    public void func22() {
-//    }@GetMapping("/community/post/postWrite")
-//    public void func23() {
-//    }@GetMapping("/community/community")
-//    public void func24() {
-//    }
-//
+        List<GamePlayer> gamePlayers = gameService.getPlayer();
 
+//        getNews();
+
+        model.addAttribute("mapKey", mapKey);
+        model.addAttribute("weatherKey", weatherKey);
+        model.addAttribute("schedules", gameSchedules);
+        model.addAttribute("players", gamePlayers);
+    }
+
+    // 아직 하는중!!!
+//    @GetMapping("/api/naver")
+//    public String naver(){
+//
+//        String query = "기아타이거즈";
+//        ByteBuffer buffer = StandardCharsets.UTF_8.encode(query);
+//        String encode = StandardCharsets.UTF_8.decode(buffer).toString();
+//
+//        URI uri = UriComponentsBuilder
+//                .fromUriString("https://openapi.naver.com")
+//                .path("/v1/search/news.xml")
+//                .queryParam("query",encode)
+//                .queryParam("display",7)
+//                .queryParam("start",1)
+//                .queryParam("sort","sim")
+//                .encode()
+//                .build()
+//                .toUri();
+//
+//        RestTemplate restTemplate = new RestTemplate();
+//
+//        // 아래는 헤더를 넣기 위함
+//        RequestEntity<Void> req = RequestEntity
+//                .get(uri)
+//                .header("X-Naver-Client-Id", clientId)
+//                .header("X-Naver-Client-Secret",clientSecret)
+//                .build();
+//
+//        ResponseEntity<String> result = restTemplate.exchange(req, String.class);
+//        return result.getBody();
+//    }
 }

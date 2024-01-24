@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class GameSchedule {
     // 전체 게임 일정
     // 날짜, 상대
+    // api 대체
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

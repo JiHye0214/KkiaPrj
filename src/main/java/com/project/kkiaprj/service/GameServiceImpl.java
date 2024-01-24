@@ -1,7 +1,9 @@
 package com.project.kkiaprj.service;
 
+import com.project.kkiaprj.domain.GamePlayer;
 import com.project.kkiaprj.domain.GameSchedule;
-import com.project.kkiaprj.repository.GameRepository;
+import com.project.kkiaprj.repository.GamePlayerRepository;
+import com.project.kkiaprj.repository.GameScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,16 @@ import java.util.List;
 public class GameServiceImpl implements GameService {
 
     @Autowired
-    GameRepository gameRepository;
+    GameScheduleRepository gameScheduleRepository;
+    @Autowired
+    GamePlayerRepository gamePlayerRepository;
 
     public List<GameSchedule> getSchedule() {
-        return gameRepository.findAll();
+        return gameScheduleRepository.findAll();
+    }
+
+    @Override
+    public List<GamePlayer> getPlayer() {
+        return gamePlayerRepository.findAll();
     }
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <script th:if="${result > 0}" th:inline="javascript">
+        if ([[${action}]] == "작성" || [[${action}]] == "수정") {
+            location.href = "detail/[[${food?.id}]]";
+        } else if ([[${action}]] == "삭제") {
+            location.href = "list";
+        } else {
+            location.href = "detail/[[${foodId}]]";
+        }
+    </script>
+
+    <script th:unless="${result > 0}" th:inline="javascript">
+        alert([[${action}]] + " 실패했습니다.");
+        history.back();
+    </script>
+</html>

@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="pagination">
+        <head>
+            <link rel="stylesheet" th:href="@{/css/common/pagination.css}" />
+            <script defer th:src="@{/js/common/pagination.js}"></script>
+        </head>
+        <div id="pagination-wrap" class="display-flex-set">
+            <ul id="pagination-content" class="display-flex">
+                <li th:if="${startPage > 1}">
+                    <a class="move-btn" th:href="@{${url}(page=${startPage - 1}, region=${region})}">
+                        <img src="/img/prevArrow.png" height="12px" />
+                    </a>
+                </li>
 
-<th:block th:fragment="pagination">
-    <head>
-        <link rel="stylesheet" th:href="@{/css/common/pagination.css}" />
-        <script defer th:src="@{/js/common/pagination.js}"></script>
-    </head>
-    <div id="pagination-wrap" class="display-flex-set">
-        <ul id="pagination-content" class="display-flex">
-            <li>
-                <a class="move-btn" href=""><img src="/img/prevArrow.png" height="12px" /></a>
-            </li>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li>
-                <a class="move-btn" href=""><img src="/img/nextArrow.png" height="12px" /></a>
-            </li>
-        </ul>
-    </div>
-</th:block>
+                <th:block th:if="${totalPage > 0}">
+                    <th:block th:each="num : ${#numbers.sequence(startPage, endPage)}">
+                        <li th:if="${num == page}">
+                            <a class="num active" href="javascript:void(0)" th:text="${num}"></a>
+                        </li>
+                        <li th:unless="${num == page}">
+                            <a class="num" th:href="@{${url}(page=${num}, region=${region})}" th:text="${num}"></a>
+                        </li>
+                    </th:block>
+                </th:block>
+
+                <li th:if="${endPage < totalPage}">
+                    <a class="move-btn" th:href="@{${url}(page=${endPage + 1}, region=${region})}">
+                        <img src="/img/nextArrow.png" height="12px" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </th:block>
 </html>

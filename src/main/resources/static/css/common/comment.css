@@ -8,11 +8,15 @@
     flex-direction: column;
     row-gap: 15px;
 }
-.comment-content {
+.comment-content,
+.comment-write {
     align-items: center;
     column-gap: 15px;
     padding-bottom: 20px;
     border-bottom: 2px solid;
+}
+.comment-content:last-child {
+    margin-bottom: 20px;
 }
 .writer-pic {
     width: 40px;
@@ -35,18 +39,18 @@
     background-color: hsl(0, 100%, 79%);
     outline: none;
     cursor: pointer;
-    display: none;
+    /*display: none;*/
 }
 
 #comment-write-wrap {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     padding: 0;
     border: none;
 }
 #comment-write-wrap > .writer-nickname {
     width: 200px;
 }
-.comment-input {
+#comment-input {
     width: 69.6%;
     padding: 5px 10px;
     border: none;
@@ -59,10 +63,10 @@
         border-radius: 5px;
     }
 }
-.comment-input::placeholder {
+#comment-input::placeholder {
     color: rgb(190, 190, 190);
 }
-.comment-write-btn {
+#comment-write-btn {
     font-size: 16px;
     font-weight: 500;
     height: 39px;

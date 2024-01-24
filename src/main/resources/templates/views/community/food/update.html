@@ -3,6 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+<script th:unless="${food}" th:inline="javascript">
+    alert("페이지가 존재하지 않습니다.");
+    location.href = "/community/food/list";
+</script>
+
+<th:block th:if="${food}">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,71 +17,89 @@
         <link rel="stylesheet" th:href="@{/css/community/foodWrite.css}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02d9a33ac12fb7a7edb7579360286569&libraries=services"></script>
+        <script defer th:src="@{/js/community/foodUpdate.js}"></script>
         <script defer th:src="@{/js/community/foodWrite.js}"></script>
         <title>구장별 맛집 수정</title>
     </head>
     <body>
-        <!--/* header */-->
-        <th:block th:insert="~{fragment/header::header}"></th:block>
+    <!--/* header */-->
+    <th:block th:insert="~{fragment/header::header}"></th:block>
 
-        <main>
-            <div id="writer-wrap" class="display-flex">
-                <img src="/img/핑구1.jpg" />
-                <div id="nickname">어우기</div>
-            </div>
+    <main>
+        <div id="writer-wrap" class="display-flex">
+            <img src="/img/핑구1.jpg" />
+            <div id="nickname" th:text="${food.user.nickname}"></div>
+        </div>
 
-            <div id="write-wrap">
-                <div id="write-info-wrap">
-                    <div class="err-wrap display-flex">
-                        <div>
-                            <p class="err-msg">* 제목을 입력해 주세요</p>
-                        </div>
-                        <div>
-                            <p class="err-msg">* 지역을 선택해 주세요</p>
-                        </div>
+        <div id="write-wrap">
+            <div id="write-info-wrap">
+                <div class="err-wrap display-flex">
+                    <div>
+                        <p class="err-msg">* 제목을 입력해 주세요</p>
                     </div>
-
-                    <div id="write-info" class="display-flex">
-                        <input type="text" id="input-title" placeholder="제목" th:value="토박이의광주찐맛집" />
-                        <div id="selected-region" class="selected-region">지역</div>
-                        <div id="region-wrap" class="region-wrap"></div>
+                    <div>
+                        <p class="err-msg">* 지역을 선택해 주세요</p>
                     </div>
                 </div>
 
-                <p class="search-err-msg"></p>
-                <div id="search-map-wrap" class="display-flex padding-line">
-                    <div id="menu-wrap">
-                        <div id="search-wrap" class="display-flex">
-                            <form method="post" th:action="@{#}" onsubmit="searchPlaces(); return false;" id="search-form" class="display-flex" autocomplete="off">
-                                <input type="text" id="keyword" placeholder="맛집 검색" name="keyword" />
-                                <button type="submit" id="search-btn"></button>
-                            </form>
-                        </div>
-
-                        <ul id="placesList"></ul>
-
-                        <div id="pagination"></div>
-                    </div>
-
-                    <div id="map"></div>
+                <div id="write-info" class="display-flex">
+                    <input type="text" id="input-title" placeholder="제목" th:value="${food.title}" />
+                    <div id="selected-region" class="selected-region" th:text="${food.region}"></div>
+                    <div id="region-wrap" class="region-wrap"></div>
                 </div>
             </div>
 
-            <form method="post" name="write-form" th:action="@{#}">
-                <input type="hidden" id="submit-title" name="title" />
-                <input type="hidden" id="submit-region" name="region" />
+            <p class="search-err-msg"></p>
+            <div id="search-map-wrap" class="display-flex padding-line">
+                <div id="menu-wrap">
+                    <div id="search-wrap" class="display-flex">
+                        <form method="post" th:action="@{#}" onsubmit="searchPlaces(); return false;" id="search-form" class="display-flex" autocomplete="off">
+                            <input type="text" id="keyword" placeholder="맛집 검색" name="keyword" />
+                            <button type="submit" id="search-btn"></button>
+                        </form>
+                    </div>
 
-                <div class="padding-line">
-                    <p class="err-msg">* 맛집을 하나 이상 선택해 주세요</p>
-                    <div>추천 맛집</div>
-                    <div id="item-content-wrap" class="display-flex"></div>
+                    <ul id="placesList"></ul>
+
+                    <div id="pagination"></div>
                 </div>
 
-                <div id="btn-wrap" class="display-flex">
-                    <button type="button" id="submit-btn">수정완료</button>
-                    <a th:href="@{/community/food/list}">목록</a>
+                <div id="map"></div>
+            </div>
+        </div>
+
+        <form name="write-form" th:action="@{/community/food/update}" method="post">
+            <input type="hidden" name="id" th:value="${food.id}" />
+            <input type="hidden" id="submit-title" name="title" />
+            <input type="hidden" id="submit-region" name="region" />
+            <input type="hidden" name="action" th:value="수정" />
+
+            <div class="padding-line">
+                <p class="err-msg">* 맛집을 하나 이상 선택해 주세요</p>
+                <div>추천 맛집</div>
+
+                <div id="item-content-wrap" class="display-flex">
+                    <div class="item-wrap" th:each="foodItem : ${food.foodItems}">
+                        <div class="txt-wrap display-flex">
+                            <div class="store-name" th:text="${foodItem.restaurantName}"></div>
+                            <textarea class="store-info" placeholder="소개 내용을 입력해 주세요" spellcheck="false" name="content" th:utext="${foodItem.content}"></textarea>
+                            <button type="button" class="item-delete-btn"></button>
+                            <input type="hidden" th:value="${foodItem.restaurantName}" name="restaurantName" />
+                            <input type="hidden" th:value="${foodItem.address}" class="store-address" name="address">
+                            <input type="hidden" th:value="${foodItem.lat}" name="lat">
+                            <input type="hidden" th:value="${foodItem.lng}" name="lng">
+                        </div>
+                        <p class="info-err-msg">* 내용을 입력해 주세요</p>
+                    </div>
                 </div>
-            </form>
-        </main>
+            </div>
+
+            <div id="btn-wrap" class="display-flex">
+                <button type="button" id="submit-btn">수정완료</button>
+                <a th:href="@{/community/food/list}">목록</a>
+            </div>
+        </form>
+    </main>
     </body>
+</th:block>
 </html>

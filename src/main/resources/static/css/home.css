@@ -5,7 +5,9 @@
     position: relative;
 }
 
-.game-wrap {
+.game-wrap,
+ .player-wrap,
+  #weather-api-key {
     display: none;
 }
 
@@ -60,6 +62,7 @@
     border: 2px solid ;
     border-radius: 5px;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 #main-today-opponent > li {
@@ -88,20 +91,37 @@
 }
 
 #main-today-entry > li {
-    width: 78px;
-    text-align: center;
+    width: 78.3px;
     border-right: 2px solid ;
+    font-weight: 600;
+    font-size: 17px;
+    flex-direction: column;
 
     &:last-of-type {
         border: none;
     }
 }
+#main-today-entry > li .entry-index {
+    border-bottom: 2px solid;
+    width: 100%;
+    text-align: center;
+    padding: 5px 0;
+}
+#main-today-entry > li .entry-player {
+    height: 100%;
+    writing-mode: vertical-lr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 3px;
+}
+
+/* place and weather ---------------------------*/
 
 #main-today-place {
     column-gap: 20px;
 }
 
-/* place and weather ---------------------------*/
 .place-content {
     width: 524px;
     height: 280px;
@@ -129,8 +149,7 @@
 }
 #weather-icon {
     position: absolute;
-    width: 80px;
-    top: 70px;
+    top: 83px;
 }
 #temperature {
     background: #f0f0f0;

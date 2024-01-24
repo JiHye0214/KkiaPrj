@@ -38,18 +38,4 @@ public class CommunityController {
 
         return "redirect:/community/main";
     }
-
-    //---------------------------------------------------------------
-    @GetMapping("/food/list")
-    public void foodList() {
-    }
-
-    //---------------------------------------------------------------
-    @GetMapping("/favorite/list")
-    public void favoriteList(){}
-
-    //---------------------------------------------------------------
-    @GetMapping("/post/list")
-    public void postList(){}
-
 }

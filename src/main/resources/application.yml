@@ -56,8 +56,9 @@ app:
     path: upload
 
   #api_key
-  #날씨 공공데이터, 네이버클라이언트 ID,PW
+  #날씨, 지도
   api:
-    weatherKey: df44ad6a3a8f46202abee4c297e535e7
-    client-id: RpfhAy8G_tHGeYN_xmVR
-    client-secret: UTl7gGDH0X
+    weatherKey: e2f1ef8ab369be1544125c13be7aa1d6
+    mapKey: d64bd068626ccb7110596affe11691da
+    clientId: Qj7MSNQWF1rvSuhD5NTJ
+    clientSecret: butXpRJ_KF

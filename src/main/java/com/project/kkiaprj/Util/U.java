@@ -35,10 +35,4 @@ public class U {
         return getRequest().getSession();
     }
 
-    public static final ObjectMapper MAPPER = new ObjectMapper();
-
-    public static JsonNode jsonToJsonNode(String json) throws JsonProcessingException {
-        return MAPPER.readTree(json);
-    }
-
 }

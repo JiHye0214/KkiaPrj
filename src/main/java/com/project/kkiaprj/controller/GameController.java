@@ -1,7 +1,6 @@
 package com.project.kkiaprj.controller;
 
 import com.project.kkiaprj.domain.GameSchedule;
-import com.project.kkiaprj.repository.GameRepository;
 import com.project.kkiaprj.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
