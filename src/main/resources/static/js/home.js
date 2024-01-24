@@ -57,9 +57,9 @@ $game.forEach((game) => {
 })
 // test
 gameArr.push({
-    gameDate: "2024.1.24",
-    homeGame: "true",
-    opponent: "KTHT",
+    gameDate: "2024.1.25",
+    homeGame: "false",
+    opponent: "HHHT",
 })
 
 // 날씨 api -----------------------------------------------------
