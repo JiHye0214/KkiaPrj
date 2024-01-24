@@ -68,17 +68,22 @@
     font-size: 50px;
     font-weight: 800;
     margin: 0 30px;
-    text-align: left;
     background-size: 65px;
     background-repeat: no-repeat;
-    background-position: center 15px;
+    background-position: right;
+
+    &:first-child {
+       background-position: left;
+    }
 }
-#main-today-opponent > li > span {
-    background-color: rgba( 255, 255, 255, 0.5 );
-    display: inline-block;
+#main-today-opponent > #home > span {
+    padding: 0 75px 0 0;
+}
+#main-today-opponent > #away > span {
+    padding: 0 0 0 75px;
 }
 
-#main-today-opponent > img {
+#main-today-opponent > img { /* 방망이 */
     width: 50px;
 }
 
@@ -96,16 +101,55 @@
     column-gap: 20px;
 }
 
+/* place and weather ---------------------------*/
 .place-content {
     width: 524px;
     height: 280px;
-
+    flex-direction: column;
     border: 2px solid;
     border-radius: 5px;
+    font-weight: 600;
+    position: relative;
 
     &:last-of-type {
         width: 240px;
     }
+}
+
+#weather-title {
+    margin-bottom: 90px;
+    font-size: 17px;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+#weather-title > img { /* 마커 */
+    width: 20px;
+    vertical-align: -2px;
+}
+#weather-icon {
+    position: absolute;
+    width: 80px;
+    top: 70px;
+}
+#temperature {
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+#weather-second {
+    width: 170px;
+    margin-top: 30px;
+    text-align: left;
+    font-size: 13px;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 20px;
+}
+#weather-second img {
+    width: 20px;
+    vertical-align: -3px;
+    margin-right: 8px;
 }
 
 /* fan picture -------------------------------*/
@@ -117,13 +161,6 @@
 
     position: absolute;
     right: 0px;
-}
-
-.heart {
-    width: 90px;
-    position: absolute;
-    top: -45px;
-    left: 130px;
 }
 
 /* slide */
