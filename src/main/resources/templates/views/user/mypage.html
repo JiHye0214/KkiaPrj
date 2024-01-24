@@ -36,7 +36,7 @@
             <div id="mypage-wrapper" class="display-flex">
                 <div id="mypage-left-wrap" class="display-flex-set">
                     <div id="mypage-profile" class="display-flex">
-                        <img id="mypage-profile-pic" th:src="@{'/upload/'} + ${userImg.fileName}" />
+                        <img id="mypage-profile-pic" th:src="@{'/upload/' + ${userImg.fileName}}" />
                         <div id="mypage-profile-inform">
                             <div class="mypage-profile-items" th:text="${logged_user.nickname}"></div>
                             <div class="mypage-profile-items" th:text="${logged_user.loginId}"></div>
