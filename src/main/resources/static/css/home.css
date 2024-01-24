@@ -40,8 +40,8 @@
     height: 58px;
     line-height: 58px;
     text-align: center;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 800;
     border-radius: 0 0 5px 5px;
     border: 2px solid;
     border-width: 0px 2px 2px 2px;
@@ -53,6 +53,7 @@
     width: calc(100% / 2);
 
     &:first-child {
+        background: #eb6868;
         border-right: 2px solid;
     }
 }
