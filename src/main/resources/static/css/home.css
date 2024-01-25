@@ -260,7 +260,7 @@
     height: 211px;
     border-radius: 5px;
     flex-direction: column;
-    row-gap: 3px;
+    row-gap: 6px;
 }
 
 .news-item  {
@@ -272,6 +272,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
+    font-size: 14px;
 
     &:hover {
         text-decoration: underline;
