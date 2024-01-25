@@ -59,7 +59,7 @@ public class GameServiceImpl implements GameService {
 
         // 오늘 날짜
         // String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.M.dd")); // 이게 되네 ?
-        String date = "2024.4.10"; // test
+        String date = "2024.4.20"; // test
         // 공식 일정
         List<GameSchedule> schedules = gameScheduleRepository.findAll();
         // 엔트리
@@ -93,9 +93,8 @@ public class GameServiceImpl implements GameService {
                         }
                     }
                 }
-            } else {
-                weatherObj = getWeather(33.3614003, 126.5294226);
             }
+
         }
 
         model.addAttribute("baseball", baseball);

@@ -27,7 +27,7 @@
                     <div>TODAY</div>
                     <div id="today-date" th:text="${today}"></div>
                 </div>
-                <div>
+                <th:block th:unless="${baseball == 12}">
                     <!--/* 엔트리 */-->
                     <div class="player-wrap" th:each="player : ${players}">
                         <span class="player-item" th:text="|${player.name}/${player.number}|"></span>
@@ -90,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </th:block>
             </div>
 
             <div id="main-fan" class="display-flex-set">
