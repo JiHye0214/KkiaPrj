@@ -20,6 +20,6 @@ public interface FoodItemRepository extends JpaRepository<FoodItem, Long> {
     @Transactional
     int setIdAsOne();
 
-    List<FoodItem> findByFood(Long foodId);
+    List<FoodItem> findByFoodId(Long foodId);
 
 }

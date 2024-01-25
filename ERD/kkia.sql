@@ -4,10 +4,11 @@ SELECT TABLE_NAME FROM information_schema.TABLES
 WHERE TABLE_SCHEMA = 'kkiatigers'
 ;
 
+SET foreign_key_checks = 0;
+DROP TABLE favorite;
+SET foreign_key_checks = 1;
+
 DROP TABLE IF EXISTS diary;
-DROP TABLE IF EXISTS favoritelike;
-DROP TABLE IF EXISTS favoriteimg;
-DROP TABLE IF EXISTS favorite;
 DROP TABLE IF EXISTS live_chat;
 DROP TABLE IF EXISTS livechat;
 DROP TABLE IF EXISTS marketcomment;
@@ -30,6 +31,10 @@ DROP TABLE IF EXISTS food_save;
 DROP TABLE IF EXISTS food_comment;
 DROP TABLE IF EXISTS food_item;
 DROP TABLE IF EXISTS food;
+DROP TABLE IF EXISTS favorite_like;
+DROP TABLE IF EXISTS favorite_comment;
+DROP TABLE IF EXISTS favorite_img;
+DROP TABLE IF EXISTS favorite;
 DROP TABLE IF EXISTS `user`;
 
 SELECT * FROM user;
@@ -38,15 +43,28 @@ SELECT * FROM live_chat;
 SELECT * FROM game_record;
 SELECT * FROM game_schedule;
 SELECT * FROM game_player;
+SELECT * FROM food;
+SELECT * FROM food_item;
+SELECT * FROM food_comment;
+SELECT * FROM food_save;
+SELECT * FROM favorite;
+SELECT * FROM favorite_img;
+SELECT * FROM favorite_comment;
+SELECT * FROM favorite_like;
 
-INSERT INTO user_img (fileName, sourceName, userId)
-VALUES ("2017.jpg", "2017.jpg", 1); 
+INSERT INTO user_img (fileName, sourceName, userId) VALUES
+("2017.jpg", "2017.jpg", 1),
+("2017.jpg", "2017.jpg", 2),
+("2017.jpg", "2017.jpg", 3),
+("2017.jpg", "2017.jpg", 4)
+;
 
 INSERT INTO game_record (userId, recordDate, recordMemo, recordPlace, recordResult) VALUES 
 (1, "2024.1.2", "안녕", "잠실종합운동장", "win"),
 (1, "2024.1.4", "기아", "잠실종합운동장", "win"),
 (1, "2024.1.24", "우승", "잠실종합운동장", "win"),
-(1, "2024.1.3", "무조건", "잠실종합운동장", "win");
+(1, "2024.1.3", "무조건", "잠실종합운동장", "win")
+;
 
 -- api 대신 
 INSERT INTO game_player (name, number) VALUES

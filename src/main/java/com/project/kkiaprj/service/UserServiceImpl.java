@@ -69,4 +69,11 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email);
         return (user != null);
     }
+
+    // 프사 조회
+    @Override
+    public UserImg findUserImgByUserId(Long id) {
+        return userImgRepository.findByUserId(id);
+    }
+
 }

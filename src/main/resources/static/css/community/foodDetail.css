@@ -23,6 +23,7 @@ main {
 }
 #writer-wrap > .writer-pic {
     width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 #writer-wrap > .writer-nickname {

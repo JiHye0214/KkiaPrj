@@ -1,8 +1,11 @@
 package com.project.kkiaprj.service;
 
+import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.FoodComment;
 import com.project.kkiaprj.domain.User;
+import com.project.kkiaprj.domain.UserImg;
 import com.project.kkiaprj.repository.FoodCommentRepository;
+import com.project.kkiaprj.repository.UserImgRepository;
 import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,16 +17,24 @@ public class FoodCommentServiceImpl implements FoodCommentService {
     private UserRepository userRepository;
 
     @Autowired
+    private UserImgRepository userImgRepository;
+
+    @Autowired
     private FoodCommentRepository foodCommentRepository;
 
     @Override
     public int write(FoodComment foodComment, Long foodId) {
         int result = 0;
-        User user = userRepository.findById(1L).orElse(null);
+
+        User user = U.getLoggedUser();
+        user = userRepository.findById(user.getId()).orElse(null);
 
         if (user != null) {
+            String userImgFileName = userImgRepository.findByUserId(user.getId()).getFileName();
+
             foodComment.setUser(user);
-            foodComment.setFood(foodId);
+            foodComment.setFoodId(foodId);
+            foodComment.setUserImgFileName(userImgFileName);
             foodCommentRepository.saveAndFlush(foodComment);
 
             result = 1;

@@ -40,26 +40,27 @@ public class Food extends BaseEntity {
     @ColumnDefault(value = "'false'")
     private String isSaveClicked;
 
-    @ManyToOne(optional = false)
+    // 맛집 글 상세에서는 어떤 유저가 작성했는지, 어떤 맛집 항목들이 있는지, 어떤 댓글들이 달려있는지 필요
+    // + 어떤 유저가 어떤 맛집 글에 저장을 눌렀는지 저장, 조회 필요
+    // 따라서 해당 타입들의 데이터 가져와야 함
+
+    @ManyToOne(optional = false)// food 테이블에 user_id 라는 외래키 생김 + food 기준으로 inner join (user_id 는 null 값 허용 X)
     @ToString.Exclude
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "food_id")
+    @OneToMany(cascade = CascadeType.ALL) // food 테이블의 데이터 삭제 시 해당 데이터 참조하고 있던 food_item 의 데이터들도 삭제
+    @JoinColumn(name = "food_id") // food_item 테이블의 food_id 라는 외래키와 연결됨 (부모 : food, 자식 : food_item)
     @ToString.Exclude
-//    @Builder.Default
     private List<FoodItem> foodItems = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "food_id")
+    @OneToMany(cascade = CascadeType.ALL) // food 테이블의 데이터 삭제 시 해당 데이터 참조하고 있던 food_comment 의 데이터들도 삭제
+    @JoinColumn(name = "food_id") // food_comment 테이블의 food_id 라는 외래키와 연결됨 (부모 : food, 자식 : food_comment)
     @ToString.Exclude
-//    @Builder.Default
     private List<FoodComment> comments = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @OneToMany(cascade = CascadeType.ALL) // food 테이블의 데이터 삭제 시 해당 데이터 참조하고 있던 food_save 의 데이터들도 삭제
+    @JoinColumn(name = "food_id") // food_save 테이블의 food_id 라는 외래키와 연결됨 (부모 : food, 자식 : food_save)
     @ToString.Exclude
-//    @Builder.Default
     private List<FoodSave> foodSaves = new ArrayList<>();
 
 }

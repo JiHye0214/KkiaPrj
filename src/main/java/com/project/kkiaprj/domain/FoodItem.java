@@ -8,9 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
 @Entity(name = "food_item")
-public class FoodItem extends BaseEntity {
+public class FoodItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +28,8 @@ public class FoodItem extends BaseEntity {
 
     private double lng;
 
-    @Column(name = "food_id")
+    @Column(name = "food_id") // food_item 테이블에 food_id 라는 외래키 생김
     @ToString.Exclude
-    private Long food;
+    private Long foodId;
 
 }

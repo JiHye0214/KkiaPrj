@@ -5,6 +5,7 @@ import com.project.kkiaprj.domain.Food;
 import com.project.kkiaprj.domain.FoodComment;
 import com.project.kkiaprj.service.FoodCommentService;
 import com.project.kkiaprj.service.FoodService;
+import com.project.kkiaprj.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/community/food")
 public class FoodController {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private FoodService foodService;
@@ -69,12 +73,15 @@ public class FoodController {
             , Model model
     ) {
         model.addAttribute("listItem", foodService.detail(id));
+        model.addAttribute("writerImg", userService.findUserImgByUserId(foodService.detailById(id).getUser().getId()));
+        model.addAttribute("cmtWriterImg", userService.findUserImgByUserId(U.getLoggedUser().getId()));
         return "community/food/detail";
     }
 
     // 맛집 글 작성 페이지
     @GetMapping("/write")
-    public void write() {
+    public void write(Model model) {
+        model.addAttribute("writerImg", userService.findUserImgByUserId(U.getLoggedUser().getId()));
     }
 
     // 맛집 글 작성
@@ -100,8 +107,8 @@ public class FoodController {
             @PathVariable(name = "id") Long id
             , Model model
     ) {
-        Food food = foodService.detailById(id);
-        model.addAttribute("food", food);
+        model.addAttribute("food", foodService.detailById(id));
+        model.addAttribute("writerImg", userService.findUserImgByUserId(U.getLoggedUser().getId()));
         return "community/food/update";
     }
 

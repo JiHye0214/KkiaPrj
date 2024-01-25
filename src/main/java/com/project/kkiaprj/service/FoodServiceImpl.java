@@ -68,7 +68,6 @@ public class FoodServiceImpl implements FoodService {
 
         model.addAttribute("page", page);
         model.addAttribute("totalPage", totalPage);
-        model.addAttribute("rowsPerPage", rowsPerPage);
         model.addAttribute("region", region);
 
         model.addAttribute("url", U.getRequest().getRequestURI());
@@ -78,12 +77,13 @@ public class FoodServiceImpl implements FoodService {
         return lists;
     }
 
+    // 맛집 글 상세 조회 (조회수 증가X)
     @Override
     public Food detailById(Long id) {
         return foodRepository.findById(id).orElse(null);
     }
 
-    // 맛집 글 상세
+    // 맛집 글 상세 조회 (조회수 증가O)
     @Override
     @Transactional
     public Food detail(Long id) {
@@ -121,16 +121,15 @@ public class FoodServiceImpl implements FoodService {
         }
 
         int result = 0;
-//        User user = U.getLoggedUser();
-//        User user = userRepository.findById(user.getId()).orElse(null);
-        User user = userRepository.findById(1L).orElse(null);
+
+        User user = U.getLoggedUser();
+        user = userRepository.findById(user.getId()).orElse(null);
 
         if (user != null) {
             food.setUser(user);
             food.setFoodItems(foodItems);
 
-            foodRepository.save(food);
-//            foodRepository.saveAndFlush(food);
+            foodRepository.saveAndFlush(food);
 
             result = 1;
         }
@@ -169,13 +168,13 @@ public class FoodServiceImpl implements FoodService {
             prevFood.setTitle(food.getTitle());
             prevFood.setRegion(food.getRegion());
 
+            // 맛집글의 맛집 항목들은 굳이 기존 게 수정되고 그럴 필요 없음
             // 맛집글의 기존 맛집 항목들 전부 삭제하고 수정한 항목들로 다시 저장
-            List<FoodItem> prevFoodItems = foodItemRepository.findByFood(prevFood.getId());
+            List<FoodItem> prevFoodItems = foodItemRepository.findByFoodId(prevFood.getId());
             foodItemRepository.deleteAllInBatch(prevFoodItems);
             prevFood.setFoodItems(foodItems);
 
-            foodRepository.save(prevFood); // UPDATE
-//            foodRepository.saveAndFlush(prevFood);
+            foodRepository.saveAndFlush(prevFood); // UPDATE
 
             result = 1;
         }

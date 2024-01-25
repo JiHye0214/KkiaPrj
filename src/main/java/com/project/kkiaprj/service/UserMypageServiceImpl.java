@@ -1,9 +1,11 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.Util.U;
+import com.project.kkiaprj.domain.FoodComment;
 import com.project.kkiaprj.domain.GameRecord;
 import com.project.kkiaprj.domain.User;
 import com.project.kkiaprj.domain.UserImg;
+import com.project.kkiaprj.repository.FoodCommentRepository;
 import com.project.kkiaprj.repository.GameRecordRepository;
 import com.project.kkiaprj.repository.UserImgRepository;
 import com.project.kkiaprj.repository.UserRepository;
@@ -24,6 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +44,8 @@ public class UserMypageServiceImpl implements UserMypageService {
     GameRecordRepository gameRecordRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private FoodCommentRepository foodCommentRepository;
 
     @Override
     public void setMypage(String menu, Model model) {
@@ -121,6 +126,14 @@ public class UserMypageServiceImpl implements UserMypageService {
         Long userId = U.getLoggedUser().getId();
         UserImg userImg = userImgRepository.findByUserId(userId); // 일단 저장
         changeImg(file, userId, userImg, resetImg);
+
+        // 프사 변경 후 해당 유저가 단 댓글(FoodComment) 들의 userImgFileName 변경
+        List<FoodComment> foodComments = foodCommentRepository.findByUser(U.getLoggedUser());
+        for (FoodComment foodCmt : foodComments) {
+            foodCmt.setUserImgFileName(userImgRepository.findByUserId(userId).getFileName());
+        }
+        foodCommentRepository.saveAllAndFlush(foodComments);
+
     }
 
     private void changeImg(Map<String, MultipartFile> file,

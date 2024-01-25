@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,13 +93,22 @@ public class setData {
 
         // User 데이터 생성
         List<String> loginId = List.of("1234", "apple1234", "melon1234", "cherry1234");
-        List<String> password = List.of("$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m",
-                                        "$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2",
-                                        "$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa",
-                                        "$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi");
+        List<String> password = List.of(
+                "$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m",
+                "$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2",
+                "$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa",
+                "$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi"
+        );
         List<String> userName = List.of("김우승", "박사과", "김멜론", "이체리");
         List<String> nickName = List.of("어우기", "말랑한고구마", "맑은아침햇살", "마라탕먹고싶다");
         List<String> email = List.of("djdnrl@mail.com", "apple@mail.com", "melon@mail.com", "cherry@mail.com");
+        List<LocalDate> birth = List.of(
+                LocalDate.of(1999, 4, 12),
+                LocalDate.of(2000, 6, 3),
+                LocalDate.of(2001, 2, 24),
+                LocalDate.of(2002, 10, 19)
+        );
+        List<String> gender = List.of("여자", "여자", "남자", "남자");
 
         List<User> users = new ArrayList<>();
 
@@ -109,6 +119,8 @@ public class setData {
                     .name(userName.get(i))
                     .nickname(nickName.get(i))
                     .email(email.get(i))
+                    .birth(birth.get(i))
+                    .gender(gender.get(i))
                     .build();
 
             users.add(user);
@@ -158,7 +170,7 @@ public class setData {
                     .address(address.get(i))
                     .lat(lat.get(i))
                     .lng(lng.get(i))
-                    .food(foodId.get(i))
+                    .foodId(foodId.get(i))
                     .build();
 
             foodItems.add(foodItem);
@@ -185,6 +197,7 @@ public class setData {
                 foods.get(0).getId(), foods.get(1).getId(), foods.get(2).getId(), foods.get(3).getId(),
                 foods.get(0).getId(), foods.get(1).getId(), foods.get(2).getId(), foods.get(3).getId()
         );
+        String cmtUserImgFileName = "2017.jpg";
 
         List<FoodComment> foodComments = new ArrayList<>();
 
@@ -192,7 +205,8 @@ public class setData {
             FoodComment foodComment = FoodComment.builder()
                     .content(cmtContent.get(i))
                     .user(cmtUser.get(i))
-                    .food(cmtFoodId.get(i))
+                    .foodId(cmtFoodId.get(i))
+                    .userImgFileName(cmtUserImgFileName)
                     .build();
 
             foodComments.add(foodComment);
