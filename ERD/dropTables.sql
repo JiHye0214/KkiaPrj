@@ -30,6 +30,7 @@ DROP TABLE IF EXISTS favorite_like;
 DROP TABLE IF EXISTS favorite_comment;
 DROP TABLE IF EXISTS favorite_img;
 DROP TABLE IF EXISTS favorite;
+DROP TABLE IF EXISTS team;
 DROP TABLE IF EXISTS `user`;
 
 SHOW tables;
@@ -48,6 +49,7 @@ SELECT * FROM favorite;
 SELECT * FROM favorite_img;
 SELECT * FROM favorite_comment;
 SELECT * FROM favorite_like;
+SELECT * FROM team;
 
 
 

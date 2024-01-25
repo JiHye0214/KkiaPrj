@@ -111,6 +111,20 @@ INSERT INTO favorite_comment(content, userImgFileName, createdDate, user_Id, fav
 ('마라탕먹고싶다가 6번 글에 댓글 작성', "2017.jpg", now(), 4, 6)
 ;
 
+-- 구단 정보
+INSERT INTO team (code, name, img, place, latitude, longitude) VALUES
+("NCHT", "Dinos", "/img/team-dinos.png", "창원NC파크", 35.2228007, 128.5820053),
+("HTSK", "Landers", "/img/team-landers.png", "인천SSG랜더스필드", 37.4369986, 126.6932732),
+("OBHT", "Bears", "/img/team-bears.png", "잠실종합운동장", 37.5121518, 127.0719083),
+("HHHT", "Eagles", "/img/team-eagles.png", "한화생명이글스파크", 36.3170827, 127.4291626),
+("HTWO", "Heros",  "/img/team-heros.png", "고척스카이돔", 37.4982302,  126.8671030),
+("SSHT", "Lions", "/img/team-lions.png", "대구삼성라이온즈파크", 35.8410568, 128.6816571),
+("HTLT", "Giants", "/img/team-giants.png", "부산사직종합운동장", 35.1940153, 129.0615412),
+("HTLG", "Twins", "/img/team-twins.png", "잠실종합운동장", 37.5121518, 127.0719083),
+("KTHT", "Wiz", "/img/team-wiz.png", "수원KT위즈파크", 37.2997194, 127.0097703),
+("KKIA", "Tigers", "/img/team-tigers.png", "광주기아챔피언스필드", 35.1682047, 126.8891093)
+;
+
 -- 직관 기록
 INSERT INTO game_record (userId, recordDate, recordMemo, recordPlace, recordResult) VALUES 
 (1, "2024.1.2", "안녕", "잠실종합운동장", "win"),
@@ -119,7 +133,7 @@ INSERT INTO game_record (userId, recordDate, recordMemo, recordPlace, recordResu
 (1, "2024.1.3", "무조건", "잠실종합운동장", "win")
 ;
 
--- 
+-- 선수 정보
 -- api 대신 
 INSERT INTO game_player (name, number) VALUES
 ("박찬호", 1),

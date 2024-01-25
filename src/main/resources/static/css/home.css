@@ -5,9 +5,10 @@
     position: relative;
 }
 
-.game-wrap,
+.map-wrap,
  .player-wrap,
-  #weather-api-key {
+ .weather-wrap,
+ .news-wrap {
     display: none;
 }
 
@@ -31,7 +32,7 @@
     top: 0px;
     font-size: 30px;
     font-weight: 900;
-    z-index: 1;
+    z-index: 100;
 }
 
 #main-today-title {
@@ -47,7 +48,7 @@
     border-width: 0px 2px 2px 2px;
     top: 0px;
     left: 215px;
-    z-index: 2;
+    z-index: 200;
 }
 #main-today-title > div {
     width: calc(100% / 2);
@@ -73,24 +74,21 @@
     line-height: 140px;
     font-size: 50px;
     font-weight: 800;
-    margin: 0 30px;
     background-size: 65px;
     background-repeat: no-repeat;
     background-position: right;
-
     &:first-child {
        background-position: left;
     }
 }
-#main-today-opponent > #home > span {
-    padding: 0 75px 0 0;
-}
-#main-today-opponent > #away > span {
-    padding: 0 0 0 75px;
+#main-today-opponent > li > img {
+    width: 70px;
+    vertical-align: -12px;
 }
 
 #main-today-opponent > img { /* 방망이 */
     width: 50px;
+    margin: 0 30px;
 }
 
 #main-today-entry > li {
@@ -116,7 +114,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 }
 
 /* place and weather ---------------------------*/
@@ -153,6 +151,8 @@
 #weather-icon {
     position: absolute;
     top: 83px;
+    left: 60px;
+    color: white;
 }
 #temperature {
     background: #f0f0f0;
@@ -259,13 +259,21 @@
     width: 310px;
     height: 211px;
     border-radius: 5px;
-    padding: 15px;
     flex-direction: column;
-    row-gap: 3px;
+    row-gap: 6px;
 }
 
 .news-item  {
+    width: 100%;
     color: #636363;
+    display: inline-block;
+    padding: 0 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 14px;
+
     &:hover {
         text-decoration: underline;
     }
