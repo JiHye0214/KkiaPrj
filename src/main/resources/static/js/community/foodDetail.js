@@ -115,13 +115,8 @@ delForms.forEach((delForm, idx) => {
     }
 })
 
-submitDelForms.forEach((el) => {
-    console.log(el.name);
-})
-
 delBtns.forEach((delBtn, idx) => {
     delBtn.onclick = () => {
-        console.log(submitDelForms[idx].name);
         if (confirm("댓글을 삭제하시겠습니까?")) {
             submitDelForms[idx].submit();
         }
