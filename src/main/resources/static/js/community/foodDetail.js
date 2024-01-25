@@ -87,9 +87,11 @@ map.setBounds(bounds);
 
 // 맛집 글 삭제
 const deleteBtn = document.querySelector("#delete-btn");
-deleteBtn.onclick = () => {
-    if (confirm("글을 삭제하시겠습니까?")) {
-        document.forms["delete-form"].submit();
+if (deleteBtn) {
+    deleteBtn.onclick = () => {
+        if (confirm("글을 삭제하시겠습니까?")) {
+            document.forms["delete-form"].submit();
+        }
     }
 }
 
@@ -103,12 +105,25 @@ cmtWriteBtn.onclick = () => {
 }
 
 // 댓글 삭제
-const deleteBtns = document.querySelectorAll(".comment-delete-btn");
-const deleteForms = document.querySelectorAll("[name = 'comment-delete-form']");
-deleteBtns.forEach((delBtn, idx) => {
+const delBtns = document.querySelectorAll(".comment-delete-btn");
+const delForms = document.querySelectorAll(".comment-delete-form");
+const submitDelForms = [];
+
+delForms.forEach((delForm, idx) => {
+    if (delForm.childElementCount == 8) {
+        submitDelForms.push(delForm);
+    }
+})
+
+submitDelForms.forEach((el) => {
+    console.log(el.name);
+})
+
+delBtns.forEach((delBtn, idx) => {
     delBtn.onclick = () => {
+        console.log(submitDelForms[idx].name);
         if (confirm("댓글을 삭제하시겠습니까?")) {
-            deleteForms[idx].submit();
+            submitDelForms[idx].submit();
         }
     }
 })
