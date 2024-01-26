@@ -15,19 +15,7 @@ $(function () {
         i++;
         confirmBoxSetting();
     });
-
-    // update 첨부파일 지우는 건
-    // intelliJ 가서 하기 
-    // $(".file-delete-btn").click(function(){
-    //     let fileId = $(this).attr('data-fileid-del');
-    //     deleteFiles(fileId);
-    //     $(this).parent().remove();
-    // });
 });
-
-// function deleteFiles(fileId){
-//     $("#delFiles").append(`<input type='hidden' name='delfile' value='${fileId}'>`);
-// }
 
 const confirmBoxSetting = () => {
 

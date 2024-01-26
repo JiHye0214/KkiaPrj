@@ -15,6 +15,7 @@
             <link rel="stylesheet" th:href="@{/css/common/common.css}" />
             <link rel="stylesheet" th:href="@{/css/market/marketWrite.css}" />
             <script defer th:src="@{/js/common/attachment.js}"></script>
+            <script defer th:src="@{/js/common/attachmentDel.js}"></script>
             <script defer th:src="@{/js/market/marketWrite.js}"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
             <title>마켓 수정</title>
@@ -29,7 +30,7 @@
                     <div id="nickname" th:text="${logged_user.nickname}"></div>
                 </div>
 
-                <form method="post" name="write-form" th:action="@{#}" autocomplete="off">
+                <form method="post" id="market-write-form" name="write-form" th:action="@{/market/update}" enctype="multipart/form-data" autocomplete="off">
                     <div id="write-info-wrap">
                         <div class="err-wrap display-flex">
                             <div>
@@ -45,7 +46,7 @@
 
                         <div id="write-info" class="display-flex">
                             <input type="text" id="price" class="valid" placeholder="가격" name="price" th:value="${market.price}"/>
-                            <input type="text" id="productName" class="valid" placeholder="상품명" name="productName" th:value="${market.product}"/>
+                            <input type="text" id="productName" class="valid" placeholder="상품명" name="product" th:value="${market.product}"/>
                             <input type="text" list="region-wrap" id="region" class="valid" placeholder="지역" name="region" th:value="${market.region}"/>
                             <datalist id="region-wrap"  class="display-flex-set"></datalist>
                         </div>
@@ -57,22 +58,22 @@
                     </div>
 
                     <div class="fileBox">
-                        <!-- <div id="delete-file-wrap" style="display: none;"></div> -->
                         <div>상품 이미지</div>
                         <p class="file-err-msg">* 사진을 하나 이상 업로드 해 주세요</p>
+                        <div id="delFiles"></div>
                         <div class="picture-btn">파일 추가</div>
                         <div class="confirm-box-wrap display-flex">
-
                             <!--/* 기존 파일 */-->
-                            <div th:if="${#lists.size(market.marketImgs) > 0}" th:each="marketImg : ${market.marketImgs}" class="confirm-box-item display-flex" style="margin-top: 10px">
+                            <div th:if="${#lists.size(market.marketImgs) > 0}" th:each="marketImg : ${market.marketImgs}" class="confirm-box-item update display-flex" style="margin-top: 10px">
                                 <div class="update-confirm-txt" th:text="${marketImg.fileName}"></div>
-                                <input class="file-delete-btn" type="button" value="삭제" />
+                                <input class="file-delete-btn" th:fileId="${marketImg.id}" type="button" value="삭제" />
                             </div>
 
                         </div>
                     </div>
 
                     <div id="btn-wrap" class="display-flex">
+                        <input type="hidden" name="id" th:value="${market.id}"/>
                         <button type="button" id="submit-btn">작성완료</button>
                         <a th:href="@{/market/list}">목록</a>
                     </div>

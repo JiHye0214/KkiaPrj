@@ -151,7 +151,7 @@ public class UserMypageServiceImpl implements UserMypageService {
                 userImgRepository.saveAndFlush(profile); // 이미지만 바꿀 게 아니라
 
                 user.setUserImg(profile);
-                userRepository.saveAndFlush(user);
+                userRepository.saveAndFlush(user); // 유저도 바꿔야지
             }
         }
     }
@@ -165,7 +165,7 @@ public class UserMypageServiceImpl implements UserMypageService {
         String sourceName = null;
         String fileName = null;
 
-        String originalFilename = multipartFile.getOriginalFilename(); // 원본파일명
+        String originalFilename = multipartFile.getOriginalFilename(); // 새로운 원본파일명
 
         // 초기화 눌렀을 때
         if(originalFilename.isEmpty()) {

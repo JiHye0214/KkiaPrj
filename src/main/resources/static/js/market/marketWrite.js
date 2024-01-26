@@ -247,16 +247,15 @@ regionArr.forEach((region) => {
 
 // validation
 const $errMsgArr = document.querySelectorAll(".err-msg");
-const $submitBtn = document.querySelector("#submit-btn");
 const $validInputArr = document.querySelectorAll(".valid");
 
-$submitBtn.onclick = () => {
+$("#submit-btn").on("click", function() {
 
     let count = 0;
     let checkNum = false;
     let titleCheck = false;
 
-    // 제목 25자 이하 
+    // 제목 25자 이하
     const checkTitle = (title) => {
         if(title.value.length > 25) {
             $errMsgArr[0].style.display = `block`;
@@ -293,26 +292,38 @@ $submitBtn.onclick = () => {
     });
 
     // 첨부파일 하나라도 있어야 함
+    const $fileItems = document.querySelectorAll(".confirm-box-wrap > .confirm-box-item");
     const $fileInputArr = document.querySelectorAll(".choice-file-btn > input");
+    console.log("자식 몇 개 : " + $fileItems.length);
+
     const $fileErrMsg = document.querySelector(".file-err-msg");
     let checkFile = false;
 
-    if ($fileInputArr.length > 0) {
-        $fileInputArr.forEach((input) => {
-            if (!checkFile) {
-                if (input.value) {
-                    checkFile = true;
-                    $fileErrMsg.style.display = ``;
-                } else {
-                    $fileErrMsg.style.display = `block`;
-                }
+    $fileItems.forEach((item) => {
+        if(item.classList.contains('update')){ // 수정이면
+            console.log("프리패스");
+            checkFile = true;
+        } else { // 수정 중 있던 파일 삭제했거나 작성이면
+            console.log("일단 정지")
+            if ($fileInputArr.length > 0) {
+                $fileInputArr.forEach((input) => {
+                    if (!checkFile) {
+                        if (input.value) {
+                            checkFile = true;
+                            $fileErrMsg.style.display = ``;
+                        } else {
+                            $fileErrMsg.style.display = `block`;
+                        }
+                    }
+                });
+            } else {
+                $fileErrMsg.style.display = `block`;
             }
-        });
-    } else {
-        $fileErrMsg.style.display = `block`;
-    }
+        }
+    })
+
 
     if (count == 4 && checkNum && checkFile && titleCheck) {
-        document.forms["write-form"].submit();
+        $("#market-write-form").submit();
     }
-};
+});

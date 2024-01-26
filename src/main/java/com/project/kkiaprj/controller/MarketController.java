@@ -3,13 +3,14 @@ package com.project.kkiaprj.controller;
 import com.project.kkiaprj.domain.Market;
 import com.project.kkiaprj.service.MarketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/market")
@@ -42,16 +43,37 @@ public class MarketController {
         return "market/update";
     }
 
+    // 마켓 작성 post
     @PostMapping("/write")
     public String marketWritePost(Market market,
+                                  @RequestParam Map<String, MultipartFile> file,
                                   RedirectAttributes redirectAttrs,
                                   Model model) {
 
-        System.out.println("----------------------------------------");
-        System.out.println(market);
-
-        model.addAttribute("result", marketService.writeMarket(market));
+        model.addAttribute("result", marketService.writeMarket(market, file));
         model.addAttribute("action", "작성");
         return "market/success";
     }
+
+    // 마켓 삭제 post
+    @PostMapping("/delete")
+    public String marketDeletePost(Market market, Model model) {
+
+        model.addAttribute("result", marketService.deleteMarket(market));
+        model.addAttribute("action", "삭제");
+        return "market/success";
+    }
+
+    // 마켓 수정 post
+    @PostMapping("/update")
+    public String marketModify(Market market,
+                               Long[] delFiles, // 삭제할 파일들
+                               @RequestParam Map<String, MultipartFile> file,
+                               Model model) {
+
+        model.addAttribute("result", marketService.modifyMarket(market, file, delFiles));
+        model.addAttribute("action", "수정");
+        return "market/success";
+    }
+
 }

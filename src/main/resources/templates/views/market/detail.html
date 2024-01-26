@@ -14,6 +14,9 @@
             <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
             <link rel="stylesheet" th:href="@{/css/common/common.css}" />
             <link rel="stylesheet" th:href="@{/css/market/marketDetail.css}" />
+            <script defer th:src="@{/js/common/imgSwiper.js}"></script>
+            <script defer th:src="@{/js/market/marketDetail.js}"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
             <title>마켓 상세</title>
         </head>
         <body>
@@ -65,8 +68,9 @@
                 <div id="btn-wrap" class="display-flex">
                     <a th:href="@{/market/write}">작성</a>
                     <a th:href="@{'/market/update/' + ${market.id}}" th:if="${logged_user.id == market.user.id}">수정</a>
-                    <form method="post" th:action="@{#}" th:if="${logged_user.id == market.user.id}">
-                        <button type="button">삭제</button>
+                    <form method="post" id="market-delete-form" th:action="@{/market/delete}" th:if="${logged_user.id == market.user.id}">
+                        <input type="hidden" name="id" th:value="${market.id}"/>
+                        <button id="market-delete-btn" type="button">삭제</button>
                     </form>
                     <a th:href="@{/market/list}">목록</a>
                 </div>
