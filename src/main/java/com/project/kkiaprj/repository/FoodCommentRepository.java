@@ -22,6 +22,4 @@ public interface FoodCommentRepository extends JpaRepository<FoodComment, Long> 
     @Transactional
     int setIdAsOne();
 
-    List<FoodComment> findByUser(User user);
-
 }

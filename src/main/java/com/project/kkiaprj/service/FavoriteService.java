@@ -19,7 +19,14 @@ public interface FavoriteService {
     Favorite detail(Long id);
 
     // 최애 글 작성
-    int write(Map<String, MultipartFile> files, Favorite favorite);
+    int write(Favorite favorite, Map<String, MultipartFile> files);
+
+    // 최애 글 수정
+    int update(
+            Favorite favorite
+            , Map<String, MultipartFile> files
+            , Long[] delfile
+    );
 
     // 최애 글 삭제
     int delete(Long id);

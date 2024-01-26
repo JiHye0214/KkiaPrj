@@ -120,7 +120,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     // 최애 글 작성
     @Override
-    public int write(Map<String, MultipartFile> files, Favorite favorite) {
+    public int write(Favorite favorite, Map<String, MultipartFile> files) {
         int result = 0;
 
         User user = U.getLoggedUser();
@@ -147,7 +147,7 @@ public class FavoriteServiceImpl implements FavoriteService {
             // 물리적으로 파일 저장 (kkiaPrj 프로젝트의 upload 폴더에 저장)
             FavoriteImg favoriteImg = upload(e.getValue());
 
-            // 각 file 확인해서 null 이 아니면(담긴 파일 있으면) db 에도 저장
+            // 각 file 확인해서 null 아니면(담긴 파일 있으면) DB 에도 저장
             if (favoriteImg != null) {
                 favoriteImg.setFavoriteId(favoriteId);
                 favoriteImgRepository.saveAndFlush(favoriteImg);
@@ -167,7 +167,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         String imgFileName = imgSourceName; // 저장될 파일명
 
         // 파일명 중복되는지 확인
-        File file = new File(uploadDir, imgFileName); // uploadDir 폴더에서 fileName 이름의 파일 가져오기
+        File file = new File(uploadDir, imgFileName); // uploadDir 폴더에서 imgFileName 값을 이름으로 가진 파일 가져오기
 
         if (file.exists()) {
             int pos = imgFileName.lastIndexOf(".");
@@ -205,14 +205,73 @@ public class FavoriteServiceImpl implements FavoriteService {
         return favoriteImg;
     }
 
+    // 최애 글 수정
+    @Override
+    public int update(
+            Favorite favorite
+            , Map<String, MultipartFile> files
+            , Long[] delfile
+    ) {
+        int result = 0;
+        Favorite prevFavorite = favoriteRepository.findById(favorite.getId()).orElse(null);
+
+        if (prevFavorite != null) {
+            prevFavorite.setTitle(favorite.getTitle());
+            prevFavorite.setPlayerName(favorite.getPlayerName());
+            prevFavorite.setPlayerNum(favorite.getPlayerNum());
+
+            favoriteRepository.saveAndFlush(prevFavorite);
+
+            // 새로운 이미지 파일들 저장
+            addImgs(files, favorite.getId());
+
+            // 삭제 버튼 누른 이미지 파일들 삭제
+            if (delfile != null) {
+                for (Long ImgId : delfile) {
+                    FavoriteImg favoriteImg = favoriteImgRepository.findById(ImgId).orElse(null);
+
+                    if (favoriteImg != null) {
+                        delImgs(favoriteImg); // 물리적으로 파일 삭제 (kkiaPrj 프로젝트의 upload 폴더에서 삭제)
+                        favoriteImgRepository.delete(favoriteImg); // DB 에서 삭제
+                    }
+                }
+            }
+
+            result = 1;
+        }
+
+        return result;
+    }
+
+    // 물리적으로 파일 삭제
+    private void delImgs(FavoriteImg favoriteImg) {
+        String saveDirectory = new File(uploadDir).getAbsolutePath();
+        File file = new File(saveDirectory, favoriteImg.getFileName()); // uploadDir 폴더에서 favoriteImg.getFileName() 값을 이름으로 가진 파일 가져오기
+
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
     // 최애 글 삭제
     @Override
     public int delete(Long id) {
         int result = 0;
         Favorite favorite = favoriteRepository.findById(id).orElse(null);
 
+        // 특정 글 삭제하면 해당 글에 저장되어 있던 이미지들 upload 폴더에서 삭제
         if (favorite != null) {
+            // 물리적으로 파일 삭제 (kkiaPrj 프로젝트의 upload 폴더에서 삭제)
+            List<FavoriteImg> favoriteImgs = favoriteImgRepository.findByFavoriteId(id);
+
+            if (favoriteImgs != null) {
+                for (FavoriteImg img : favoriteImgs) {
+                    delImgs(img);
+                }
+            }
+
             favoriteRepository.delete(favorite);
+
             result = 1;
         }
 

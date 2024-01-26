@@ -49,7 +49,7 @@ SELECT * FROM favorite_img;
 SELECT * FROM favorite_comment;
 SELECT * FROM favorite_like;
 SELECT * FROM team;
-SELECT *  FROM market ;
+SELECT *  FROM market;
 SELECT * FROM market_img;
 
 

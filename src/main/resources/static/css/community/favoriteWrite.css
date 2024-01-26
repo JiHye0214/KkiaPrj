@@ -144,6 +144,12 @@
     cursor: pointer;
 }
 
+.update-confirm-txt {
+    width: 95%;
+    border-right: 2px solid;
+    padding: 10px;
+}
+
 /* ------------------------------------------------------------ */
 
 #btn-wrap {

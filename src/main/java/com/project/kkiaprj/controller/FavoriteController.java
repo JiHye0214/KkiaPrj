@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -69,11 +70,11 @@ public class FavoriteController {
     // 최애 글 작성
     @PostMapping("/write")
     public String writeOk(
-            @RequestParam Map<String, MultipartFile> files
-            , Favorite favorite
+            Favorite favorite
+            , @RequestParam Map<String, MultipartFile> files
             , Model model
     ) {
-        model.addAttribute("result", favoriteService.write(files, favorite));
+        model.addAttribute("result", favoriteService.write(favorite, files));
         model.addAttribute("action", "작성");
         return "community/favorite/success";
     }
@@ -89,6 +90,17 @@ public class FavoriteController {
     }
 
     // 최애 글 수정
+    @PostMapping("/update")
+    public String updateOk(
+            Favorite favorite
+            , @RequestParam Map<String, MultipartFile> files
+            , Long[] delfile
+            , Model model
+    ) {
+        model.addAttribute("result", favoriteService.update(favorite, files, delfile));
+        model.addAttribute("action", "수정");
+        return "community/favorite/success";
+    }
 
     // 최애 글 삭제
     @PostMapping("/delete")
