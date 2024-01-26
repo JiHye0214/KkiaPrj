@@ -92,7 +92,6 @@
                     <a th:href="@{'/community/food/update/' + ${listItem.id}}" th:if="${logged_user.id == listItem.user.id}">수정</a>
                     <form name="delete-form" th:action="@{/community/food/delete}" method="post" th:if="${logged_user.id == listItem.user.id}">
                         <input type="hidden" name="id" th:value="${listItem.id}" />
-                        <input type="hidden" name="action" th:value="삭제" />
                         <button type="button" id="delete-btn">삭제</button>
                     </form>
                     <a th:href="@{/community/food/list}">목록</a>

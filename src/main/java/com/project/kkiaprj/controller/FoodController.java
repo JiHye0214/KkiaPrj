@@ -87,11 +87,10 @@ public class FoodController {
             , @RequestParam List<String> address
             , @RequestParam List<Double> lat
             , @RequestParam List<Double> lng
-            , String action
             , Model model
     ) {
         model.addAttribute("result", foodService.write(food, restaurantName, content, address, lat, lng));
-        model.addAttribute("action", action);
+        model.addAttribute("action", "작성");
         return "community/food/success";
     }
 
@@ -114,11 +113,10 @@ public class FoodController {
             , @RequestParam List<String> address
             , @RequestParam List<Double> lat
             , @RequestParam List<Double> lng
-            , String action
             , Model model
     ) {
         model.addAttribute("result", foodService.update(food, restaurantName, content, address, lat, lng));
-        model.addAttribute("action", action);
+        model.addAttribute("action", "수정");
         return "community/food/success";
     }
 
@@ -126,11 +124,10 @@ public class FoodController {
     @PostMapping("/delete")
     public String deleteOk(
             Long id
-            , String action
             , Model model
     ) {
         model.addAttribute("result", foodService.delete(id));
-        model.addAttribute("action", action);
+        model.addAttribute("action", "삭제");
         return "community/food/success";
     }
 
@@ -141,12 +138,10 @@ public class FoodController {
     public String cmtWriteOk(
             FoodComment foodComment
             , Long listItemId
-            , String action
             , Model model
     ) {
         model.addAttribute("result", foodCommentService.write(foodComment, listItemId));
-        model.addAttribute("foodId", listItemId);
-        model.addAttribute("action", action);
+        model.addAttribute("action", "댓글 작성");
         return "community/food/success";
     }
 
@@ -154,13 +149,10 @@ public class FoodController {
     @PostMapping("/cmtDelete")
     public String cmtDeleteOk(
             Long id
-            , Long listItemId
-            , String action
             , Model model
     ) {
         model.addAttribute("result", foodCommentService.delete(id));
-        model.addAttribute("foodId", listItemId);
-        model.addAttribute("action", action);
+        model.addAttribute("action", "댓글 삭제");
         return "community/food/success";
     }
 

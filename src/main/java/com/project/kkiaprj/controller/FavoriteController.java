@@ -71,11 +71,10 @@ public class FavoriteController {
     public String writeOk(
             @RequestParam Map<String, MultipartFile> files
             , Favorite favorite
-            , String action
             , Model model
     ) {
         model.addAttribute("result", favoriteService.write(files, favorite));
-        model.addAttribute("action", action);
+        model.addAttribute("action", "작성");
         return "community/favorite/success";
     }
 
@@ -95,11 +94,10 @@ public class FavoriteController {
     @PostMapping("/delete")
     public String deleteOk(
             Long id
-            , String action
             , Model model
     ) {
         model.addAttribute("result", favoriteService.delete(id));
-        model.addAttribute("action", action);
+        model.addAttribute("action", "삭제");
         return "community/favorite/success";
     }
 
@@ -111,12 +109,10 @@ public class FavoriteController {
     public String cmtWriteOk(
             FavoriteComment favoriteComment
             , Long listItemId
-            , String action
             , Model model
     ) {
         model.addAttribute("result", favoriteCommentService.write(favoriteComment, listItemId));
-        model.addAttribute("favoriteId", listItemId);
-        model.addAttribute("action", action);
+        model.addAttribute("action", "댓글 작성");
         return "community/favorite/success";
     }
 
@@ -124,13 +120,10 @@ public class FavoriteController {
     @PostMapping("/cmtDelete")
     public String cmtDeleteOk(
             Long id
-            , Long listItemId
-            , String action
             , Model model
     ) {
         model.addAttribute("result", favoriteCommentService.delete(id));
-        model.addAttribute("favoriteId", listItemId);
-        model.addAttribute("action", action);
+        model.addAttribute("action", "댓글 삭제");
         return "community/favorite/success";
     }
 

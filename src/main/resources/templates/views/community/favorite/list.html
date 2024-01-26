@@ -34,7 +34,7 @@
             <div id="list-wrap" class="display-flex">
                 <div class="list-content" th:each="favorite : ${lists}">
                     <a th:href="@{'/community/favorite/detail/' + ${favorite.id}}">
-                        <img class="favorite-img" src="/img/player.jpg" />
+                        <img class="favorite-img" th:src="@{'/upload/' + ${favorite.favoriteImgs[0].fileName}}" />
                         <div class="player-info-wrap display-flex-set">
                             <div class="num-name-wrap display-flex">
                                 <div class="player-num" th:text="${favorite.playerNum}"></div>

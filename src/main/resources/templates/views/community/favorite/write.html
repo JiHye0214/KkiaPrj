@@ -25,7 +25,7 @@
                     <div id="nickname" th:text="${logged_user.nickname}"></div>
                 </div>
 
-                <form method="post" name="write-form" th:action="@{/community/favorite/write}" autocomplete="off">
+                <form method="post" name="write-form" th:action="@{/community/favorite/write}" autocomplete="off" enctype="multipart/form-data">
                     <div id="write-info-wrap">
                         <div class="err-wrap display-flex">
                             <div>

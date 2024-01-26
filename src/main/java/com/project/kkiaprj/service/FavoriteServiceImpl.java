@@ -197,7 +197,7 @@ public class FavoriteServiceImpl implements FavoriteService {
             throw new RuntimeException(e);
         }
 
-        favoriteImg = favoriteImg.builder()
+        favoriteImg = FavoriteImg.builder()
                 .fileName(imgFileName)
                 .sourceName(imgSourceName)
                 .build();

@@ -109,7 +109,12 @@ INSERT INTO favorite(title, playerName, playerNum, likeCnt, viewCnt, isLikeClick
 -- 최애 글 이미지
 INSERT INTO favorite_img (fileName, sourceName, favorite_id) VALUES
 ("player1.jpg", "player1.jpg", 1),
-("player2.jpg", "player2.jpg", 1)
+("player2.jpg", "player2.jpg", 1),
+("player2.jpg", "player2.jpg", 2),
+("player2.jpg", "player2.jpg", 3),
+("player2.jpg", "player2.jpg", 4),
+("player2.jpg", "player2.jpg", 5),
+("player2.jpg", "player2.jpg", 6)
 ;
 
 -- 최애 글 댓글

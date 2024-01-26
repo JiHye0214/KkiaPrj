@@ -14,7 +14,8 @@ const delForms = document.querySelectorAll(".comment-delete-form");
 const submitDelForms = [];
 
 delForms.forEach((delForm, idx) => {
-    if (delForm.childElementCount == 8) {
+    // input 으로 넘겨주는 값 개수 달라지면 form 의 자식 개수 확인하기
+    if (delForm.childElementCount == 6) {
         submitDelForms.push(delForm);
     }
 })

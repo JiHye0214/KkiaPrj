@@ -2,7 +2,6 @@
 const $errMsgArr = document.querySelectorAll(".err-msg");
 const $submitBtn = document.querySelector("#submit-btn");
 const $validInputArr = document.querySelectorAll(".valid");
-const $submitForm = document.querySelector("form");
 
 $submitBtn.onclick = () => {
     let count = 0;
@@ -64,6 +63,6 @@ $submitBtn.onclick = () => {
     }
 
     if(count == 3 && titleCheck && numCheck && fileCheck) {
-        $submitForm.submit();
+        document.forms["write-form"].submit();
     }
 }
