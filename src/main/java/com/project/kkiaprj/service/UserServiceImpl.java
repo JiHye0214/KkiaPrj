@@ -70,10 +70,4 @@ public class UserServiceImpl implements UserService {
         return (user != null);
     }
 
-    // 프사 조회
-    @Override
-    public UserImg findUserImgByUserId(Long id) {
-        return userImgRepository.findByUserId(id);
-    }
-
 }

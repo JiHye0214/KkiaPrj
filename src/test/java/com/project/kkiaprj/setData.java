@@ -177,7 +177,6 @@ public class setData {
         }
 
         foodItemRepository.saveAll(foodItems);
-//        foodItemRepository.findAll().forEach((System.out::println));
 
         // --------------------------------------------------------------------------------
 
@@ -197,7 +196,6 @@ public class setData {
                 foods.get(0).getId(), foods.get(1).getId(), foods.get(2).getId(), foods.get(3).getId(),
                 foods.get(0).getId(), foods.get(1).getId(), foods.get(2).getId(), foods.get(3).getId()
         );
-        String cmtUserImgFileName = "2017.jpg";
 
         List<FoodComment> foodComments = new ArrayList<>();
 
@@ -206,14 +204,12 @@ public class setData {
                     .content(cmtContent.get(i))
                     .user(cmtUser.get(i))
                     .foodId(cmtFoodId.get(i))
-                    .userImgFileName(cmtUserImgFileName)
                     .build();
 
             foodComments.add(foodComment);
         }
 
         foodCommentRepository.saveAll(foodComments);
-//        foodCommentRepository.findAll().forEach((System.out::println));
 
         // --------------------------------------------------------------------------------
 

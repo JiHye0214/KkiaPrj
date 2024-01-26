@@ -29,22 +29,22 @@ ALTER TABLE favorite AUTO_INCREMENT = 1;
 ALTER TABLE user_img AUTO_INCREMENT = 1;
 ALTER TABLE user AUTO_INCREMENT = 1;
 
--- 유저
-INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate) VALUES
-('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now()),
-('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now()),
-('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now()),
-('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now())
-;
-
 -- 유저 프사
-INSERT INTO user_img (fileName, sourceName, userId) VALUES
-("2017.jpg", "2017.jpg", 1),
-("2017.jpg", "2017.jpg", 2),
-("2017.jpg", "2017.jpg", 3),
-("2017.jpg", "2017.jpg", 4)
+-- 얘 먼저 하고 user 하면 됨 !
+INSERT INTO user_img (fileName, sourceName) VALUES
+("2017.jpg", "2017.jpg"),
+("2017.jpg", "2017.jpg"),
+("2017.jpg", "2017.jpg"),
+("2017.jpg", "2017.jpg")
 ;
 
+-- 유저
+INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate, imgId) VALUES
+('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(),1),
+('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(),2),
+('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(),3),
+('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(),4)
+;
 
 -- 맛집 글
 INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, user_id) VALUES
@@ -72,19 +72,19 @@ INSERT INTO food_item(restaurantName, content, address, lat, lng, food_id) VALUE
 ;
 
 -- 맛집 글 댓글
-INSERT INTO food_comment(content, userImgFileName, createdDate, user_Id, food_Id) VALUES
-('말랑한고구마가 1번 글에 댓글 작성', "2017.jpg", now(), 2, 1),
-('말랑한고구마가 2번 글에 댓글 작성', "2017.jpg", now(), 2, 2),
-('말랑한고구마가 3번 글에 댓글 작성', "2017.jpg", now(), 2, 3),
-('말랑한고구마가 4번 글에 댓글 작성', "2017.jpg", now(), 2, 4),
-('맑은아침햇살이 1번 글에 댓글 작성', "2017.jpg", now(), 3, 1),
-('맑은아침햇살이 2번 글에 댓글 작성', "2017.jpg", now(), 3, 2),
-('맑은아침햇살이 3번 글에 댓글 작성', "2017.jpg", now(), 3, 3),
-('맑은아침햇살이 4번 글에 댓글 작성', "2017.jpg", now(), 3, 4),
-('마라탕먹고싶다가 1번 글에 댓글 작성', "2017.jpg", now(), 4, 1),
-('마라탕먹고싶다가 2번 글에 댓글 작성', "2017.jpg", now(), 4, 2),
-('마라탕먹고싶다가 3번 글에 댓글 작성', "2017.jpg", now(), 4, 3),
-('마라탕먹고싶다가 4번 글에 댓글 작성', "2017.jpg", now(), 4, 4)
+INSERT INTO food_comment(content, createdDate, user_Id, food_Id) VALUES
+('말랑한고구마가 1번 글에 댓글 작성', now(), 2, 1),
+('말랑한고구마가 2번 글에 댓글 작성', now(), 2, 2),
+('말랑한고구마가 3번 글에 댓글 작성', now(), 2, 3),
+('말랑한고구마가 4번 글에 댓글 작성', now(), 2, 4),
+('맑은아침햇살이 1번 글에 댓글 작성', now(), 3, 1),
+('맑은아침햇살이 2번 글에 댓글 작성', now(), 3, 2),
+('맑은아침햇살이 3번 글에 댓글 작성', now(), 3, 3),
+('맑은아침햇살이 4번 글에 댓글 작성', now(), 3, 4),
+('마라탕먹고싶다가 1번 글에 댓글 작성', now(), 4, 1),
+('마라탕먹고싶다가 2번 글에 댓글 작성', now(), 4, 2),
+('마라탕먹고싶다가 3번 글에 댓글 작성', now(), 4, 3),
+('마라탕먹고싶다가 4번 글에 댓글 작성', now(), 4, 4)
 ;
 
 -- 최애 글
@@ -106,25 +106,23 @@ SELECT count(*)
 FROM favorite;
 
 -- 최애 글 댓글
-INSERT INTO favorite_comment(content, userImgFileName, createdDate, user_Id, favorite_Id) VALUES
-('말랑한고구마가 1번 글에 댓글 작성', "2017.jpg", now(), 2, 1),
-('말랑한고구마가 2번 글에 댓글 작성', "2017.jpg", now(), 2, 2),
-('말랑한고구마가 3번 글에 댓글 작성', "2017.jpg", now(), 2, 3),
-('말랑한고구마가 4번 글에 댓글 작성', "2017.jpg", now(), 2, 4),
-('말랑한고구마가 5번 글에 댓글 작성', "2017.jpg", now(), 2, 5),
-('말랑한고구마가 6번 글에 댓글 작성', "2017.jpg", now(), 2, 6),
-('맑은아침햇살이 1번 글에 댓글 작성', "2017.jpg", now(), 3, 1),
-('맑은아침햇살이 2번 글에 댓글 작성', "2017.jpg", now(), 3, 2),
-('맑은아침햇살이 3번 글에 댓글 작성', "2017.jpg", now(), 3, 3),
-('맑은아침햇살이 4번 글에 댓글 작성', "2017.jpg", now(), 3, 4),
-('맑은아침햇살이 5번 글에 댓글 작성', "2017.jpg", now(), 3, 5),
-('맑은아침햇살이 6번 글에 댓글 작성', "2017.jpg", now(), 3, 6),
-('마라탕먹고싶다가 1번 글에 댓글 작성', "2017.jpg", now(), 4, 1),
-('마라탕먹고싶다가 2번 글에 댓글 작성', "2017.jpg", now(), 4, 2),
-('마라탕먹고싶다가 3번 글에 댓글 작성', "2017.jpg", now(), 4, 3),
-('마라탕먹고싶다가 4번 글에 댓글 작성', "2017.jpg", now(), 4, 4),
-('마라탕먹고싶다가 5번 글에 댓글 작성', "2017.jpg", now(), 4, 5),
-('마라탕먹고싶다가 6번 글에 댓글 작성', "2017.jpg", now(), 4, 6)
+INSERT INTO favorite_comment(content, createdDate, user_Id, favorite_Id) VALUES
+('말랑한고구마가 1번 글에 댓글 작성', now(), 2, 1),
+('말랑한고구마가 2번 글에 댓글 작성', now(), 2, 2),
+('말랑한고구마가 3번 글에 댓글 작성', now(), 2, 3),
+('말랑한고구마가 5번 글에 댓글 작성', now(), 2, 5),
+('말랑한고구마가 6번 글에 댓글 작성', now(), 2, 6),
+('맑은아침햇살이 1번 글에 댓글 작성', now(), 3, 1),
+('맑은아침햇살이 2번 글에 댓글 작성', now(), 3, 2),
+('맑은아침햇살이 3번 글에 댓글 작성', now(), 3, 3),
+('맑은아침햇살이 4번 글에 댓글 작성', now(), 3, 4),
+('맑은아침햇살이 5번 글에 댓글 작성', now(), 3, 5),
+('맑은아침햇살이 6번 글에 댓글 작성', now(), 3, 6),
+('마라탕먹고싶다가 2번 글에 댓글 작성', now(), 4, 2),
+('마라탕먹고싶다가 3번 글에 댓글 작성', now(), 4, 3),
+('마라탕먹고싶다가 4번 글에 댓글 작성', now(), 4, 4),
+('마라탕먹고싶다가 5번 글에 댓글 작성', now(), 4, 5),
+('마라탕먹고싶다가 6번 글에 댓글 작성', now(), 4, 6)
 ;
 
 -- 구단 정보

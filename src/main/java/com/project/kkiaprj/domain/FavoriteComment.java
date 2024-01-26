@@ -26,8 +26,4 @@ public class FavoriteComment extends BaseEntity {
     @Column(name = "favorite_id")
     @ToString.Exclude
     private Long favoriteId;
-
-    @Column(nullable = false)
-    private String userImgFileName;
-
 }

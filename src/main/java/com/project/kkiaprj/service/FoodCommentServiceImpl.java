@@ -34,7 +34,6 @@ public class FoodCommentServiceImpl implements FoodCommentService {
 
             foodComment.setUser(user);
             foodComment.setFoodId(foodId);
-            foodComment.setUserImgFileName(userImgFileName);
             foodCommentRepository.saveAndFlush(foodComment);
 
             result = 1;

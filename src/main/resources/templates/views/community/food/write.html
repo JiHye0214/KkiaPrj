@@ -19,7 +19,7 @@
 
             <main>
                 <div id="writer-wrap" class="display-flex">
-                    <img th:src="@{'/upload/' + ${writerImg.fileName}}" />
+                    <img th:src="@{'/upload/' + ${logged_user.userImg.fileName}}" />
                     <div id="nickname" th:text="${logged_user.nickname}"></div>
                 </div>
 
