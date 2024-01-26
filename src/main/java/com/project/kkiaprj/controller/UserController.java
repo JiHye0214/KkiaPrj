@@ -1,6 +1,7 @@
 package com.project.kkiaprj.controller;
 
 import com.project.kkiaprj.Util.U;
+import com.project.kkiaprj.config.UserInformation;
 import com.project.kkiaprj.domain.GameRecord;
 import com.project.kkiaprj.domain.User;
 import com.project.kkiaprj.domain.UserImg;
@@ -10,6 +11,7 @@ import com.project.kkiaprj.service.UserMypageService;
 import com.project.kkiaprj.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -141,6 +143,7 @@ public class UserController {
     public String modifyUser(User user,
                              @RequestParam Map<String, MultipartFile> file,
                              String newPassword,
+                             @AuthenticationPrincipal UserInformation userInformation,
                              RedirectAttributes redirectAttrs) {
 
         // 원래 user

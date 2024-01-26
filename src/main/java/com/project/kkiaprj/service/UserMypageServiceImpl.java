@@ -11,6 +11,7 @@ import com.project.kkiaprj.repository.UserImgRepository;
 import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -124,11 +125,14 @@ public class UserMypageServiceImpl implements UserMypageService {
     public void setUserImg(Map<String, MultipartFile> file, boolean resetImg) {
 
         Long userId = U.getLoggedUser().getId();
+        User user = U.getLoggedUser();
+
         UserImg userImg = userImgRepository.findByUserId(userId); // 일단 저장
-        changeImg(file, userImg, resetImg);
+        changeImg(file, user, userImg, resetImg);
     }
 
     private void changeImg(Map<String, MultipartFile> file,
+                           User user,
                            UserImg userImg,
                            boolean resetImg) {
 
@@ -147,8 +151,12 @@ public class UserMypageServiceImpl implements UserMypageService {
             if(profile != null) {
                 profile.setId(imgId); // id가 있어야 바뀐다.
                 profile.setUser(U.getLoggedUser());
+                userImgRepository.saveAndFlush(profile); // 이미지만 바꿀 게 아니라
+                user.setUserImg(profile);
+                userRepository.saveAndFlush(user); // 유저도 같이 바꿔 줘야 바로 반영 된다 !!
 
-                userImgRepository.saveAndFlush(profile);
+                System.out.println("-----------------------------------------");
+                System.out.println(U.getLoggedUser().getUserImg());
             }
         }
     }

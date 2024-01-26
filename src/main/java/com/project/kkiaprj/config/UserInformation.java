@@ -11,6 +11,7 @@ public class UserInformation implements UserDetails {
 
     private UserService userService;
 
+    public void setUser (User user) { this.user = user; }
     public void setUserService (UserService userService) { this.userService = userService; }
 
     private User user;
