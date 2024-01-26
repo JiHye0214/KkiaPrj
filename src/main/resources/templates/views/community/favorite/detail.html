@@ -8,13 +8,14 @@
         location.href = "/community/food/list";
     </script>
 
-    <th:block th:if="${listItem}">
+    <th:block th:if="${listItem}" th:with="logged_user=${#authentication.principal.user}">
         <head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
             <link rel="stylesheet" th:href="@{/css/common/common.css}" />
             <link rel="stylesheet" th:href="@{/css/community/favoriteDetail.css}" />
+            <script defer th:src="@{/js/community/favoriteDetail.js}"></script>
             <title>최애 자랑 게시판 상세</title>
         </head>
         <body>
@@ -25,22 +26,22 @@
                 <div id="detail-wrap">
                     <div id="detail-header-wrap" class="display-flex-set padding-line">
                         <div id="writer-wrap" class="display-flex">
-                            <img class="writer-pic" src="/img/핑구1.jpg" />
-                            <div class="writer-nickname">어우기</div>
+                            <img class="writer-pic" th:src="@{'/upload/' + ${listItem.user.userImg.fileName}}" />
+                            <div class="writer-nickname" th:text="${listItem.user.nickname}"></div>
                         </div>
 
                         <div id="num-wrap" class="display-flex">
                             <div class="display-flex-set">
                                 <div>좋아요수</div>
-                                <div>13</div>
+                                <div th:text="${listItem.likeCnt}"></div>
                             </div>
                             <div class="display-flex-set">
                                 <div>조회수</div>
-                                <div>13</div>
+                                <div th:text="${listItem.viewCnt}"></div>
                             </div>
                             <div class="display-flex-set">
                                 <div>작성일</div>
-                                <div>2023-12-05</div>
+                                <div th:text="${#temporals.format(listItem.createdDate, 'yyyy.MM.dd')}"></div>
                             </div>
                         </div>
                     </div>
@@ -63,34 +64,36 @@
                                     ></path>
                                 </svg>
                             </div>
-                            <div id="title">우리도영이야구도잘하고잘생기고아주그냥혼자다하네</div>
+                            <div id="title" th:text="${listItem.title}"></div>
                         </div>
                         <div id="player-info-wrap" class="display-flex">
                             <div id="num-name-wrap" class="display-flex">
-                                <div id="num">05</div>
-                                <div id="name">김도영</div>
+                                <div id="num" th:text="${listItem.playerNum}">05</div>
+                                <div id="name" th:text="${listItem.playerName}">김도영</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="swiper padding-line display-flex">
-                        <div class="swiper-slide">
-                            <img src="/img/player.jpg" />
+                        <div class="swiper-slide" th:each="img : ${listItem.favoriteImgs}">
+                            <img th:src="@{'/upload/' + ${img.fileName}}" />
                         </div>
                     </div>
                 </div>
 
                 <div id="btn-wrap" class="display-flex">
                     <a th:href="@{/community/favorite/write}">작성</a>
-                    <a th:href="@{/community/favorite/update}">수정</a>
-                    <form method="post" th:action="@{#}">
-                        <button type="button">삭제</button>
+                    <a th:href="@{'/community/favorite/update' + ${listItem.id}}" th:if="${logged_user.id == listItem.user.id}">수정</a>
+                    <form name="delete-from" th:action="@{/community/favorite/delete}" method="post" th:if="${logged_user.id == listItem.user.id}">
+                        <input type="hidden" name="id" th:value="${listItem.id}" />
+                        <input type="hidden" name="action" th:value="삭제" />
+                        <button type="button" id="delete-btn">삭제</button>
                     </form>
                     <a th:href="@{/community/favorite/list}">목록</a>
                 </div>
 
                 <!--/* comment */-->
-<!--                <th:block th:insert="~{fragment/comment::comment}"></th:block>-->
+                <th:block th:insert="~{fragment/comment::comment}"></th:block>
             </main>
         </body>
     </th:block>

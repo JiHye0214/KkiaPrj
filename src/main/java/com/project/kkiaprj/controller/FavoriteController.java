@@ -1,6 +1,7 @@
 package com.project.kkiaprj.controller;
 
 import com.project.kkiaprj.Util.U;
+import com.project.kkiaprj.domain.FoodComment;
 import com.project.kkiaprj.service.FavoriteService;
 import com.project.kkiaprj.service.FoodService;
 import com.project.kkiaprj.service.UserService;
@@ -53,7 +54,38 @@ public class FavoriteController {
             , Model model
     ) {
         model.addAttribute("listItem", favoriteService.detail(id));
+        model.addAttribute("page", "favorite");
         return "community/favorite/detail";
     }
+
+    // ----------------------------------------------------------------------------------------------------
+
+    // 댓글 작성
+//    @PostMapping("/cmtWrite")
+//    public String cmtWriteOk(
+//            FoodComment foodComment
+//            , Long foodId
+//            , String action
+//            , Model model
+//    ) {
+//        model.addAttribute("result", foodCommentService.write(foodComment, foodId));
+//        model.addAttribute("foodId", foodId);
+//        model.addAttribute("action", action);
+//        return "community/food/success";
+//    }
+//
+//    // 댓글 삭제
+//    @PostMapping("/cmtDelete")
+//    public String cmtDeleteOk(
+//            Long id
+//            , Long foodId
+//            , String action
+//            , Model model
+//    ) {
+//        model.addAttribute("result", foodCommentService.delete(id));
+//        model.addAttribute("foodId", foodId);
+//        model.addAttribute("action", action);
+//        return "community/food/success";
+//    }
 
 }

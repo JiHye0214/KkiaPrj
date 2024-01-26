@@ -5,12 +5,13 @@
     <th:block th:fragment="comment">
         <head>
             <link rel="stylesheet" th:href="@{/css/common/comment.css}" />
+            <script defer th:src="@{/js/common/comment.js}"></script>
         </head>
 
         <div id="comment-wrap">
             <div id="comment-content-wrap" class="display-flex">
                 <th:block th:each="comment, iterState : ${listItem.comments}">
-                    <form class="comment-delete-form comment-content display-flex" th:name="'comment-delete-form' + ${iterState.index}" th:action="@{/community/food/cmtDelete}" method="post">
+                    <form class="comment-delete-form comment-content display-flex" th:name="'comment-delete-form' + ${iterState.index}" th:action="@{'/community/' +${page} + '/cmtDelete'}" method="post">
                         <input type="hidden" name="id" th:value="${comment.id}" />
                         <input type="hidden" name="foodId" th:value="${listItem.id}" />
                         <input type="hidden" name="action" th:value="'댓글'+' 삭제'" />
@@ -24,7 +25,7 @@
                 </th:block>
             </div>
 
-            <form id="comment-write-wrap" class="comment-write display-flex" autocomplete="off" name="cmt-write-form" th:action="@{/community/food/cmtWrite}" method="post">
+            <form id="comment-write-wrap" class="comment-write display-flex" autocomplete="off" name="cmt-write-form" th:action="@{'/community/' +${page} + '/cmtWrite'}" method="post">
                 <input type="hidden" name="foodId" th:value="${listItem.id}" />
                 <input type="hidden" name="action" th:value="'댓글'+' 작성'" />
 

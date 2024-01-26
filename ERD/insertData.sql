@@ -1,4 +1,5 @@
 -- 기존 데이터 삭제
+DELETE FROM team;
 DELETE FROM live_chat;
 DELETE FROM game_record;
 DELETE FROM game_schedule;
@@ -11,10 +12,10 @@ DELETE FROM favorite_like;
 DELETE FROM favorite_comment;
 DELETE FROM favorite_img;
 DELETE FROM favorite;
-DELETE FROM user_img;
 DELETE FROM user;
+DELETE FROM user_img;
 
-ALTER TABLE food_save AUTO_INCREMENT = 1;
+ALTER TABLE team AUTO_INCREMENT = 1;
 ALTER TABLE game_record AUTO_INCREMENT = 1;
 ALTER TABLE game_schedule AUTO_INCREMENT = 1;
 ALTER TABLE game_player AUTO_INCREMENT = 1;
@@ -55,9 +56,9 @@ INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, us
 ;
 
 -- 페이징 테스트용 다량 데이터
-INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, user_id)
-SELECT title, region, saveCnt, viewCnt, isSaveClicked, now(), user_id
-FROM food;
+-- INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, user_id)
+-- SELECT title, region, saveCnt, viewCnt, isSaveClicked, now(), user_id
+-- FROM food;
 
 -- 맛집 글 항목
 INSERT INTO food_item(restaurantName, content, address, lat, lng, food_id) VALUES
@@ -85,25 +86,32 @@ INSERT INTO food_comment(content, createdDate, user_Id, food_Id) VALUES
 ;
 
 -- 최애 글
-INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, createdDate, user_id) VALUES
-('최애글1', '유지성', '4', '최애글1 내용',  0, 0, "false", now(), 2),
-('최애글2', '곽도규', '9', '최애글2 내용', 0, 0, "false", now(), 2),
-('최애글3', '황동하', '10', '최애글3 내용', 0, 0, "false", now(), 3),
-('최애글4', '윤영철', '13', '최애글4 내용', 0, 0, "false", now(), 3),
-('최애글5', '김현수', '15', '최애글5 내용', 0, 0, "false", now(), 4),
-('최애글6', '임기영', '17', '최애글6 내용', 0, 0, "false", now(), 4)
+INSERT INTO favorite(title, playerName, playerNum, likeCnt, viewCnt, isLikeClicked, createdDate, user_id) VALUES
+('최애글1', '유지성', '4',  0, 0, "false", now(), 2),
+('최애글2', '곽도규', '9', 0, 0, "false", now(), 2),
+('최애글3', '황동하', '10', 0, 0, "false", now(), 3),
+('최애글4', '윤영철', '13', 0, 0, "false", now(), 3),
+('최애글5', '김현수', '15', 0, 0, "false", now(), 4),
+('최애글6', '임기영', '17', 0, 0, "false", now(), 4)
 ;
 
 -- 페이징 테스트용 다량 데이터
-INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, createdDate, user_id)
-SELECT title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, now(), user_id
-FROM favorite;
+-- INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, createdDate, user_id)
+-- SELECT title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, now(), user_id
+-- FROM favorite;
+
+-- 최애 글 이미지
+INSERT INTO favorite_img (fileName, sourceName, favorite_id) VALUES
+("player1.jpg", "player1.jpg", 1),
+("player2.jpg", "player2.jpg", 1)
+;
 
 -- 최애 글 댓글
 INSERT INTO favorite_comment(content, createdDate, user_Id, favorite_Id) VALUES
 ('말랑한고구마가 1번 글에 댓글 작성', now(), 2, 1),
 ('말랑한고구마가 2번 글에 댓글 작성', now(), 2, 2),
 ('말랑한고구마가 3번 글에 댓글 작성', now(), 2, 3),
+('말랑한고구마가 4번 글에 댓글 작성', now(), 2, 4),
 ('말랑한고구마가 5번 글에 댓글 작성', now(), 2, 5),
 ('말랑한고구마가 6번 글에 댓글 작성', now(), 2, 6),
 ('맑은아침햇살이 1번 글에 댓글 작성', now(), 3, 1),
@@ -112,6 +120,7 @@ INSERT INTO favorite_comment(content, createdDate, user_Id, favorite_Id) VALUES
 ('맑은아침햇살이 4번 글에 댓글 작성', now(), 3, 4),
 ('맑은아침햇살이 5번 글에 댓글 작성', now(), 3, 5),
 ('맑은아침햇살이 6번 글에 댓글 작성', now(), 3, 6),
+('마라탕먹고싶다가 1번 글에 댓글 작성', now(), 4, 1),
 ('마라탕먹고싶다가 2번 글에 댓글 작성', now(), 4, 2),
 ('마라탕먹고싶다가 3번 글에 댓글 작성', now(), 4, 3),
 ('마라탕먹고싶다가 4번 글에 댓글 작성', now(), 4, 4),

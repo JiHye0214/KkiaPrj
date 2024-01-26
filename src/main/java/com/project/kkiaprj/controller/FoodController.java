@@ -73,6 +73,7 @@ public class FoodController {
             , Model model
     ) {
         model.addAttribute("listItem", foodService.detail(id));
+        model.addAttribute("page", "/community/food");
         return "community/food/detail";
     }
 

@@ -16,10 +16,10 @@ public class FavoriteImg {
     private Long id;
 
     @Column(nullable = false)
-    private String fileName;
+    private String fileName; // 저장된 파일명 (rename 된 파일명)
 
     @Column(nullable = false)
-    private String sourceName;
+    private String sourceName; // 원본 파일명
 
     @Column(name = "favorite_id")
     @ToString.Exclude

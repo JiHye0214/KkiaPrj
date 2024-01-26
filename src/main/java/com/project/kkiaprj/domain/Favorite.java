@@ -33,9 +33,6 @@ public class Favorite extends BaseEntity {
     @Column(length = 10, nullable = false)
     private String playerNum;
 
-    @Column(length = 100, nullable = false)
-    private String content;
-
     @ColumnDefault(value = "0")
     private long likeCnt;
 
