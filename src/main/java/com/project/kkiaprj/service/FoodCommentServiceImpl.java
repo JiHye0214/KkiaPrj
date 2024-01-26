@@ -3,9 +3,7 @@ package com.project.kkiaprj.service;
 import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.FoodComment;
 import com.project.kkiaprj.domain.User;
-import com.project.kkiaprj.domain.UserImg;
 import com.project.kkiaprj.repository.FoodCommentRepository;
-import com.project.kkiaprj.repository.UserImgRepository;
 import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +15,9 @@ public class FoodCommentServiceImpl implements FoodCommentService {
     private UserRepository userRepository;
 
     @Autowired
-    private UserImgRepository userImgRepository;
-
-    @Autowired
     private FoodCommentRepository foodCommentRepository;
 
+    // 맛집 글 댓글 작성
     @Override
     public int write(FoodComment foodComment, Long foodId) {
         int result = 0;
@@ -30,8 +26,6 @@ public class FoodCommentServiceImpl implements FoodCommentService {
         user = userRepository.findById(user.getId()).orElse(null);
 
         if (user != null) {
-            String userImgFileName = userImgRepository.findByUserId(user.getId()).getFileName();
-
             foodComment.setUser(user);
             foodComment.setFoodId(foodId);
             foodCommentRepository.saveAndFlush(foodComment);
@@ -42,6 +36,7 @@ public class FoodCommentServiceImpl implements FoodCommentService {
         return result;
     }
 
+    // 맛집 글 댓글 삭제
     @Override
     public int delete(Long id) {
         int result = 0;

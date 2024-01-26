@@ -13,7 +13,7 @@
                 <th:block th:each="comment, iterState : ${listItem.comments}">
                     <form class="comment-delete-form comment-content display-flex" th:name="'comment-delete-form' + ${iterState.index}" th:action="@{'/community/' +${page} + '/cmtDelete'}" method="post">
                         <input type="hidden" name="id" th:value="${comment.id}" />
-                        <input type="hidden" name="foodId" th:value="${listItem.id}" />
+                        <input type="hidden" name="listItemId" th:value="${listItem.id}" />
                         <input type="hidden" name="action" th:value="'댓글'+' 삭제'" />
 
                         <img class="writer-pic" th:src="@{'/upload/' + ${comment.user.userImg.fileName}}" />
@@ -26,7 +26,7 @@
             </div>
 
             <form id="comment-write-wrap" class="comment-write display-flex" autocomplete="off" name="cmt-write-form" th:action="@{'/community/' +${page} + '/cmtWrite'}" method="post">
-                <input type="hidden" name="foodId" th:value="${listItem.id}" />
+                <input type="hidden" name="listItemId" th:value="${listItem.id}" />
                 <input type="hidden" name="action" th:value="'댓글'+' 작성'" />
 
                 <img class="writer-pic" th:src="@{'/upload/' + ${logged_user.userImg.fileName}}" />

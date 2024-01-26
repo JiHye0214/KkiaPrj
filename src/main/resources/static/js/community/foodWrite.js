@@ -271,6 +271,7 @@ function addTxtContent(listItems, itemTitles, itemAddresses, lats, lngs) {
                         </div>
                     `);
 
+                // 새로 추가한 항목 x 버튼 누르면 삭제
                 let itemWraps = document.querySelectorAll(".item-wrap");
                 let itemDeletBtns = document.querySelectorAll(".item-delete-btn");
 

@@ -7,7 +7,7 @@ $(function () {
             <label class="choice-file-btn display-flex">
                 <div>파일 선택</div>
                 <div class="confirm-txt"></div>
-                <input type="file" name="productImg" accept="image/*" style="display: none"/>
+                <input type="file" name="uploadImg${i}" accept="image/*" style="display: none"/>
             </label>
             <input class="file-delete-btn" type="button" value="삭제" />
         </div>`

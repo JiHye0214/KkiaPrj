@@ -83,8 +83,8 @@
 
                 <div id="btn-wrap" class="display-flex">
                     <a th:href="@{/community/favorite/write}">작성</a>
-                    <a th:href="@{'/community/favorite/update' + ${listItem.id}}" th:if="${logged_user.id == listItem.user.id}">수정</a>
-                    <form name="delete-from" th:action="@{/community/favorite/delete}" method="post" th:if="${logged_user.id == listItem.user.id}">
+                    <a th:href="@{'/community/favorite/update/' + ${listItem.id}}" th:if="${logged_user.id == listItem.user.id}">수정</a>
+                    <form name="delete-form" th:action="@{/community/favorite/delete}" method="post" th:if="${logged_user.id == listItem.user.id}">
                         <input type="hidden" name="id" th:value="${listItem.id}" />
                         <input type="hidden" name="action" th:value="삭제" />
                         <button type="button" id="delete-btn">삭제</button>

@@ -2,8 +2,10 @@ package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.domain.Favorite;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FavoriteService {
 
@@ -15,5 +17,11 @@ public interface FavoriteService {
 
     // 최애 글 상세 조회 (조회수 증가O)
     Favorite detail(Long id);
+
+    // 최애 글 작성
+    int write(Map<String, MultipartFile> files, Favorite favorite);
+
+    // 최애 글 삭제
+    int delete(Long id);
 
 }

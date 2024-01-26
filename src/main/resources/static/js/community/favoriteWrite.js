@@ -5,16 +5,15 @@ const $validInputArr = document.querySelectorAll(".valid");
 const $submitForm = document.querySelector("form");
 
 $submitBtn.onclick = () => {
-    
     let count = 0;
-    let checkNum = false;
+    let numCheck = false;
     let titleCheck = false;
     
     // 제목 25자 이하 
     const checkTitle = (title) => {
         if(title.value.length > 25) {
-            $errMsgArr[0].style.display = `block`;
             $errMsgArr[0].innerHTML = `* 제목은 25자 이하로 작성해 주세요`;
+            $errMsgArr[0].style.display = `block`;
         } else {
             $errMsgArr[0].style.display = ``;
             titleCheck = true;
@@ -26,10 +25,9 @@ $submitBtn.onclick = () => {
         if(isNaN(num.value)) { // 문자열이면
             $errMsgArr[2].innerText = `* 숫자를 입력해 주세요`
             $errMsgArr[2].style.display = `block`;
-            checkNum = false;
         } else {
             $errMsgArr[2].style.display = ``;
-            checkNum = true;
+            numCheck = true;
         }
     }
 
@@ -48,13 +46,13 @@ $submitBtn.onclick = () => {
     // 첨부파일 하나라도 있어야 함
     const $fileInputArr = document.querySelectorAll(".choice-file-btn > input");
     const $fileErrMsg = document.querySelector(".file-err-msg");
-    let checkFile = false;
+    let fileCheck = false;
 
     if($fileInputArr.length > 0) {
         $fileInputArr.forEach((input) => {
-            if(!checkFile) {
+            if(!fileCheck) {
                 if(input.value){
-                    checkFile = true;
+                    fileCheck = true;
                     $fileErrMsg.style.display = ``;
                 } else {
                     $fileErrMsg.style.display = `block`;
@@ -65,7 +63,7 @@ $submitBtn.onclick = () => {
         $fileErrMsg.style.display = `block`;
     }
 
-    if(count == 3 && checkNum && checkFile && titleCheck) {
+    if(count == 3 && titleCheck && numCheck && fileCheck) {
         $submitForm.submit();
     }
 }

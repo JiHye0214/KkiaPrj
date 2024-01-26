@@ -5,7 +5,6 @@ import com.project.kkiaprj.domain.Food;
 import com.project.kkiaprj.domain.FoodComment;
 import com.project.kkiaprj.service.FoodCommentService;
 import com.project.kkiaprj.service.FoodService;
-import com.project.kkiaprj.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +17,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/community/food")
 public class FoodController {
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private FoodService foodService;
@@ -73,7 +69,7 @@ public class FoodController {
             , Model model
     ) {
         model.addAttribute("listItem", foodService.detail(id));
-        model.addAttribute("page", "/community/food");
+        model.addAttribute("page", "food");
         return "community/food/detail";
     }
 
@@ -144,12 +140,12 @@ public class FoodController {
     @PostMapping("/cmtWrite")
     public String cmtWriteOk(
             FoodComment foodComment
-            , Long foodId
+            , Long listItemId
             , String action
             , Model model
     ) {
-        model.addAttribute("result", foodCommentService.write(foodComment, foodId));
-        model.addAttribute("foodId", foodId);
+        model.addAttribute("result", foodCommentService.write(foodComment, listItemId));
+        model.addAttribute("foodId", listItemId);
         model.addAttribute("action", action);
         return "community/food/success";
     }
@@ -158,12 +154,12 @@ public class FoodController {
     @PostMapping("/cmtDelete")
     public String cmtDeleteOk(
             Long id
-            , Long foodId
+            , Long listItemId
             , String action
             , Model model
     ) {
         model.addAttribute("result", foodCommentService.delete(id));
-        model.addAttribute("foodId", foodId);
+        model.addAttribute("foodId", listItemId);
         model.addAttribute("action", action);
         return "community/food/success";
     }

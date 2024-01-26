@@ -1,26 +1,29 @@
 package com.project.kkiaprj.controller;
 
 import com.project.kkiaprj.Util.U;
-import com.project.kkiaprj.domain.FoodComment;
+import com.project.kkiaprj.domain.Favorite;
+import com.project.kkiaprj.domain.FavoriteComment;
+import com.project.kkiaprj.service.FavoriteCommentService;
 import com.project.kkiaprj.service.FavoriteService;
-import com.project.kkiaprj.service.FoodService;
-import com.project.kkiaprj.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/community/favorite")
 public class FavoriteController {
 
     @Autowired
-    private UserService userService;
+    private FavoriteService favoriteService;
 
     @Autowired
-    private FavoriteService favoriteService;
+    private FavoriteCommentService favoriteCommentService;
 
     // 최애 글 목록 페이지
     @GetMapping("/list")
@@ -58,34 +61,77 @@ public class FavoriteController {
         return "community/favorite/detail";
     }
 
+    // 최애 글 작성 페이지
+    @GetMapping("/write")
+    public void write() {
+    }
+
+    // 최애 글 작성
+    @PostMapping("/write")
+    public String writeOk(
+            @RequestParam Map<String, MultipartFile> files
+            , Favorite favorite
+            , String action
+            , Model model
+    ) {
+        model.addAttribute("result", favoriteService.write(files, favorite));
+        model.addAttribute("action", action);
+        return "community/favorite/success";
+    }
+
+    // 최애 글 수정 페이지
+    @GetMapping("/update/{id}")
+    public String update(
+            @PathVariable(name = "id") Long id
+            , Model model
+    ) {
+        model.addAttribute("favorite", favoriteService.detailById(id));
+        return "community/favorite/update";
+    }
+
+    // 최애 글 수정
+
+    // 최애 글 삭제
+    @PostMapping("/delete")
+    public String deleteOk(
+            Long id
+            , String action
+            , Model model
+    ) {
+        model.addAttribute("result", favoriteService.delete(id));
+        model.addAttribute("action", action);
+        return "community/favorite/success";
+    }
+
+
     // ----------------------------------------------------------------------------------------------------
 
     // 댓글 작성
-//    @PostMapping("/cmtWrite")
-//    public String cmtWriteOk(
-//            FoodComment foodComment
-//            , Long foodId
-//            , String action
-//            , Model model
-//    ) {
-//        model.addAttribute("result", foodCommentService.write(foodComment, foodId));
-//        model.addAttribute("foodId", foodId);
-//        model.addAttribute("action", action);
-//        return "community/food/success";
-//    }
-//
-//    // 댓글 삭제
-//    @PostMapping("/cmtDelete")
-//    public String cmtDeleteOk(
-//            Long id
-//            , Long foodId
-//            , String action
-//            , Model model
-//    ) {
-//        model.addAttribute("result", foodCommentService.delete(id));
-//        model.addAttribute("foodId", foodId);
-//        model.addAttribute("action", action);
-//        return "community/food/success";
-//    }
+    @PostMapping("/cmtWrite")
+    public String cmtWriteOk(
+            FavoriteComment favoriteComment
+            , Long listItemId
+            , String action
+            , Model model
+    ) {
+        model.addAttribute("result", favoriteCommentService.write(favoriteComment, listItemId));
+        model.addAttribute("favoriteId", listItemId);
+        model.addAttribute("action", action);
+        return "community/favorite/success";
+    }
+
+    // 댓글 삭제
+    @PostMapping("/cmtDelete")
+    public String cmtDeleteOk(
+            Long id
+            , Long listItemId
+            , String action
+            , Model model
+    ) {
+        model.addAttribute("result", favoriteCommentService.delete(id));
+        model.addAttribute("favoriteId", listItemId);
+        model.addAttribute("action", action);
+        return "community/favorite/success";
+    }
 
 }
