@@ -186,14 +186,14 @@
                             <div id="user-title" class="display-flex-set">회원정보</div>
                             <form method="post" th:action="@{/user/resetImg}" enctype="multipart/form-data">
                                 <input style="display:none" name="userImg" type="file"/>
-                                <input id="img-reset-btn" name="userImage" type="submit" value="초기화" />
+                                <input id="img-reset-btn" name="userImg" type="submit" value="초기화" />
                             </form>
                             <form method="post" th:action="@{/user/modifyUser}" name="user-content" id="user-content-wrap" class="display-flex" enctype="multipart/form-data">
                                 <div class="user-inform-items">
                                     <div class="user-inform-title">프로필 사진</div>
                                     <label id="user-picture-wrap">
-                                        <img id="user-pic" th:src="@{'/upload/'} + ${userImg.fileName}" />
-                                        <input style="display:none" accept="image/*" id="file" class="profile-pic" name="userImg" type="file"/>
+                                        <img id="user-pic" th:src="@{'/upload/'} + ${userImg.fileName}" /> <!--/* 이거 이름 userImg로 하면 user가 자기 건 줄 알고 가져감 ==> 에러 ==> 이름 다른 걸로 바꿔 주기 ==> 성공 !!! */-->
+                                        <input style="display:none" accept="image/*" id="file" class="profile-pic" name="userFile" type="file"/>
                                     </label>
                                 </div>
                                 <label class="user-inform-items">

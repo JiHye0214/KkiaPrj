@@ -76,6 +76,11 @@ public class FoodController {
         return "community/food/detail";
     }
 
+    // 맛집 글 작성 페이지
+    @GetMapping("/write")
+    public void write(Model model) {
+    }
+
     // 맛집 글 작성
     @PostMapping("write")
     public String wirteOk(

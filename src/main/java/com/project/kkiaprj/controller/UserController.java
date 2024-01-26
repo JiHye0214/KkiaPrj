@@ -143,8 +143,6 @@ public class UserController {
                              String newPassword,
                              RedirectAttributes redirectAttrs) {
 
-        System.out.println("=====================================================");
-
         // 원래 user
         User origin = U.getLoggedUser();
 
@@ -168,8 +166,6 @@ public class UserController {
 
         // 프사
         boolean resetImg = false;
-        System.out.println("---------------------------------------");
-        System.out.println(file);
         userMypageService.setUserImg(file, resetImg);
 
         redirectAttrs.addAttribute("menu", "회원정보");

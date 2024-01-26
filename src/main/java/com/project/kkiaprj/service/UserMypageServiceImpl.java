@@ -134,9 +134,6 @@ public class UserMypageServiceImpl implements UserMypageService {
 
         Long imgId = userImg.getId();
 
-        System.out.println("=====================================");
-        System.out.println(userImg);
-
         if(file == null) return; // 없으면 말고
 
         for(Map.Entry<String, MultipartFile> e : file.entrySet()){
