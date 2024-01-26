@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/market")
@@ -21,9 +22,14 @@ public class MarketController {
 
     // 마켓 리스트
     @GetMapping("/list")
-    public void marketList(Model model){
-        marketService.getMarketList(model);
-    };
+    public String marketList(@RequestParam(name = "sq", required = false, defaultValue = "") String sq,
+                             RedirectAttributes redirectAttrs,
+                             Model model
+    ){
+        marketService.getMarketList(model, sq);
+        redirectAttrs.addAttribute("sq", sq);
+        return "market/list";
+    }
 
     // 마켓 상세
     @GetMapping("/detail/{id}")
@@ -42,6 +48,18 @@ public class MarketController {
         model.addAttribute("market", marketService.getMarket(id));
         return "market/update";
     }
+
+    // 마켓 검색 post
+    @PostMapping("/search")
+    public String marketSearch(String sq,
+                               Model model,
+                               RedirectAttributes redirectAttrs) {
+        redirectAttrs.addAttribute("sq", sq);
+        return "redirect:/market/list";
+    }
+
+    // 마켓 pagination
+
 
     // 마켓 작성 post
     @PostMapping("/write")
@@ -67,11 +85,11 @@ public class MarketController {
     // 마켓 수정 post
     @PostMapping("/update")
     public String marketModify(Market market,
-                               Long[] delFiles, // 삭제할 파일들
+                               Long[] delfile, // 삭제할 파일들
                                @RequestParam Map<String, MultipartFile> file,
                                Model model) {
 
-        model.addAttribute("result", marketService.modifyMarket(market, file, delFiles));
+        model.addAttribute("result", marketService.modifyMarket(market, file, delfile));
         model.addAttribute("action", "수정");
         return "market/success";
     }

@@ -64,12 +64,12 @@ button {
     overflow: hidden;
     border-radius: 5px;
     border: 2px solid;
-    background-color: var(--basic-pink);
 }
 .product-img {
     width: 100%;
     height: 210px;
     border-bottom: 2px solid;
+    object-fit: cover;
 }
 .product-inform {
     width: 100%;
@@ -77,6 +77,7 @@ button {
     flex-wrap: wrap;
     row-gap: 5px;
     FONT-WEIGHT: 500;
+    background-color: var(--basic-pink);
 }
 .product-name {
     width: 100%;

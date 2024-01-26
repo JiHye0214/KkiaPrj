@@ -9,6 +9,8 @@
         <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/market/marketList.css}" />
+        <script defer th:src="@{/js/market/marketList.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <title>마켓 리스트</title>
     </head>
     <body>
@@ -21,9 +23,9 @@
                 <div id="list-search-wrap" class="display-flex">
                     <a id="write-btn" th:href="@{/market/write}">작성하기</a>
                     <div id="btn-wrap" class="display-flex-set">
-                        <form method="post" name="search-form" th:action="@{#}" autocomplete="off" class="display-flex">
+                        <form method="post"  name="search-form" th:action="@{/market/search}" autocomplete="off" class="display-flex">
                             <button type="button" id="initial-btn">초기화</button>
-                            <input type="text" id="search-input" placeholder="검색어를 입력하세요" />
+                            <input type="text" id="search-input" name="sq" placeholder="검색어를 입력하세요" th:value="${sq}" />
                             <button type="submit" id="search-btn">검색</button>
                         </form>
                     </div>
@@ -32,7 +34,7 @@
 
             <div id="list-wrap" class="display-flex">
                 <a th:href="@{'/market/detail/' + ${market.id}}" th:each="market : ${marketList}" class="list-content display-flex">
-                    <img class="product-img" src="/img/goods.jpg" />
+                    <img class="product-img" th:src="@{'/upload/' + ${market.marketImgs[0].fileName}}" />
                     <div class="product-inform display-flex">
                         <div class="product-name" th:text="${market.product}"></div>
                         <div class="product-price" th:text="${market.price}"></div>

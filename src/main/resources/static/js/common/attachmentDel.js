@@ -1,5 +1,5 @@
  $(".file-delete-btn").click(function(){
-     let fileId = $(this).attr('fileId');
+     let fileId = $(this).attr('fileNumber');
      deleteFiles(fileId);
      $(this).parent().remove();
  });

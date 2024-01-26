@@ -60,7 +60,7 @@
 
                     <div class="swiper padding-line display-flex">
                         <div class="swiper-slide">
-                            <img th:each="marketImg : ${market.marketImgs}" th:src="@{'/img/' + ${marketImg.fileName}}" />
+                            <img th:each="marketImg : ${market.marketImgs}" th:src="@{'/upload/' + ${marketImg.fileName}}" />
                         </div>
                     </div>
                 </div>

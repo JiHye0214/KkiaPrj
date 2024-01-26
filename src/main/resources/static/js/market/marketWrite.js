@@ -299,28 +299,30 @@ $("#submit-btn").on("click", function() {
     const $fileErrMsg = document.querySelector(".file-err-msg");
     let checkFile = false;
 
-    $fileItems.forEach((item) => {
-        if(item.classList.contains('update')){ // 수정이면
-            console.log("프리패스");
-            checkFile = true;
-        } else { // 수정 중 있던 파일 삭제했거나 작성이면
-            console.log("일단 정지")
-            if ($fileInputArr.length > 0) {
-                $fileInputArr.forEach((input) => {
-                    if (!checkFile) {
-                        if (input.value) {
-                            checkFile = true;
-                            $fileErrMsg.style.display = ``;
-                        } else {
-                            $fileErrMsg.style.display = `block`;
+    if($fileItems.length > 0) {
+        $fileItems.forEach((item) => {
+            if(item.classList.contains('update')){ // 수정이면
+                checkFile = true;
+            } else { // 수정 중 있던 파일 삭제했거나 작성이면
+                if ($fileInputArr.length > 0) {
+                    $fileInputArr.forEach((input) => {
+                        if (!checkFile) {
+                            if (input.value) {
+                                checkFile = true;
+                                $fileErrMsg.style.display = ``;
+                            } else {
+                                $fileErrMsg.style.display = `block`;
+                            }
                         }
-                    }
-                });
-            } else {
-                $fileErrMsg.style.display = `block`;
+                    });
+                } else {
+                    $fileErrMsg.style.display = `block`;
+                }
             }
-        }
-    })
+        })
+    } else {
+        $fileErrMsg.style.display = `block`;
+    }
 
 
     if (count == 4 && checkNum && checkFile && titleCheck) {

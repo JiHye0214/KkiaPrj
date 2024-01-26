@@ -20,10 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MarketServiceImpl implements MarketService {
@@ -38,14 +35,18 @@ public class MarketServiceImpl implements MarketService {
 
     // 마켓 리스트
     @Override
-    public List<Market> getMarketList(Model model) {
+    public List<Market> getMarketList(Model model, String sq) {
 
         List<Market> marketList = new ArrayList<>();
 
-        marketList = marketRepository.findAll();
+        if(Objects.equals(sq, "")){
+            marketList = marketRepository.findAll();
+        } else {
+            marketList = marketRepository.findByProductContains(sq);
+        }
 
         model.addAttribute("marketList", marketList);
-
+        model.addAttribute("sq", sq);
         return marketList;
     }
 
@@ -76,20 +77,25 @@ public class MarketServiceImpl implements MarketService {
                             Long[] delFiles
     ) {
 
-        market.setUser(U.getLoggedUser());
-        marketRepository.saveAndFlush(market);
-
         resistImg(file, market); // 새로운 파일 첨부
 
         if(delFiles != null){
             for(Long fileId : delFiles) {
                 MarketImg img = marketImgRepository.findById(fileId).orElse(null);
                 if(img != null) {
+                    img.setMarketId(market.getId());
                     deleteImgs(img); // upload 삭제
                     marketImgRepository.delete(img); // db 삭제
                 }
             }
         }
+
+        // 유저이미지에 market id 넣어주거나
+        // 마켓에 유저이미지 넣어주거나 해야 됨
+        market.setUser(U.getLoggedUser());
+        List<MarketImg> marketImg = marketImgRepository.findByMarketId(market.getId());
+        market.setMarketImgs(marketImg);
+        marketRepository.saveAndFlush(market);
 
         return 1;
     }
