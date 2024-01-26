@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "user")
 public class User extends BaseEntity {
 
@@ -46,6 +45,11 @@ public class User extends BaseEntity {
     private LocalDate birth; // 생일
 
     private String gender; // 성별
+
+    @ToString.Exclude
+    @OneToOne(optional = false) // 작성자 필수임
+    @JoinColumn(name = "imgId") // user에는 안 적어도 되는구나??!!
+    private UserImg userImg;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @ToString.Exclude

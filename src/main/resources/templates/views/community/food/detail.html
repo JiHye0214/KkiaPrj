@@ -26,7 +26,7 @@
                 <div id="detail-wrap">
                     <div id="detail-header-wrap" class="display-flex-set padding-line">
                         <div id="writer-wrap" class="display-flex">
-                            <img class="writer-pic" th:src="@{'/upload/' + ${writerImg.fileName}}" />
+                            <img class="writer-pic" th:src="@{'/upload/' + ${listItem.user.userImg.fileName}}" />
                             <div class="writer-nickname" th:text="${listItem.user.nickname}"></div>
                         </div>
 

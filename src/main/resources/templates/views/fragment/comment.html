@@ -15,7 +15,7 @@
                         <input type="hidden" name="foodId" th:value="${listItem.id}" />
                         <input type="hidden" name="action" th:value="'댓글'+' 삭제'" />
 
-                        <img class="writer-pic" th:src="@{'/upload/' + ${comment.userImgFileName}}" />
+                        <img class="writer-pic" th:src="@{'/upload/' + ${comment.user.userImg.fileName}}" />
                         <div class="writer-nickname" th:text="${comment.user.nickname}"></div>
                         <div class="write-content" th:text="${comment.content}"></div>
                         <div class="write-time" th:text="${#temporals.format(comment.createdDate, 'yyyy.MM.dd')}"></div>
@@ -28,7 +28,7 @@
                 <input type="hidden" name="foodId" th:value="${listItem.id}" />
                 <input type="hidden" name="action" th:value="'댓글'+' 작성'" />
 
-                <img class="writer-pic" th:src="@{'/upload/' + ${cmtWriterImg.fileName}}" />
+                <img class="writer-pic" th:src="@{'/upload/' + ${logged_user.userImg.fileName}}" />
                 <div class="writer-nickname" th:text="${logged_user.nickname}"></div>
                 <input id="comment-input" type="text" placeholder="댓글을 입력하세요" name="content" />
                 <button type="button" id="comment-write-btn">작성</button>

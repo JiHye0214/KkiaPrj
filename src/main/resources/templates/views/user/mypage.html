@@ -186,7 +186,7 @@
                             <div id="user-title" class="display-flex-set">회원정보</div>
                             <form method="post" th:action="@{/user/resetImg}" enctype="multipart/form-data">
                                 <input style="display:none" name="userImg" type="file"/>
-                                <input id="img-reset-btn" name="userImg" type="submit" value="초기화" />
+                                <input id="img-reset-btn" name="userImage" type="submit" value="초기화" />
                             </form>
                             <form method="post" th:action="@{/user/modifyUser}" name="user-content" id="user-content-wrap" class="display-flex" enctype="multipart/form-data">
                                 <div class="user-inform-items">

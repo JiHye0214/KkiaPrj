@@ -17,8 +17,7 @@ public class UserImg {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(optional = false) // 작성자 필수임
-    @JoinColumn(name = "userId") // user에는 안 적어도 되는구나??!!
+    @OneToOne(mappedBy = "userImg") // 작성자 필수임 // 아니 근데 mappedBy는 class 이름이어야 하는 건가?
     private User user;
 
     @Column(nullable = false)

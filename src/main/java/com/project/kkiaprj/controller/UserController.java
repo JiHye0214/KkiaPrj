@@ -141,7 +141,10 @@ public class UserController {
     public String modifyUser(User user,
                              @RequestParam Map<String, MultipartFile> file,
                              String newPassword,
-                             RedirectAttributes redirectAttrs){
+                             RedirectAttributes redirectAttrs) {
+
+        System.out.println("=====================================================");
+
         // 원래 user
         User origin = U.getLoggedUser();
 
@@ -162,8 +165,11 @@ public class UserController {
         if(!Objects.equals(user.getGender(), origin.getGender())) { // 이전과 다르면
             userMypageService.setGender(user.getGender());
         }
+
         // 프사
         boolean resetImg = false;
+        System.out.println("---------------------------------------");
+        System.out.println(file);
         userMypageService.setUserImg(file, resetImg);
 
         redirectAttrs.addAttribute("menu", "회원정보");

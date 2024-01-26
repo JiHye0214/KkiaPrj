@@ -44,8 +44,6 @@ public class FavoriteController {
             , Model model
     ) {
         model.addAttribute("listItem", favoriteService.detail(id));
-//        model.addAttribute("writerImg", userService.findUserImgByUserId(favoriteService.detailById(id).getUser().getId()));
-//        model.addAttribute("cmtWriterImg", userService.findUserImgByUserId(U.getLoggedUser().getId()));
         return "community/favorite/detail";
     }
 

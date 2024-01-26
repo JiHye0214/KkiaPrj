@@ -125,28 +125,17 @@ public class UserMypageServiceImpl implements UserMypageService {
 
         Long userId = U.getLoggedUser().getId();
         UserImg userImg = userImgRepository.findByUserId(userId); // 일단 저장
-        changeImg(file, userId, userImg, resetImg);
-
-        // 프사 변경 후 해당 유저가 단 댓글(FoodComment) 들의 userImgFileName 변경
-        List<FoodComment> foodComments = foodCommentRepository.findByUser(U.getLoggedUser());
-        for (FoodComment foodCmt : foodComments) {
-            foodCmt.setUserImgFileName(userImgRepository.findByUserId(userId).getFileName());
-        }
-        foodCommentRepository.saveAllAndFlush(foodComments);
-
+        changeImg(file, userImg, resetImg);
     }
 
     private void changeImg(Map<String, MultipartFile> file,
-                           Long userId,
                            UserImg userImg,
                            boolean resetImg) {
 
+        Long imgId = userImg.getId();
 
-        // 프사 있으면 먼저 삭제
-        if(userImgRepository.findByUserId(userId) != null){
-            userImgRepository.removeByUserId(userId);
-            System.out.println(userImgRepository.findByUserId(userId));
-        }
+        System.out.println("=====================================");
+        System.out.println(userImg);
 
         if(file == null) return; // 없으면 말고
 
@@ -159,7 +148,9 @@ public class UserMypageServiceImpl implements UserMypageService {
             UserImg profile = upload(e.getValue(), userImg, resetImg); // 함수가 UserImg 타입을 반환
 
             if(profile != null) {
+                profile.setId(imgId); // id가 있어야 바뀐다.
                 profile.setUser(U.getLoggedUser());
+
                 userImgRepository.saveAndFlush(profile);
             }
         }
