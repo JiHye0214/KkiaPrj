@@ -34,7 +34,13 @@
 }
 #writer-wrap {
     align-items: center;
-    column-gap: 20px;
+    column-gap: 10px;
+}
+#writer-wrap > .writer-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 #num-wrap {
     column-gap: 20px;
@@ -84,10 +90,10 @@
 /* ------------------------------------------------------------ */
 
 .swiper {
-    column-gap: 20px;
     overflow-x: scroll;
 }
 .swiper-slide {
+    column-gap: 20px;
     display: flex;
     align-items: center;
 }

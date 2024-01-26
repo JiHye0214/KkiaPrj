@@ -32,19 +32,19 @@ ALTER TABLE user AUTO_INCREMENT = 1;
 
 -- 유저 프사
 -- 얘 먼저 하고 user 하면 됨 !
-INSERT INTO user_img (fileName, sourceName) VALUES
-("2017.jpg", "2017.jpg"),
-("2017.jpg", "2017.jpg"),
-("2017.jpg", "2017.jpg"),
-("2017.jpg", "2017.jpg")
+INSERT INTO user_img (fileName, sourceName, userId) VALUES
+("2017.jpg", "2017.jpg", 1),
+("2017.jpg", "2017.jpg", 2),
+("2017.jpg", "2017.jpg", 3),
+("2017.jpg", "2017.jpg", 4)
 ;
 
 -- 유저
-INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate, imgId) VALUES
-('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(), 1),
-('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(), 2),
-('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(), 3),
-('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(), 4)
+INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate, userId) VALUES
+('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(),1),
+('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(),2),
+('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(),3),
+('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(),4)
 ;
 
 -- 맛집 글
@@ -126,6 +126,29 @@ INSERT INTO favorite_comment(content, createdDate, user_Id, favorite_Id) VALUES
 ('마라탕먹고싶다가 4번 글에 댓글 작성', now(), 4, 4),
 ('마라탕먹고싶다가 5번 글에 댓글 작성', now(), 4, 5),
 ('마라탕먹고싶다가 6번 글에 댓글 작성', now(), 4, 6)
+;
+
+-- 마켓 글 작성
+INSERT INTO market (product, content, price, region, userId, createdDate) VALUES
+('김도영 유니폼 자수 마킹 3번 입은 거 팝니다', '김도영 유니폼 자수 마킹 3번 입은 거 a팝니다', 100000, '광주광역시 북구', 1, now()),
+('호통이 2묶음', '호통이 2묶음', 50000, '광주광역시 북구', 2, now()),
+('윤영철 싸인볼', '윤영철 싸인볼', 50000, '광주광역시 북구', 3, now()),
+('이의리 아이콘 유니폼', '이의리 아이콘 유니폼', 100000, '광주광역시 북구', 4, now())
+;
+
+-- 마켓 글 이미지
+INSERT INTO market_img (fileName, sourceName, marketId) VALUES
+('goods.jpg', 'good.jpg', 1),
+('goods.jpg', 'good.jpg', 1),
+('goods.jpg', 'good.jpg', 1),
+('goods.jpg', 'good.jpg', 1),
+('goods.jpg', 'good.jpg', 1),
+('goods.jpg', 'good.jpg', 1),
+('goods.jpg', 'good.jpg', 1),
+('호걸이.png', '호걸이.png', 2),
+('호걸이.png', '호걸이.png', 2),
+('챔필.jpg', '챔필.jpg', 3),
+('양현종.jpg', '양현종.jpg', 4)
 ;
 
 -- 구단 정보

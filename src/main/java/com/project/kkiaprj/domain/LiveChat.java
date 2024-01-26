@@ -16,6 +16,7 @@ public class LiveChat {
 
     @ManyToOne(optional = false) // 작성자 필수임
     @JoinColumn(name = "userId") // user에는 안 적어도 되는구나??!!
+    @ToString.Exclude
     private User user;
 
     @Column(nullable = false)

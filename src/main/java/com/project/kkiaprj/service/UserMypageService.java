@@ -27,9 +27,6 @@ public interface UserMypageService {
 
     // 회원 정보 ------------------------------------------
 
-    // 회원 이미지 가져오기
-    UserImg getUserImg(Long userId);
-
     // 회원정보 변경
     void setNickname(String nickname, RedirectAttributes redirectAttrs);
     void setBirth(LocalDate birth);

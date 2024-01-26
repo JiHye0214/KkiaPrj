@@ -33,21 +33,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int resister(User user) {
-            // password encode
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            // sign up
-        userRepository.save(user);
+        // password encode
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         // authority setting
 //            userAuthorityRepository.addAuthority(user.getId(), 1L);
 
-            // default img setting
-            UserImg userImg = UserImg.builder()
-                    .user(user)
-                    .sourceName("default.png")
-                    .fileName("default.png")
-                    .build();
+        // default img setting
+        UserImg userImg = UserImg.builder()
+                .sourceName("default.png")
+                .fileName("default.png")
+                .build();
 
-            userImgRepository.saveAndFlush(userImg);
+        // sign up
+        user.setUserImg(userImg);
+        userRepository.saveAndFlush(user);
+
+        // 이것도 해 줘야 됨 왜냐면 유저가 먼저 생성되어야 하는데 이미지 없이 생성이 안 됨
+        // 근데 저러고 말면 이미지 테이블에는 userId가 null임 (당연함 userId를 안 줬기 때문이지)
+        userImg.setUserId(user.getId());
+        userImgRepository.saveAndFlush(userImg);
 
         return 1;
     }

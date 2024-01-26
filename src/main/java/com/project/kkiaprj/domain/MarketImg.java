@@ -7,20 +7,20 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "user_img")
-public class UserImg {
+@Entity(name = "market_img")
+public class MarketImg {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId")
+    @Column(nullable = false)
+    private String fileName; // 저장
+
+    @Column(nullable = false)
+    private String sourceName; // 원본
+
+    @Column(name = "marketId")
     @ToString.Exclude
-    private Long userId;
-
-    @Column(nullable = false)
-    private String fileName;
-
-    @Column(nullable = false)
-    private String sourceName;
+    private Long marketId;
 }

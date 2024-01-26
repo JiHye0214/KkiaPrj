@@ -249,7 +249,6 @@ regionArr.forEach((region) => {
 const $errMsgArr = document.querySelectorAll(".err-msg");
 const $submitBtn = document.querySelector("#submit-btn");
 const $validInputArr = document.querySelectorAll(".valid");
-const $submitForm = document.querySelector("form");
 
 $submitBtn.onclick = () => {
 
@@ -314,7 +313,6 @@ $submitBtn.onclick = () => {
     }
 
     if (count == 4 && checkNum && checkFile && titleCheck) {
-        console.log("submit");
-        $submitForm.submit();
+        document.forms["write-form"].submit();
     }
 };

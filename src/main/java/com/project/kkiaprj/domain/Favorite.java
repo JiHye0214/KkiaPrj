@@ -24,7 +24,7 @@ public class Favorite extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 25, nullable = false)
     private String title;
 
     @Column(length = 10, nullable = false)

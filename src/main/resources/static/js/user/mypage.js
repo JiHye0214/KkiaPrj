@@ -133,7 +133,16 @@ if($diaryWrapper != null) {
             recordArr.forEach((record) => {
                 if(record.recordDate == that) { // 기록 있으면
                     date.classList.add('record'); // 달력에 표시하기 (공통 class)
-                    date.classList.add(`${record.recordResult}`); // 달력에 표시하기
+
+                    if(record.recordResult == "win"){
+                        date.classList.add('win');
+                    } else if(record.recordResult == "draw"){
+                        date.classList.add('draw');
+                    } else if(record.recordResult == "lose"){
+                        date.classList.add('lose');
+                    } else {
+                        date.classList.add('cancel');
+                    }
                 }
             })
 

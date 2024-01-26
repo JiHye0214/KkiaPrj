@@ -91,13 +91,10 @@ public class UserController {
                          Model model,
                          RedirectAttributes redirectAttrs
     ){
+
         // 직관 기록 리스트
         List<GameRecord> gameRecords = userMypageService.getGameRecord(U.getLoggedUser().getId());
         model.addAttribute("gameRecords", gameRecords);
-
-        // 프사
-        UserImg userImg = userMypageService.getUserImg(U.getLoggedUser().getId());
-        model.addAttribute("userImg", userImg);
 
         // menu select
         if (menu.equals("커뮤니티") || menu.equals("직관기록") || menu.equals("회원정보")) {

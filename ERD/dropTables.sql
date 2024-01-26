@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS diary;
 DROP TABLE IF EXISTS live_chat;
 DROP TABLE IF EXISTS livechat;
 DROP TABLE IF EXISTS marketcomment;
-DROP TABLE IF EXISTS marketimg;
+DROP TABLE IF EXISTS market_img;
 DROP TABLE IF EXISTS market;
 DROP TABLE IF EXISTS postcomment;
 DROP TABLE IF EXISTS postrecommend;
@@ -50,6 +50,8 @@ SELECT * FROM favorite_img;
 SELECT * FROM favorite_comment;
 SELECT * FROM favorite_like;
 SELECT * FROM team;
+SELECT *  FROM market ;
+SELECT * FROM market_img;
 
 
 

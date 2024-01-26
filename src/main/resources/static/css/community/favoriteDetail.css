@@ -80,8 +80,8 @@ main {
 /* ------------------------------------------------------------ */
 
 .swiper {
-    column-gap: 20px;
     overflow-x: scroll;
+    column-gap: 20px;
 }
 .swiper-slide {
     display: flex;

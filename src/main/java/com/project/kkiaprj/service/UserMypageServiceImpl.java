@@ -86,10 +86,6 @@ public class UserMypageServiceImpl implements UserMypageService {
     }
 
     // 회원 정보 ----------------------------------------------------------------------------------
-    @Override
-    public UserImg getUserImg(Long userId) {
-        return userImgRepository.findByUserId(userId);
-    }
 
     // 회원정보 변경
     @Override
@@ -128,6 +124,7 @@ public class UserMypageServiceImpl implements UserMypageService {
         User user = U.getLoggedUser();
 
         UserImg userImg = userImgRepository.findByUserId(userId); // 일단 저장
+
         changeImg(file, user, userImg, resetImg);
     }
 
@@ -150,13 +147,11 @@ public class UserMypageServiceImpl implements UserMypageService {
 
             if(profile != null) {
                 profile.setId(imgId); // id가 있어야 바뀐다.
-                profile.setUser(U.getLoggedUser());
+                profile.setUserId(U.getLoggedUser().getId());
                 userImgRepository.saveAndFlush(profile); // 이미지만 바꿀 게 아니라
-                user.setUserImg(profile);
-                userRepository.saveAndFlush(user); // 유저도 같이 바꿔 줘야 바로 반영 된다 !!
 
-                System.out.println("-----------------------------------------");
-                System.out.println(U.getLoggedUser().getUserImg());
+                user.setUserImg(profile);
+                userRepository.saveAndFlush(user);
             }
         }
     }
