@@ -40,10 +40,10 @@ INSERT INTO user_img (fileName, sourceName) VALUES
 
 -- 유저
 INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate, imgId) VALUES
-('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(),1),
-('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(),2),
-('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(),3),
-('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(),4)
+('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(), 1),
+('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(), 2),
+('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(), 3),
+('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(), 4)
 ;
 
 -- 맛집 글
@@ -54,12 +54,9 @@ INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, us
 ('맛집4', '부산', 0, 0, "false", now(), 4)
 ;
 
-# 페이징 테스트용 다량 데이터
+-- 페이징 테스트용 다량 데이터
 INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, user_id)
 SELECT title, region, saveCnt, viewCnt, isSaveClicked, now(), user_id
-FROM food;
-
-SELECT count(*)
 FROM food;
 
 -- 맛집 글 항목
@@ -97,12 +94,9 @@ INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, is
 ('최애글6', '임기영', '17', '최애글6 내용', 0, 0, "false", now(), 4)
 ;
 
-# 페이징 테스트용 다량 데이터
+-- 페이징 테스트용 다량 데이터
 INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, createdDate, user_id)
 SELECT title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, now(), user_id
-FROM favorite;
-
-SELECT count(*)
 FROM favorite;
 
 -- 최애 글 댓글
