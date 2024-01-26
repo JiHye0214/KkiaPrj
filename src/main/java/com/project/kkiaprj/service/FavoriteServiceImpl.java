@@ -22,13 +22,18 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     // 최애 글 목록 조회 (페이징)
     @Override
-    public List<Favorite> list(Integer page, Model model) {
+    public List<Favorite> list(Integer page, String sq, Model model) {
         if (page < 1) page = 1;
 
         int pagesPerSection = 5;
         int rowsPerPage = 10;
 
-        Page<Favorite> pagedFavorite = favoriteRepository.findAll(PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+        Page<Favorite> pagedFavorite = null;
+        if (sq.isEmpty()) {
+            pagedFavorite = favoriteRepository.findAll(PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+        } else {
+            pagedFavorite = favoriteRepository.findByPlayerNameContainsOrPlayerNumContains(sq, sq, PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+        }
 
         long totalLength = pagedFavorite.getTotalElements();
         int totalPage = pagedFavorite.getTotalPages();
@@ -39,7 +44,15 @@ public class FavoriteServiceImpl implements FavoriteService {
         List<Favorite> lists = new ArrayList<>();
 
         if (totalLength > 0) {
-            if (page > totalPage) page = totalPage;
+            if (page > totalPage) {
+                page = totalPage;
+
+                if (sq.isEmpty()) {
+                    pagedFavorite = favoriteRepository.findAll(PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+                } else {
+                    pagedFavorite = favoriteRepository.findByPlayerNameContainsOrPlayerNumContains(sq, sq, PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+                }
+            }
 
             startPage = (((page - 1) / pagesPerSection) * pagesPerSection) + 1;
             endPage = startPage + pagesPerSection - 1;
@@ -53,6 +66,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
         model.addAttribute("page", page);
         model.addAttribute("totalPage", totalPage);
+        model.addAttribute("sq", sq);
 
         model.addAttribute("url", U.getRequest().getRequestURI());
         model.addAttribute("startPage", startPage);

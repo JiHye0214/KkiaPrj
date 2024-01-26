@@ -8,7 +8,7 @@ import java.util.List;
 public interface FavoriteService {
 
     // 최애 글 목록 조회 (페이징)
-    List<Favorite> list(Integer page, Model model);
+    List<Favorite> list(Integer page, String sq, Model model);
 
     // 최애 글 상세 조회 (조회수 증가X)
     Favorite detailById(Long id);

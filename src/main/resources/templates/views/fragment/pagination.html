@@ -8,7 +8,7 @@
         <div id="pagination-wrap" class="display-flex-set">
             <ul id="pagination-content" class="display-flex">
                 <li th:if="${startPage > 1}">
-                    <a class="move-btn" th:href="@{${url}(page=${startPage - 1}, region=${region})}">
+                    <a class="move-btn" th:href="@{${url}(page=${startPage - 1}, sq=${sq})}">
                         <img src="/img/prevArrow.png" height="12px" />
                     </a>
                 </li>
@@ -19,13 +19,13 @@
                             <a class="num active" href="javascript:void(0)" th:text="${num}"></a>
                         </li>
                         <li th:unless="${num == page}">
-                            <a class="num" th:href="@{${url}(page=${num}, region=${region})}" th:text="${num}"></a>
+                            <a class="num" th:href="@{${url}(page=${num}, sq=${sq})}" th:text="${num}"></a>
                         </li>
                     </th:block>
                 </th:block>
 
                 <li th:if="${endPage < totalPage}">
-                    <a class="move-btn" th:href="@{${url}(page=${endPage + 1}, region=${region})}">
+                    <a class="move-btn" th:href="@{${url}(page=${endPage + 1}, sq=${sq})}">
                         <img src="/img/nextArrow.png" height="12px" />
                     </a>
                 </li>

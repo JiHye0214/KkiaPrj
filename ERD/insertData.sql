@@ -54,6 +54,14 @@ INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, us
 ('맛집4', '부산', 0, 0, "false", now(), 4)
 ;
 
+# 페이징 테스트용 다량 데이터
+INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, user_id)
+SELECT title, region, saveCnt, viewCnt, isSaveClicked, now(), user_id
+FROM food;
+
+SELECT count(*)
+FROM food;
+
 -- 맛집 글 항목
 INSERT INTO food_item(restaurantName, content, address, lat, lng, food_id) VALUES
 ('라스트춘선 안양점', '로컬 식당이라 주민들밖에 모르는데 택시 기사님 추천받아서 갔다.', '경기 안양시 동안구 호계동 1045-9', 37.3908408022861, 126.953373087799, 1),
@@ -88,6 +96,14 @@ INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, is
 ('최애글5', '김현수', '15', '최애글5 내용', 0, 0, "false", now(), 4),
 ('최애글6', '임기영', '17', '최애글6 내용', 0, 0, "false", now(), 4)
 ;
+
+# 페이징 테스트용 다량 데이터
+INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, createdDate, user_id)
+SELECT title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, now(), user_id
+FROM favorite;
+
+SELECT count(*)
+FROM favorite;
 
 -- 최애 글 댓글
 INSERT INTO favorite_comment(content, userImgFileName, createdDate, user_Id, favorite_Id) VALUES

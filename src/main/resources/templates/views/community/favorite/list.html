@@ -9,6 +9,7 @@
         <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/community/favoriteList.css}" />
+        <script defer th:src="@{/js/community/favoriteList.js}"></script>
         <title>최애 자랑 게시판</title>
     </head>
     <body>
@@ -21,10 +22,10 @@
                 <div id="list-search-wrap" class="display-flex">
                     <a id="write-btn" th:href="@{/community/favorite/write}">작성하기</a>
                     <div id="btn-wrap" class="display-flex-set">
-                        <form method="post" name="search-form" th:action="@{#}" autocomplete="off" class="display-flex">
+                        <form method="post" name="search-form" th:action="@{/community/favorite/search}" autocomplete="off" class="display-flex">
                             <button type="button" id="initial-btn">초기화</button>
-                            <input type="text" id="search-input" placeholder="검색어를 입력하세요" />
-                            <button type="submit" id="search-btn">검색</button>
+                            <input type="text" id="search-input" placeholder="검색어를 입력하세요" name="sq" th:value="${sq}" />
+                            <button type="button" id="search-btn">검색</button>
                         </form>
                     </div>
                 </div>

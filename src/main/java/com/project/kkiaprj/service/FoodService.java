@@ -8,7 +8,7 @@ import java.util.List;
 public interface FoodService {
 
     // 맛집 글 목록 조회 (페이징)
-    List<Food> list(Integer page, String region, Model model);
+    List<Food> list(Integer page, String sq, Model model);
 
     // 맛집 글 상세 조회 (조회수 증가X)
     Food detailById(Long id);

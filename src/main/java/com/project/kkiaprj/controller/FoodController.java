@@ -34,7 +34,7 @@ public class FoodController {
     @GetMapping("/list")
     public String list(
             @RequestParam(name = "page", required = false, defaultValue = "1") Integer page
-            , @RequestParam(name = "region", required = false, defaultValue = "") String region
+            , @RequestParam(name = "sq", required = false, defaultValue = "") String sq
             , HttpServletRequest request
             , Model model
     ) {
@@ -43,13 +43,13 @@ public class FoodController {
 
         boolean isValidRegion = false;
         for (String r : regions) {
-            if (region.equals(r) || region.isEmpty()) {
+            if (sq.equals(r) || sq.isEmpty()) {
                 isValidRegion = true;
             }
         }
 
         if (isValidRegion) {
-            foodService.list(page, region, model);
+            foodService.list(page, sq, model);
             return "community/food/list";
         } else {
             return "redirect:/community/food/list";
@@ -59,10 +59,10 @@ public class FoodController {
     // 지역 필터
     @PostMapping("/regionSelect")
     public String regionSelect(
-            String region
+            String sq
             , RedirectAttributes redirectAttr
     ) {
-        redirectAttr.addAttribute("region", region);
+        redirectAttr.addAttribute("sq", sq);
         return "redirect:/community/food/list";
     }
 

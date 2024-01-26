@@ -21,7 +21,7 @@
                 <div id="btn-wrap" class="display-flex-set">
                     <a id="write-btn" th:href="@{/community/food/write}">작성하기</a>
                     <form name="region-form" th:action="@{/community/food/regionSelect}" method="post">
-                        <input type="hidden" id="submit-region" name="region" th:value="${region}" />
+                        <input type="hidden" id="submit-region" name="sq" th:value="${sq}" />
                         <div id="region-btn-wrap" class="display-flex-set">
                             <div class="all">전체</div>
                         </div>

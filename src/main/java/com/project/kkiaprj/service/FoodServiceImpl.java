@@ -32,17 +32,17 @@ public class FoodServiceImpl implements FoodService {
 
     // 맛집 글 목록 조회 (페이징)
     @Override
-    public List<Food> list(Integer page, String region, Model model) {
+    public List<Food> list(Integer page, String sq, Model model) {
         if (page < 1) page = 1;
 
         int pagesPerSection = 5;
         int rowsPerPage = 9;
 
         Page<Food> pagedFood = null;
-        if (region.isEmpty()) {
+        if (sq.isEmpty()) {
             pagedFood = foodRepository.findAll(PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
         } else {
-            pagedFood = foodRepository.findByRegion(region, PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+            pagedFood = foodRepository.findByRegion(sq, PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
         }
 
         long totalLength = pagedFood.getTotalElements();
@@ -54,7 +54,16 @@ public class FoodServiceImpl implements FoodService {
         List<Food> lists = new ArrayList<>();
 
         if (totalLength > 0) {
-            if (page > totalPage) page = totalPage;
+            // page 가 totalPage 보다 크다면 pagedFood 에 아무것도 안 담겨있으므로 내용물 있는 마지막 페이지로 재검색 필요
+            if (page > totalPage) {
+                page = totalPage;
+
+                if (sq.isEmpty()) {
+                    pagedFood = foodRepository.findAll(PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+                } else {
+                    pagedFood = foodRepository.findByRegion(sq, PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+                }
+            }
 
             startPage = (((page - 1) / pagesPerSection) * pagesPerSection) + 1;
             endPage = startPage + pagesPerSection - 1;
@@ -68,7 +77,7 @@ public class FoodServiceImpl implements FoodService {
 
         model.addAttribute("page", page);
         model.addAttribute("totalPage", totalPage);
-        model.addAttribute("region", region);
+        model.addAttribute("sq", sq);
 
         model.addAttribute("url", U.getRequest().getRequestURI());
         model.addAttribute("startPage", startPage);
