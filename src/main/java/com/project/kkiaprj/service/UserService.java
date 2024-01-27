@@ -12,7 +12,9 @@ public interface UserService {
     User findByLogId(String loginId);
 
     // 찾기
-    void findResult(String what, User user, RedirectAttributes redirectAttrs);
+    void setFindPage(String what, Model model);
+    void findResult(User user, RedirectAttributes redirectAttrs);
+    int updatePassword(User user);
 
     // 회원가입
     int resister(User user);

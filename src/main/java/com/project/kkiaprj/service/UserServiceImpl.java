@@ -31,26 +31,64 @@ public class UserServiceImpl implements UserService {
 
     // 찾기
     @Override
-    public void findResult(String what, User user, RedirectAttributes redirectAttrs) {
+    public void setFindPage(String what, Model model){
+        String whatValue = "";
+        if(what.equals("id")){
+            whatValue = "아이디 찾기";
+        } else {
+            whatValue = "비밀번호 찾기";
+        }
+
+        model.addAttribute("whatValue", whatValue);
+    }
+    @Override
+    public void findResult(User user, RedirectAttributes redirectAttrs) {
+
+        String name = user.getName();
+        String email = user.getEmail();
+        String loginId = user.getLoginId();
 
         String warn = "";
+        String give = null;
+        User person = null;
 
-        if(Objects.equals(what, "아이디")) {
+        if(name != null && email != null) { // 아이디 찾기
             User result = userRepository.findByNameAndEmail(user.getName(), user.getEmail());
             if(result == null) {
                 warn = "이름 또는 이메일이 올바르지 않습니다.";
+            } else {
+                give = "아이디 찾기";
+                person = result;
             }
-        } else if(Objects.equals(what, "비밀번호")) {
+            redirectAttrs.addAttribute("what", "id");
+
+        } else if(name != null && loginId != null) { // 비번 찾기
             User result = userRepository.findByNameAndLoginId(user.getName(), user.getLoginId());
             if(result == null) {
                 warn = "이름 또는 아이디가 올바르지 않습니다.";
+            } else {
+                give = "비밀번호 변경";
+                person = result;
             }
+            redirectAttrs.addAttribute("what", "pw");
         }
 
-        System.out.println("======================================");
-        System.out.println(warn);
+        redirectAttrs.addFlashAttribute("warnMessage", warn);
+        redirectAttrs.addFlashAttribute("give", give);
+        redirectAttrs.addFlashAttribute("user", person);
+    }
 
-        redirectAttrs.addAttribute("warn", warn);
+    @Override
+    public int updatePassword(User user) {
+        User newUser = userRepository.findById(user.getId()).orElse(null);
+
+        assert newUser != null;
+        String newPassword = user.getPassword();
+        newPassword = passwordEncoder.encode(newPassword);
+        newUser.setPassword(newPassword);
+        userRepository.saveAndFlush(newUser);
+
+        return 1;
     }
 
     // 회원가입

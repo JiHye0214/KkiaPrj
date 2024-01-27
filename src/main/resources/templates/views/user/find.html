@@ -17,25 +17,56 @@
             <div id="find-wrapper" class="display-flex-set">
                 <div class="error-msg display-flex-set">
                     <img src="/img/warning.png" width="35px"/>
-                    <div class="error-msg-text" th:text="${warn}"></div>
+                    <div class="error-msg-text" th:text="${warnMessage}"></div>
                 </div>
+
                 <a th:href="@{/home}"><img src="/img/KKIA2-removebg.png" class="logo" /></a>
-                <div id="find-menu-wrap" class="display-flex-set">
-                    <div class="find-menu-item">아이디 찾기</div>
-                    <div class="find-menu-item">비밀번호 찾기</div>
-                </div>
-                <form method="post" th:action="@{/user/findInform}" name="find-id" class="find-content">
-                    <input type="hidden" name="what" value="아이디"/>
-                    <input name="name" class="find-items find-input" type="text" placeholder="이름" />
-                    <input name="email" class="find-items find-input" type="text" placeholder="이메일" />
-                    <input class="find-items find-btn" type="button" value="확인" />
-                </form>
-                <form method="post" th:action="@{/user/findInform}" name="find-pw" class="find-content">
-                    <input type="hidden" name="what" value="비밀번호"/>
-                    <input name="name" class="find-items find-input" type="text" placeholder="이름" />
-                    <input name="loginId" class="find-items find-input" type="text" placeholder="아이디" />
-                    <input class="find-items find-btn" type="button" value="확인" />
-                </form>
+
+                <th:block th:unless="${give}">
+                    <!--/* 선택 */-->
+                    <form method="post" th:action="@{/user/findWhat}" id="find-menu-wrap" class="display-flex-set">
+                        <input id="what-nav" type="hidden" th:value="${whatValue}"/>
+                        <input type="submit" name="what" class="find-menu-item" value="아이디 찾기"/>
+                        <input type="submit" name="what" class="find-menu-item" value="비밀번호 찾기"/>
+                    </form>
+
+                    <!--/* 입력 */-->
+                    <form th:if="${whatValue.toString().equals('아이디 찾기')}" method="post" th:action="@{/user/findInform}" name="find-id" class="find-content">
+                        <input name="name" class="find-items find-input" type="text" placeholder="이름" />
+                        <input name="email" class="find-items find-input" type="text" placeholder="이메일" />
+                        <input class="find-items find-btn" type="button" value="확인" />
+                    </form>
+                    <form th:if="${whatValue.toString().equals('비밀번호 찾기')}" method="post" th:action="@{/user/findInform}" name="find-pw" class="find-content">
+                        <input name="name" class="find-items find-input" type="text" placeholder="이름" />
+                        <input name="loginId" class="find-items find-input" type="text" placeholder="아이디" />
+                        <input class="find-items find-btn" type="button" value="확인" />
+                    </form>
+                </th:block>
+
+                <!--/* 결과 */-->
+                <th:block th:if="${give}">
+                    <div th:unless="${give.toString().equals('비밀번호 변경')}" class="find-result-wrap display-flex-set">
+                        <div id="find-result-id">
+                            아이디는 <span th:text="${user.loginId}"></span> 입니다
+                        </div>
+                        <div id="find-id-btn" class="display-flex">
+                            <form method="post" th:action="@{/user/findWhat}">
+                                <input type="submit" name="what" value="비밀번호 찾기"/>
+                            </form>
+                            <a th:href="@{/user/logIn}">로그인</a>
+                        </div>
+                    </div>
+                    <form method="post" th:action="@{/user/findCngPw}" id="find-change-pw" th:if="${give.toString().equals('비밀번호 변경')}" class="find-result-wrap password display-flex-set">
+                        <div id="result-err"></div>
+                        <input type="hidden" name="id" th:value="${user.id}">
+                        <input class="valid" type="password" name="password" placeholder="신규 비밀번호"/>
+                        <input class="valid" type="password" placeholder="비밀번호 확인"/>
+                        <div id="find-pw-btn" class="display-flex-set">
+                            <a th:href="@{/user/find}">뒤로가기</a>
+                            <input id="submit-btn" type="button" value="확인" />
+                        </div>
+                    </form>
+                </th:block>
             </div>
             
             <div>

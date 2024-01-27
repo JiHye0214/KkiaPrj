@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script th:if="${result > 0}">
+    alert("변경 성공");
+    location.href = "/user/logIn";
+</script>
+<script th:unlessf="${result > 0}">
+    alert("가입을 실패했습니다");
+    history.back();
+</script>
+</html>

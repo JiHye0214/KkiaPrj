@@ -9,7 +9,10 @@ import com.project.kkiaprj.domain.UserValidator;
 import com.project.kkiaprj.service.CommunityService;
 import com.project.kkiaprj.service.UserMypageService;
 import com.project.kkiaprj.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import jakarta.websocket.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.parameters.P;
@@ -51,23 +54,50 @@ public class UserController {
 
     // 찾기
     @GetMapping("/find")
-    public void find(){}
+    public String find(@RequestParam(name = "what", required = false, defaultValue = "id") String what,
+                       @RequestParam(name = "warnMessage", required = false, defaultValue = "") String warnMessage,
+                       @RequestParam(name = "warnMessage", required = false, defaultValue = "") String give,
+                       @RequestParam(name = "warnMessage", required = false, defaultValue = "") String user,
+                       Model model,
+                       RedirectAttributes redirectAttrs
+    ){
 
-    @GetMapping("/find-user") // 팝업창
-    public String popup(RedirectAttributes redirectAttrs) {
-        String warn = (String) redirectAttrs.getAttribute("warn");
-        System.out.println(warn);
-        return "user/find-user";
+        if (what.equals("id") || what.equals("pw")) {
+            userService.setFindPage(what, model);
+            return "user/find";
+        } else {
+            redirectAttrs.addAttribute("what", "id");
+            return "redirect:/user/find";
+        }
+    }
+
+    @PostMapping("/findWhat")
+    public String findWhat(String what, RedirectAttributes redirectAttrs){
+        if(what.equals("아이디 찾기")) what = "id";
+        if(what.equals("비밀번호 찾기")) what = "pw";
+
+        redirectAttrs.addAttribute("what", what);
+        return "redirect:/user/find";
     }
 
     @PostMapping("/findInform")
-    public String findId(String what,
-                         User user,
+    public String findId(User user,
+                         Model model,
                          RedirectAttributes redirectAttrs) {
 
-        userService.findResult(what, user, redirectAttrs);
-
+        userService.findResult(user, redirectAttrs);
         return "redirect:/user/find";
+    }
+
+    @PostMapping("/findCngPw")
+    public String findChangePw(User user, Model model){
+
+        System.out.println("user===============================");
+        System.out.println(user);
+
+        int result = userService.updatePassword(user);
+        model.addAttribute("result", result);
+        return "user/changeOk";
     }
 
     // 회원가입
@@ -159,7 +189,6 @@ public class UserController {
     public String modifyUser(User user,
                              @RequestParam Map<String, MultipartFile> file,
                              String newPassword,
-                             @AuthenticationPrincipal UserInformation userInformation,
                              RedirectAttributes redirectAttrs) {
 
         // 원래 user
