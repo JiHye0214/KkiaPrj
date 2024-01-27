@@ -58,6 +58,7 @@ public class SecurityConfig {
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
                         .logoutUrl("/doLogout")
                         .logoutSuccessUrl("/home")
+                        .logoutSuccessHandler(new LogoutSuccess())
                         .invalidateHttpSession(false)
                 )
 

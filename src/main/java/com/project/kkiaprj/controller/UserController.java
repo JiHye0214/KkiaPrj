@@ -49,9 +49,28 @@ public class UserController {
         return "user/logIn";
     }
 
+    // 찾기
     @GetMapping("/find")
     public void find(){}
 
+    @GetMapping("/find-user") // 팝업창
+    public String popup(RedirectAttributes redirectAttrs) {
+        String warn = (String) redirectAttrs.getAttribute("warn");
+        System.out.println(warn);
+        return "user/find-user";
+    }
+
+    @PostMapping("/findInform")
+    public String findId(String what,
+                         User user,
+                         RedirectAttributes redirectAttrs) {
+
+        userService.findResult(what, user, redirectAttrs);
+
+        return "redirect:/user/find";
+    }
+
+    // 회원가입
     @GetMapping("/signUp")
     public void signUp(){};
 

@@ -144,7 +144,8 @@ INSERT INTO market (product, content, price, region, userId, createdDate) VALUES
 ('김도영 유니폼 자수 마킹 3번 입은 거 팝니다', '김도영 유니폼 자수 마킹 3번 입은 거 a팝니다', 100000, '광주광역시 북구', 1, now()),
 ('호통이 2묶음', '호통이 2묶음', 50000, '광주광역시 북구', 2, now()),
 ('윤영철 싸인볼', '윤영철 싸인볼', 50000, '광주광역시 북구', 3, now()),
-('이의리 아이콘 유니폼', '이의리 아이콘 유니폼', 100000, '광주광역시 북구', 4, now())
+('이의리 아이콘 유니폼', '이의리 아이콘 유니폼', 100000, '광주광역시 북구', 4, now()),
+('영철이의 미소', '영철이 내년에는 10승 하고 신인상 받자', 9999999, '서울특별시 송파구', 1, now())
 ;
 
 -- 마켓 글 이미지
@@ -156,10 +157,11 @@ INSERT INTO market_img (fileName, sourceName, marketId) VALUES
 ('goods.jpg', 'good.jpg', 1),
 ('goods.jpg', 'good.jpg', 1),
 ('goods.jpg', 'good.jpg', 1),
-('호걸이.png', '호걸이.png', 2),
-('호걸이.png', '호걸이.png', 2),
-('챔필.jpg', '챔필.jpg', 3),
-('양현종.jpg', '양현종.jpg', 4)
+('player2.jpg', 'player2.jpg', 2),
+('tiger.png', 'tiger.png', 2),
+('브이 도영.jpg', '브이 도영.jpg', 3),
+('잘생긴 도영.jpg', '잘생긴 도영.jpg', 4),
+('하트 영철.jpg', '하트 영철.jpg', 5)
 ;
 
 -- 구단 정보

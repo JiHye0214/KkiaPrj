@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <meta charset="UTF-8" />
@@ -10,23 +9,29 @@
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/user/find.css}" />
         <script defer th:src="@{/js/user/find.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <title>아이디/비밀번호 찾기</title>
     </head>
     <body>
         <div class="auth-wrapper">
             <div id="find-wrapper" class="display-flex-set">
-                <div class="error-msg"></div>
+                <div class="error-msg display-flex-set">
+                    <img src="/img/warning.png" width="35px"/>
+                    <div class="error-msg-text" th:text="${warn}"></div>
+                </div>
                 <a th:href="@{/home}"><img src="/img/KKIA2-removebg.png" class="logo" /></a>
                 <div id="find-menu-wrap" class="display-flex-set">
                     <div class="find-menu-item">아이디 찾기</div>
                     <div class="find-menu-item">비밀번호 찾기</div>
                 </div>
-                <form method="post" action="@{#}" name="find-id" class="find-content">
+                <form method="post" th:action="@{/user/findInform}" name="find-id" class="find-content">
+                    <input type="hidden" name="what" value="아이디"/>
                     <input name="name" class="find-items find-input" type="text" placeholder="이름" />
                     <input name="email" class="find-items find-input" type="text" placeholder="이메일" />
                     <input class="find-items find-btn" type="button" value="확인" />
                 </form>
-                <form method="post" action="@{#}" name="find-pw" class="find-content">
+                <form method="post" th:action="@{/user/findInform}" name="find-pw" class="find-content">
+                    <input type="hidden" name="what" value="비밀번호"/>
                     <input name="name" class="find-items find-input" type="text" placeholder="이름" />
                     <input name="loginId" class="find-items find-input" type="text" placeholder="아이디" />
                     <input class="find-items find-btn" type="button" value="확인" />

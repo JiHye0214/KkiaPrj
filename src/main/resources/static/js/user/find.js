@@ -2,6 +2,7 @@ const $findMenuArr = document.querySelectorAll(".find-menu-item");
 const $findFormArr = document.querySelectorAll("#find-wrapper > form");
 const $findBtn = document.querySelectorAll(".find-btn");
 const $errorMsg = document.querySelector(".error-msg");
+const $errText = document.querySelector(".error-msg-text");
 
 // find menu
 for (let i = 0; i < $findMenuArr.length; i++) {
@@ -29,8 +30,8 @@ $findBtn.forEach((btn, index) => {
 const validation = (index) => {
     let count = 0;
     const child = [];
-    child.push($findFormArr[index].children[0]);
     child.push($findFormArr[index].children[1]);
+    child.push($findFormArr[index].children[2]);
 
     for (let i = 0; i < 2; i++) {
         if (child[i].value == "") {
@@ -39,9 +40,10 @@ const validation = (index) => {
             setTimeout(function () {
                 $errorMsg.classList.remove("login-valid");
             }, 2000);
-            $errorMsg.innerHTML = `<div class="display-flex-set"><img src="/img/warning.png" width="35px"/> ${child[i].placeholder} 을(를) 입력해 주세요</div>`;
+            $errText.innerHTML = `${child[i].placeholder} 을(를) 입력해 주세요`;
             break;
         } else {
+            $errText.innerHTML = ``;
             count++;
         }
     }
@@ -50,3 +52,16 @@ const validation = (index) => {
         $findFormArr[index].submit();
     }
 };
+
+// 서버 validation 보여주기
+$(document).ready(function() {
+
+    console.log($errText.innerText);
+
+    if($errText.innerText) {
+        $errorMsg.classList.add("login-valid");
+        setTimeout(function () {
+            $errorMsg.classList.remove("login-valid");
+        }, 2000);
+    }
+})

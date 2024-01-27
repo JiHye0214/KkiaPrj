@@ -65,7 +65,7 @@
                         <div class="confirm-box-wrap display-flex">
                             <!--/* 기존 파일 */-->
                             <div th:if="${#lists.size(market.marketImgs) > 0}" th:each="marketImg : ${market.marketImgs}" class="confirm-box-item update display-flex" style="margin-top: 10px">
-                                <div class="update-confirm-txt" th:text="${marketImg.fileName}"></div>
+                                <div class="update-confirm-txt" th:text="${marketImg.sourceName}"></div>
                                 <input class="file-delete-btn" th:fileNumber="${marketImg.id}" type="button" value="삭제" />
                             </div>
 

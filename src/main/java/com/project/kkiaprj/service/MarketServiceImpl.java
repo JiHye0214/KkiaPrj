@@ -1,6 +1,7 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.Util.U;
+import com.project.kkiaprj.domain.Favorite;
 import com.project.kkiaprj.domain.Market;
 import com.project.kkiaprj.domain.MarketImg;
 import com.project.kkiaprj.domain.UserImg;
@@ -8,6 +9,9 @@ import com.project.kkiaprj.repository.MarketImgRepository;
 import com.project.kkiaprj.repository.MarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -35,19 +39,58 @@ public class MarketServiceImpl implements MarketService {
 
     // 마켓 리스트
     @Override
-    public List<Market> getMarketList(Model model, String sq) {
+    public List<Market> getMarketList(Integer page, String sq, Model model) {
+        if (page < 1) page = 1;
 
-        List<Market> marketList = new ArrayList<>();
+        int pagesPerSection = 5;
+        int rowsPerPage = 10;
 
-        if(Objects.equals(sq, "")){
-            marketList = marketRepository.findAll();
+        Page<Market> pagedMarket = null;
+        if (sq.isEmpty()) {
+            pagedMarket = marketRepository.findAll(PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));;
         } else {
-            marketList = marketRepository.findByProductContains(sq);
+            pagedMarket = marketRepository.findByProductContains(sq, PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
         }
 
-        model.addAttribute("marketList", marketList);
+        long totalLength = pagedMarket.getTotalElements();
+        int totalPage = pagedMarket.getTotalPages();
+
+        int startPage = 0;
+        int endPage = 0;
+
+        List<Market> lists = new ArrayList<>();
+
+        if (totalLength > 0) {
+            if (page > totalPage) {
+                page = totalPage;
+
+                if (sq.isEmpty()) {
+                    pagedMarket = marketRepository.findAll(PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+                } else {
+                    pagedMarket = marketRepository.findByProductContains(sq, PageRequest.of(page - 1, rowsPerPage, Sort.by(Sort.Order.desc("id"))));
+                }
+            }
+
+            startPage = (((page - 1) / pagesPerSection) * pagesPerSection) + 1;
+            endPage = startPage + pagesPerSection - 1;
+            if (endPage > totalPage) endPage = totalPage;
+
+            lists = pagedMarket.getContent();
+
+            model.addAttribute("lists", lists);
+        } else {
+            page = 0;
+        }
+
+        model.addAttribute("page", page);
+        model.addAttribute("totalPage", totalPage);
         model.addAttribute("sq", sq);
-        return marketList;
+
+        model.addAttribute("url", U.getRequest().getRequestURI());
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        return lists;
     }
 
     // 마켓 상세 + 이미지

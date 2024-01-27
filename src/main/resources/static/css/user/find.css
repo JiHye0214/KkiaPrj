@@ -92,6 +92,7 @@ form[name="find-pw"] {
     text-align: center;
     position: fixed;
     top: -70px;
+    column-gap: 10px;
 }
 
 .login-valid {

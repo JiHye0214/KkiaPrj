@@ -10,6 +10,9 @@ import java.time.LocalDate;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    User findByNameAndEmail(String name, String email);
+    User findByNameAndLoginId(String name, String loginId);
+
     User findByLoginId(String loginId);
     User findByNickname(String nickname);
     User findByEmail(String email);

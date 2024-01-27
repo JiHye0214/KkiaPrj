@@ -7,7 +7,10 @@ import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -22,15 +25,35 @@ public class UserServiceImpl implements UserService {
     private UserImgRepository userImgRepository;
 
     @Override
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
-    }
-
-    @Override
     public User findByLogId(String loginId) {
         return userRepository.findByLoginId(loginId);
     }
 
+    // 찾기
+    @Override
+    public void findResult(String what, User user, RedirectAttributes redirectAttrs) {
+
+        String warn = "";
+
+        if(Objects.equals(what, "아이디")) {
+            User result = userRepository.findByNameAndEmail(user.getName(), user.getEmail());
+            if(result == null) {
+                warn = "이름 또는 이메일이 올바르지 않습니다.";
+            }
+        } else if(Objects.equals(what, "비밀번호")) {
+            User result = userRepository.findByNameAndLoginId(user.getName(), user.getLoginId());
+            if(result == null) {
+                warn = "이름 또는 아이디가 올바르지 않습니다.";
+            }
+        }
+
+        System.out.println("======================================");
+        System.out.println(warn);
+
+        redirectAttrs.addAttribute("warn", warn);
+    }
+
+    // 회원가입
     @Override
     public int resister(User user) {
         // password encode

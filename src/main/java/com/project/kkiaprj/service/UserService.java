@@ -2,13 +2,17 @@ package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.domain.User;
 import com.project.kkiaprj.domain.UserImg;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> findById(Long id);
     User findByLogId(String loginId);
+
+    // 찾기
+    void findResult(String what, User user, RedirectAttributes redirectAttrs);
 
     // 회원가입
     int resister(User user);

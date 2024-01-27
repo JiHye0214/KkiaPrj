@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface MarketService {
 
     // 전체 조회
-    List<Market> getMarketList(Model model, String sq);
+    List<Market> getMarketList(Integer page, String sq, Model model);
 
     // 하나 조회
     Market getMarket(Long id);

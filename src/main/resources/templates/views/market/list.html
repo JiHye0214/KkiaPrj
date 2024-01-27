@@ -33,7 +33,7 @@
             </div>
 
             <div id="list-wrap" class="display-flex">
-                <a th:href="@{'/market/detail/' + ${market.id}}" th:each="market : ${marketList}" class="list-content display-flex">
+                <a th:href="@{'/market/detail/' + ${market.id}}" th:each="market : ${lists}" class="list-content display-flex">
                     <img class="product-img" th:src="@{'/upload/' + ${market.marketImgs[0].fileName}}" />
                     <div class="product-inform display-flex">
                         <div class="product-name" th:text="${market.product}"></div>

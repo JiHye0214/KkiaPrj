@@ -5,6 +5,7 @@ import com.project.kkiaprj.domain.LiveChat;
 import com.project.kkiaprj.domain.User;
 import com.project.kkiaprj.service.CommunityService;
 import com.project.kkiaprj.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,14 +26,18 @@ public class CommunityController {
 
     // live chat 가져오기
     @GetMapping("/main")
-    public void communityHome(Model model){
+    public void communityHome(Model model,
+                              HttpServletRequest request
+    ){
+        String uri = U.getRequest().getRequestURI();
+        request.getSession().setAttribute("prevPage", uri);
+
         model.addAttribute("chat", communityService.getChat());
     }
 
     // 채팅 쓰기
     @PostMapping("/writeChat")
     public String writeChat(LiveChat chat){
-
         chat.setUser(U.getLoggedUser());
         communityService.writeChat(chat);
 

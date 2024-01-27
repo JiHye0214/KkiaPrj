@@ -1,7 +1,9 @@
 package com.project.kkiaprj.controller;
 
+import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.Market;
 import com.project.kkiaprj.service.MarketService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
@@ -22,12 +24,15 @@ public class MarketController {
 
     // 마켓 리스트
     @GetMapping("/list")
-    public String marketList(@RequestParam(name = "sq", required = false, defaultValue = "") String sq,
-                             RedirectAttributes redirectAttrs,
+    public String marketList(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+                             @RequestParam(name = "sq", required = false, defaultValue = "") String sq,
+                             HttpServletRequest request,
                              Model model
     ){
-        marketService.getMarketList(model, sq);
-        redirectAttrs.addAttribute("sq", sq);
+        String uri = U.getRequest().getRequestURI();
+        request.getSession().setAttribute("prevPage", uri);
+
+        marketService.getMarketList(page, sq, model);
         return "market/list";
     }
 
@@ -52,7 +57,6 @@ public class MarketController {
     // 마켓 검색 post
     @PostMapping("/search")
     public String marketSearch(String sq,
-                               Model model,
                                RedirectAttributes redirectAttrs) {
         redirectAttrs.addAttribute("sq", sq);
         return "redirect:/market/list";
