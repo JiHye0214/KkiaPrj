@@ -15,11 +15,11 @@ public class FavoriteLike {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
+    @Column(name = "userId")
     @ToString.Exclude
     private Long userId;
 
-    @Column(name = "favorite_id")
+    @Column(name = "favoriteId")
     @ToString.Exclude
     private Long favoriteId;
 

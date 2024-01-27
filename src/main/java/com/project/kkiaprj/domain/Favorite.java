@@ -44,21 +44,22 @@ public class Favorite extends BaseEntity {
     private String isLikeClicked;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "userId")
     @ToString.Exclude
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "favorite_id")
+    @JoinColumn(name = "favoriteId")
     @ToString.Exclude
     private List<FavoriteImg> favoriteImgs = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "favorite_id")
+    @JoinColumn(name = "favoriteId")
     @ToString.Exclude
     private List<FavoriteComment> comments = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "favorite_id")
+    @JoinColumn(name = "favoriteId")
     @ToString.Exclude
     private List<FavoriteLike> favoriteLikes = new ArrayList<>();
 
