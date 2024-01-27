@@ -28,7 +28,7 @@ public class FoodItem {
 
     private double lng;
 
-    @Column(name = "food_id") // food_item 테이블에 food_id 라는 외래키 생김
+    @Column(name = "foodId") // food_item 테이블에 foodId 라는 외래키 생김
     @ToString.Exclude
     private Long foodId;
 

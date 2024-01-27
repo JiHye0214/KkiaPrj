@@ -68,7 +68,7 @@
                                 <!--/* 기존 파일 */-->
                                 <div th:each="favoriteImg : ${favorite.favoriteImgs}" class="confirm-box-item update display-flex" style="margin-top: 10px">
                                     <div class="update-confirm-txt" th:text="${favoriteImg.fileName}"></div>
-                                    <input class="file-delete-btn" th:fileId="${favoriteImg.id}" type="button" value="삭제" />
+                                    <input class="file-delete-btn" th:fileNumber="${favoriteImg.id}" type="button" value="삭제" />
                                 </div>
                             </div>
                         </div>

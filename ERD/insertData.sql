@@ -1,38 +1,39 @@
 -- 기존 데이터 삭제
-DELETE FROM team;
-DELETE FROM live_chat;
-DELETE FROM game_record;
-DELETE FROM game_schedule;
-DELETE FROM game_player;
--- DELETE FROM market_comment;
-DELETE FROM market_img;
-DELETE FROM market;
-DELETE FROM food_save;
-DELETE FROM food_comment;
-DELETE FROM food_item;
-DELETE FROM food;
 DELETE FROM favorite_like;
 DELETE FROM favorite_comment;
 DELETE FROM favorite_img;
 DELETE FROM favorite;
+DELETE FROM food_save;
+DELETE FROM food_comment;
+DELETE FROM food_item;
+DELETE FROM food;
+-- DELETE FROM market_comment;
+DELETE FROM market_img;
+DELETE FROM market;
+DELETE FROM live_chat;
+DELETE FROM game_schedule;
+DELETE FROM game_record;
+DELETE FROM game_player;
+DELETE FROM team;
 DELETE FROM user;
 DELETE FROM user_img;
 
-ALTER TABLE team AUTO_INCREMENT = 1;
-ALTER TABLE game_record AUTO_INCREMENT = 1;
-ALTER TABLE game_schedule AUTO_INCREMENT = 1;
-ALTER TABLE game_player AUTO_INCREMENT = 1;
--- ALTER TABLE market_comment AUTO_INCREMENT = 1;
-ALTER TABLE market_img AUTO_INCREMENT = 1;
-ALTER TABLE market AUTO_INCREMENT = 1;
-ALTER TABLE food_save AUTO_INCREMENT = 1;
-ALTER TABLE food_comment AUTO_INCREMENT = 1;
-ALTER TABLE food_item AUTO_INCREMENT = 1;
-ALTER TABLE food AUTO_INCREMENT = 1;
 ALTER TABLE favorite_like AUTO_INCREMENT = 1;
 ALTER TABLE favorite_comment AUTO_INCREMENT = 1;
 ALTER TABLE favorite_img AUTO_INCREMENT = 1;
 ALTER TABLE favorite AUTO_INCREMENT = 1;
+ALTER TABLE food_save AUTO_INCREMENT = 1;
+ALTER TABLE food_comment AUTO_INCREMENT = 1;
+ALTER TABLE food_item AUTO_INCREMENT = 1;
+ALTER TABLE food AUTO_INCREMENT = 1;
+-- ALTER TABLE market_comment AUTO_INCREMENT = 1;
+ALTER TABLE market_img AUTO_INCREMENT = 1;
+ALTER TABLE market AUTO_INCREMENT = 1;
+ALTER TABLE live_chat AUTO_INCREMENT = 1;
+ALTER TABLE game_schedule AUTO_INCREMENT = 1;
+ALTER TABLE game_record AUTO_INCREMENT = 1;
+ALTER TABLE game_player AUTO_INCREMENT = 1;
+ALTER TABLE team AUTO_INCREMENT = 1;
 ALTER TABLE user_img AUTO_INCREMENT = 1;
 ALTER TABLE user AUTO_INCREMENT = 1;
 
@@ -46,15 +47,15 @@ INSERT INTO user_img (fileName, sourceName, userId) VALUES
 ;
 
 -- 유저
-INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate, userId) VALUES
-('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(),1),
-('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(),2),
-('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(),3),
-('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(),4)
+INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate, userImgId) VALUES
+('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(), 1),
+('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(), 2),
+('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(), 3),
+('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(), 4)
 ;
 
 -- 맛집 글
-INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, user_id) VALUES
+INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, userId) VALUES
 ('맛집1', '광주', 0, 0, "false", now(), 2),
 ('맛집2', '광주', 0, 0, "false", now(), 2),
 ('맛집3', '대구', 0, 0, "false", now(), 3),
@@ -62,12 +63,12 @@ INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, us
 ;
 
 -- 페이징 테스트용 다량 데이터
--- INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, user_id)
--- SELECT title, region, saveCnt, viewCnt, isSaveClicked, now(), user_id
+-- INSERT INTO food(title, region, saveCnt, viewCnt, isSaveClicked, createdDate, userId)
+-- SELECT title, region, saveCnt, viewCnt, isSaveClicked, now(), userId
 -- FROM food;
 
 -- 맛집 글 항목
-INSERT INTO food_item(restaurantName, content, address, lat, lng, food_id) VALUES
+INSERT INTO food_item(restaurantName, content, address, lat, lng, foodId) VALUES
 ('라스트춘선 안양점', '로컬 식당이라 주민들밖에 모르는데 택시 기사님 추천받아서 갔다.', '경기 안양시 동안구 호계동 1045-9', 37.3908408022861, 126.953373087799, 1),
 ('호랑이굴', '로컬 식당이라 주민들밖에 모르는데 택시 기사님 추천받아서 갔다.', '경기 안양시 동안구 호계동 1043-1', 37.39201269687231, 126.95482912267362, 1),
 ('호랑이굴', '로컬 식당이라 주민들밖에 모르는데 택시 기사님 추천받아서 갔다.', '경기 안양시 동안구 호계동 1043-1', 37.39201269687231, 126.95482912267362, 2),
@@ -76,7 +77,7 @@ INSERT INTO food_item(restaurantName, content, address, lat, lng, food_id) VALUE
 ;
 
 -- 맛집 글 댓글
-INSERT INTO food_comment(content, createdDate, user_Id, food_Id) VALUES
+INSERT INTO food_comment(content, createdDate, userId, foodId) VALUES
 ('말랑한고구마가 1번 글에 댓글 작성', now(), 2, 1),
 ('말랑한고구마가 2번 글에 댓글 작성', now(), 2, 2),
 ('말랑한고구마가 3번 글에 댓글 작성', now(), 2, 3),
@@ -92,7 +93,7 @@ INSERT INTO food_comment(content, createdDate, user_Id, food_Id) VALUES
 ;
 
 -- 최애 글
-INSERT INTO favorite(title, playerName, playerNum, likeCnt, viewCnt, isLikeClicked, createdDate, user_id) VALUES
+INSERT INTO favorite(title, playerName, playerNum, likeCnt, viewCnt, isLikeClicked, createdDate, userId) VALUES
 ('최애글1', '유지성', '4',  0, 0, "false", now(), 2),
 ('최애글2', '곽도규', '9', 0, 0, "false", now(), 2),
 ('최애글3', '황동하', '10', 0, 0, "false", now(), 3),
@@ -102,12 +103,12 @@ INSERT INTO favorite(title, playerName, playerNum, likeCnt, viewCnt, isLikeClick
 ;
 
 -- 페이징 테스트용 다량 데이터
--- INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, createdDate, user_id)
--- SELECT title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, now(), user_id
+-- INSERT INTO favorite(title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, createdDate, userId)
+-- SELECT title, playerName, playerNum, content, likeCnt, viewCnt, isLikeClicked, now(), userId
 -- FROM favorite;
 
 -- 최애 글 이미지
-INSERT INTO favorite_img (fileName, sourceName, favorite_id) VALUES
+INSERT INTO favorite_img (fileName, sourceName, favoriteId) VALUES
 ("player1.jpg", "player1.jpg", 1),
 ("player2.jpg", "player2.jpg", 1),
 ("player2.jpg", "player2.jpg", 2),
@@ -118,7 +119,7 @@ INSERT INTO favorite_img (fileName, sourceName, favorite_id) VALUES
 ;
 
 -- 최애 글 댓글
-INSERT INTO favorite_comment(content, createdDate, user_Id, favorite_Id) VALUES
+INSERT INTO favorite_comment(content, createdDate, userId, favoriteId) VALUES
 ('말랑한고구마가 1번 글에 댓글 작성', now(), 2, 1),
 ('말랑한고구마가 2번 글에 댓글 작성', now(), 2, 2),
 ('말랑한고구마가 3번 글에 댓글 작성', now(), 2, 3),
