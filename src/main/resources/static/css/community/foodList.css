@@ -137,11 +137,11 @@ main {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.content-zzimBtn {
+
+.content-save-form {
     position: absolute;
-    bottom: 36px;
-    right: 21px;
-    transform: translateY(50%);
+    bottom: 17px;
+    right: 18px;
 }
 .star{
     /* fill: var(--yellow-btn); */

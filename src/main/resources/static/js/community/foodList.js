@@ -60,3 +60,30 @@ regionTags.forEach((tag) => {
         }
     })
 })
+
+// ====================================================================================================
+
+// 저장(별)
+const saveForms = document.querySelectorAll(".content-save-form");
+const starBtns = document.querySelectorAll(".star");
+const isSaveClicked = document.querySelectorAll(".isSaveClicked"); // 클릭되어있는 버튼인지 여부
+const isLoggedIn = document.querySelector("#isLoggedIn"); // 로그인 여부
+
+starBtns.forEach((star, i) => {
+    // 사용자별 star 색 변경
+    if (isSaveClicked[i].value == "true") {
+        star.style.fill = "var(--yellow-btn)";
+    } else {
+        star.style.fill = "white";
+    }
+
+    // 로그인 한 상태라면 save-form[i] 제출
+    // 로그인 안 한 상태라면 로그인 페이지로 이동
+    star.onclick = () => {
+        if (isLoggedIn.value) {
+            saveForms[i].submit();
+        } else {
+            location.href = "/user/logIn";
+        }
+    }
+})

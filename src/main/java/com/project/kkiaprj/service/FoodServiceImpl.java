@@ -1,16 +1,16 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.Util.U;
-import com.project.kkiaprj.domain.Food;
-import com.project.kkiaprj.domain.FoodItem;
-import com.project.kkiaprj.domain.User;
+import com.project.kkiaprj.domain.*;
 import com.project.kkiaprj.repository.FoodItemRepository;
 import com.project.kkiaprj.repository.FoodRepository;
+import com.project.kkiaprj.repository.FoodSaveRepository;
 import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -29,6 +29,9 @@ public class FoodServiceImpl implements FoodService {
 
     @Autowired
     private FoodItemRepository foodItemRepository;
+
+    @Autowired
+    private FoodSaveService foodSaveService;
 
     // 맛집 글 목록 조회 (페이징)
     @Override
@@ -51,10 +54,12 @@ public class FoodServiceImpl implements FoodService {
         int startPage = 0;
         int endPage = 0;
 
+        String isLoggedIn = null;
+
         List<Food> lists = new ArrayList<>();
 
         if (totalLength > 0) {
-            // page 가 totalPage 보다 크다면 pagedFood 에 아무것도 안 담겨있으므로 내용물 있는 마지막 페이지로 재검색 필요
+            // page 가 totalPage 보다 크다면 pagedFood 에 아무것도 안 담겨있으므로 내용물 있는 마지막 페이지 값(totalPage)으로 재검색 필요
             if (page > totalPage) {
                 page = totalPage;
 
@@ -71,19 +76,64 @@ public class FoodServiceImpl implements FoodService {
 
             lists = pagedFood.getContent();
             model.addAttribute("lists", lists);
+
+            // -------------------- 저장된 맛집 여부 체크 --------------------
+
+            // 클릭되어있는 별인지 아닌지 확인할 isSaveClicked
+            int itemCnt = pagedFood.getNumberOfElements();
+            List<String> isSaveClicked = new ArrayList<>();
+            for (int i = 0; i < itemCnt; i++) {
+                isSaveClicked.add("false");
+            }
+
+            // 로그인 상태 확인
+            String user = "" + SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            // 로그인 한 상태라면
+            if(!user.equals("anonymousUser")) {
+                isLoggedIn = "true";
+                Long userId = U.getLoggedUser().getId();
+
+                for (int i = 0; i < itemCnt; i++) {
+                    boolean isSaveCheck = foodSaveService.isSaveCheck(userId, lists.get(i).getId());
+                    if (isSaveCheck) {
+                        isSaveClicked.set(i, "true");
+                    }
+                }
+            }
+
+            System.out.println("=======================isLoggedIn:" + isLoggedIn);
+            System.out.println("=======================isSaveClicked:" + isSaveClicked);
+
+            model.addAttribute("isSaveClicked", isSaveClicked);
         } else {
             page = 0;
         }
 
         model.addAttribute("page", page);
         model.addAttribute("totalPage", totalPage);
-        model.addAttribute("sq", sq);
-
-        model.addAttribute("url", U.getRequest().getRequestURI());
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("url", U.getRequest().getRequestURI());
+        model.addAttribute("sq", sq);
+        model.addAttribute("isLoggedIn", isLoggedIn);
 
         return lists;
+    }
+
+    @Override
+    public int changeSaveCnt(Long num, Long foodId) {
+        int result = 0;
+        Food food = foodRepository.findById(foodId).orElse(null);
+
+        if (food != null) {
+            food.setSaveCnt(food.getSaveCnt() + num);
+            foodRepository.saveAndFlush(food);
+
+            result = 1;
+        }
+
+        return result;
     }
 
     // 맛집 글 상세 조회 (조회수 증가X)

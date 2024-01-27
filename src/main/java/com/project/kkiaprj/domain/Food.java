@@ -41,7 +41,7 @@ public class Food extends BaseEntity {
     private String isSaveClicked;
 
     // 맛집 글 상세에서는 어떤 유저가 작성했는지, 어떤 맛집 항목들이 있는지, 어떤 댓글들이 달려있는지 필요
-    // + 어떤 유저가 어떤 맛집 글에 저장을 눌렀는지 저장, 조회 필요
+    // + 어떤 유저가 어떤 맛집 글에 저장을 눌렀는지 정보 필요
     // 따라서 해당 타입들의 데이터 가져와야 함
 
     @ManyToOne(optional = false) // food 테이블에 userId 라는 외래키 생김 + food 기준으로 inner join (userId 는 null 값 허용 X)

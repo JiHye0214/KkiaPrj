@@ -4,6 +4,7 @@ import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.Food;
 import com.project.kkiaprj.domain.FoodComment;
 import com.project.kkiaprj.service.FoodCommentService;
+import com.project.kkiaprj.service.FoodSaveService;
 import com.project.kkiaprj.service.FoodService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class FoodController {
 
     @Autowired
     private FoodCommentService foodCommentService;
+
+    @Autowired
+    private FoodSaveService foodSaveService;
 
     List<String> regions = List.of("고척", "광주", "대구", "대전", "부산", "수원", "인천", "잠실", "창원");
 
@@ -62,6 +66,32 @@ public class FoodController {
         return "redirect:/community/food/list";
     }
 
+    // 목록에서 저장(별) 추가 & 삭제
+    @PostMapping("/listSaveToggle")
+    public String listSaveToggle(
+            Long foodId
+            , Integer page
+            , String sq
+            , RedirectAttributes redirectAttr
+    ) {
+        Long userId = U.getLoggedUser().getId();
+        boolean isSaveCheck = foodSaveService.isSaveCheck(userId, foodId);
+
+        if (!isSaveCheck) {
+            // 로그인한 유저가 아직 저장하지 않은 글이라면
+            foodSaveService.insertSave(userId, foodId); // food_save 테이블에 데이터 추가
+            foodService.changeSaveCnt(1L, foodId); // food 테이블의 saveCnt +1
+        } else {
+            // 로그인한 유저가 이미 저장한 글이라면
+            foodSaveService.deleteSave(userId, foodId); // food_save 테이블에서 데이터 삭제
+            foodService.changeSaveCnt(-1L, foodId); // food 테이블의 saveCnt -1
+        }
+
+        redirectAttr.addAttribute("page", page);
+        redirectAttr.addAttribute("sq", sq);
+        return "redirect:/community/food/list";
+    }
+
     // 맛집 글 상세 페이지
     @GetMapping("/detail/{id}")
     public String detail(
@@ -75,7 +105,7 @@ public class FoodController {
 
     // 맛집 글 작성 페이지
     @GetMapping("/write")
-    public void write(Model model) {
+    public void write() {
     }
 
     // 맛집 글 작성

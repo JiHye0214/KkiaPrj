@@ -57,7 +57,7 @@ public class User extends BaseEntity {
     private UserImg userImg;
 
     @OneToMany(cascade = CascadeType.ALL) // user 테이블의 데이터 삭제 시 해당 데이터 참조하고 있던 food_save 의 데이터들도 삭제
-    @JoinColumn(name = "userId") // food_save 테이블의 userId 라는 외래키와 연결됨 (부모 : food, 자식 : food_save)
+    @JoinColumn(name = "userId") // food_save 테이블의 userId 라는 외래키와 연결됨 (부모 : user, 자식 : food_save)
     @ToString.Exclude
     private List<FoodSave> foodSaves = new ArrayList<>();
 

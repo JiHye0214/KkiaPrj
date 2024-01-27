@@ -15,12 +15,14 @@ public class FoodSave {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId") // food_save 테이블에 user_id 라는 외래키 생김
+    @ManyToOne
+    @JoinColumn(name = "userId") // food_save 테이블에 userId 라는 외래키 생김
     @ToString.Exclude
-    private Long userId;
+    private User user;
 
-    @Column(name = "foodId") // food_save 테이블에 food_id 라는 외래키 생김
+    @ManyToOne
+    @JoinColumn(name = "foodId") // food_save 테이블에 foodId 라는 외래키 생김
     @ToString.Exclude
-    private Long foodId;
+    private Food food;
 
 }
