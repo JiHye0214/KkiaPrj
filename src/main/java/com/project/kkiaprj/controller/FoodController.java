@@ -56,7 +56,34 @@ public class FoodController {
         }
     }
 
-    // 지역 필터
+    // 맛집 글 상세 페이지
+    @GetMapping("/detail/{id}")
+    public String detail(
+            @PathVariable(name = "id") Long id
+            , Model model
+    ) {
+        foodService.detail(id, model);
+        return "community/food/detail";
+    }
+
+    // 맛집 글 작성 페이지
+    @GetMapping("/write")
+    public void write() {
+    }
+
+    // 맛집 글 수정 페이지
+    @GetMapping("/update/{id}")
+    public String update(
+            @PathVariable(name = "id") Long id
+            , Model model
+    ) {
+        model.addAttribute("food", foodService.detailById(id));
+        return "community/food/update";
+    }
+
+    // ----------------------------------------------------------------------------------------------------
+
+    // 맛집 글 지역 필터
     @PostMapping("/regionSelect")
     public String regionSelect(
             String sq
@@ -92,20 +119,27 @@ public class FoodController {
         return "redirect:/community/food/list";
     }
 
-    // 맛집 글 상세 페이지
-    @GetMapping("/detail/{id}")
-    public String detail(
-            @PathVariable(name = "id") Long id
-            , Model model
+    // 상세에서 저장(별) 추가 & 삭제
+    @PostMapping("/detailSaveToggle")
+    public String detailSaveToggle(
+            Long foodId
+            , RedirectAttributes redirectAttr
     ) {
-        model.addAttribute("listItem", foodService.detail(id));
-        model.addAttribute("page", "food");
-        return "community/food/detail";
-    }
+        Long userId = U.getLoggedUser().getId();
+        boolean isSaveCheck = foodSaveService.isSaveCheck(userId, foodId);
 
-    // 맛집 글 작성 페이지
-    @GetMapping("/write")
-    public void write() {
+        if (!isSaveCheck) {
+            // 로그인한 유저가 아직 저장하지 않은 글이라면
+            foodSaveService.insertSave(userId, foodId); // food_save 테이블에 데이터 추가
+            foodService.changeSaveCnt(1L, foodId); // food 테이블의 saveCnt +1
+        } else {
+            // 로그인한 유저가 이미 저장한 글이라면
+            foodSaveService.deleteSave(userId, foodId); // food_save 테이블에서 데이터 삭제
+            foodService.changeSaveCnt(-1L, foodId); // food 테이블의 saveCnt -1
+        }
+
+        redirectAttr.addAttribute("id", foodId);
+        return "redirect:/community/food/detail/{id}";
     }
 
     // 맛집 글 작성
@@ -122,16 +156,6 @@ public class FoodController {
         model.addAttribute("result", foodService.write(food, restaurantName, content, address, lat, lng));
         model.addAttribute("action", "작성");
         return "community/food/success";
-    }
-
-    // 맛집 글 수정 페이지
-    @GetMapping("/update/{id}")
-    public String update(
-            @PathVariable(name = "id") Long id
-            , Model model
-    ) {
-        model.addAttribute("food", foodService.detailById(id));
-        return "community/food/update";
     }
 
     // 맛집 글 수정

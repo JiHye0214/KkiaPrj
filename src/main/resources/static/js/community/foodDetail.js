@@ -95,3 +95,21 @@ if (deleteBtn) {
         }
     }
 }
+
+// ====================================================================================================
+
+// 상세에서 맛집 글 저장(별)
+const saveForm = document.querySelector("#save-form");
+const starBtn = document.querySelector("#star");
+const isSaveClicked = document.querySelector("#isSaveClicked"); // 클릭되어있는 버튼인지 여부
+
+// 사용자별 상세 star 색 변경
+if (isSaveClicked.value == "true") {
+    starBtn.style.fill = "var(--yellow-btn)";
+} else {
+    starBtn.style.fill = "white";
+}
+
+starBtn.onclick = () => {
+    saveForm.submit();
+}

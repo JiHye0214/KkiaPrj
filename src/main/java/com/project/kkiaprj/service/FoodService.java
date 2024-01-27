@@ -17,7 +17,7 @@ public interface FoodService {
     Food detailById(Long id);
 
     // 맛집 글 상세 조회 (조회수 증가O)
-    Food detail(Long id);
+    Food detail(Long id, Model model);
 
     // 맛집 글 작성
     int write(Food food

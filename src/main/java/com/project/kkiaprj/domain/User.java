@@ -6,11 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
 
 @Data
 @NoArgsConstructor
@@ -60,5 +57,10 @@ public class User extends BaseEntity {
     @JoinColumn(name = "userId") // food_save 테이블의 userId 라는 외래키와 연결됨 (부모 : user, 자식 : food_save)
     @ToString.Exclude
     private List<FoodSave> foodSaves = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL) // user 테이블의 데이터 삭제 시 해당 데이터 참조하고 있던 favorite_like 의 데이터들도 삭제
+    @JoinColumn(name = "userId") // favorite_like 테이블의 userId 라는 외래키와 연결됨 (부모 : user, 자식 : favorite_like)
+    @ToString.Exclude
+    private List<FavoriteLike> favoriteLikes = new ArrayList<>();
 
 }

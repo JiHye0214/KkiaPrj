@@ -21,13 +21,14 @@ public class FoodSaveServiceImpl implements FoodSaveService {
     @Autowired
     private FoodSaveRepository foodSaveRepository;
 
-    // 저장(별) 클릭 여부
+    // 저장(별) 여부
     @Override
     public boolean isSaveCheck(Long userId, Long foodId) {
         FoodSave foodSave = foodSaveRepository.findByUserIdAndFoodId(userId, foodId);
         return (foodSave != null);
     }
 
+    // 저장 추가
     @Override
     public int insertSave(Long userId, Long foodId) {
         int result = 0;
@@ -48,6 +49,7 @@ public class FoodSaveServiceImpl implements FoodSaveService {
         return result;
     }
 
+    // 저장 삭제
     @Override
     public int deleteSave(Long userId, Long foodId) {
         int result = 0;

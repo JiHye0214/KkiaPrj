@@ -15,12 +15,14 @@ public class FavoriteLike {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId")
+    @ManyToOne
+    @JoinColumn(name = "userId")
     @ToString.Exclude
-    private Long userId;
+    private User user;
 
-    @Column(name = "favoriteId")
+    @ManyToOne
+    @JoinColumn(name = "favoriteId")
     @ToString.Exclude
-    private Long favoriteId;
+    private Favorite favorite;
 
 }

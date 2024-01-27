@@ -41,7 +41,7 @@
                         <div th:text="${food.user.nickname}"></div>
                         <div th:text="${#temporals.format(food.createdDate, 'yyyy.MM.dd')}"></div>
                     </a>
-                    <form class="content-save-form" th:name="'save-form' + ${iter.index}" th:action="@{/community/food/listSaveToggle}" method="post">
+                    <form class="save-form" th:name="'save-form' + ${iter.index}" th:action="@{/community/food/listSaveToggle}" method="post">
                         <input type="hidden" th:value="${food.id}" name="foodId" />
                         <input type="hidden" th:value="${page}" name="page" />
                         <input type="hidden" th:value="${sq}" name="sq" />

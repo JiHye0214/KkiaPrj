@@ -3,8 +3,6 @@ package com.project.kkiaprj.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +13,6 @@ import java.util.List;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@DynamicInsert
-@DynamicUpdate
 @Entity(name = "food")
 public class Food extends BaseEntity {
 
@@ -35,10 +31,6 @@ public class Food extends BaseEntity {
 
     @ColumnDefault(value = "0")
     private long viewCnt;
-
-    @Column(length = 10)
-    @ColumnDefault(value = "'false'")
-    private String isSaveClicked;
 
     // 맛집 글 상세에서는 어떤 유저가 작성했는지, 어떤 맛집 항목들이 있는지, 어떤 댓글들이 달려있는지 필요
     // + 어떤 유저가 어떤 맛집 글에 저장을 눌렀는지 정보 필요

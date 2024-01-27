@@ -138,7 +138,7 @@ main {
     text-overflow: ellipsis;
 }
 
-.content-save-form {
+.save-form {
     position: absolute;
     bottom: 17px;
     right: 18px;

@@ -54,7 +54,7 @@ public class FoodServiceImpl implements FoodService {
         int startPage = 0;
         int endPage = 0;
 
-        String isLoggedIn = null;
+        String isLoggedIn = null; // 맛집 목록 진입 시 로그인 여부
 
         List<Food> lists = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class FoodServiceImpl implements FoodService {
             lists = pagedFood.getContent();
             model.addAttribute("lists", lists);
 
-            // -------------------- 저장된 맛집 여부 체크 --------------------
+            // -------------------- 저장(별) 여부 여부 체크 --------------------
 
             // 클릭되어있는 별인지 아닌지 확인할 isSaveClicked
             int itemCnt = pagedFood.getNumberOfElements();
@@ -94,6 +94,7 @@ public class FoodServiceImpl implements FoodService {
                 isLoggedIn = "true";
                 Long userId = U.getLoggedUser().getId();
 
+                // 각 페이지의 항목들(9개) 중, 현재 로그인 한 유저가 저장한 항목일 경우, 해당 인덱스의 isSaveClicked 를 "true" 로
                 for (int i = 0; i < itemCnt; i++) {
                     boolean isSaveCheck = foodSaveService.isSaveCheck(userId, lists.get(i).getId());
                     if (isSaveCheck) {
@@ -101,9 +102,6 @@ public class FoodServiceImpl implements FoodService {
                     }
                 }
             }
-
-            System.out.println("=======================isLoggedIn:" + isLoggedIn);
-            System.out.println("=======================isSaveClicked:" + isSaveClicked);
 
             model.addAttribute("isSaveClicked", isSaveClicked);
         } else {
@@ -121,6 +119,7 @@ public class FoodServiceImpl implements FoodService {
         return lists;
     }
 
+    // 특정 맛집 글 saveCnt 변경
     @Override
     public int changeSaveCnt(Long num, Long foodId) {
         int result = 0;
@@ -145,7 +144,7 @@ public class FoodServiceImpl implements FoodService {
     // 맛집 글 상세 조회 (조회수 증가O)
     @Override
     @Transactional
-    public Food detail(Long id) {
+    public Food detail(Long id, Model model) {
         Food food = foodRepository.findById(id).orElse(null);
 
         if (food != null) {
@@ -153,7 +152,24 @@ public class FoodServiceImpl implements FoodService {
             foodRepository.saveAndFlush(food);
         }
 
-        return food;
+        model.addAttribute("listItem", food);
+        model.addAttribute("page", "food");
+        // 커뮤니티 게시판들에서 comment fragment 공유하므로 댓글 작성ㆍ삭제 시 제출 form action 경로 지정 위함
+
+        // -------------------- 저장(별) 여부 여부 체크 --------------------
+
+        // 클릭되어있는 별인지 아닌지 확인할 isSaveClicked
+        String isSaveClicked = "false";
+
+        // 해당 항목이 현재 로그인 한 유저가 저장한 항목일 경우 isSaveClicked 를 "true" 로
+        Long userId = U.getLoggedUser().getId();
+        boolean isSaveCheck = foodSaveService.isSaveCheck(userId, id);
+        if (isSaveCheck) {
+            isSaveClicked = "true";
+        }
+        model.addAttribute("isSaveClicked", isSaveClicked);
+
+        return food; // 의미 없는 값 (함수 실행으로 반환되는 값 사용 안함)
     }
 
     // 맛집 글 작성

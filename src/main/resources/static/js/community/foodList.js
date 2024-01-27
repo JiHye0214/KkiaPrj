@@ -63,14 +63,14 @@ regionTags.forEach((tag) => {
 
 // ====================================================================================================
 
-// 저장(별)
-const saveForms = document.querySelectorAll(".content-save-form");
+// 목록에서 맛집 글 저장(별)
+const saveForms = document.querySelectorAll(".save-form");
 const starBtns = document.querySelectorAll(".star");
 const isSaveClicked = document.querySelectorAll(".isSaveClicked"); // 클릭되어있는 버튼인지 여부
 const isLoggedIn = document.querySelector("#isLoggedIn"); // 로그인 여부
 
 starBtns.forEach((star, i) => {
-    // 사용자별 star 색 변경
+    // 사용자별 목록 star 색 변경
     if (isSaveClicked[i].value == "true") {
         star.style.fill = "var(--yellow-btn)";
     } else {

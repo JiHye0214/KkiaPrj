@@ -3,8 +3,6 @@ package com.project.kkiaprj.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +13,6 @@ import java.util.List;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@DynamicInsert
-@DynamicUpdate
 @Entity(name = "favorite")
 public class Favorite extends BaseEntity {
 
@@ -38,10 +34,6 @@ public class Favorite extends BaseEntity {
 
     @ColumnDefault(value = "0")
     private long viewCnt;
-
-    @Column(length = 10)
-    @ColumnDefault(value = "'false'")
-    private String isLikeClicked;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "userId")
