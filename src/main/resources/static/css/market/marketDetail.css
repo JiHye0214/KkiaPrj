@@ -129,7 +129,7 @@
     cursor: pointer;
 
     &:hover {
-        background-color: var(--yellow-btn);
+        background-color: var(--yellow-btn-hover);
     }
 }
 #market-chat-btn {
