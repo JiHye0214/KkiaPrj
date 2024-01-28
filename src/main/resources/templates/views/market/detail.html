@@ -56,7 +56,6 @@
                             <div id="product-title" th:text="${market.product}"></div>
                         </div>
                         <div id="product-content" th:text="${market.content}"></div>
-                        <div id="product-chat-btn">채팅하기</div>
                     </div>
 
                     <div class="swiper padding-line display-flex">
@@ -67,17 +66,17 @@
                 </div>
 
                 <div id="btn-wrap" class="display-flex">
-                    <a th:href="@{/market/write}">작성</a>
-                    <a th:href="@{'/market/update/' + ${market.id}}" th:if="${logged_user.id == market.user.id}">수정</a>
-                    <form method="post" id="market-delete-form" th:action="@{/market/delete}" th:if="${logged_user.id == market.user.id}">
-                        <input type="hidden" name="id" th:value="${market.id}"/>
-                        <button id="market-delete-btn" type="button">삭제</button>
-                    </form>
-                    <a th:href="@{/market/list}">목록</a>
+                    <div id="market-chat-btn">채팅하기</div>
+                    <div class="display-flex" id="market-btn-wrap">
+                        <a th:href="@{/market/write}">작성</a>
+                        <a th:href="@{'/market/update/' + ${market.id}}" th:if="${logged_user.id == market.user.id}">수정</a>
+                        <form method="post" id="market-delete-form" th:action="@{/market/delete}" th:if="${logged_user.id == market.user.id}">
+                            <input type="hidden" name="id" th:value="${market.id}"/>
+                            <button id="market-delete-btn" type="button">삭제</button>
+                        </form>
+                        <a th:href="@{/market/list}">목록</a>
+                    </div>
                 </div>
-
-                <!--/* comment */-->
-    <!--            <th:block th:insert="~{fragment/comment::comment}"></th:block>-->
             </div>
         </body>
     </th:block>

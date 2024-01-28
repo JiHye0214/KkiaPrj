@@ -87,21 +87,6 @@
         display: none;
     }
 }
-#product-chat-btn {
-    position: absolute;
-    padding: 10px;
-    border: 2px solid;
-    border-radius: 5px;
-    top: 153px;
-    right: 0;
-    font-size: 22px;
-    font-weight: 900;
-    cursor: pointer;
-
-    &:hover {
-        background: var(--yellow-btn);
-    }
-}
 
 /* ------------------------------------------------------------ */
 
@@ -123,11 +108,15 @@
 
 #btn-wrap {
     margin-top: 20px;
-    justify-content: end;
+    justify-content: space-between;
+}
+#market-btn-wrap {
     column-gap: 15px;
 }
-#btn-wrap > a,
+#market-chat-btn,
+#btn-wrap a,
 #btn-wrap button {
+    display: inline-block;
     font-size: 16px;
     font-weight: 500;
     height: 39px;
@@ -141,5 +130,11 @@
 
     &:hover {
         background-color: var(--yellow-btn);
+    }
+}
+#market-chat-btn {
+    background-color: var(--yellow-btn);
+    &:hover {
+        background-color: var(--yellow-hover);
     }
 }

@@ -258,10 +258,10 @@ $("#submit-btn").on("click", function() {
     // 제목 25자 이하
     const checkTitle = (title) => {
         if(title.value.length > 25) {
-            $errMsgArr[0].style.display = `block`;
-            $errMsgArr[0].innerHTML = `* 제목은 25자 이하로 작성해 주세요`;
+            $errMsgArr[1].style.display = `block`;
+            $errMsgArr[1].innerHTML = `* 제목은 25자 이하로 작성해 주세요`;
         } else {
-            $errMsgArr[0].style.display = ``;
+            $errMsgArr[1].style.display = ``;
             titleCheck = true;
         }
     }
