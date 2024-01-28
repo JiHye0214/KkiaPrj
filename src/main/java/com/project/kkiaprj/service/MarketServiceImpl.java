@@ -4,6 +4,7 @@ import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.*;
 import com.project.kkiaprj.repository.MarketImgRepository;
 import com.project.kkiaprj.repository.MarketRepository;
+import com.project.kkiaprj.repository.MarketTalkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,8 @@ public class MarketServiceImpl implements MarketService {
     private MarketRepository marketRepository;
     @Autowired
     private MarketImgRepository marketImgRepository;
+    @Autowired
+    private MarketTalkRepository marketTalkRepository;
 
     // 마켓 리스트
     @Override
@@ -237,5 +240,17 @@ public class MarketServiceImpl implements MarketService {
                     .build();
 
         return marketImg;
+    }
+
+    // 채팅
+    @Override
+    public List<MarketTalk> getMarketTalk(Long marketId) {
+        Long userId = U.getLoggedUser().getId();
+        return marketTalkRepository.findByMarketIdAndUserId(marketId, userId);
+    }
+    @Override
+    public void writeTalk(MarketTalk marketTalk) {
+        marketTalk.setUser(U.getLoggedUser());
+        marketTalkRepository.saveAndFlush(marketTalk);
     }
 }

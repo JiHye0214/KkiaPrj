@@ -1,6 +1,7 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.domain.Market;
+import com.project.kkiaprj.domain.MarketTalk;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,4 +23,8 @@ public interface MarketService {
     int deleteMarket(Market market);
     // 수정
     int modifyMarket(Market market, Map<String, MultipartFile> file, Long[] delFiles);
+
+    // 채팅
+    List<MarketTalk> getMarketTalk(Long marketId);
+    void writeTalk(MarketTalk marketTalk);
 }

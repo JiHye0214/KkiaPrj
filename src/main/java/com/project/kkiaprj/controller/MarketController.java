@@ -2,6 +2,7 @@ package com.project.kkiaprj.controller;
 
 import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.Market;
+import com.project.kkiaprj.domain.MarketTalk;
 import com.project.kkiaprj.service.MarketService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -52,6 +54,22 @@ public class MarketController {
     public String marketUpdate(@PathVariable(name = "id") Long id, Model model){
         model.addAttribute("market", marketService.getMarket(id));
         return "market/update";
+    }
+
+    // 마켓 채팅 열기
+    @GetMapping("/talk/{id}")
+    public String marketTalk(@PathVariable(name = "id") Long id, Model model) {
+        model.addAttribute("talkList", marketService.getMarketTalk(id));
+
+        List<MarketTalk> list = marketService.getMarketTalk(id);
+
+        return "market/talk";
+    }
+    // 마켓 채팅 쓰기
+    @PostMapping("/writeTalk")
+    public String writeTalk(MarketTalk marketTalk) {
+        marketService.writeTalk(marketTalk);
+        return "market/talk";
     }
 
     // 마켓 검색 post

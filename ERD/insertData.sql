@@ -13,6 +13,7 @@ DELETE FROM post;
 
 -- DELETE FROM market_comment;
 DELETE FROM market_img;
+DELETE FROM market_talk;
 DELETE FROM market;
 DELETE FROM live_chat;
 DELETE FROM game_schedule;
@@ -36,6 +37,7 @@ ALTER TABLE post AUTO_INCREMENT = 1;
 
 -- ALTER TABLE market_comment AUTO_INCREMENT = 1;
 ALTER TABLE market_img AUTO_INCREMENT = 1;
+ALTER TABLE market_talk AUTO_INCREMENT = 1;
 ALTER TABLE market AUTO_INCREMENT = 1;
 ALTER TABLE live_chat AUTO_INCREMENT = 1;
 ALTER TABLE game_schedule AUTO_INCREMENT = 1;
@@ -300,6 +302,29 @@ INSERT INTO market_img (fileName, sourceName, marketId) VALUES
 ('하트 영철.jpg', '하트 영철.jpg', 10),
 ('하트 영철.jpg', '하트 영철.jpg', 11),
 ('하트 영철.jpg', '하트 영철.jpg', 12)
+;
+
+-- 마켓 채팅
+INSERT INTO market_talk (content, marketId, createdDate, userId) VALUES 
+('안녕하세요', 4, now(), 1),
+('안녕하세요2', 4, now(), 1),
+('안녕하세요3', 4, now(), 1),
+('안녕하세요4', 4, now(), 1),
+('안녕하세요5', 4, now(), 1),
+('안녕하세요6', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요8', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1),
+('안녕하세요7', 4, now(), 1)
 ;
 
 -- 구단 정보
