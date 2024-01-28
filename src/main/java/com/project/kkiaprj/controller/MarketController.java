@@ -60,16 +60,13 @@ public class MarketController {
     @GetMapping("/talk/{id}")
     public String marketTalk(@PathVariable(name = "id") Long id, Model model) {
         model.addAttribute("talkList", marketService.getMarketTalk(id));
-
-        List<MarketTalk> list = marketService.getMarketTalk(id);
-
         return "market/talk";
     }
     // 마켓 채팅 쓰기
     @PostMapping("/writeTalk")
-    public String writeTalk(MarketTalk marketTalk) {
-        marketService.writeTalk(marketTalk);
-        return "market/talk";
+    public String writeTalk(MarketTalk marketTalk, Model model) {
+        model.addAttribute("result", marketService.writeTalk(marketTalk));
+        return "market/success";
     }
 
     // 마켓 검색 post

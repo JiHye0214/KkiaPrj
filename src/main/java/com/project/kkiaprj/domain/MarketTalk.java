@@ -23,5 +23,5 @@ public class MarketTalk extends BaseEntity{
     private String content;
 
     @Column(nullable = false)
-    private Long marketId; // 어느글 채팅
+    private Long writerId; // 글 작성자
 }

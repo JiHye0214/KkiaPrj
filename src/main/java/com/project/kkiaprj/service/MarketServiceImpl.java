@@ -245,12 +245,17 @@ public class MarketServiceImpl implements MarketService {
     // 채팅
     @Override
     public List<MarketTalk> getMarketTalk(Long marketId) {
+        // 어느 글, 글 작성자, 채팅 신청자
+        Market market = marketRepository.findById(marketId).orElse(null);
+        assert market != null;
+        Long writerId = market.getUser().getId();
         Long userId = U.getLoggedUser().getId();
-        return marketTalkRepository.findByMarketIdAndUserId(marketId, userId);
+        return marketTalkRepository.findByWriterIdAndUserIdOrUserId(writerId, userId, writerId);
     }
     @Override
-    public void writeTalk(MarketTalk marketTalk) {
+    public int writeTalk(MarketTalk marketTalk) {
         marketTalk.setUser(U.getLoggedUser());
         marketTalkRepository.saveAndFlush(marketTalk);
+        return 1;
     }
 }

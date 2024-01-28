@@ -305,20 +305,18 @@ INSERT INTO market_img (fileName, sourceName, marketId) VALUES
 ;
 
 -- 마켓 채팅
-INSERT INTO market_talk (content, marketId, createdDate, userId) VALUES 
+INSERT INTO market_talk (content, writerId, createdDate, userId) VALUES 
 ('안녕하세요', 4, now(), 1),
 ('안녕하세요2', 4, now(), 1),
 ('안녕하세요3', 4, now(), 1),
 ('안녕하세요4', 4, now(), 1),
-('안녕하세요5', 4, now(), 1),
-('안녕하세요6', 4, now(), 1),
+('안녕하세요4', 4, now(), 4),
 ('안녕하세요7', 4, now(), 1),
-('안녕하세요8', 4, now(), 1),
-('안녕하세요7', 4, now(), 1),
-('안녕하세요7', 4, now(), 1),
-('안녕하세요7', 4, now(), 1),
-('안녕하세요7', 4, now(), 1),
-('안녕하세요7', 4, now(), 1),
+('안녕하세요4', 4, now(), 4),
+('안녕하세요4', 4, now(), 4),
+('안녕하세요4', 4, now(), 4),
+('안녕하세요4', 4, now(), 4),
+('안녕하세요4', 4, now(), 4),
 ('안녕하세요7', 4, now(), 1),
 ('안녕하세요7', 4, now(), 1),
 ('안녕하세요7', 4, now(), 1),

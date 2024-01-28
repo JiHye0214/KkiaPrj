@@ -66,8 +66,8 @@
                 </div>
 
                 <div id="btn-wrap" class="display-flex">
-                    <input id="marketId" type="hidden" th:value="${market.id}"/>
-                    <input id="market-inform" type="hidden" th:value="|${market.id}/${market.user.userImg.fileName}/${market.user.nickname}|"/>
+                    <input id="marketId" type="hidden" th:value="${market.id}"/> <!--/* 팝업에 전달해주기 위한 id (requestParam) */-->
+                    <input id="market-inform" type="hidden" th:value="|${market.user.id}/${market.user.userImg.fileName}/${market.user.nickname}|"/>
                     <div id="market-chat-btn">채팅하기</div>
                     <div class="display-flex" id="market-btn-wrap">
                         <a th:href="@{/market/write}">작성</a>

@@ -52,8 +52,6 @@ SELECT * FROM post;
 SELECT * FROM post_img;
 SELECT * FROM post_comment;
 
-SELECT * FROM market_talk 
-WHERE marketId = 4 AND userId = 1;
 
 
 

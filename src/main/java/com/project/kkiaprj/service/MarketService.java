@@ -26,5 +26,5 @@ public interface MarketService {
 
     // 채팅
     List<MarketTalk> getMarketTalk(Long marketId);
-    void writeTalk(MarketTalk marketTalk);
+    int writeTalk(MarketTalk marketTalk);
 }

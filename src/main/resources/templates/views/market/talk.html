@@ -17,12 +17,12 @@
             <div id="writer-nickname"></div>
         </div>
         <div class="display-flex" id="market-chat-space">
-            <div th:each="talk : ${talkList}" class="talk-content" th:text="${talk.content}"></div>
+            <div th:each="talk : ${talkList}" th:classappend="${logged_user.id == talk.user.id} ? talk-me : ''" class="talk-content" th:text="${talk.content}"></div>
         </div>
         <form method="post" th:action="@{/market/writeTalk}" class="display-flex" id="market-chat-form">
-            <input id="marketId" type="hidden" name="marketId"/>
-            <input type="text" name="content"/>
-            <input type="submit" value="전송"/>
+            <input id="writerId" type="hidden" name="writerId"/>
+            <input id="submit-content" type="text" name="content" />
+            <input id="submit-btn" type="submit" value="전송"/>
         </form>
     </div>
 </body>

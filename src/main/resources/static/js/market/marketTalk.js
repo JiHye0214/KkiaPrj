@@ -6,10 +6,14 @@ $(document).ready(function() {
     // 정보 가공
     const informItem = marketInform.split("/");
 
-    $("#marketId").val(informItem[0]);
+    $("#writerId").val(informItem[0]);
     $("#writer-pic").attr("src", `/img/${informItem[1]}`);
     $("#writer-nickname").text(informItem[2]);
 
     // 아래부터 보기
     $("#market-chat-space").scrollTop($("#market-chat-space")[0].scrollHeight);
+})
+
+$("#submit-btn").on("click", function() {
+    $("#submit-content").val("");
 })
