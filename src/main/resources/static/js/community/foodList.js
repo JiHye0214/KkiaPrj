@@ -6,11 +6,11 @@ regionNames.forEach((regionName) => {
     regionBtnWrap.innerHTML += `<div class="region">${regionName}</div>`;
 });
 
-const allBtn = document.querySelector(".all");
+const allBtn = document.querySelector("#all");
 const regionBtns = document.querySelectorAll(".region");
 const colorArr = ["#eb008a", "var(--kia-red)", "#0066b3", "#f37321", "#bd0d0d", "#909090", "#cf0a2c", "#80c8ff", "#244c81"];
 
-// 전체 버튼 클릭
+// sq 비어있으면 '전체' 버튼에 active 추가, 배경색 변경, 글자 진하게
 if (regionSubmitInput.value == "") {
     allBtn.classList.add("active");
 }
@@ -70,7 +70,7 @@ const isSaveClicked = document.querySelectorAll(".isSaveClicked"); // 클릭되�
 const isLoggedIn = document.querySelector("#isLoggedIn"); // 로그인 여부
 
 starBtns.forEach((star, i) => {
-    // 사용자별 목록 star 색 변경
+    // 로그인 한 유저에 따라 목록의 각 항목 star 색 변경
     if (isSaveClicked[i].value == "true") {
         star.style.fill = "var(--yellow-btn)";
     } else {

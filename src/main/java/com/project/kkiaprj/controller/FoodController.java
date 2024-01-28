@@ -129,11 +129,11 @@ public class FoodController {
         boolean isSaveCheck = foodSaveService.isSaveCheck(userId, foodId);
 
         if (!isSaveCheck) {
-            // 로그인한 유저가 아직 저장하지 않은 글이라면
+            // 로그인 한 유저가 아직 저장하지 않은 글이라면
             foodSaveService.insertSave(userId, foodId); // food_save 테이블에 데이터 추가
             foodService.changeSaveCnt(1L, foodId); // food 테이블의 saveCnt +1
         } else {
-            // 로그인한 유저가 이미 저장한 글이라면
+            // 로그인 한 유저가 이미 저장한 글이라면
             foodSaveService.deleteSave(userId, foodId); // food_save 테이블에서 데이터 삭제
             foodService.changeSaveCnt(-1L, foodId); // food 테이블의 saveCnt -1
         }

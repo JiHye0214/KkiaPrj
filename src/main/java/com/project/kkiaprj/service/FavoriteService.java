@@ -12,11 +12,14 @@ public interface FavoriteService {
     // 최애 글 목록 조회 (페이징)
     List<Favorite> list(Integer page, String sq, Model model);
 
+    // 특정 최애 글 likeCnt 변경 (좋아요 추가 시 num : 1 / 좋아요 해제 시 num : -1)
+    int changeLikeCnt(Long num, Long favoriteId);
+
     // 최애 글 상세 조회 (조회수 증가X)
     Favorite detailById(Long id);
 
     // 최애 글 상세 조회 (조회수 증가O)
-    Favorite detail(Long id);
+    Favorite detail(Long id, Model model);
 
     // 최애 글 작성
     int write(Favorite favorite, Map<String, MultipartFile> files);

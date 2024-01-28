@@ -1,10 +1,9 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.Util.U;
-import com.project.kkiaprj.domain.Favorite;
-import com.project.kkiaprj.domain.FavoriteImg;
-import com.project.kkiaprj.domain.User;
+import com.project.kkiaprj.domain.*;
 import com.project.kkiaprj.repository.FavoriteImgRepository;
+import com.project.kkiaprj.repository.FavoriteLikeRepository;
 import com.project.kkiaprj.repository.FavoriteRepository;
 import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -43,6 +43,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Autowired
     private FavoriteImgRepository favoriteImgRepository;
 
+    @Autowired
+    private FavoriteLikeService favoriteLikeService;
+
     // 최애 글 목록 조회 (페이징)
     @Override
     public List<Favorite> list(Integer page, String sq, Model model) {
@@ -64,6 +67,8 @@ public class FavoriteServiceImpl implements FavoriteService {
         int startPage = 0;
         int endPage = 0;
 
+        String isLoggedIn = null; // 최애 목록 진입 시 로그인 여부
+
         List<Favorite> lists = new ArrayList<>();
 
         if (totalLength > 0) {
@@ -83,19 +88,63 @@ public class FavoriteServiceImpl implements FavoriteService {
 
             lists = pagedFavorite.getContent();
             model.addAttribute("lists", lists);
+
+            // -------------------- 좋아요(하트) 여부 체크 --------------------
+
+            // 클릭되어있는 하트인지 아닌지 확인할 isLikeClicked
+            int itemCnt = pagedFavorite.getNumberOfElements();
+            List<String> isLikeClicked = new ArrayList<>();
+            for (int i = 0; i < itemCnt; i++) {
+                isLikeClicked.add("false");
+            }
+
+            // 로그인 상태 확인
+            String user = "" + SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            // 로그인 한 상태라면
+            if(!user.equals("anonymousUser")) {
+                isLoggedIn = "true";
+                Long userId = U.getLoggedUser().getId();
+
+                // 각 페이지의 항목들(10개) 중, 현재 로그인 한 유저가 좋아요 한 항목일 경우, 해당 인덱스의 isLikeClicked 를 "true" 로
+                for (int i = 0; i < itemCnt; i++) {
+                    boolean isLikeCheck = favoriteLikeService.isLikeCheck(userId, lists.get(i).getId());
+                    if (isLikeCheck) {
+                        isLikeClicked.set(i, "true");
+                    }
+                }
+            }
+
+            model.addAttribute("isLikeClicked", isLikeClicked);
         } else {
             page = 0;
         }
 
         model.addAttribute("page", page);
         model.addAttribute("totalPage", totalPage);
-        model.addAttribute("sq", sq);
-
-        model.addAttribute("url", U.getRequest().getRequestURI());
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("url", U.getRequest().getRequestURI());
+        model.addAttribute("sq", sq);
+        model.addAttribute("isLoggedIn", isLoggedIn);
 
         return lists;
+    }
+
+    // 특정 최애 글 likeCnt 변경
+    @Override
+    public int changeLikeCnt(Long num, Long favoriteId) {
+        int result = 0;
+        Favorite favorite = favoriteRepository.findById(favoriteId).orElse(null);
+
+        if (favorite != null) {
+            favorite.setLikeCnt(favorite.getLikeCnt() + num);
+            favoriteRepository.saveAndFlush(favorite);
+
+            result = 1;
+        }
+
+        return result;
     }
 
     // 최애 글 상세 조회 (조회수 증가X)
@@ -107,13 +156,29 @@ public class FavoriteServiceImpl implements FavoriteService {
     // 최애 글 상세 조회 (조회수 증가O)
     @Override
     @Transactional
-    public Favorite detail(Long id) {
+    public Favorite detail(Long id, Model model) {
         Favorite favorite = favoriteRepository.findById(id).orElse(null);
 
         if (favorite != null) {
             favorite.setViewCnt(favorite.getViewCnt() + 1);
             favoriteRepository.saveAndFlush(favorite);
         }
+
+        model.addAttribute("listItem", favorite);
+        model.addAttribute("page", "favorite");
+
+        // -------------------- 좋아요(하트) 여부 여부 체크 --------------------
+
+        // 클릭되어있는 하트인지 아닌지 확인할 isLikeClicked
+        String isLikeClicked = "false";
+
+        // 해당 항목이 현재 로그인 한 유저가 좋아요 한 항목일 경우 isLikeClicked 를 "true" 로
+        Long userId = U.getLoggedUser().getId();
+        boolean isLikeCheck = favoriteLikeService.isLikeCheck(userId, id);
+        if (isLikeCheck) {
+            isLikeClicked = "true";
+        }
+        model.addAttribute("isLikeClicked", isLikeClicked);
 
         return favorite;
     }

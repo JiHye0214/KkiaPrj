@@ -100,17 +100,16 @@ button {
     font-size: 32px;
 }
 
-.content-zzimBtn {
+.like-form {
     position: absolute;
     bottom: 8px;
     right: 20px;
 }
-#heart {
+.heart {
     /* fill: rgb(255, 110, 110); */
     fill: white;
-    width: 40px;
+    width: 38px;
     stroke: #333;
     stroke-width: 60px;
     cursor: pointer;
 }
-

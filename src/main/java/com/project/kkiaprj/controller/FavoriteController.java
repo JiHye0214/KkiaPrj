@@ -4,6 +4,7 @@ import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.Favorite;
 import com.project.kkiaprj.domain.FavoriteComment;
 import com.project.kkiaprj.service.FavoriteCommentService;
+import com.project.kkiaprj.service.FavoriteLikeService;
 import com.project.kkiaprj.service.FavoriteService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class FavoriteController {
     @Autowired
     private FavoriteCommentService favoriteCommentService;
 
+    @Autowired
+    private FavoriteLikeService favoriteLikeService;
+
     // 최애 글 목록 페이지
     @GetMapping("/list")
     public String list(
@@ -41,7 +45,34 @@ public class FavoriteController {
         return "community/favorite/list";
     }
 
-    // 검색
+    // 최애 글 상세 페이지
+    @GetMapping("/detail/{id}")
+    public String detail(
+            @PathVariable(name = "id") Long id
+            , Model model
+    ) {
+        favoriteService.detail(id, model);
+        return "community/favorite/detail";
+    }
+
+    // 최애 글 작성 페이지
+    @GetMapping("/write")
+    public void write() {
+    }
+
+    // 최애 글 수정 페이지
+    @GetMapping("/update/{id}")
+    public String update(
+            @PathVariable(name = "id") Long id
+            , Model model
+    ) {
+        model.addAttribute("favorite", favoriteService.detailById(id));
+        return "community/favorite/update";
+    }
+
+    // ----------------------------------------------------------------------------------------------------
+
+    // 이름 or 번호 검색
     @PostMapping("/search")
     public String search(
             String sq
@@ -51,20 +82,53 @@ public class FavoriteController {
         return "redirect:/community/favorite/list";
     }
 
-    // 최애 글 상세 페이지
-    @GetMapping("/detail/{id}")
-    public String detail(
-            @PathVariable(name = "id") Long id
-            , Model model
+    // 목록에서 좋아요(하트) 추가 & 삭제
+    @PostMapping("/listLikeToggle")
+    public String listLikeToggle(
+            Long favoriteId
+            , Integer page
+            , String sq
+            , RedirectAttributes redirectAttr
     ) {
-        model.addAttribute("listItem", favoriteService.detail(id));
-        model.addAttribute("page", "favorite");
-        return "community/favorite/detail";
+        Long userId = U.getLoggedUser().getId();
+        boolean isLikeCheck = favoriteLikeService.isLikeCheck(userId, favoriteId);
+
+        if (!isLikeCheck) {
+            // 로그인 한 유저가 아직 좋아요 하지 않은 글이라면
+            favoriteLikeService.insertLike(userId, favoriteId); // favorite_like 테이블에 데이터 추가
+            favoriteService.changeLikeCnt(1L, favoriteId); // favorite 테이블의 likeCnt +1
+        } else {
+            // 로그인 한 유저가 이미 좋아요 한 글이라면
+            favoriteLikeService.deleteLike(userId, favoriteId); // favorite_like 테이블에서 데이터 삭제
+            favoriteService.changeLikeCnt(-1L, favoriteId); // favorite 테이블의 likeCnt -1
+        }
+
+        redirectAttr.addAttribute("page", page);
+        redirectAttr.addAttribute("sq", sq);
+        return "redirect:/community/favorite/list";
     }
 
-    // 최애 글 작성 페이지
-    @GetMapping("/write")
-    public void write() {
+    // 상세에서 좋아요(하트) 추가 & 삭제
+    @PostMapping("/detailLikeToggle")
+    public String detailLikeToggle(
+            Long favoriteId
+            , RedirectAttributes redirectAttr
+    ) {
+        Long userId = U.getLoggedUser().getId();
+        boolean isLikeCheck = favoriteLikeService.isLikeCheck(userId, favoriteId);
+
+        if (!isLikeCheck) {
+            // 로그인 한 유저가 아직 좋아요 하지 않은 글이라면
+            favoriteLikeService.insertLike(userId, favoriteId); // favorite_like 테이블에 데이터 추가
+            favoriteService.changeLikeCnt(1L, favoriteId); // favorite 테이블의 likeCnt +1
+        } else {
+            // 로그인 한 유저가 이미 좋아요 한 글이라면
+            favoriteLikeService.deleteLike(userId, favoriteId); // favorite_like 테이블에서 데이터 삭제
+            favoriteService.changeLikeCnt(-1L, favoriteId); // favorite 테이블의 likeCnt -1
+        }
+
+        redirectAttr.addAttribute("id", favoriteId);
+        return "redirect:/community/favorite/detail/{id}";
     }
 
     // 최애 글 작성
@@ -77,16 +141,6 @@ public class FavoriteController {
         model.addAttribute("result", favoriteService.write(favorite, files));
         model.addAttribute("action", "작성");
         return "community/favorite/success";
-    }
-
-    // 최애 글 수정 페이지
-    @GetMapping("/update/{id}")
-    public String update(
-            @PathVariable(name = "id") Long id
-            , Model model
-    ) {
-        model.addAttribute("favorite", favoriteService.detailById(id));
-        return "community/favorite/update";
     }
 
     // 최애 글 수정

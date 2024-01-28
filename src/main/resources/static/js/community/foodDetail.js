@@ -85,6 +85,8 @@ for (var i = 0; i < positions.length; i++) {
 
 map.setBounds(bounds);
 
+// ====================================================================================================
+
 // 맛집 글 삭제
 const deleteBtn = document.querySelector("#delete-btn");
 

@@ -1,8 +1,5 @@
 package com.project.kkiaprj.service;
 
-import com.project.kkiaprj.domain.Food;
-import com.project.kkiaprj.domain.User;
-
 public interface FoodSaveService {
 
     // 저장(별) 여부

@@ -38,12 +38,12 @@ main {
 
 /* ------------------------------------------------------------ */
 
-#detail-content-wrap {
+#title-wrap {
     justify-content: space-between;
     border-bottom: 2px solid;
     height: 100px;
 }
-#detail-content-wrap > * {
+#title-wrap > * {
     font-size: 30px;
     font-weight: 600;
 }
@@ -62,12 +62,12 @@ main {
 #heart {
     /* fill: rgb(255, 110, 110); */
     fill: white;
-    width: 40px;
+    width: 38px;
     stroke: #333;
     stroke-width: 60px;
     cursor: pointer;
-    margin-right: 20px;
-    transform: translateY(10%);
+    margin-right: 22px;
+    transform: translateY(15%);
 }
 
 #num {
@@ -91,7 +91,6 @@ main {
     height: 240px;
     border: 2px solid;
     border-radius: 5px;
-    object-fit: cover;
 }
 
 /* ------------------------------------------------------------ */

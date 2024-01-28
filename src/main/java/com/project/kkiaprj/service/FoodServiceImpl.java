@@ -4,7 +4,6 @@ import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.*;
 import com.project.kkiaprj.repository.FoodItemRepository;
 import com.project.kkiaprj.repository.FoodRepository;
-import com.project.kkiaprj.repository.FoodSaveRepository;
 import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -77,7 +76,7 @@ public class FoodServiceImpl implements FoodService {
             lists = pagedFood.getContent();
             model.addAttribute("lists", lists);
 
-            // -------------------- 저장(별) 여부 여부 체크 --------------------
+            // -------------------- 저장(별) 여부 체크 --------------------
 
             // 클릭되어있는 별인지 아닌지 확인할 isSaveClicked
             int itemCnt = pagedFood.getNumberOfElements();
@@ -156,7 +155,7 @@ public class FoodServiceImpl implements FoodService {
         model.addAttribute("page", "food");
         // 커뮤니티 게시판들에서 comment fragment 공유하므로 댓글 작성ㆍ삭제 시 제출 form action 경로 지정 위함
 
-        // -------------------- 저장(별) 여부 여부 체크 --------------------
+        // -------------------- 저장(별) 여부 체크 --------------------
 
         // 클릭되어있는 별인지 아닌지 확인할 isSaveClicked
         String isSaveClicked = "false";
