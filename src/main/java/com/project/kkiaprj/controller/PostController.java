@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
@@ -51,6 +52,14 @@ public class PostController {
         return "community/post/update";
     }
 
+    // 검색 post
+    @PostMapping("/search")
+    public String marketSearch(String sq,
+                               RedirectAttributes redirectAttrs) {
+        redirectAttrs.addAttribute("sq", sq);
+        return "redirect:/community/post/list";
+    }
+
     @PostMapping("/write")
     public String postWrite(Post post,
                             @RequestParam Map<String, MultipartFile> file,
@@ -65,8 +74,6 @@ public class PostController {
                              @RequestParam Map<String, MultipartFile> file,
                              Long[] delfile,
                              Model model) {
-        System.out.println("===============================================");
-        System.out.println(post.getCreatedDate());
         model.addAttribute("result", postService.updatePost(post, file, delfile));
         model.addAttribute("action", "수정");
         return "community/post/success";

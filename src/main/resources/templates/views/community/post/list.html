@@ -10,6 +10,7 @@
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/community/postList.css}" />
         <script defer th:src="@{/js/community/postList.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <title>자유 게시판</title>
     </head>
     <body>
@@ -22,9 +23,9 @@
                 <div id="list-search-wrap" class="display-flex">
                     <a id="write-btn" th:href="@{/community/post/write}">작성하기</a>
                     <div id="btn-wrap" class="display-flex-set">
-                        <form method="post" name="search-form" th:action="@{#}" autocomplete="off" class="display-flex">
+                        <form method="post" name="search-form" th:action="@{/community/post/search}" autocomplete="off" class="display-flex">
                             <button type="button" id="initial-btn">초기화</button>
-                            <input type="text" id="search-input" placeholder="검색어를 입력하세요" />
+                            <input type="text" id="search-input" name="sq" placeholder="검색어를 입력하세요" th:value="${sq}" />
                             <button type="submit" id="search-btn">검색</button>
                         </form>
                     </div>

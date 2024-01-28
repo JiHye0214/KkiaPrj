@@ -62,9 +62,6 @@ public class MarketController {
         return "redirect:/market/list";
     }
 
-    // 마켓 pagination
-
-
     // 마켓 작성 post
     @PostMapping("/write")
     public String marketWritePost(Market market,

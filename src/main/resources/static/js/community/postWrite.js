@@ -23,8 +23,6 @@ const typeItemSetting = () => {
         type.onclick = () => {
             $typeBtn.innerHTML = `${type.innerText}`;
             $typeInput.value = `${type.innerText}`;
-            console.log("--------------------------")
-            console.log($typeInput.value);
             $typeWrap.style.display = `none`;
         };
     });
