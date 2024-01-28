@@ -58,39 +58,76 @@
                             <div id="community-main-title" class="display-flex-set">커뮤니티</div>
                         </div>
                         <div class="community-items">
-                            <div class="community-title">작성한 글</div>
+                            <div class="community-title">작성한 마켓 글</div>
                             <div class="community-box display-flex">
-                                <a th:href="@{/community/post/detail}" class="community-one">
-                                    <div>안녕하세요ddddddddddddddddddd</div>
-                                    <div>처음 인사드립니다 저는 누구누구누구입니다</div>
-                                    <div>2024.1.4</div>
-                                </a>
+                                <div class="community-one" th:each="market : ${loggedUser.markets}">
+                                    <a th:href="@{'/market/detail/' + ${market.id}}">
+                                        <div th:text="${market.product}"></div>
+                                        <div th:text="${market.price} + ' 원'"></div>
+                                        <div th:text="${#temporals.format(market.createdDate, 'yyyy.MM.dd')}"></div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="community-items">
-                            <div class="community-title">댓글 쓴 글</div>
+                            <div class="community-title">작성한 맛집 게시판 글</div>
                             <div class="community-box display-flex">
-                                <a th:href="@{/community/post/detail}" class="community-one">
-                                    <div>안녕하세요ddddddddddddddddddd</div>
-                                    <div class="community-writer">갓생살거야</div>
-                                    <div>2024.1.4</div>
-                                </a>
+                                <div class="community-one" th:each="food : ${loggedUser.foods}">
+                                    <a th:href="@{'/community/food/detail/' + ${food.id}}">
+                                        <div th:text="${food.title}"></div>
+                                        <div th:text="${food.region}"></div>
+                                        <div th:text="${#temporals.format(food.createdDate, 'yyyy.MM.dd')}"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="community-items">
+                            <div class="community-title">작성한 최애 게시판 글</div>
+                            <div class="community-box display-flex">
+                                <div class="community-one" th:each="favorite : ${loggedUser.favorites}">
+                                    <a th:href="@{'/community/favorite/detail/' + ${favorite.id}}">
+                                        <div th:text="${favorite.title}"></div>
+                                        <div th:text="${favorite.playerName}"></div>
+                                        <div th:text="${#temporals.format(favorite.createdDate, 'yyyy.MM.dd')}"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="community-items">
+                            <div class="community-title">작성한 자유 게시판 글</div>
+                            <div class="community-box display-flex">
+                                <div class="community-one" th:each="post : ${loggedUser.posts}">
+                                    <a th:href="@{'/community/post/detail/' + ${post.id}}">
+                                        <div th:text="${post.title}"></div>
+                                        <div th:text="${post.category}"></div>
+                                        <div th:text="${#temporals.format(post.createdDate, 'yyyy.MM.dd')}"></div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="community-items">
                             <div class="community-title">저장한 맛집</div>
                             <div class="community-box display-flex">
-                                <a th:href="@{/community/food/detail}" class="community-one recommend-store">
-                                    <div><sapn class="community-region">광주</sapn>챔필 근처 찐맛집 추천</div>
-                                    <div class="community-writer">감자맛 고구마</div>
-                                    <div>2024.1.4</div>
-                                </a>
+                                <div class="community-one" th:each="foodSave : ${loggedUser.foodSaves}">
+                                    <a th:href="@{'/community/food/detail/' + ${foodSave.food.id}}" class="recommend-store">
+                                        <div>
+                                            <sapn class="community-region" th:text="${foodSave.food.region}"></sapn>
+                                            <span th:text="${foodSave.food.title}"></span>
+                                        </div>
+                                        <div class="community-writer" th:text="${foodSave.food.user.nickname}">감자맛 고구마</div>
+                                        <div th:text="${#temporals.format(foodSave.food.createdDate, 'yyyy.MM.dd')}"></div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="community-items">
                             <div class="community-title">마음에 든 사진</div>
                             <div class="community-box display-flex">
-                                <a th:href="@{/community/favorite/detail}"><img src="/img/양현종.jpg" /></a>
+                                <div th:each="favoriteLike : ${loggedUser.favoriteLikes}">
+                                    <a class="display-flex" th:href="@{'/community/favorite/detail/' + ${favoriteLike.favorite.id}}">
+                                        <img th:src="@{'/upload/' + ${favoriteLike.favorite.favoriteImgs[0].fileName}}" />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -192,7 +229,7 @@
                                 <div class="user-inform-items">
                                     <div class="user-inform-title">프로필 사진</div>
                                     <label id="user-picture-wrap">
-                                        <img id="user-pic" th:src="@{'/upload/'} + ${logged_user.userImg.fileName}" /> <!--/* 이거 이름 userImg로 하면 user가 자기 건 줄 알고 가져감 ==> 에러 ==> 이름 다른 걸로 바꿔 주기 ==> 성공 !!! */-->
+                                        <img id="user-pic" th:src="@{'/upload/' + ${logged_user.userImg.fileName}}" /> <!--/* 이거 이름 userImg로 하면 user가 자기 건 줄 알고 가져감 ==> 에러 ==> 이름 다른 걸로 바꿔 주기 ==> 성공 !!! */-->
                                         <input style="display:none" accept="image/*" id="file" class="profile-pic" name="userFile" type="file"/>
                                     </label>
                                 </div>
@@ -233,7 +270,7 @@
                                 </label>
                                 <label class="user-inform-items">
                                     <div class="user-inform-title">생년월일</div>
-                                    <input type="date" name="birth" th:value="${logged_user.birth} ? ${logged_user.birth} : 연도-월-일" />
+                                    <input type="date" name="birth" th:value="${logged_user.birth} ? ${logged_user.birth} : '연도-월-일'" />
                                 </label>
                                 <input id="user-modify-btn" type="button" value="수정완료" />
                                 <input type="hidden" name="id" th:value="${logged_user.id}"/>
