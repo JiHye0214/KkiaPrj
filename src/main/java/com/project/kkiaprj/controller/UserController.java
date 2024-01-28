@@ -91,12 +91,7 @@ public class UserController {
 
     @PostMapping("/findCngPw")
     public String findChangePw(User user, Model model){
-
-        System.out.println("user===============================");
-        System.out.println(user);
-
-        int result = userService.updatePassword(user);
-        model.addAttribute("result", result);
+        model.addAttribute("result", userService.updatePassword(user));
         return "user/changeOk";
     }
 

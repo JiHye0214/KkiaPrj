@@ -7,3 +7,8 @@ if($imgArr.length == 0) {
 } else {
     $imgWrap.style.display = ``;
 }
+
+console.log($imgArr.length);
+if($imgArr.length < 5) {
+    $imgWrap.style.overflowX = `hidden`;
+}

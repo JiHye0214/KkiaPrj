@@ -8,8 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@Entity(name = "market_img")
-public class MarketImg {
+@Entity(name = "post_img")
+public class PostImg {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class MarketImg {
     @Column(nullable = false)
     private String sourceName; // 원본
 
-    @Column(name = "marketId")
+    @Column(name = "postId")
     @ToString.Exclude
-    private Long marketId;
+    private Long postId;
 }

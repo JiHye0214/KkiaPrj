@@ -71,6 +71,10 @@ button {
     line-height: 45px;
     background: var(--basic-pink);
 
+    &:first-child {
+        background: #f0f0f0;
+    }
+
     &:hover:not(:first-child) {
         .post-title {
             text-decoration: underline;

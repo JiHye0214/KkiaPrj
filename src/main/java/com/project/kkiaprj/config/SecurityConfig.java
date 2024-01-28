@@ -30,13 +30,13 @@ public class SecurityConfig {
 
                 // authority setting
                 .authorizeHttpRequests(auth -> auth
-                        // 로그인만 하면 들어갈 수 있도록 !
-//                        .requestMatchers("/community/post/detail/*").authenticated()
-//                        .requestMatchers("/community/post/update/*").authenticated()
-//                        .requestMatchers("/community/post/write").authenticated()
+//                         로그인만 하면 들어갈 수 있도록 !
                         .requestMatchers("/market/detail/*").authenticated()
                         .requestMatchers("/market/update/*").authenticated()
                         .requestMatchers("/market/write").authenticated()
+                        .requestMatchers("/community/post/detail/*").authenticated()
+                        .requestMatchers("/community/post/update/*").authenticated()
+                        .requestMatchers("/community/post/write").authenticated()
                         .requestMatchers("/community/favorite/detail/*").authenticated()
                         .requestMatchers("/community/favorite/update/*").authenticated()
                         .requestMatchers("/community/favorite/write").authenticated()

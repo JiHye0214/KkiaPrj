@@ -42,14 +42,14 @@
                         <div class="post-date">작성일</div>
                     </div>
                 </div>
-                <a th:href="@{/community/post/detail}" class="list-content display-flex border-and-radius">
+                <a th:href="@{'/community/post/detail/' + ${post.id}}" th:each="post, iterState : ${lists}" class="list-content display-flex border-and-radius">
                     <div class="post-inform display-flex">
-                        <div class="post-id">55555</div>
-                        <div class="post-type">직관나눔</div>
-                        <div class="post-title">작성자dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</div>
-                        <div class="post-writer">작성자</div>
-                        <div class="post-view">55555</div>
-                        <div class="post-date">2024.02.05</div>
+                        <div class="post-id" th:text="${(page - 1) * rowsPerPage + (iterState.index + 1)}"></div>
+                        <div class="post-type" th:text="${post.category}"></div>
+                        <div class="post-title" th:text="${post.title}"></div>
+                        <div class="post-writer" th:text="${post.user.nickname}"></div>
+                        <div class="post-view" th:text="${post.viewCnt}"></div>
+                        <div class="post-date" th:text="${#temporals.format(post.createdDate, 'yy.MM.dd')}"></div>
                     </div>
                 </a>
             </div>

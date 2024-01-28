@@ -18,7 +18,9 @@
 }
 #writer-wrap > img {
     width: 40px;
+    height: 40px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 /* ------------------------------------------------------------ */
@@ -189,6 +191,12 @@
     border: none;
     width: 5%;
     cursor: pointer;
+}
+
+.update-confirm-txt {
+    width: 95%;
+    border-right: 2px solid;
+    padding: 10px;
 }
 
 /* ------------------------------------------------------------ */

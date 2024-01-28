@@ -69,7 +69,6 @@ public class MarketController {
     @PostMapping("/write")
     public String marketWritePost(Market market,
                                   @RequestParam Map<String, MultipartFile> file,
-                                  RedirectAttributes redirectAttrs,
                                   Model model) {
 
         model.addAttribute("result", marketService.writeMarket(market, file));

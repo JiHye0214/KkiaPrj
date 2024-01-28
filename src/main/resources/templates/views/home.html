@@ -40,13 +40,13 @@
 
                     <ul id="main-today-opponent" class="display-flex-set">
                         <li id="away">
-                            <img th:src="${away.img}"/>
+                            <img th:src="@{'/img/' + ${away.img}}"/>
                             <span th:text="${away.name}"></span>
                         </li>
                         <img src="/img/baseball.png" />
                         <li id="home">
                             <span th:text="${home.name}"></span>
-                            <img th:src="${home.img}"/>
+                            <img th:src="@{'/img/' + ${home.img}}"/>
                         </li>
                     </ul>
 

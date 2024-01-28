@@ -8,7 +8,7 @@ regionNames.forEach((regionName) => {
 
 const allBtn = document.querySelector(".all");
 const regionBtns = document.querySelectorAll(".region");
-const colorArr = ["#eb008a", "var(--kia-red)", "#0066b3", "#f37321", "#d00e31", "#e3e3e5", "#cf0a2c", "white", "#244c81"];
+const colorArr = ["#eb008a", "var(--kia-red)", "#0066b3", "#f37321", "#bd0d0d", "#909090", "#cf0a2c", "#80c8ff", "#244c81"];
 
 // 전체 버튼 클릭
 if (regionSubmitInput.value == "") {

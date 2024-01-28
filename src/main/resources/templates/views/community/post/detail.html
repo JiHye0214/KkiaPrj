@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
-        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
-        <link rel="stylesheet" th:href="@{/css/community/postDetail.css}" />
-        <script defer th:src="@{/js/common/imgSwiper.js}"></script>
-        <title>자유 게시판 상세</title>
-    </head>
-    <body>
-        <!--/* header */-->
-        <th:block th:insert="~{fragment/header::header}"></th:block>
+    <script th:unless="${listItem}" th:inline="javascript">
+        alert("페이지가 존재하지 않습니다.");
+        location.href = "/community/post/list";
+    </script>
 
-<!--        <nav class="display-flex">-->
-<!--            <div>자유 게시판</div>-->
-<!--            <div> > </div>-->
-<!--            <div>제목</div>-->
-<!--        </nav>-->
-        <main>
-            <div id="detail-wrap">
-                <div id="detail-header-wrap" class="display-flex-set padding-line">
-                    <div id="writer-wrap" class="display-flex">
-                        <img class="writer-pic" src="/img/핑구1.jpg" />
-                        <div class="writer-nickname">어우기</div>
-                    </div>
+    <th:block th:if="${listItem}" th:with="logged_user=${#authentication.principal.user}">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon" />
+            <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+            <link rel="stylesheet" th:href="@{/css/community/postDetail.css}" />
+            <script defer th:src="@{/js/common/imgSwiper.js}"></script>
+            <script defer th:src="@{/js/community/postDetail.js}"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+            <title>자유 게시판 상세</title>
+        </head>
+        <body>
+            <!--/* header */-->
+            <th:block th:insert="~{fragment/header::header}"></th:block>
 
-                    <div id="num-wrap" class="display-flex">
-                        <div class="display-flex-set">
-                            <div>조회수</div>
-                            <div>13</div>
+            <main>
+                <div id="detail-wrap">
+                    <div id="detail-header-wrap" class="display-flex-set padding-line">
+                        <div id="writer-wrap" class="display-flex">
+                            <img class="writer-pic" th:src="@{'/upload/' + ${listItem.user.userImg.fileName}}" />
+                            <div class="writer-nickname" th:text="${listItem.user.nickname}"></div>
                         </div>
-                        <div class="display-flex-set">
-                            <div>작성일</div>
-                            <div>2023-12-05</div>
+
+                        <div id="num-wrap" class="display-flex">
+                            <div class="display-flex-set">
+                                <div>조회수</div>
+                                <div th:text="${listItem.viewCnt}"></div>
+                            </div>
+                            <div class="display-flex-set">
+                                <div>작성일</div>
+                                <div th:text="${#temporals.format(listItem.createdDate, 'yyyy.MM.dd')}"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="detail-content-wrap" class="display-flex-set">
-                    <div id="title">직관 같이 가실 분</div>
-                    <div id="type">동행구함</div>
-                    <div id="content">잠실 직관 동행 구합니다</div>
-                </div>
-
-                <div class="swiper padding-line display-flex">
-                    <div class="swiper-slide">
-                        <img src="/img/player.jpg" />
+                    <div id="detail-content-wrap" class="display-flex-set">
+                        <div id="title" th:text="${listItem.title}"></div>
+                        <div id="type" th:text="${listItem.category}"></div>
+                        <div id="content" th:text="${listItem.content}"></div>
                     </div>
+
+                    <th:block th:if="${listItem.postImgs}">
+                        <div class="swiper padding-line display-flex">
+                            <div class="swiper-slide">
+                                <img th:each="postImg : ${listItem.postImgs}" th:src="@{'/upload/' + ${postImg.fileName}}" />
+                            </div>
+                        </div>
+                    </th:block>
                 </div>
-            </div>
 
-            <div id="btn-wrap" class="display-flex">
-                <a th:href="@{/community/post/write}">작성</a>
-                <a th:href="@{/community/post/update}">수정</a>
-                <form method="post" th:action="@{#}">
-                    <button type="button">삭제</button>
-                </form>
-                <a th:href="@{/community/post/list}">목록</a>
-            </div>
+                <div id="btn-wrap" class="display-flex">
+                    <a th:href="@{/community/post/write}">작성</a>
+                    <a th:href="@{'/community/post/update/' + ${listItem.id}}" th:if="${logged_user.id == listItem.user.id}">수정</a>
+                    <form method="post" id="post-delete-form" th:action="@{/community/post/delete}" th:if="${logged_user.id == listItem.user.id}">
+                        <input type="hidden" name="id" th:value="${listItem.id}"/>
+                        <button id="post-delete-btn" type="button">삭제</button>
+                    </form>
+                    <a th:href="@{/community/post/list}">목록</a>
+                </div>
 
-            <!--/* comment */-->
-<!--            <th:block th:insert="~{fragment/comment::comment}"></th:block>-->
-        </main>
-    </body>
+                <!--/* comment */-->
+                <th:block th:insert="~{fragment/comment::comment}"></th:block>
+            </main>
+        </body>
+    </th:block>
 </html>

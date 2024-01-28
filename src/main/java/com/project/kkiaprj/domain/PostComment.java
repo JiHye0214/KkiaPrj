@@ -7,21 +7,22 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(callSuper = true)
-@Entity(name = "market_img")
-public class MarketImg {
+@Entity(name = "post_comment")
+public class PostComment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String fileName; // 저장
+    private String content;
 
-    @Column(nullable = false)
-    private String sourceName; // 원본
-
-    @Column(name = "marketId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "userId")
     @ToString.Exclude
-    private Long marketId;
+    private User user;
+
+    @Column(name = "postId")
+    @ToString.Exclude
+    private Long postId;
 }

@@ -3,9 +3,6 @@ SET foreign_key_checks = 0;
 DROP TABLE favorite;
 SET foreign_key_checks = 1;
 
--- DROP TABLE IF EXISTS post_comment;
--- DROP TABLE IF EXISTS post_img;
--- DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS favorite_like;
 DROP TABLE IF EXISTS favorite_comment;
 DROP TABLE IF EXISTS favorite_img;
@@ -14,6 +11,9 @@ DROP TABLE IF EXISTS food_save;
 DROP TABLE IF EXISTS food_comment;
 DROP TABLE IF EXISTS food_item;
 DROP TABLE IF EXISTS food;
+DROP TABLE IF EXISTS post_comment;
+DROP TABLE IF EXISTS post_img;
+DROP TABLE IF EXISTS post;
 -- DROP TABLE IF EXISTS market_comment;
 DROP TABLE IF EXISTS market_img;
 DROP TABLE IF EXISTS market;
@@ -46,6 +46,9 @@ SELECT * FROM favorite;
 SELECT * FROM favorite_img;
 SELECT * FROM favorite_comment;
 SELECT * FROM favorite_like;
+SELECT * FROM post;
+SELECT * FROM post_img;
+SELECT * FROM post_comment;
 
 
 

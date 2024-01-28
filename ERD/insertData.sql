@@ -7,6 +7,10 @@ DELETE FROM food_save;
 DELETE FROM food_comment;
 DELETE FROM food_item;
 DELETE FROM food;
+DELETE FROM post_comment;
+DELETE FROM post_img;
+DELETE FROM post;
+
 -- DELETE FROM market_comment;
 DELETE FROM market_img;
 DELETE FROM market;
@@ -26,6 +30,10 @@ ALTER TABLE food_save AUTO_INCREMENT = 1;
 ALTER TABLE food_comment AUTO_INCREMENT = 1;
 ALTER TABLE food_item AUTO_INCREMENT = 1;
 ALTER TABLE food AUTO_INCREMENT = 1;
+ALTER TABLE post_comment AUTO_INCREMENT = 1;
+ALTER TABLE post_img AUTO_INCREMENT = 1;
+ALTER TABLE post AUTO_INCREMENT = 1;
+
 -- ALTER TABLE market_comment AUTO_INCREMENT = 1;
 ALTER TABLE market_img AUTO_INCREMENT = 1;
 ALTER TABLE market AUTO_INCREMENT = 1;
@@ -192,6 +200,69 @@ INSERT INTO favorite_comment(content, createdDate, userId, favoriteId) VALUES
 ('마라탕먹고싶다가 6번 글에 댓글 작성', now(), 4, 6)
 ;
 
+-- 자유게시판 글 
+INSERT INTO post(title, category, content, viewCnt, createdDate, userId) VALUES
+('최애글1', '동행구함', '안녕하세요', 0, now(), 2),
+('최애글2', '직관나눔', '안녕하세요', 0, now(), 2),
+('최애글3', '갸빠일상', '안녕하세요', 0, now(), 3),
+('최애글4', '기타', '안녕하세요', 0, now(), 3),
+('최애글5', '동행구함', '안녕하세요', 0, now(), 4),
+('최애글6', '직관나눔', '안녕하세요', 0, now(), 4),
+('최애글7', '갸빠일상', '안녕하세요', 0, now(), 2),
+('최애글8', '기타', '안녕하세요', 0, now(), 2),
+('최애글9', '동행구함', '안녕하세요', 0, now(), 3),
+('최애글10', '직관나눔', '안녕하세요', 0, now(), 3),
+('최애글11', '갸빠일상', '안녕하세요', 0, now(), 4),
+('최애글12', '기타', '안녕하세요', 0, now(), 4),
+('최애글13', '동행구함', '안녕하세요', 0, now(), 2),
+('최애글14', '직관나눔', '안녕하세요', 0, now(), 2),
+('최애글15', '갸빠일상', '안녕하세요', 0, now(), 3),
+('최애글16', '기타', '안녕하세요', 0, now(), 3)
+;
+
+-- 자유게시판 이미지
+INSERT INTO post_img (fileName, sourceName, postId) VALUES
+("player1.jpg", "player1.jpg", 1),
+("player2.jpg", "player2.jpg", 2),
+("브이 도영.jpg", "브이 도영.jpg", 3),
+("잘생긴 도영.jpg", "잘생긴 도영.jpg", 4),
+("하트 영철.jpg", "하트 영철.jpg", 5),
+("goods.jpg", "goods.jpg", 6),
+("tiger.png", "tiger.png", 7),
+("player1.jpg", "player1.jpg", 8),
+("player2.jpg", "player2.jpg", 9),
+("브이 도영.jpg", "브이 도영.jpg", 10),
+("잘생긴 도영.jpg", "잘생긴 도영.jpg", 11),
+("하트 영철.jpg", "하트 영철.jpg", 12),
+("goods.jpg", "goods.jpg", 13),
+("tiger.png", "tiger.png", 14),
+("브이 도영.jpg", "브이 도영.jpg", 15),
+("잘생긴 도영.jpg", "잘생긴 도영.jpg", 16),
+("player2.jpg", "player2.jpg", 16)
+;
+
+-- 자유게시판 댓글 
+INSERT INTO post_comment(content, createdDate, userId, postId) VALUES
+('말랑한고구마가 1번 글에 댓글 작성', now(), 2, 1),
+('말랑한고구마가 2번 글에 댓글 작성', now(), 2, 2),
+('말랑한고구마가 3번 글에 댓글 작성', now(), 2, 3),
+('말랑한고구마가 4번 글에 댓글 작성', now(), 2, 4),
+('말랑한고구마가 5번 글에 댓글 작성', now(), 2, 5),
+('말랑한고구마가 6번 글에 댓글 작성', now(), 2, 6),
+('맑은아침햇살이 1번 글에 댓글 작성', now(), 3, 1),
+('맑은아침햇살이 2번 글에 댓글 작성', now(), 3, 2),
+('맑은아침햇살이 3번 글에 댓글 작성', now(), 3, 3),
+('맑은아침햇살이 4번 글에 댓글 작성', now(), 3, 4),
+('맑은아침햇살이 5번 글에 댓글 작성', now(), 3, 5),
+('맑은아침햇살이 6번 글에 댓글 작성', now(), 3, 6),
+('마라탕먹고싶다가 1번 글에 댓글 작성', now(), 4, 1),
+('마라탕먹고싶다가 2번 글에 댓글 작성', now(), 4, 2),
+('마라탕먹고싶다가 3번 글에 댓글 작성', now(), 4, 3),
+('마라탕먹고싶다가 4번 글에 댓글 작성', now(), 4, 4),
+('마라탕먹고싶다가 5번 글에 댓글 작성', now(), 4, 5),
+('마라탕먹고싶다가 6번 글에 댓글 작성', now(), 4, 6)
+;
+
 -- 마켓 글 작성
 INSERT INTO market (product, content, price, region, userId, createdDate) VALUES
 ('김도영 유니폼 자수 마킹 3번 입은 거 팝니다', '김도영 유니폼 자수 마킹 3번 입은 거 a팝니다', 100000, '광주광역시 북구', 1, now()),
@@ -233,16 +304,16 @@ INSERT INTO market_img (fileName, sourceName, marketId) VALUES
 
 -- 구단 정보
 INSERT INTO team (code, name, img, place, latitude, longitude) VALUES
-("NCHT", "Dinos", "/img/team-dinos.png", "창원NC파크", 35.2228007, 128.5820053),
-("HTSK", "Landers", "/img/team-landers.png", "인천SSG랜더스필드", 37.4369986, 126.6932732),
-("OBHT", "Bears", "/img/team-bears.png", "잠실종합운동장", 37.5121518, 127.0719083),
-("HHHT", "Eagles", "/img/team-eagles.png", "한화생명이글스파크", 36.3170827, 127.4291626),
-("HTWO", "Heros",  "/img/team-heros.png", "고척스카이돔", 37.4982302,  126.8671030),
-("SSHT", "Lions", "/img/team-lions.png", "대구삼성라이온즈파크", 35.8410568, 128.6816571),
-("HTLT", "Giants", "/img/team-giants.png", "부산사직종합운동장", 35.1940153, 129.0615412),
-("HTLG", "Twins", "/img/team-twins.png", "잠실종합운동장", 37.5121518, 127.0719083),
-("KTHT", "Wiz", "/img/team-wiz.png", "수원KT위즈파크", 37.2997194, 127.0097703),
-("KKIA", "Tigers", "/img/team-tigers.png", "광주기아챔피언스필드", 35.1682047, 126.8891093)
+("NCHT", "Dinos", "team-dinos.png", "창원NC파크", 35.2228007, 128.5820053),
+("HTSK", "Landers", "team-landers.png", "인천SSG랜더스필드", 37.4369986, 126.6932732),
+("OBHT", "Bears", "team-bears.png", "잠실종합운동장", 37.5121518, 127.0719083),
+("HHHT", "Eagles", "team-eagles.png", "한화생명이글스파크", 36.3170827, 127.4291626),
+("HTWO", "Heros",  "team-heros.png", "고척스카이돔", 37.4982302,  126.8671030),
+("SSHT", "Lions", "team-lions.png", "대구삼성라이온즈파크", 35.8410568, 128.6816571),
+("HTLT", "Giants", "team-giants.png", "부산사직종합운동장", 35.1940153, 129.0615412),
+("HTLG", "Twins", "team-twins.png", "잠실종합운동장", 37.5121518, 127.0719083),
+("KTHT", "Wiz", "team-wiz.png", "수원KT위즈파크", 37.2997194, 127.0097703),
+("KKIA", "Tigers", "team-tigers.png", "광주기아챔피언스필드", 35.1682047, 126.8891093)
 ;
 
 -- 직관 기록

@@ -1,3 +1,10 @@
+$(document).ready(function() {
+    if($("#category").text() != "카테고리"){
+        $("#type").val($("#category").text());
+        $("#category").css("color", "#333");
+    }
+})
+
 // category
 const $typeBtn = document.querySelector("#category");
 const $typeWrap = document.querySelector("#category-wrap");
@@ -16,6 +23,8 @@ const typeItemSetting = () => {
         type.onclick = () => {
             $typeBtn.innerHTML = `${type.innerText}`;
             $typeInput.value = `${type.innerText}`;
+            console.log("--------------------------")
+            console.log($typeInput.value);
             $typeWrap.style.display = `none`;
         };
     });
@@ -23,11 +32,9 @@ const typeItemSetting = () => {
 
 // validation
 const $errMsgArr = document.querySelectorAll(".err-msg");
-const $submitBtn = document.querySelector("#submit-btn");
 const $validInputArr = document.querySelectorAll(".valid");
-const $submitForm = document.querySelector("form");
 
-$submitBtn.onclick = () => {
+$("#submit-btn").on("click", function() {
     let count = 0;
     let titleCheck = false;
 
@@ -54,6 +61,7 @@ $submitBtn.onclick = () => {
     });
 
     if (count == 3 && titleCheck) {
-        $submitForm.submit();
+        document.forms["write-form"].submit();
     }
-};
+})
+

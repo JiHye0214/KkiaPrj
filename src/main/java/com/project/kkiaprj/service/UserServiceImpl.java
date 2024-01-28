@@ -81,13 +81,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updatePassword(User user) {
         User newUser = userRepository.findById(user.getId()).orElse(null);
-
-        assert newUser != null;
-        String newPassword = user.getPassword();
-        newPassword = passwordEncoder.encode(newPassword);
-        newUser.setPassword(newPassword);
-        userRepository.saveAndFlush(newUser);
-
+        if(newUser != null) {
+            String newPassword = user.getPassword();
+            newPassword = passwordEncoder.encode(newPassword);
+            newUser.setPassword(newPassword);
+            userRepository.saveAndFlush(newUser);
+        }
         return 1;
     }
 

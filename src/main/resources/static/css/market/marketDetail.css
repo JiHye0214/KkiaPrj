@@ -98,7 +98,7 @@
     align-items: center;
 }
 .swiper-slide > img {
-    width: 240px;
+    height: 240px;
     border: 2px solid;
     border-radius: 5px;
 }

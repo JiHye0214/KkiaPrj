@@ -1,10 +1,7 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.Util.U;
-import com.project.kkiaprj.domain.Favorite;
-import com.project.kkiaprj.domain.Market;
-import com.project.kkiaprj.domain.MarketImg;
-import com.project.kkiaprj.domain.UserImg;
+import com.project.kkiaprj.domain.*;
 import com.project.kkiaprj.repository.MarketImgRepository;
 import com.project.kkiaprj.repository.MarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +106,7 @@ public class MarketServiceImpl implements MarketService {
     public int deleteMarket(Market market) {
 
         Market delete = marketRepository.findById(market.getId()).orElse(null);
+        assert delete != null;
         marketRepository.delete(delete);
         return 1;
     }
@@ -135,10 +133,17 @@ public class MarketServiceImpl implements MarketService {
 
         // 유저이미지에 market id 넣어주거나
         // 마켓에 유저이미지 넣어주거나 해야 됨
-        market.setUser(U.getLoggedUser());
+        Market update = marketRepository.findById(market.getId()).orElse(null);
         List<MarketImg> marketImg = marketImgRepository.findByMarketId(market.getId());
-        market.setMarketImgs(marketImg);
-        marketRepository.saveAndFlush(market);
+
+        assert update != null;
+        update.setProduct(market.getProduct());
+        update.setPrice(market.getPrice());
+        update.setRegion(market.getRegion());
+        update.setContent(market.getContent());
+        update.setUser(U.getLoggedUser());
+        update.setMarketImgs(marketImg);
+        marketRepository.saveAndFlush(update);
 
         return 1;
     }
@@ -192,7 +197,7 @@ public class MarketServiceImpl implements MarketService {
         String fileName = null;
 
         String originalFilename = multipartFile.getOriginalFilename();
-        if(originalFilename == null || originalFilename.length() == 0) return null;
+        if(originalFilename == null || originalFilename.isEmpty()) return null;
 
         sourceName = StringUtils.cleanPath(originalFilename);
         fileName = sourceName;

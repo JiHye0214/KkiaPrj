@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
     <script th:if="${result > 0}" th:inline="javascript">
         if ([[${action}]] == "작성" || [[${action}]] == "수정") {
-            location.href = "detail/[[${market?.id}]]";
+            location.href = "detail/[[${post?.id}]]";
         } else if ([[${action}]] == "삭제") {
             location.href = "list";
         } else {
@@ -10,7 +10,6 @@
         }
     </script>
     <script th:unless="${result > 0}" th:inline="javascript">
-        alert('실패');
         history.back();
     </script>
 </html>

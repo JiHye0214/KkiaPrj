@@ -75,11 +75,11 @@ main {
 }
 .region:nth-child(6).active {
     color: black;
-    background-color: #d00e31;
+    background-color: #bd0d0d;
 }
 .region:nth-child(7).active {
     color: black;
-    background-color: #e3e3e5;
+    background-color: #909090;
 }
 .region:nth-child(8).active {
     color: black;
@@ -87,7 +87,7 @@ main {
 }
 .region:nth-child(9).active {
     color: black;
-    background-color: white;
+    background-color: #80c8ff;
 }
 .region:nth-child(10).active {
     color: black;
@@ -112,7 +112,7 @@ main {
     height: 140px;
     border: 2px solid;
     border-radius: 5px;
-    background-color: #ebf0f2;
+    background-color: var(--basic-pink);
     padding: 20px;
     font-size: 16px;
     font-weight: 600;

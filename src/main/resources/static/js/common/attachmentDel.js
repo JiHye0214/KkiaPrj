@@ -7,3 +7,4 @@
  function deleteFiles(fileId){
      $("#delFiles").append(`<input type='hidden' name='delfile' value='${fileId}'>`);
  }
+
