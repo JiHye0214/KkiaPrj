@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
     private UserImgRepository userImgRepository;
 
     @Override
+    public User findloggedUser(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public User findByLogId(String loginId) {
         return userRepository.findByLoginId(loginId);
     }
@@ -41,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
         model.addAttribute("whatValue", whatValue);
     }
+
     @Override
     public void findResult(User user, RedirectAttributes redirectAttrs) {
 

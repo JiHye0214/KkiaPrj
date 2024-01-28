@@ -44,22 +44,42 @@ public class User extends BaseEntity {
     private String gender;
 
     // 각 게시판의 작성ㆍ수정 페이지, 댓글에서는 유저의 이미지 필요
-    // 마이페이지의 커뮤니티에서는 유저가 작성한 글, 작성한 댓글(마켓, 맛집, 최애, 자유) 필요
+    // 마이페이지의 커뮤니티에서는 유저가 작성한 글(마켓, 맛집, 최애, 자유) 필요
     // + 저장 맛집, 좋아요 최애 정보 필요
     // 따라서 해당 타입들의 데이터 가져와야 함
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userImgId") // user 테이블에 userImgId 라는 외래키 생김. user_img 테이블과 연결 (부모 : user_img, 자식 : user)
+    @JoinColumn(name = "userImgId") // 부모 : user_img / 자식 : user
     @ToString.Exclude
     private UserImg userImg;
 
-    @OneToMany(cascade = CascadeType.ALL) // user 테이블의 데이터 삭제 시 해당 데이터 참조하고 있던 food_save 의 데이터들도 삭제
-    @JoinColumn(name = "userId") // food_save 테이블의 userId 라는 외래키와 연결됨 (부모 : user, 자식 : food_save)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId") // 부모 : user / 자식 : market
+    @ToString.Exclude
+    private List<Market> markets;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId") // 부모 : user / 자식 : food
+    @ToString.Exclude
+    private List<Food> foods;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId") // 부모 : user / 자식 : favorite
+    @ToString.Exclude
+    private List<Favorite> favorites;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId") // 부모 : user / 자식 : post
+    @ToString.Exclude
+    private List<Post> posts;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId") // 부모 : user / 자식 : food_save
     @ToString.Exclude
     private List<FoodSave> foodSaves = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL) // user 테이블의 데이터 삭제 시 해당 데이터 참조하고 있던 favorite_like 의 데이터들도 삭제
-    @JoinColumn(name = "userId") // favorite_like 테이블의 userId 라는 외래키와 연결됨 (부모 : user, 자식 : favorite_like)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId") // 부모 : user / 자식 : favorite_like
     @ToString.Exclude
     private List<FavoriteLike> favoriteLikes = new ArrayList<>();
 

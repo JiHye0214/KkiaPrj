@@ -1,10 +1,7 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.Util.U;
-import com.project.kkiaprj.domain.FoodComment;
-import com.project.kkiaprj.domain.GameRecord;
-import com.project.kkiaprj.domain.User;
-import com.project.kkiaprj.domain.UserImg;
+import com.project.kkiaprj.domain.*;
 import com.project.kkiaprj.repository.FoodCommentRepository;
 import com.project.kkiaprj.repository.GameRecordRepository;
 import com.project.kkiaprj.repository.UserImgRepository;
@@ -39,18 +36,18 @@ public class UserMypageServiceImpl implements UserMypageService {
 
     @Autowired
     UserRepository userRepository;
+
     @Autowired
     UserImgRepository userImgRepository;
+
     @Autowired
     GameRecordRepository gameRecordRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private FoodCommentRepository foodCommentRepository;
 
     @Override
     public void setMypage(String menu, Model model) {
-
         String menuValue = "";
         if(menu.equals("커뮤니티")){
             menuValue = "커뮤니티";
@@ -64,6 +61,7 @@ public class UserMypageServiceImpl implements UserMypageService {
     }
 
     // 직관 기록 ----------------------------------------------------------------------------------
+
     @Override
     public List<GameRecord> getGameRecord(Long userId) {
         return gameRecordRepository.findByUserId(userId);
@@ -79,6 +77,7 @@ public class UserMypageServiceImpl implements UserMypageService {
             gameRecordRepository.saveAndFlush(gameRecord);
         }
     }
+
     @Override
     public void deleteGameRecord(GameRecord gameRecord) {
         GameRecord deleteRecord = gameRecordRepository.findByUserIdAndRecordDate(gameRecord.getUser().getId(), gameRecord.getRecordDate());
@@ -98,28 +97,31 @@ public class UserMypageServiceImpl implements UserMypageService {
             userRepository.saveAndFlush(origin);
         }
     }
+
     @Override
     public void setBirth(LocalDate birth) {
         User origin = U.getLoggedUser();
         origin.setBirth(birth);
         userRepository.saveAndFlush(origin);
     }
+
     @Override
     public void setPassword(String newPassword) {
         User origin = U.getLoggedUser();
         origin.setPassword(passwordEncoder.encode(newPassword));
         userRepository.saveAndFlush(origin);
     }
+
     @Override
     public void setGender(String gender) {
         User origin = U.getLoggedUser();
         origin.setGender(gender);
         userRepository.saveAndFlush(origin);
     }
+
     @Override
     @Transactional
     public void setUserImg(Map<String, MultipartFile> file, boolean resetImg) {
-
         Long userId = U.getLoggedUser().getId();
         User user = U.getLoggedUser();
 

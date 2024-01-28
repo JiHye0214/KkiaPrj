@@ -1,7 +1,6 @@
 package com.project.kkiaprj.service;
 
-import com.project.kkiaprj.domain.GameRecord;
-import com.project.kkiaprj.domain.UserImg;
+import com.project.kkiaprj.domain.*;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,6 +21,7 @@ public interface UserMypageService {
 
     // 직관 기록 추가 + 수정
     void addOrUpdateGameRecord(GameRecord gameRecord);
+
     // 직관 기록 삭제
     void deleteGameRecord(GameRecord gameRecord);
 
@@ -29,9 +29,13 @@ public interface UserMypageService {
 
     // 회원정보 변경
     void setNickname(String nickname, RedirectAttributes redirectAttrs);
+
     void setBirth(LocalDate birth);
+
     void setPassword(String newPassword);
+
     void setGender(String gender);
+
     void setUserImg(Map<String, MultipartFile> file, boolean resetImg);
 
 }

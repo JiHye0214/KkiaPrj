@@ -9,7 +9,10 @@ import java.util.Optional;
 
 public interface UserService {
 
-    User findByLogId(String loginId);
+    // 마이페이지 접근 시 LazyInitializationException 발생 막기 위해 유저 찾기
+    User findloggedUser(Long id);
+
+    User findByLogId(String userId);
 
     // 찾기
     void setFindPage(String what, Model model);

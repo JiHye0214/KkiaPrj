@@ -128,9 +128,9 @@
     column-gap: 15px;
     overflow-x: scroll;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    /*&::-webkit-scrollbar {*/
+    /*    display: none;*/
+    /*}*/
 }
 
 .community-box .community-one {
@@ -145,7 +145,7 @@
     }
 }
 
-.community-box .community-one > div {
+.community-box .community-one div {
     width: 150px;
     overflow: hidden;
     white-space: nowrap;
@@ -180,7 +180,7 @@
 .community-box img {
     border-radius: 5px;
     border: 2px solid;
-    height: 130px;
+    height: 125px;
 
     &:hover {
         cursor: pointer;
@@ -317,7 +317,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(50, 50);
     width: 100%;
     height: 100%;
     object-fit: cover;

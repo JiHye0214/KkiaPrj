@@ -38,8 +38,10 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private UserMypageService userMypageService;
 
@@ -135,9 +137,15 @@ public class UserController {
                          Model model,
                          RedirectAttributes redirectAttrs
     ){
+        Long userId = U.getLoggedUser().getId();
+
+        // 마이페이지에서 유저가 작성한 마켓, 맛집, 최애, 자유 글 & 저장한 맛집 글 & 좋아요 한 최애 글 가져와야 하는데
+        // mypage.html 에서 logged_user.markets 이런 식으로 가져오려 하면 LazyInitializationException 발생 (OneToMany 이기 때문)
+        // 따라서 userId 로 로그인 한 user 찾아서 mypage.html 에 넘겨주기
+        model.addAttribute("loggedUser", userService.findloggedUser(userId));
 
         // 직관 기록 리스트
-        List<GameRecord> gameRecords = userMypageService.getGameRecord(U.getLoggedUser().getId());
+        List<GameRecord> gameRecords = userMypageService.getGameRecord(userId);
         model.addAttribute("gameRecords", gameRecords);
 
         // menu select
@@ -163,6 +171,7 @@ public class UserController {
         redirectAttrs.addAttribute("menu", "직관기록");
         return "redirect:/user/mypage";
     }
+
     @PostMapping("/deleteGameRecord")
     public String deleteGameRecord(GameRecord gameRecord, RedirectAttributes redirectAttrs) {
         gameRecord.setUser(U.getLoggedUser());
@@ -180,6 +189,7 @@ public class UserController {
         redirectAttrs.addAttribute("menu", "회원정보");
         return "redirect:/user/mypage";
     }
+
     @PostMapping("/modifyUser")
     public String modifyUser(User user,
                              @RequestParam Map<String, MultipartFile> file,
@@ -215,12 +225,10 @@ public class UserController {
         return "redirect:/user/mypage";
     }
 
-// ------------------validator--------------------
+    // ------------------validator--------------------
     @InitBinder("user")
     public void intiBinder(WebDataBinder binder) {
         binder.setValidator(new UserValidator(userService));
     }
+
 }
-
-
-
