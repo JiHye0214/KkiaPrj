@@ -24,6 +24,7 @@ $(document).ready(function() {
         title.innerText = title.innerText.replace("&gt;", ">");
         title.innerText = title.innerText.replace("<b>", "");
         title.innerText = title.innerText.replace("</b>", "");
+        title.innerText = title.innerText.replace("&quot;", "");
     })
 
     // 엔트리 -----------------------------------------------------

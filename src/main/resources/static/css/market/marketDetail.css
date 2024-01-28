@@ -26,6 +26,7 @@
     border-bottom: 2px solid;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 #detail-header-wrap {
     justify-content: space-between;
@@ -84,6 +85,21 @@
 
     &::-webkit-scrollbar {
         display: none;
+    }
+}
+#product-chat-btn {
+    position: absolute;
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 5px;
+    top: 153px;
+    right: 0;
+    font-size: 22px;
+    font-weight: 900;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--yellow-btn);
     }
 }
 

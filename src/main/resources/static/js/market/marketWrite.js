@@ -294,7 +294,6 @@ $("#submit-btn").on("click", function() {
     // 첨부파일 하나라도 있어야 함
     const $fileItems = document.querySelectorAll(".confirm-box-wrap > .confirm-box-item");
     const $fileInputArr = document.querySelectorAll(".choice-file-btn > input");
-    console.log("자식 몇 개 : " + $fileItems.length);
 
     const $fileErrMsg = document.querySelector(".file-err-msg");
     let checkFile = false;

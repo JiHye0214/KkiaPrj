@@ -6,24 +6,41 @@ $(document).ready(function() {
 })
 
 // category
+let openToggle = false;
+let colorIndex = null;
 const $typeBtn = document.querySelector("#category");
 const $typeWrap = document.querySelector("#category-wrap");
 const $typeInput = document.querySelector("#type");
-if($typeInput.value) {
-    $typeBtn.style.color = `#333`;
-}
-$typeBtn.onclick = () => {
-    $typeBtn.style.color = `#333`;
-    $typeWrap.style.display = `block`;
-    typeItemSetting();
+const $typeItemArr = document.querySelectorAll(".category-item");
+
+$typeBtn.onclick = () => { // 선택창 열기
+    if(!openToggle){
+        $typeBtn.style.color = `#333`;
+        $typeWrap.style.display = `block`;
+        typeItemSetting();
+        openToggle = true;
+    } else {
+        $typeBtn.style.color = ``;
+        $typeWrap.style.display = `none`;
+        openToggle = false;
+    }
 };
 const typeItemSetting = () => {
-    const $typeItemArr = document.querySelectorAll(".category-item");
-    $typeItemArr.forEach((type) => {
+    $typeItemArr.forEach((type, index) => {
         type.onclick = () => {
+            colorIndex = index;
+            $typeBtn.style.color = `#333`;
             $typeBtn.innerHTML = `${type.innerText}`;
             $typeInput.value = `${type.innerText}`;
             $typeWrap.style.display = `none`;
+            openToggle = false;
+        };
+
+        // 색깔 칠하기
+        if(colorIndex == index) {
+            type.style.background = `var(--yellow-btn)`;
+        } else {
+            type.style.background = ``;
         };
     });
 };

@@ -38,8 +38,6 @@ public class PostController {
         model.addAttribute("listItem", postService.getPost(id));
         model.addAttribute("page", "post");
 
-        System.out.println(postService.getPost(id));
-
         return "community/post/detail";
     }
 
