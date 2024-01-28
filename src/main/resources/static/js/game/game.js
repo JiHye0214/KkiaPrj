@@ -68,7 +68,8 @@ const gameSetting = () => {
             gameArr.forEach((game) => {
                 if(game.gameDate == that) { // 기록 있으면
                     setTeamCode = game.opponent;
-                    $aTag[index].href = `https://tigers.co.kr/game/schedule/view?type=major&gameKey=${dateComplete}${setTeamCode}0&gameDate=${dateComplete}`
+                    url = `https://tigers.co.kr/game/schedule/view?type=major&gameKey=${dateComplete}${setTeamCode}0&gameDate=${dateComplete}`
+                    window.open(`${url}`);
                 }
             })
 
