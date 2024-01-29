@@ -51,7 +51,8 @@ public class FavoriteController {
             @PathVariable(name = "id") Long id
             , Model model
     ) {
-        favoriteService.detail(id, model);
+        model.addAttribute("listItem", favoriteService.detail(id, model));
+        model.addAttribute("page", "favorite");
         return "community/favorite/detail";
     }
 

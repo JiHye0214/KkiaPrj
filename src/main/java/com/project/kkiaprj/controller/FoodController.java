@@ -8,6 +8,7 @@ import com.project.kkiaprj.service.FoodSaveService;
 import com.project.kkiaprj.service.FoodService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/community/food")
 public class FoodController {
+
+    @Value("${app.api.mapKey}")
+    private String mapKey;
 
     @Autowired
     private FoodService foodService;
@@ -62,13 +66,16 @@ public class FoodController {
             @PathVariable(name = "id") Long id
             , Model model
     ) {
-        foodService.detail(id, model);
+        model.addAttribute("mapKey", mapKey);
+        model.addAttribute("listItem", foodService.detail(id, model));
+        model.addAttribute("page", "food"); // 커뮤니티 게시판들에서 comment fragment 공유하므로 댓글 작성ㆍ삭제 시 제출 form action 경로 지정 위함
         return "community/food/detail";
     }
 
     // 맛집 글 작성 페이지
     @GetMapping("/write")
-    public void write() {
+    public void write(Model model) {
+        model.addAttribute("mapKey", mapKey);
     }
 
     // 맛집 글 수정 페이지
@@ -77,6 +84,7 @@ public class FoodController {
             @PathVariable(name = "id") Long id
             , Model model
     ) {
+        model.addAttribute("mapKey", mapKey);
         model.addAttribute("food", foodService.detailById(id));
         return "community/food/update";
     }

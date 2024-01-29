@@ -6,6 +6,7 @@ import com.project.kkiaprj.repository.FoodItemRepository;
 import com.project.kkiaprj.repository.FoodRepository;
 import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,6 +20,9 @@ import java.util.List;
 
 @Service
 public class FoodServiceImpl implements FoodService {
+
+    @Value("${app.api.mapKey}")
+    private String mapKey;
 
     @Autowired
     private UserRepository userRepository;
@@ -151,10 +155,6 @@ public class FoodServiceImpl implements FoodService {
             foodRepository.saveAndFlush(food);
         }
 
-        model.addAttribute("listItem", food);
-        model.addAttribute("page", "food");
-        // 커뮤니티 게시판들에서 comment fragment 공유하므로 댓글 작성ㆍ삭제 시 제출 form action 경로 지정 위함
-
         // -------------------- 저장(별) 여부 체크 --------------------
 
         // 클릭되어있는 별인지 아닌지 확인할 isSaveClicked
@@ -168,7 +168,7 @@ public class FoodServiceImpl implements FoodService {
         }
         model.addAttribute("isSaveClicked", isSaveClicked);
 
-        return food; // 의미 없는 값 (함수 실행으로 반환되는 값 사용 안함)
+        return food;
     }
 
     // 맛집 글 작성

@@ -8,6 +8,7 @@ const $diaryWrapper = document.querySelector("#diary-wrapper")
 const $userWrapper = document.querySelector("#user-wrapper");
 
 // 왼쪽 ------------------------------------------------------------------------
+
 const clickMenuBtn = (num) => {
     $fragmentArr.forEach((fragment, index) => {
         if (index == num) {
@@ -32,6 +33,21 @@ $menuBtn.forEach((btn, index) => {
 });
 
 // 오른쪽 ------------------------------------------------------------------------
+
+// Community ---------------------------------------------------------------------
+// 저장한 맛집 각 항목의 지역 태그 색 변경
+const colors = ["#eb008a", "var(--kia-red)", "#0066b3", "#f37321", "#bd0d0d", "#909090", "#cf0a2c", "#80c8ff", "#244c81"];
+const regionNames = ["고척", "광주", "대구", "대전", "부산", "수원", "인천", "잠실", "창원"];
+const regionTags = document.querySelectorAll(".community-region");
+
+regionTags.forEach((tag) => {
+    regionNames.forEach((regionName, i) => {
+        if (tag.textContent == regionName) {
+            tag.style.backgroundColor = colors[i];
+        }
+    })
+})
+
 // User --------------------------------------------------------------------------
 if($userWrapper != null){
     const $passwordInputArr = document.querySelectorAll("#user-password > input");

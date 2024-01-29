@@ -60,27 +60,49 @@ marker.setMap(map); // 마커를 지도에 표시
 // slide banner ------------------------------------------------------------------------------------------
 
 const $slideWrap = document.querySelector("#slide-wrap");
+const slideWidth = $slideWrap.clientWidth; // 슬라이드 wrap 너비(width)
+const slidItem = document.querySelectorAll("#slide-wrap > li");
 const $slideBtnArr = document.querySelectorAll("#slide-btn-wrap > li");
 
-let index = 1;
-$slideBtnArr[0].style.background = `black`;
+// 아직 최애 글 개수가 5개가 안된다면 나머지에 기본 이미지 세팅
+let restCnt = 5 - slidItem.length;
+for (let i = 0; i < restCnt; i++) {
+    $slideWrap.innerHTML += `
+        <li>
+            <img src="/img/호걸이.png" />
+        </li>
+    `
+}
+
+// 최애 글 이미지 슬라이드
+let idx = 0;
 
 const slideNext = () => {
-    for (let i = 0; i < $slideBtnArr.length; i++) {
-        if (index === i) {
-            $slideBtnArr[i].style.background = `black`;
-        } else {
-            $slideBtnArr[i].style.background = ``;
-        }
+    idx++;
+    if (idx >= $slideBtnArr.length) {
+        idx = 0;
     }
 
-    $slideWrap.style.transform = `translateX(-${index * 310}px)`;
-    index++;
-    if (index >= $slideBtnArr.length) {
-        index = 0;
-    }
+    let offset = slideWidth * idx;
+    $slideWrap.style.transform = `translateX(-${offset}px)`;
+
+    $slideBtnArr.forEach((btn) => btn.classList.remove("active"));
+    $slideBtnArr[idx].classList.add("active");
 };
 
 setInterval(slideNext, 4000);
 
+// 각 페이지네이션 버튼 클릭 시 해당 슬라이드로 이동하기
+$slideBtnArr.forEach((btn, i) => {
+    btn.onclick = () => {
+        console.log("클릭");
 
+        const offset = slideWidth * i;
+        $slideWrap.style.transform = `translateX(-${offset}px)`;
+
+        $slideBtnArr.forEach((btn) => btn.classList.remove("active"));
+        btn.classList.add("active");
+
+        idx = i;
+    };
+});

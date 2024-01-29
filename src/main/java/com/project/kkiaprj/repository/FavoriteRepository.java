@@ -11,4 +11,6 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 
     Page<Favorite> findByPlayerNameContainsOrPlayerNumContains(String sq1, String sq2, Pageable pageable);
 
+    List<Favorite> findTop5ByOrderByLikeCntDesc();
+
 }

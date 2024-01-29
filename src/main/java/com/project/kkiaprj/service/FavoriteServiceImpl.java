@@ -131,6 +131,11 @@ public class FavoriteServiceImpl implements FavoriteService {
         return lists;
     }
 
+    @Override
+    public List<Favorite> findTop5() {
+        return favoriteRepository.findTop5ByOrderByLikeCntDesc();
+    }
+
     // 특정 최애 글 likeCnt 변경
     @Override
     public int changeLikeCnt(Long num, Long favoriteId) {
@@ -164,10 +169,7 @@ public class FavoriteServiceImpl implements FavoriteService {
             favoriteRepository.saveAndFlush(favorite);
         }
 
-        model.addAttribute("listItem", favorite);
-        model.addAttribute("page", "favorite");
-
-        // -------------------- 좋아요(하트) 여부 여부 체크 --------------------
+        // -------------------- 좋아요(하트) 여부 체크 --------------------
 
         // 클릭되어있는 하트인지 아닌지 확인할 isLikeClicked
         String isLikeClicked = "false";

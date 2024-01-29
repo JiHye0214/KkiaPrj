@@ -1,6 +1,5 @@
 SELECT *
-FROM market
-WHERE userId = 1;
+FROM user;
 
 SELECT *
 FROM food
@@ -14,3 +13,7 @@ SELECT *
 FROM favorite_like 
 WHERE userId = 2;
 
+SELECT *
+FROM favorite
+ORDER BY likeCnt DESC, id ASC
+LIMIT 5;

@@ -96,15 +96,15 @@
             <div id="main-fan" class="display-flex-set">
                 <div id="main-fan-content">
                     <ul id="slide-wrap" class="display-flex">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li th:each="favorite : ${top5Favorites}">
+                            <a th:href="@{'/community/favorite/detail/' + ${favorite.id}}">
+                                <img th:src="@{'/upload/' + ${favorite.favoriteImgs[0].fileName}}" />
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <ul id="slide-btn-wrap" class="display-flex">
-                    <li></li>
+                    <li class="active"></li>
                     <li></li>
                     <li></li>
                     <li></li>

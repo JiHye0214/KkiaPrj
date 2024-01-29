@@ -20,7 +20,7 @@
                 <link rel="stylesheet" th:href="@{/css/common/common.css}" />
                 <link rel="stylesheet" th:href="@{/css/community/foodWrite.css}" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02d9a33ac12fb7a7edb7579360286569&libraries=services"></script>
+                <script type="text/javascript" th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${mapKey} + '&libraries=services'}"></script>
                 <script defer th:src="@{/js/community/foodUpdate.js}"></script>
                 <script defer th:src="@{/js/community/foodWrite.js}"></script>
                 <title>구장별 맛집 수정</title>
