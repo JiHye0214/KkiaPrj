@@ -2,14 +2,13 @@ package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.*;
-import com.project.kkiaprj.repository.MarketImgRepository;
-import com.project.kkiaprj.repository.MarketRepository;
-import com.project.kkiaprj.repository.MarketTalkRepository;
+import com.project.kkiaprj.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -18,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,11 +31,15 @@ public class MarketServiceImpl implements MarketService {
     private String uploadDir;
 
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private MarketRepository marketRepository;
     @Autowired
     private MarketImgRepository marketImgRepository;
     @Autowired
     private MarketTalkRepository marketTalkRepository;
+    @Autowired
+    private MarketTalkListRepository marketTalkListRepository;
 
     // 마켓 리스트
     @Override
@@ -242,15 +246,85 @@ public class MarketServiceImpl implements MarketService {
         return marketImg;
     }
 
-    // 채팅
+    // 채팅------------------------------------------------------------------------------------
+    // 한 유저의 모든 채팅 리스트
     @Override
-    public List<MarketTalk> getMarketTalk(Long marketId) {
-        Long userId = U.getLoggedUser().getId();
-        return marketTalkRepository.findByMarketIdAndUserId(marketId, userId);
+    public List<MarketTalkList> getMarketTalkList(Long userId, Model model) {
+        List<MarketTalkList> list = marketTalkListRepository.findByNameStartingWithOrNameEndingWith(userId, userId);
+        ArrayList listInform = new ArrayList<>();
+
+        for(MarketTalkList e : list) {
+            if(!e.getMarketTalks().isEmpty()){
+
+                MarketTalk h = e.getMarketTalks().get(0); // 하나만 가져와서
+
+                // 상대방 누군지 확인
+                Long partner = null;
+                if(!Objects.equals(userId, h.getRecipientId())) {
+                    partner = h.getRecipientId();
+                } else {
+                    partner = h.getUser().getId();
+                }
+
+                String lastTalk = e.getMarketTalks().get(e.getMarketTalks().size()-1).getContent();
+                String lastTalkWriter = String.valueOf(Objects.equals(e.getMarketTalks().get(e.getMarketTalks().size() - 1).getUser().getId(), U.getLoggedUser().getId()));
+                String partnerNick = userRepository.findById(partner).orElse(null).getNickname();
+                String partnerPic = userRepository.findById(partner).orElse(null).getUserImg().getFileName();
+
+                List<String> setList = new ArrayList<>();
+                setList.add(lastTalk);  // 마지막 대화 내용
+                setList.add(String.valueOf(partner));  // 대화 상대 (방리스트에서 채팅방으로 넘어가기 위함)
+                setList.add(partnerNick);  // 대화 상대 닉네임
+                setList.add(partnerPic);  // 대화 상대 프사
+                setList.add(lastTalkWriter); // 마지막 대화 쓴 사람이 유저인가
+
+                listInform.add(setList);
+            }
+        }
+
+        model.addAttribute("talkList", listInform);
+        return null;
     }
+
+    // 한 채팅방 내용
     @Override
-    public void writeTalk(MarketTalk marketTalk) {
+    public List<MarketTalk> getMarketTalk(Long recipientId, Model model) { // 마켓 글쓴이를 알기 위한 정보
+
+        // 일단 마켓 작성자와 유저 간 대화 조회
+        Long senderId = U.getLoggedUser().getId();
+
+        // 이름 경우의 수 두 개
+        // 같은 유저 간의 대화방이 두 개 생기지 않게 하기 위함 !
+        String roomName1 = recipientId + "_" + senderId;
+        String roomName2 = senderId + "_" + recipientId;
+
+        // 방 찾기
+        MarketTalkList talkRoom = marketTalkListRepository.findByNameIsOrNameIs(roomName1, roomName2);
+
+        List<MarketTalk> talks = new ArrayList<>();
+
+        // 방 없으면 새로 파
+        if(talkRoom == null) {
+            MarketTalkList marketList = MarketTalkList.builder()
+                        .name(roomName1)
+                        .build();
+            talkRoom = marketTalkListRepository.saveAndFlush(marketList);
+        } else {
+            // 방 있으면 내용 가져오기
+            talks = marketTalkRepository.findByRoomId(talkRoom.getId());
+        }
+
+        model.addAttribute("recipient", userRepository.findById(recipientId).orElse(null));
+        model.addAttribute("talkList", talks);
+        model.addAttribute("roomId", talkRoom.getId());
+
+        return talks;
+    }
+
+    @Override
+    public int writeTalk(MarketTalk marketTalk) {
         marketTalk.setUser(U.getLoggedUser());
         marketTalkRepository.saveAndFlush(marketTalk);
+        return 1;
     }
 }

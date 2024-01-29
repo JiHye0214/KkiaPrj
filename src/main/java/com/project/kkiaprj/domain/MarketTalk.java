@@ -17,11 +17,15 @@ public class MarketTalk extends BaseEntity{
     @ManyToOne(optional = false)
     @JoinColumn(name = "userId")
     @ToString.Exclude
-    private User user;
+    private User user; // 쓴 사람
 
     @Column(nullable = false)
     private String content;
 
     @Column(nullable = false)
-    private Long marketId; // 어느글 채팅
+    private Long recipientId; // 받는 사람
+
+    @Column(name = "roomId")
+    @ToString.Exclude
+    private Long roomId; // 톡방 id
 }

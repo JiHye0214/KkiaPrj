@@ -1,11 +1,14 @@
 package com.project.kkiaprj.controller;
 
 import com.project.kkiaprj.Util.U;
+import com.project.kkiaprj.config.UserInformation;
 import com.project.kkiaprj.domain.Market;
 import com.project.kkiaprj.domain.MarketTalk;
+import com.project.kkiaprj.domain.MarketTalkList;
 import com.project.kkiaprj.service.MarketService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +37,13 @@ public class MarketController {
         String uri = U.getRequest().getRequestURI();
         request.getSession().setAttribute("prevPage", uri);
 
+        // 로그인 여부 확인
+        Object loginCheck = request.getSession().getAttribute("isLogin");
+        if(loginCheck != null) {
+             marketService.getMarketTalkList(U.getLoggedUser().getId(), model);
+        }
+
+        // 리스트 렌더링
         marketService.getMarketList(page, sq, model);
         return "market/list";
     }
@@ -41,6 +51,8 @@ public class MarketController {
     // 마켓 상세
     @GetMapping("/detail/{id}")
     public String marketDetail(@PathVariable(name = "id") Long id, Model model){
+
+        marketService.getMarketTalkList(U.getLoggedUser().getId(), model);
         model.addAttribute("market", marketService.getMarket(id));
         return "market/detail";
     }
@@ -54,22 +66,6 @@ public class MarketController {
     public String marketUpdate(@PathVariable(name = "id") Long id, Model model){
         model.addAttribute("market", marketService.getMarket(id));
         return "market/update";
-    }
-
-    // 마켓 채팅 열기
-    @GetMapping("/talk/{id}")
-    public String marketTalk(@PathVariable(name = "id") Long id, Model model) {
-        model.addAttribute("talkList", marketService.getMarketTalk(id));
-
-        List<MarketTalk> list = marketService.getMarketTalk(id);
-
-        return "market/talk";
-    }
-    // 마켓 채팅 쓰기
-    @PostMapping("/writeTalk")
-    public String writeTalk(MarketTalk marketTalk) {
-        marketService.writeTalk(marketTalk);
-        return "market/talk";
     }
 
     // 마켓 검색 post
@@ -112,4 +108,17 @@ public class MarketController {
         return "market/success";
     }
 
+    //-----------------------------------------------------------------------------------
+    // 마켓 채팅 열기
+    @GetMapping("/talk/{id}")
+    public String marketTalk(@PathVariable(name = "id") Long recipientId, Model model) {
+        marketService.getMarketTalk(recipientId, model);
+        return "market/talk";
+    }
+    // 마켓 채팅 쓰기
+    @PostMapping("/writeTalk")
+    public String writeTalk(MarketTalk marketTalk, Model model) {
+        model.addAttribute("result", marketService.writeTalk(marketTalk));
+        return "market/success";
+    }
 }

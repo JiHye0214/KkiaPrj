@@ -9,7 +9,7 @@
     position: fixed;
     column-gap: 10px;
     padding: 15px;
-    background: lavender;
+    background: var(--yellow-btn);
     align-items: center;
     border-bottom: 2px solid;
 }
@@ -22,9 +22,9 @@
 
 #market-chat-space {
     width: 100%;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 155px);
     position: fixed;
-    top: 70px;
+    top: 78px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -43,8 +43,8 @@
     padding: 5px;
     text-align: center;
 
-    max-width: 350px;
-    min-width: 48px;
+    max-width: 378px;
+    min-width: 22px;
     word-wrap: break-word;
 }
 .talk-content.talk-me {
@@ -60,7 +60,7 @@
     width: 100%;
 }
 #market-chat-form > input {
-    &:nth-child(2) {
+    &:nth-child(3) {
         width: 90%;
         border: none;
         border-right: 2px solid;

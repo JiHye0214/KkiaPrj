@@ -492,7 +492,7 @@
     min-width: 100%;
     min-height: 100%;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     background-color: rgba(193, 193, 193, 0.525);
     visibility: hidden;
 }
@@ -670,7 +670,7 @@ input[name="recordMemo"] {
     min-height: 100%;
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     background-color: rgba(193, 193, 193, 0.525);
     visibility: hidden;
 }

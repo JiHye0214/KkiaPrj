@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS post;
 -- DROP TABLE IF EXISTS market_comment;
 DROP TABLE IF EXISTS market_img;
 DROP TABLE IF EXISTS market_talk;
+DROP TABLE IF EXISTS market_talk_list;
 DROP TABLE IF EXISTS market;
 DROP TABLE IF EXISTS live_chat;
 DROP TABLE IF EXISTS game_schedule;
@@ -39,6 +40,7 @@ SELECT * FROM game_schedule;
 SELECT * FROM live_chat;
 SELECT * FROM market;
 SELECT * FROM market_talk;
+SELECT * FROM market_talk_list;
 SELECT * FROM market_img;
 SELECT * FROM food;
 SELECT * FROM food_item;
@@ -52,8 +54,8 @@ SELECT * FROM post;
 SELECT * FROM post_img;
 SELECT * FROM post_comment;
 
-SELECT * FROM market_talk 
-WHERE marketId = 4 AND userId = 1;
+
+
 
 
 

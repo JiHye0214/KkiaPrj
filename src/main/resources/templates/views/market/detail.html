@@ -66,18 +66,16 @@
                 </div>
 
                 <div id="btn-wrap" class="display-flex">
-                    <input id="marketId" type="hidden" th:value="${market.id}"/>
-                    <input id="market-inform" type="hidden" th:value="|${market.id}/${market.user.userImg.fileName}/${market.user.nickname}|"/>
-                    <div id="market-chat-btn">채팅하기</div>
-                    <div class="display-flex" id="market-btn-wrap">
-                        <a th:href="@{/market/write}">작성</a>
-                        <a th:href="@{'/market/update/' + ${market.id}}" th:if="${logged_user.id == market.user.id}">수정</a>
-                        <form method="post" id="market-delete-form" th:action="@{/market/delete}" th:if="${logged_user.id == market.user.id}">
-                            <input type="hidden" name="id" th:value="${market.id}"/>
-                            <button id="market-delete-btn" type="button">삭제</button>
-                        </form>
-                        <a th:href="@{/market/list}">목록</a>
-                    </div>
+                    <input id="recipientId" type="hidden" th:value="${market.user.id}"/> <!--/* 팝업에 전달해주기 위한 id (requestParam) */-->
+                    <div th:if="${logged_user.id != market.user.id}" id="market-chat-btn">채팅하기</div>
+
+                    <a th:href="@{/market/write}">작성</a>
+                    <a th:href="@{'/market/update/' + ${market.id}}" th:if="${logged_user.id == market.user.id}">수정</a>
+                    <form method="post" id="market-delete-form" th:action="@{/market/delete}" th:if="${logged_user.id == market.user.id}">
+                        <input type="hidden" name="id" th:value="${market.id}"/>
+                        <button id="market-delete-btn" type="button">삭제</button>
+                    </form>
+                    <a th:href="@{/market/list}">목록</a>
                 </div>
             </div>
         </body>
