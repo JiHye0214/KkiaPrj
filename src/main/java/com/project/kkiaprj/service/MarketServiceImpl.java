@@ -247,6 +247,23 @@ public class MarketServiceImpl implements MarketService {
     }
 
     // 채팅------------------------------------------------------------------------------------
+    // 전체 알림 만들기 위한 함수
+    public void headerMessageAlert(Long userId, Model model) {
+        List<MarketTalkList> list = marketTalkListRepository.findByNameStartingWithOrNameEndingWith(userId, userId);
+        String alert = null;
+
+        // 마지막으로 쓴 게 내 것이냐 네 것이냐
+        for(MarketTalkList e : list) {
+            if(!e.getMarketTalks().isEmpty()) {
+                alert = String.valueOf(!Objects.equals(e.getMarketTalks().get(e.getMarketTalks().size() - 1).getUser().getId(), U.getLoggedUser().getId()));
+                if(alert.equals("true")) {
+                    break;
+                }
+            }
+        }
+        model.addAttribute("alert", alert);
+    }
+
     // 한 유저의 모든 채팅 리스트
     @Override
     public List<MarketTalkList> getMarketTalkList(Long userId, Model model) {
@@ -256,14 +273,14 @@ public class MarketServiceImpl implements MarketService {
         for(MarketTalkList e : list) {
             if(!e.getMarketTalks().isEmpty()){
 
-                MarketTalk h = e.getMarketTalks().get(0); // 하나만 가져와서
+                MarketTalk talkList = e.getMarketTalks().get(0); // 하나만 가져와서
 
                 // 상대방 누군지 확인
                 Long partner = null;
-                if(!Objects.equals(userId, h.getRecipientId())) {
-                    partner = h.getRecipientId();
+                if(!Objects.equals(userId, talkList.getRecipientId())) {
+                    partner = talkList.getRecipientId();
                 } else {
-                    partner = h.getUser().getId();
+                    partner = talkList.getUser().getId();
                 }
 
                 String lastTalk = e.getMarketTalks().get(e.getMarketTalks().size()-1).getContent();

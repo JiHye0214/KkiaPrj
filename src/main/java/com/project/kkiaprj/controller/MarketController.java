@@ -37,6 +37,12 @@ public class MarketController {
         String uri = U.getRequest().getRequestURI();
         request.getSession().setAttribute("prevPage", uri);
 
+        // 로그인 여부
+        Object loginCheck = request.getSession().getAttribute("isLogin");
+        if(loginCheck != null) {
+            marketService.headerMessageAlert(U.getLoggedUser().getId(), model); // 내 거면 false
+        }
+
         // 리스트 렌더링
         marketService.getMarketList(page, sq, model);
         return "market/list";
@@ -119,7 +125,6 @@ public class MarketController {
     // 마켓 채팅 쓰기
     @PostMapping("/writeTalk")
     public String writeTalk(MarketTalk marketTalk, Model model, RedirectAttributes redirectAttrs) {
-
         model.addAttribute("result", marketService.writeTalk(marketTalk));
         model.addAttribute("action", "채팅 작성");
         return "market/success";

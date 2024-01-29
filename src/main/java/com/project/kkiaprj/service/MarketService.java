@@ -26,6 +26,7 @@ public interface MarketService {
     int modifyMarket(Market market, Map<String, MultipartFile> file, Long[] delFiles);
 
     // 채팅 리스트
+    void headerMessageAlert(Long userId, Model model);
     List<MarketTalkList> getMarketTalkList(Long userId, Model model);
     // 채팅 내용
     List<MarketTalk> getMarketTalk(Long recipientId, Model model);

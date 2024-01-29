@@ -71,7 +71,9 @@ header {
 }
 
 /* 마켓 ----------------------------------------------------------- */
-
+#market-message-wrap {
+    position: relative;
+}
 #market-message {
     width: 50px;
 }
@@ -80,6 +82,5 @@ header {
     position: absolute;
     left: -10px;
     top: -10px;
-    display: none;
 }
 
