@@ -307,15 +307,10 @@ INSERT INTO market_img (fileName, sourceName, marketId) VALUES
 ;
 
 -- 마켓 채팅방
--- INSERT INTO market_talk_list (name) VALUES 
--- ('default'),
--- ('default'),
--- ('default'),
--- ('default'),
--- ('default'),
--- ('default')
--- ;
--- 
+INSERT INTO market_talk_list (name) VALUES 
+('4_2')
+;
+
 -- 마켓 채팅
 INSERT INTO market_talk (content, recipientId, createdDate, userId, roomId) VALUES 
 ('안녕하세요', 4, now(), 2, 1),
