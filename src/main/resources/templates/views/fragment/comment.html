@@ -18,7 +18,7 @@
                         <div class="writer-nickname" th:text="${comment.user.nickname}"></div>
                         <div class="write-content" th:text="${comment.content}"></div>
                         <div class="write-time" th:text="${#temporals.format(comment.createdDate, 'yyyy.MM.dd')}"></div>
-                        <input type="button" class="comment-delete-btn" value="삭제" th:if="${logged_user.id == comment.user.id}" />
+                        <input type="button" class="comment-delete-btn" value="삭제" th:if="${logged_user.id == comment.user.id} or ${logged_user.authority == 'ADMIN'}" />
                     </form>
                 </th:block>
             </div>

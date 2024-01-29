@@ -14,7 +14,6 @@ DROP TABLE IF EXISTS food;
 DROP TABLE IF EXISTS post_comment;
 DROP TABLE IF EXISTS post_img;
 DROP TABLE IF EXISTS post;
--- DROP TABLE IF EXISTS market_comment;
 DROP TABLE IF EXISTS market_img;
 DROP TABLE IF EXISTS market_talk;
 DROP TABLE IF EXISTS market_talk_list;
@@ -24,8 +23,6 @@ DROP TABLE IF EXISTS game_schedule;
 DROP TABLE IF EXISTS game_record;
 DROP TABLE IF EXISTS game_player;
 DROP TABLE IF EXISTS team;
--- DROP TABLE IF EXISTS user_authority;
--- DROP TABLE IF EXISTS authority;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS user_img;
 

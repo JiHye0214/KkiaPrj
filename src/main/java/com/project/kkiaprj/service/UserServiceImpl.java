@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Objects;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -101,9 +101,7 @@ public class UserServiceImpl implements UserService {
     public int resister(User user) {
         // password encode
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        // authority setting
-//            userAuthorityRepository.addAuthority(user.getId(), 1L);
+        user.setAuthority("MEMBER");
 
         // default img setting
         UserImg userImg = UserImg.builder()

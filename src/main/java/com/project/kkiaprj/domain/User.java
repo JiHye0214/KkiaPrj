@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -42,6 +43,9 @@ public class User extends BaseEntity {
     private LocalDate birth;
 
     private String gender;
+
+    @Column(nullable = false)
+    private String authority;
 
     // 각 게시판의 작성ㆍ수정 페이지, 댓글에서는 유저의 이미지 필요
     // 마이페이지의 커뮤니티에서는 유저가 작성한 글(마켓, 맛집, 최애, 자유) 필요

@@ -71,7 +71,7 @@
 
                     <a th:href="@{/market/write}">작성</a>
                     <a th:href="@{'/market/update/' + ${market.id}}" th:if="${logged_user.id == market.user.id}">수정</a>
-                    <form method="post" id="market-delete-form" th:action="@{/market/delete}" th:if="${logged_user.id == market.user.id}">
+                    <form method="post" id="market-delete-form" th:action="@{/market/delete}" th:if="${logged_user.id == market.user.id} or ${logged_user.authority == 'ADMIN'}">
                         <input type="hidden" name="id" th:value="${market.id}"/>
                         <button id="market-delete-btn" type="button">삭제</button>
                     </form>

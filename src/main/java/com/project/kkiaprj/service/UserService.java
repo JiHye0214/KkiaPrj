@@ -1,11 +1,10 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.domain.User;
-import com.project.kkiaprj.domain.UserImg;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface UserService {
 

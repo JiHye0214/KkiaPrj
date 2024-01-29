@@ -11,7 +11,6 @@ DELETE FROM post_comment;
 DELETE FROM post_img;
 DELETE FROM post;
 
--- DELETE FROM market_comment;
 DELETE FROM market_img;
 DELETE FROM market_talk;
 DELETE FROM market_talk_list;
@@ -36,7 +35,6 @@ ALTER TABLE post_comment AUTO_INCREMENT = 1;
 ALTER TABLE post_img AUTO_INCREMENT = 1;
 ALTER TABLE post AUTO_INCREMENT = 1;
 
--- ALTER TABLE market_comment AUTO_INCREMENT = 1;
 ALTER TABLE market_img AUTO_INCREMENT = 1;
 ALTER TABLE market_talk AUTO_INCREMENT = 1;
 ALTER TABLE market_talk_list AUTO_INCREMENT = 1;
@@ -59,11 +57,11 @@ INSERT INTO user_img (fileName, sourceName, userId) VALUES
 ;
 
 -- 유저
-INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate, userImgId) VALUES
-('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(), 1),
-('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(), 2),
-('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(), 3),
-('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(), 4)
+INSERT INTO user(loginId, password, name, nickname, email, birth, gender, createdDate, userImgId, authority) VALUES
+('1234', '$2a$10$K6ipjV2LUKV2ncw3FE9wwe1PEn3lHepog5kKu/vutJ2K9HFLQ/12m', '김우승', '어우기', 'djdnrl@mail.com', "2000-4-12", "여자", now(), 1, "ADMIN"),
+('apple1234', '$2a$10$6gVaMy7.lbezp8bGRlV2fOArmA3WAk2EHxSKxncnzs28/m3DXPyA2', '박사과', '말랑한고구마', 'apple@mail.com', "2001-6-3", "여자", now(), 2, "MEMBER"),
+('melon1234', '$2a$10$7LTnvLaczZbEL0gabgqgfezQPr.xOtTab2NAF/Yt4FrvTSi0Y29Xa', '김멜론', '맑은아침햇살', 'melon@mail.com', "2002-2-24", "남자", now(), 3, "MEMBER"),
+('cherry1234', '$2a$10$53OEi/JukSMPr3z5RQBFH.z0TCYSUDPtxf1/8caRyRVdDNdHA9QHi', '이체리', '마라탕먹고싶다', 'cherry@mail.com', "2003-10-19", "남자", now(), 4, "MEMBER")
 ;
 
 -- 맛집 글

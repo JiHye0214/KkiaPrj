@@ -61,7 +61,7 @@
                 <div id="btn-wrap" class="display-flex">
                     <a th:href="@{/community/post/write}">작성</a>
                     <a th:href="@{'/community/post/update/' + ${listItem.id}}" th:if="${logged_user.id == listItem.user.id}">수정</a>
-                    <form method="post" id="post-delete-form" th:action="@{/community/post/delete}" th:if="${logged_user.id == listItem.user.id}">
+                    <form method="post" id="post-delete-form" th:action="@{/community/post/delete}" th:if="${logged_user.id == listItem.user.id} or ${logged_user.authority == 'ADMIN'}">
                         <input type="hidden" name="id" th:value="${listItem.id}"/>
                         <button id="post-delete-btn" type="button">삭제</button>
                     </form>

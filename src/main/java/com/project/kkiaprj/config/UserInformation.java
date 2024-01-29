@@ -25,8 +25,6 @@ public class UserInformation implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        user.setAuthority(userService.selectUserAuth(user.getId()));
-//        System.out.println("-------user-------" + user);
         return null;
     }
 
