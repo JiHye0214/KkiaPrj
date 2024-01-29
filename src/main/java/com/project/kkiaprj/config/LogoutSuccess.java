@@ -19,6 +19,7 @@ public class LogoutSuccess implements org.springframework.security.web.authentic
                                 HttpServletResponse response,
                                 Authentication authentication) throws IOException, ServletException {
         System.out.println("### Logout Success : CustomLogoutSuccessHandler working ###");
+        request.getSession().removeAttribute("isLogin");
 
         HttpSession session = request.getSession();
 

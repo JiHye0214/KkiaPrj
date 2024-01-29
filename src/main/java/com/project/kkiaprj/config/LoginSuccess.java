@@ -20,6 +20,8 @@ public class LoginSuccess extends SavedRequestAwareAuthenticationSuccessHandler 
                                         Authentication authentication) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        session.setAttribute("isLogin", authentication.isAuthenticated());
+
         if (session != null) {
             String redirectUrl = (String) session.getAttribute("prevPage");
             if (redirectUrl != null) {

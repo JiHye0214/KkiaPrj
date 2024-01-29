@@ -108,11 +108,11 @@
 
 #btn-wrap {
     margin-top: 20px;
-    justify-content: space-between;
-}
-#market-btn-wrap {
+    justify-content: end;
+    position: relative;
     column-gap: 15px;
 }
+
 #market-chat-btn,
 #btn-wrap a,
 #btn-wrap button {
@@ -133,6 +133,9 @@
     }
 }
 #market-chat-btn {
+    position: absolute;
+    left: 0;
+
     background-color: var(--yellow-btn);
     &:hover {
         background-color: var(--yellow-hover);

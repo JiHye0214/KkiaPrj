@@ -115,7 +115,7 @@
             <div id="main-news" class="display-flex-set">
                 <div id="main-news-title">NEWS 📰</div>
                 <div id="main-news-content" class="display-flex-set">
-                    <a class="news-item" th:each="news : ${news.items}" th:href="${news.originallink}" th:text="${news.title}"></a>
+                    <a class="news-item" th:each="news : ${news.items}" target="_blank" th:href="${news.originallink}" th:text="${news.title}"></a>
                 </div>
             </div>
         </div>
