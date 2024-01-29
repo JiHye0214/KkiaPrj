@@ -59,9 +59,15 @@
                         </div>
 
                         <div class="community-items">
-                            <div class="community-title">작성한 마켓 글</div>
-                            <div class="community-box display-flex">
-                                <div class="community-one" th:each="market : ${loggedUser.markets}">
+                            <div class="community-title display-flex">
+                                <p>작성한 마켓 글</p>
+                                <p>
+                                    <span class="moreBtn">모두 보기</span>
+                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
+                                </p>
+                            </div>
+                            <div id="write-market-wrap" class="community-box write-board-box display-flex">
+                                <div class="community-one write-board-one" th:each="market : ${loggedUser.markets}">
                                     <a th:href="@{'/market/detail/' + ${market.id}}">
                                         <div th:text="${market.product}"></div>
                                         <div th:text="${market.price} + ' 원'"></div>
@@ -72,9 +78,15 @@
                         </div>
 
                         <div class="community-items">
-                            <div class="community-title">작성한 맛집 게시판 글</div>
-                            <div class="community-box display-flex">
-                                <div class="community-one" th:each="food : ${loggedUser.foods}">
+                            <div class="community-title display-flex">
+                                <p>작성한 맛집 게시판 글</p>
+                                <p>
+                                    <span class="moreBtn">모두 보기</span>
+                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
+                                </p>
+                            </div>
+                            <div id="write-food-wrap" class="community-box write-board-box display-flex">
+                                <div class="community-one write-board-one" th:each="food : ${loggedUser.foods}">
                                     <a th:href="@{'/community/food/detail/' + ${food.id}}">
                                         <div th:text="${food.title}"></div>
                                         <div th:text="${food.region}"></div>
@@ -85,9 +97,15 @@
                         </div>
 
                         <div class="community-items">
-                            <div class="community-title">작성한 최애 게시판 글</div>
-                            <div class="community-box display-flex">
-                                <div class="community-one" th:each="favorite : ${loggedUser.favorites}">
+                            <div class="community-title display-flex">
+                                <p>작성한 최애 게시판 글</p>
+                                <p>
+                                    <span class="moreBtn">모두 보기</span>
+                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
+                                </p>
+                            </div>
+                            <div id="write-favorite-wrap" class="community-box write-board-box display-flex">
+                                <div class="community-one write-board-one" th:each="favorite : ${loggedUser.favorites}">
                                     <a th:href="@{'/community/favorite/detail/' + ${favorite.id}}">
                                         <div th:text="${favorite.title}"></div>
                                         <div th:text="${favorite.playerName}"></div>
@@ -98,9 +116,15 @@
                         </div>
 
                         <div class="community-items">
-                            <div class="community-title">작성한 자유 게시판 글</div>
-                            <div class="community-box display-flex">
-                                <div class="community-one" th:each="post : ${loggedUser.posts}">
+                            <div class="community-title display-flex">
+                                <p>작성한 자유 게시판 글</p>
+                                <p>
+                                    <span class="moreBtn">모두 보기</span>
+                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
+                                </p>
+                            </div>
+                            <div id="write-post-wrap" class="community-box write-board-box display-flex">
+                                <div class="community-one write-board-one" th:each="post : ${loggedUser.posts}">
                                     <a th:href="@{'/community/post/detail/' + ${post.id}}">
                                         <div th:text="${post.title}"></div>
                                         <div th:text="${post.category}"></div>
@@ -111,9 +135,15 @@
                         </div>
 
                         <div class="community-items">
-                            <div class="community-title">저장한 맛집</div>
-                            <div class="community-box display-flex">
-                                <div class="community-one" th:each="foodSave : ${loggedUser.foodSaves}">
+                            <div class="community-title display-flex">
+                                <p>저장한 맛집</p>
+                                <p>
+                                    <span class="moreBtn">모두 보기</span>
+                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
+                                </p>
+                            </div>
+                            <div id="save-food-wrap" class="community-box display-flex">
+                                <div class="community-one save-food-one" th:each="foodSave : ${loggedUser.foodSaves}">
                                     <a th:href="@{'/community/food/detail/' + ${foodSave.food.id}}" class="recommend-store">
                                         <div>
                                             <sapn class="community-region" th:text="${foodSave.food.region}"></sapn>
@@ -127,8 +157,14 @@
                         </div>
 
                         <div class="community-items">
-                            <div class="community-title">마음에 든 사진</div>
-                            <div class="community-box display-flex">
+                            <div class="community-title display-flex">
+                                <p>마음에 든 사진</p>
+                                <p>
+                                    <span class="moreBtn">모두 보기</span>
+                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
+                                </p>
+                            </div>
+                            <div id="like-favorite-wrap" class="community-box display-flex">
                                 <div th:each="favoriteLike : ${loggedUser.favoriteLikes}">
                                     <a class="display-flex" th:href="@{'/community/favorite/detail/' + ${favoriteLike.favorite.id}}">
                                         <img th:src="@{'/upload/' + ${favoriteLike.favorite.favoriteImgs[0].fileName}}" />
