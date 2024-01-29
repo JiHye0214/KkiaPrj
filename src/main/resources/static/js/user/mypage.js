@@ -48,19 +48,25 @@ regionTags.forEach((tag) => {
     })
 })
 
-// 각 파트마다 처음에는 한 줄만 보여주고 모두 보기 누르면 전체 보여주기
-const moreBtns = document.querySelectorAll(".moreBtn"); // 6개
-const upBtns = document.querySelectorAll(".upBtn"); // 6개
+// 각 파트마다 처음에는 한 줄만 보여주고 '모두 보기' 누르면 전체 보여주기
+const showHideBtns = document.querySelectorAll(".showHideBtn"); // 6개
 const itemMaxCnt = [5, 3, 6];
+const wrapIsShowed = [false, false, false, false, false, false];
+const wrapClickCnt = [0, 0, 0, 0, 0, 0];
 
-console.log("moreBtns :", moreBtns);
-console.log("upBtns :", upBtns);
+const showHideItems = (itemWrap, items, maxCnt, showHideBtn, idx) => {
+    if (!itemWrap) return;
 
-const showHideItems = (wrap, items, maxCnt, btnIdx, clickCnt) => {
     let itemLen = items.length;
 
     if (itemLen === 0) {
-        wrap.style.height = "163px";
+        itemWrap.style.height = "163px";
+        showHideBtn.style.display = "none";
+        return;
+    }
+
+    if (itemLen <= maxCnt) {
+        showHideBtn.style.display = "none";
     }
 
     for (let i = maxCnt; i < itemLen; i++) {
@@ -69,58 +75,64 @@ const showHideItems = (wrap, items, maxCnt, btnIdx, clickCnt) => {
 
     let ableClickCnt = itemLen / maxCnt;
 
-    moreBtns[btnIdx].onclick = () => {
-        clickCnt++;
-        if (clickCnt <= ableClickCnt) {
-            for (let i = maxCnt; i < itemLen; i++) {
-                items[i].style.display = "block";
-            }
-        }
-    };
+    showHideBtn.onclick = () => {
 
-    upBtns[btnIdx].onclick = () => {
-        clickCnt = 0;
-        for (let i = maxCnt; i < itemLen; i++) {
-            items[i].style.display = "none";
+        if (!wrapIsShowed[idx]) {
+            wrapIsShowed[idx] = true;
+            wrapClickCnt[idx] += 1;
+
+            if (wrapClickCnt[idx] <= ableClickCnt) {
+                for (let i = maxCnt; i < itemLen; i++) {
+                    items[i].style.display = "block";
+                }
+            }
+
+            showHideBtn.textContent = "접기";
+            showHideBtn.style.backgroundImage = "url(/img/upArrow.png)";
+        } else {
+            wrapIsShowed[idx] = false;
+            wrapClickCnt[idx] = 0;
+
+            for (let i = maxCnt; i < itemLen; i++) {
+                items[i].style.display = "none";
+            }
+
+            showHideBtn.textContent = "모두 보기";
+            showHideBtn.style.backgroundImage = "url(/img/downArrow.png)";
         }
-    }
+
+    };
 }
 
 // 작성한 마켓 글
-let marketClickCnt = 0;
 const writeMarketWrap = document.querySelector("#write-market-wrap");
 const writeMarketItems = document.querySelectorAll("#write-market-wrap > div");
-showHideItems(writeMarketWrap, writeMarketItems, itemMaxCnt[0], 0, marketClickCnt);
+showHideItems(writeMarketWrap, writeMarketItems, itemMaxCnt[0], showHideBtns[0], 0);
 
 // 작성한 맛집 게시판 글
-let foodClickCnt = 0;
 const writeFoodWrap = document.querySelector("#write-food-wrap");
 const writeFoodItems = document.querySelectorAll("#write-food-wrap > div");
-showHideItems(writeFoodWrap, writeFoodItems, itemMaxCnt[0], 1, foodClickCnt);
+showHideItems(writeFoodWrap, writeFoodItems, itemMaxCnt[0], showHideBtns[1], 1);
 
 // 작성한 최애 게시판 글
-let favoriteClickCnt = 0;
 const writeFavoriteWrap = document.querySelector("#write-favorite-wrap");
 const writeFavoriteItems = document.querySelectorAll("#write-favorite-wrap > div");
-showHideItems(writeFavoriteWrap, writeFavoriteItems, itemMaxCnt[0], 2, favoriteClickCnt);
+showHideItems(writeFavoriteWrap, writeFavoriteItems, itemMaxCnt[0], showHideBtns[2], 2);
 
 // 작성한 자유 게시판 글
-let postClickCnt = 0;
 const writePostWrap = document.querySelector("#write-post-wrap");
 const writePostItems = document.querySelectorAll("#write-post-wrap > div");
-showHideItems(writePostWrap, writePostItems, itemMaxCnt[0], 3, postClickCnt);
+showHideItems(writePostWrap, writePostItems, itemMaxCnt[0], showHideBtns[3], 3);
 
 // 저장한 맛집
-let saveFoodClickCnt = 0;
 const saveFoodWrap = document.querySelector("#save-food-wrap");
 const saveFoodItems = document.querySelectorAll("#save-food-wrap > div");
-showHideItems(saveFoodWrap, saveFoodItems, itemMaxCnt[1], 4, saveFoodClickCnt);
+showHideItems(saveFoodWrap, saveFoodItems, itemMaxCnt[1], showHideBtns[4], 4);
 
 // 마음에 든 사진
-let likeFavoriteClickCnt = 0;
 const likeFavoriteWrap = document.querySelector("#like-favorite-wrap");
 const likeFavoriteItems = document.querySelectorAll("#like-favorite-wrap > div");
-showHideItems(likeFavoriteWrap, likeFavoriteItems, itemMaxCnt[2], 5, likeFavoriteClickCnt);
+showHideItems(likeFavoriteWrap, likeFavoriteItems, itemMaxCnt[2], showHideBtns[5], 5);
 
 // User --------------------------------------------------------------------------
 if($userWrapper != null){

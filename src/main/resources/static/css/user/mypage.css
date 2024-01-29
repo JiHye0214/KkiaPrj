@@ -118,12 +118,14 @@
     font-weight: 500;
     font-size: 18px;
 }
-.moreBtn {
+
+.showHideBtn {
+    padding-right: 30px;
     cursor: pointer;
-    margin-right: 8px;
-}
-.upBtn {
-    cursor: pointer;
+    background-image: url(../../img/downArrow.png);
+    background-repeat: no-repeat;
+    background-position: 95% 60%;
+    background-size: 15px auto;
 }
 
 .community-box {

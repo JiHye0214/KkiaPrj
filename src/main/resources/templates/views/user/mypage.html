@@ -61,10 +61,7 @@
                         <div class="community-items">
                             <div class="community-title display-flex">
                                 <p>작성한 마켓 글</p>
-                                <p>
-                                    <span class="moreBtn">모두 보기</span>
-                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
-                                </p>
+                                <div class="showHideBtn">모두 보기</div>
                             </div>
                             <div id="write-market-wrap" class="community-box write-board-box display-flex">
                                 <div class="community-one write-board-one" th:each="market : ${loggedUser.markets}">
@@ -80,10 +77,7 @@
                         <div class="community-items">
                             <div class="community-title display-flex">
                                 <p>작성한 맛집 게시판 글</p>
-                                <p>
-                                    <span class="moreBtn">모두 보기</span>
-                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
-                                </p>
+                                <div class="showHideBtn">모두 보기</div>
                             </div>
                             <div id="write-food-wrap" class="community-box write-board-box display-flex">
                                 <div class="community-one write-board-one" th:each="food : ${loggedUser.foods}">
@@ -99,10 +93,7 @@
                         <div class="community-items">
                             <div class="community-title display-flex">
                                 <p>작성한 최애 게시판 글</p>
-                                <p>
-                                    <span class="moreBtn">모두 보기</span>
-                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
-                                </p>
+                                <div class="showHideBtn">모두 보기</div>
                             </div>
                             <div id="write-favorite-wrap" class="community-box write-board-box display-flex">
                                 <div class="community-one write-board-one" th:each="favorite : ${loggedUser.favorites}">
@@ -118,10 +109,7 @@
                         <div class="community-items">
                             <div class="community-title display-flex">
                                 <p>작성한 자유 게시판 글</p>
-                                <p>
-                                    <span class="moreBtn">모두 보기</span>
-                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
-                                </p>
+                                <div class="showHideBtn">모두 보기</div>
                             </div>
                             <div id="write-post-wrap" class="community-box write-board-box display-flex">
                                 <div class="community-one write-board-one" th:each="post : ${loggedUser.posts}">
@@ -137,10 +125,7 @@
                         <div class="community-items">
                             <div class="community-title display-flex">
                                 <p>저장한 맛집</p>
-                                <p>
-                                    <span class="moreBtn">모두 보기</span>
-                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
-                                </p>
+                                <div class="showHideBtn">모두 보기</div>
                             </div>
                             <div id="save-food-wrap" class="community-box display-flex">
                                 <div class="community-one save-food-one" th:each="foodSave : ${loggedUser.foodSaves}">
@@ -159,10 +144,7 @@
                         <div class="community-items">
                             <div class="community-title display-flex">
                                 <p>마음에 든 사진</p>
-                                <p>
-                                    <span class="moreBtn">모두 보기</span>
-                                    <img class="upBtn" src="/img/upArrow.png" width="15px" />
-                                </p>
+                                <div class="showHideBtn">모두 보기</div>
                             </div>
                             <div id="like-favorite-wrap" class="community-box display-flex">
                                 <div th:each="favoriteLike : ${loggedUser.favoriteLikes}">
