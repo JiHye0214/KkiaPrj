@@ -3,7 +3,6 @@ $(document).ready(function() {
     $("#market-chat-space").scrollTop($("#market-chat-space")[0].scrollHeight);
 })
 
-$("#submit-btn").on("click", function() {
-    $("#market-chat-form").submit();
-    $("#submit-content").val("");
-})
+//$("#submit-btn").on("click", function() {
+//    $("#market-chat-form").submit();
+//})

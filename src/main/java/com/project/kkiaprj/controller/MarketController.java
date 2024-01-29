@@ -121,6 +121,7 @@ public class MarketController {
     public String writeTalk(MarketTalk marketTalk, Model model, RedirectAttributes redirectAttrs) {
 
         model.addAttribute("result", marketService.writeTalk(marketTalk));
+        model.addAttribute("action", "채팅 작성");
         return "market/success";
     }
 }
