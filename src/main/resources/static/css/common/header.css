@@ -72,9 +72,6 @@ header {
 
 /* 마켓 ----------------------------------------------------------- */
 
-#market-message-wrap {
-    position: relative;
-}
 #market-message {
     width: 50px;
 }
@@ -86,76 +83,3 @@ header {
     display: none;
 }
 
-#market-message-container {
-    display: none;
-    top: 50px;
-    left: -124px;
-    background-color: var(--yellow-btn);
-    width: 300px;
-    height: 500px;
-    position: absolute;
-    z-index: 1;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: 14px;
-    overflow: hidden;
-}
-#market-container-title {
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    font-size: 16px;
-    background-color: #ffe250;
-}
-#market-container-content {
-    height: 425px;
-    flex-direction: column;
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-.market-talk-wrap {
-    background: white;
-    padding: 10px;
-    margin: 10px 14px 0;
-    border-radius: 5px;
-    column-gap: 10px;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-    &:hover {
-        background-color: #f2f2f2;
-    }
-    &:first-child {
-        margin: 14px 14px 0;
-    }
-}
-.market-talk-wrap > .writer-pic {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-.market-talk-wrap > .talk-text-wrap {
-    flex-direction: column;
-}
-.talk-text-wrap > div {
-    width: 190px;
-    text-wrap: nowrap;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-
-    &:last-child {
-        color: gray;
-        font-size: 12px;
-    }
-}
-
-.market-talk-wrap > .unread-mark {
-    width: 15px;
-    position: absolute;
-    right: 10px;
-}

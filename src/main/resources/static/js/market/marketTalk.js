@@ -6,5 +6,4 @@ $(document).ready(function() {
 $("#submit-btn").on("click", function() {
     $("#market-chat-form").submit();
     $("#submit-content").val("");
-    opener.location.reload();
 })

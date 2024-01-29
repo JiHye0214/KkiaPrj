@@ -13,6 +13,7 @@
 <body>
     <div id="talk-wrapper" class="display-flex" th:with="logged_user=${#authentication.principal.user}">
         <div class="display-flex" id="market-writer-inform">
+            <a th:href="@{/market/talk-list}"><img id="prev-img" src="/img/slidePrevArrow.png"/></a>
             <img id="writer-pic" th:src="@{'/upload/' + ${recipient.userImg.fileName}}"/>
             <div id="writer-nickname" th:text="${recipient.nickname}"></div>
         </div>

@@ -17,27 +17,11 @@
             <a th:href="@{/community/main}" class="header-menu">COMMUNITY</a>
         </div>
         <div class="display-flex-set">
-            <th:block th:if="${talkList}" sec:authorize="isAuthenticated()">
-                <div id="market-message-wrap" class="display-flex">
-                    <img id="market-message" src="/img/message.png"/>
-                    <img id="market-alert" src="/img/message-mark.png"/>
+            <div id="market-message-wrap" class="display-flex">
+                <img id="market-message" src="/img/message.png"/>
+<!--                <img id="market-alert" src="/img/message-mark.png"/>-->
+            </div>
 
-                    <div id="market-message-container">
-                        <div id="market-container-title">마켓 채팅방</div>
-                        <div id="market-container-content" class="display-flex">
-                            <a th:each="talkRoom : ${talkList}" class="market-talk-wrap display-flex">
-                                <img class="writer-pic" th:src="@{'/upload/' + ${talkRoom[3]}}"/>
-                                <div class="talk-text-wrap display-flex">
-                                    <input class="partnerId" type="hidden" th:value="${talkRoom[1]}"/>
-                                    <div class="writer-nickname" th:text="${talkRoom[2]}"></div>
-                                    <div class="talk-content" th:text="${talkRoom[0]}"></div>
-                                </div>
-                                <img th:if="${talkRoom[4].toString().equals('false')}" class="unread-mark" src="/img/message-mark.png"/>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </th:block>
             <a th:href="@{/user/mypage}">
                 <img class="header-mypage" src="/img/tiger.png" />
             </a>

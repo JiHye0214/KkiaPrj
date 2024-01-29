@@ -31,6 +31,8 @@ public class SecurityConfig {
                 // authority setting
                 .authorizeHttpRequests(auth -> auth
 //                         로그인만 하면 들어갈 수 있도록 !
+                        .requestMatchers("/market/talk-list").authenticated()
+                        .requestMatchers("/market/talk/*").authenticated()
                         .requestMatchers("/market/detail/*").authenticated()
                         .requestMatchers("/market/update/*").authenticated()
                         .requestMatchers("/market/write").authenticated()

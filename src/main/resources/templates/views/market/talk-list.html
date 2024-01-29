@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+    <link rel="stylesheet" th:href="@{/css/market/marketTalkList.css}" />
+    <script defer th:src="@{/js/market/marketTalkList.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <title>market-talk-list</title>
+</head>
+<body>
+    <div id="market-message-container">
+        <div id="market-container-title">마켓 채팅방</div>
+        <div id="market-container-content" class="display-flex">
+            <a th:each="talkRoom : ${talkList}" class="market-talk-wrap display-flex">
+                <img class="writer-pic" th:src="@{'/upload/' + ${talkRoom[3]}}"/>
+                <div class="talk-text-wrap display-flex">
+                    <input class="partnerId" type="hidden" th:value="${talkRoom[1]}"/>
+                    <div class="writer-nickname" th:text="${talkRoom[2]}"></div>
+                    <div class="talk-content" th:text="${talkRoom[0]}"></div>
+                </div>
+                <img th:if="${talkRoom[4].toString().equals('false')}" class="unread-mark" src="/img/message-mark.png"/>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

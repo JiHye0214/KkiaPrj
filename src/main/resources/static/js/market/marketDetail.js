@@ -7,7 +7,7 @@ $("#market-delete-btn").on("click", function(){
 // 팝업
 const recipientId = document.querySelector("#recipientId");
 $("#market-chat-btn").on("click", function() {
-    let talkOption = "width = 400px, height = 630px, top = 100px, left = 300px";
+    let talkOption = "width = 450px, height = 630px, top = 100px, left = 300px";
     let talkUrl = `/market/talk/${recipientId.value}`;
     openTalk = window.open(talkUrl, "chat-popup", talkOption);
 })

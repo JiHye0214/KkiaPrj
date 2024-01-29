@@ -37,12 +37,6 @@ public class MarketController {
         String uri = U.getRequest().getRequestURI();
         request.getSession().setAttribute("prevPage", uri);
 
-        // 로그인 여부 확인
-        Object loginCheck = request.getSession().getAttribute("isLogin");
-        if(loginCheck != null) {
-             marketService.getMarketTalkList(U.getLoggedUser().getId(), model);
-        }
-
         // 리스트 렌더링
         marketService.getMarketList(page, sq, model);
         return "market/list";
@@ -109,6 +103,13 @@ public class MarketController {
     }
 
     //-----------------------------------------------------------------------------------
+    // 안되겠다 마켓 리스트도 팝업으로 간다
+    @GetMapping("/talk-list")
+    public String marketTalkList(Model model) {
+        marketService.getMarketTalkList(U.getLoggedUser().getId(), model);
+        return "market/talk-list";
+    }
+
     // 마켓 채팅 열기
     @GetMapping("/talk/{id}")
     public String marketTalk(@PathVariable(name = "id") Long recipientId, Model model) {

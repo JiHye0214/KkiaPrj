@@ -147,3 +147,9 @@ label > img {
         top: -70px;
     }
 }
+
+@media screen and (max-width: 500px) {
+    #login-picture {
+        display: none;
+    }
+}
