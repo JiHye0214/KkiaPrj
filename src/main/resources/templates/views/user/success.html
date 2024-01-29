@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script th:if="${result > 0}" th:inline="javascript">
+    if ([[${action}]] == "탈퇴") {
+        alert("탈퇴 성공");
+        location.href = "/";
+    } else if ([[${action}]] == "회원가입") {
+        alert("환영합니다");
+        location.href = "/user/logIn";
+    } else if ([[${action}]] == "비밀번호 변경") {
+        alert("비밀번호 변경 완료");
+        location.href = "/user/logIn";
+    }
+</script>
+<script th:unless="${result > 0}" th:inline="javascript">
+    alert("실패했습니다");
+    history.back();
+</script>
+</html>

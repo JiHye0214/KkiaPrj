@@ -141,4 +141,12 @@ public class UserServiceImpl implements UserService {
         return (user != null);
     }
 
+    @Override
+    public int dropUser(User user) {
+        User drop = userRepository.findById(user.getId()).orElse(null);
+        assert drop != null;
+        userRepository.delete(drop);
+        return 1;
+    }
+
 }

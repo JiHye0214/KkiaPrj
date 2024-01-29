@@ -31,4 +31,7 @@ public interface UserService {
     // 회원가입 - 등록된 이메일인지 확인
     boolean isExistEm(String email);
 
+    // 회원탈퇴
+    int dropUser(User user);
+
 }

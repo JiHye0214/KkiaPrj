@@ -344,12 +344,12 @@ $("#drop-close-btn").click(function() {
 })
 
 $("#drop-submit-btn").click(function() {
-
     if(!$(".drop-input").val()) {
-        $("#drop-title").css('marginBottom', '15px');
-        $("#drop-valid-msg").css('display', 'block');
+        $("#drop-title").css('marginBottom', '20px');
+        $("#drop-valid-msg").text("* 비밀번호를 입력해 주세요");
     } else {
         $("#drop-content").submit();
+        $("#drop-valid-msg").text("");
         $(".drop-input").val("");
     }
 })

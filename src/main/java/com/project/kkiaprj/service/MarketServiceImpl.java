@@ -271,6 +271,9 @@ public class MarketServiceImpl implements MarketService {
                 String partnerNick = userRepository.findById(partner).orElse(null).getNickname();
                 String partnerPic = userRepository.findById(partner).orElse(null).getUserImg().getFileName();
 
+                System.out.println("=====================================");
+                System.out.println(lastTalk);
+
                 List<String> setList = new ArrayList<>();
                 setList.add(lastTalk);  // 마지막 대화 내용
                 setList.add(String.valueOf(partner));  // 대화 상대 (방리스트에서 채팅방으로 넘어가기 위함)
