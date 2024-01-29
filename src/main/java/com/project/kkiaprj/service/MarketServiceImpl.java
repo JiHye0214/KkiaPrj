@@ -261,6 +261,7 @@ public class MarketServiceImpl implements MarketService {
                 }
             }
         }
+
         model.addAttribute("alert", alert);
     }
 

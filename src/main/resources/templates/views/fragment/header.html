@@ -19,7 +19,7 @@
         <div class="display-flex-set">
             <div id="market-message-wrap" class="display-flex">
                 <img id="market-message" src="/img/message.png"/>
-<!--                <img id="market-alert" src="/img/message-mark.png"/>-->
+                <img sec:authorize="isAuthenticated()" th:if="${alert}" id="market-alert" src="/img/message-mark.png"/>
             </div>
 
             <a th:href="@{/user/mypage}">

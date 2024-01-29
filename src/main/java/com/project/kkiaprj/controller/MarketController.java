@@ -122,6 +122,7 @@ public class MarketController {
         marketService.getMarketTalk(recipientId, model);
         return "market/talk";
     }
+
     // 마켓 채팅 쓰기
     @PostMapping("/writeTalk")
     public String writeTalk(MarketTalk marketTalk, Model model, RedirectAttributes redirectAttrs) {
