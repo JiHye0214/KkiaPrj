@@ -1,21 +1,18 @@
 package com.project.kkiaprj.controller;
 
 import com.project.kkiaprj.Util.U;
-import com.project.kkiaprj.config.UserInformation;
 import com.project.kkiaprj.domain.GameRecord;
 import com.project.kkiaprj.domain.User;
-import com.project.kkiaprj.domain.UserImg;
 import com.project.kkiaprj.domain.UserValidator;
-import com.project.kkiaprj.service.CommunityService;
 import com.project.kkiaprj.service.UserMypageService;
 import com.project.kkiaprj.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import jakarta.websocket.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -94,7 +91,8 @@ public class UserController {
     @PostMapping("/findCngPw")
     public String findChangePw(User user, Model model){
         model.addAttribute("result", userService.updatePassword(user));
-        return "user/changeOk";
+        model.addAttribute("action", "비밀번호 변경");
+        return "user/success";
     }
 
     // 회원가입
@@ -127,7 +125,8 @@ public class UserController {
 
         int resister = userService.resister(user);
         model.addAttribute("result", resister);
-        return "user/signUpOk";
+        model.addAttribute("action", "회원가입");
+        return "user/success";
     }
 
     @GetMapping("/mypage")
@@ -223,6 +222,23 @@ public class UserController {
 
         redirectAttrs.addAttribute("menu", "회원정보");
         return "redirect:/user/mypage";
+    }
+
+    @PostMapping("/dropUser")
+    public String dropUser(User user,
+                           Model model,
+                           HttpServletRequest request,
+                           HttpServletResponse response) throws Exception {
+
+        if(passwordEncoder.matches(user.getPassword(), U.getLoggedUser().getPassword())){
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null) {
+                model.addAttribute("result", userService.dropUser(user));
+                model.addAttribute("action", "탈퇴");
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+            }
+        }
+        return "user/success";
     }
 
     // ------------------validator--------------------

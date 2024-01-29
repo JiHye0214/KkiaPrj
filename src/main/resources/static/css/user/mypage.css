@@ -697,7 +697,6 @@ input[name="recordMemo"] {
     font-weight: 500;
 }
 #drop-valid-msg {
-    display: none;
     margin-bottom: 5px;
     font-size: 14px;
 }

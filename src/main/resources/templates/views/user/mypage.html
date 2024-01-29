@@ -20,14 +20,14 @@
 
             <!-- drop modal -->
             <div id="drop-modal-wrap" class="display-flex-set">
-                <form method="post" th:action="@{#}" id="drop-content" class="display-flex-set">
-                    <input type="hidden" th:value="${logged_user.id}">
+                <form method="post" th:action="@{/user/dropUser}" id="drop-content" class="display-flex-set">
+                    <input type="hidden" name="id" th:value="${logged_user.id}">
                     <img id="drop-close-btn" src="/img/close.png" />
                     <div id="drop-title" class="display-flex">정말 탈퇴하시겠습니까?
                         <span id="drop-warn">당신의 모든 정보가 사라지며 복구할 수 없습니다</span>
                     </div>
-                    <div id="drop-valid-msg" class="error-msg">* 비밀번호를 입력해 주세요</div>
-                    <input class="drop-input" id="password" type="text" placeholder="비밀번호를 입력해 주세요">
+                    <div id="drop-valid-msg" class="error-msg" th:text="${passwordErr}"></div>
+                    <input class="drop-input" id="password" name="password" type="text" placeholder="비밀번호를 입력해 주세요">
                     <input id="drop-submit-btn" type="button" value="확인">
                 </form>
             </div>

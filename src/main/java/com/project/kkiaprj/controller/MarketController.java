@@ -117,7 +117,8 @@ public class MarketController {
     }
     // 마켓 채팅 쓰기
     @PostMapping("/writeTalk")
-    public String writeTalk(MarketTalk marketTalk, Model model) {
+    public String writeTalk(MarketTalk marketTalk, Model model, RedirectAttributes redirectAttrs) {
+
         model.addAttribute("result", marketService.writeTalk(marketTalk));
         return "market/success";
     }
