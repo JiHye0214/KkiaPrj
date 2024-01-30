@@ -33,8 +33,8 @@ const gameSetting = () => {
         let that = `${$month.innerText}.${date.innerText}`;
         gameArr.forEach((game) => {
             if(game.gameDate == that) { // 기록 있으면
-
                 date.style.backgroundImage = `url(${teamArr[game.opponent]})`;
+                date.style.cursor = "pointer";
 
                 if(game.homeGame == "true") {
                     date.style.backgroundColor = '#ffeeee';
@@ -69,7 +69,7 @@ const gameSetting = () => {
                 if(game.gameDate == that) { // 기록 있으면
                     setTeamCode = game.opponent;
                     url = `https://tigers.co.kr/game/schedule/view?type=major&gameKey=${dateComplete}${setTeamCode}0&gameDate=${dateComplete}`
-                    window.open(`${url}`, "_blank");
+                    window.open(`${url}`, "_blank"); // 새창 열기
                 }
             })
 
@@ -139,7 +139,7 @@ function calendarInit() {
         }
         // 이번달
         for (var i = 1; i <= nextDate; i++) {
-            calendar.innerHTML = calendar.innerHTML + '<a href="#" class="tag day current display-flex-set"><span>' + i + "</span></a>";
+            calendar.innerHTML = calendar.innerHTML + '<div class="tag day current display-flex-set"><span>' + i + "</span></div>";
         }
         // 다음달
         for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
