@@ -23,125 +23,116 @@
 - 팀원 : [cjkywe07](https://github.com/cjkywe07)
 
 ## 💻 기능 및 화면 소개
-### 로그인/회원가입
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/1_logIn.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/2_idPwFind.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/3_signUp.jpg" alt="">
-    </div>
+### 1. &nbsp;로그인/회원가입
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/1_logIn.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/2_idPwFind.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/3_signUp.jpg" alt="">
+  </div>
 
-### 홈
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/4_home.jpg" alt="">
-    </div>
+### 2. &nbsp;홈
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/4_home.jpg" alt="">
+  </div>
     
-### 마이페이지
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/5_mypage-board.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/6_mypage-record.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/7_mypage-record2.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/8_mypage-userInfo.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/9_mypage-userInfo2.jpg" alt="">
-    </div>
+### 3. &nbsp;마이페이지
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/5_mypage-board.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/6_mypage-record.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/7_mypage-record2.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/8_mypage-userInfo.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/9_mypage-userInfo2.jpg" alt="">
+  </div>
 
-### 경기일정
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/10_game.jpg" alt="">
-    </div>
+### 4. &nbsp;경기일정
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/10_game.jpg" alt="">
+  </div>
 
-### 마켓
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/11_marketlist.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/12_marketDetail.jpg" alt="">
-    </div>
-     <div>
-      <img width="600" src="./src/main/resources/static/viewImg/13_marketDetailChat.jpg" alt="">
-    </div>
-     <div>
-      <img width="600" src="./src/main/resources/static/viewImg/14_marketDetailChat2.jpg" alt="">
-    </div>
-     <div>
-      <img width="600" src="./src/main/resources/static/viewImg/15_marketWrite.jpg" alt="">
-    </div>
-     <div>
-      <img width="600" src="./src/main/resources/static/viewImg/16_marketUpdate.jpg" alt="">
-    </div>
+### 5. &nbsp;마켓
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/11_marketlist.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/12_marketDetail.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/13_marketDetailChat.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/14_marketDetailChat2.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/15_marketWrite.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/16_marketUpdate.jpg" alt="">
+  </div>
 
-### 커뮤니티 홈
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/17_community.jpg" alt="">
-    </div>
+### 6. &nbsp;커뮤니티 홈
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/17_community.jpg" alt="">
+  </div>
 
-### 커뮤니티 - 구장별 맛집 추천
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/18_foodList.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/19_foodDetail.jpg" alt="">
-    </div>
-     <div>
-      <img width="600" src="./src/main/resources/static/viewImg/20_foodWrite.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/21_foodWrite2.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/22_foodWrite3.jpg" alt="">
-    </div>
+### 7. &nbsp;커뮤니티 - 구장별 맛집 추천
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/18_foodList.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/19_foodDetail.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/20_foodWrite.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/21_foodWrite2.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/22_foodWrite3.jpg" alt="">
+  </div>
 
-### 커뮤니티 - 최애 자랑 게시판
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/23_favoriteList.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/24_favoriteDetail.jpg" alt="">
-    </div>
-     <div>
-      <img width="600" src="./src/main/resources/static/viewImg/25_favoriteWrite.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/26_favoriteUpdate.jpg" alt="">
-    </div>
+### 8. &nbsp;커뮤니티 - 최애 자랑 게시판
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/23_favoriteList.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/24_favoriteDetail.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/25_favoriteWrite.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/26_favoriteUpdate.jpg" alt="">
+  </div>
 
-### 커뮤니티 - 자유 게시판
-  - #### 설명
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/27_postList.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/28_postDetail.jpg" alt="">
-    </div>
-     <div>
-      <img width="600" src="./src/main/resources/static/viewImg/29_postComment.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/30_postWrite.jpg" alt="">
-    </div>
-    <div>
-      <img width="600" src="./src/main/resources/static/viewImg/31_postUpdate.jpg" alt="">
-    </div>
+### 9. &nbsp;커뮤니티 - 자유 게시판
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/27_postList.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/28_postDetail.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/29_postComment.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/30_postWrite.jpg" alt="">
+  </div>
+  <div>
+    <img width="600" src="./src/main/resources/static/viewImg/31_postUpdate.jpg" alt="">
+  </div>
 
 ## ⚙ Stacks
 ### Environment
