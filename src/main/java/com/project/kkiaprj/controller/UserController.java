@@ -130,7 +130,7 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(@RequestParam(name = "menu", required = false, defaultValue = "커뮤니티")String menu,
+    public String mypage(@RequestParam(name = "menu", required = false, defaultValue = "글 관리")String menu,
                          @RequestParam(name = "nicknameErr", required = false, defaultValue = "")String nicknameErr,
                          @RequestParam(name = "passwordErr", required = false, defaultValue = "")String passwordErr,
                          Model model,
@@ -148,11 +148,11 @@ public class UserController {
         model.addAttribute("gameRecords", gameRecords);
 
         // menu select
-        if (menu.equals("커뮤니티") || menu.equals("직관기록") || menu.equals("회원정보")) {
+        if (menu.equals("글 관리") || menu.equals("직관기록") || menu.equals("회원정보")) {
             userMypageService.setMypage(menu, model);
             return "user/mypage";
         } else {
-            redirectAttrs.addAttribute("menu", "커뮤니티");
+            redirectAttrs.addAttribute("menu", "글 관리");
             return "redirect:/user/mypage";
         }
     }

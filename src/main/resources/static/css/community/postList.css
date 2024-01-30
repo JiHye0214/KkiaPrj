@@ -59,7 +59,7 @@ button {
     row-gap: 20px;
     flex-direction: column;
     margin-bottom: 20px;
-    min-height: 400px;
+    min-height: 464px;
 }
 #list-wrap .list-content {
     width: 100%;

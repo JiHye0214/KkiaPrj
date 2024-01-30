@@ -45,7 +45,7 @@
                     <form method="post" th:action="@{/user/mypageType}" id="mypage-menu" class="display-flex">
                         <input type="hidden" name="menu" id="submit-input" />
                         <input id="menu-nav" type="hidden" th:value="${menu}"/>
-                        <input type="button" class="mypage-menu-items" value="커뮤니티" />
+                        <input type="button" class="mypage-menu-items" value="글 관리" />
                         <input type="button" class="mypage-menu-items" value="직관기록" />
                         <input type="button" class="mypage-menu-items" value="회원정보" />
                     </form>
@@ -53,15 +53,15 @@
                 </div>
 
                 <div id="mypage-right-wrap">
-                    <div th:if="${menu.toString().equals('커뮤니티')}" class="fragment display-flex" id="community-wrapper">
+                    <div th:if="${menu.toString().equals('글 관리')}" class="fragment display-flex" id="community-wrapper">
                         <div class="display-flex-set">
-                            <div id="community-main-title" class="display-flex-set">커뮤니티</div>
+                            <div id="community-main-title" class="display-flex-set">글 관리</div>
                         </div>
 
                         <div class="community-items">
                             <div class="community-title display-flex">
-                                <p>작성한 마켓 글</p>
-                                <div class="showHideBtn">모두 보기</div>
+                                <p>마켓</p>
+                                <div class="showHideBtn"></div>
                             </div>
                             <div id="write-market-wrap" class="community-box write-board-box display-flex">
                                 <div class="community-one write-board-one" th:each="market : ${loggedUser.markets}">
@@ -76,8 +76,8 @@
 
                         <div class="community-items">
                             <div class="community-title display-flex">
-                                <p>작성한 맛집 게시판 글</p>
-                                <div class="showHideBtn">모두 보기</div>
+                                <p>맛집 게시판</p>
+                                <div class="showHideBtn"></div>
                             </div>
                             <div id="write-food-wrap" class="community-box write-board-box display-flex">
                                 <div class="community-one write-board-one" th:each="food : ${loggedUser.foods}">
@@ -92,8 +92,8 @@
 
                         <div class="community-items">
                             <div class="community-title display-flex">
-                                <p>작성한 최애 게시판 글</p>
-                                <div class="showHideBtn">모두 보기</div>
+                                <p>최애 게시판</p>
+                                <div class="showHideBtn"></div>
                             </div>
                             <div id="write-favorite-wrap" class="community-box write-board-box display-flex">
                                 <div class="community-one write-board-one" th:each="favorite : ${loggedUser.favorites}">
@@ -108,8 +108,8 @@
 
                         <div class="community-items">
                             <div class="community-title display-flex">
-                                <p>작성한 자유 게시판 글</p>
-                                <div class="showHideBtn">모두 보기</div>
+                                <p>자유 게시판</p>
+                                <div class="showHideBtn"></div>
                             </div>
                             <div id="write-post-wrap" class="community-box write-board-box display-flex">
                                 <div class="community-one write-board-one" th:each="post : ${loggedUser.posts}">
@@ -125,7 +125,7 @@
                         <div class="community-items">
                             <div class="community-title display-flex">
                                 <p>저장한 맛집</p>
-                                <div class="showHideBtn">모두 보기</div>
+                                <div class="showHideBtn"></div>
                             </div>
                             <div id="save-food-wrap" class="community-box display-flex">
                                 <div class="community-one save-food-one" th:each="foodSave : ${loggedUser.foodSaves}">
@@ -144,7 +144,7 @@
                         <div class="community-items">
                             <div class="community-title display-flex">
                                 <p>마음에 든 사진</p>
-                                <div class="showHideBtn">모두 보기</div>
+                                <div class="showHideBtn"></div>
                             </div>
                             <div id="like-favorite-wrap" class="community-box display-flex">
                                 <div th:each="favoriteLike : ${loggedUser.favoriteLikes}">

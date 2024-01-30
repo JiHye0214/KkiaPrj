@@ -48,91 +48,32 @@ regionTags.forEach((tag) => {
     })
 })
 
-// 각 파트마다 처음에는 한 줄만 보여주고 '모두 보기' 누르면 전체 보여주기
 const showHideBtns = document.querySelectorAll(".showHideBtn"); // 6개
-const itemMaxCnt = [5, 3, 6];
+const communityTitles = document.querySelectorAll(".community-title"); // 6개
+const communityContents = document.querySelectorAll(".community-box"); // 6개
 const wrapIsShowed = [false, false, false, false, false, false];
-const wrapClickCnt = [0, 0, 0, 0, 0, 0];
 
-const showHideItems = (itemWrap, items, maxCnt, showHideBtn, idx) => {
-    if (!itemWrap) return;
+communityTitles.forEach((title, index) => {
 
-    let itemLen = items.length;
+    if(communityContents[index].children.length == 0) {
+        title.style.cursor = "default";
+        communityContents[index].style.display = "none";
+        showHideBtns[index].style.backgroundImage = "none";
+    } else {
+        title.onclick = () => {
+            if(!wrapIsShowed[index]) {
+                wrapIsShowed[index] = true;
+                communityContents[index].style.display = "flex";
+                showHideBtns[index].style.backgroundImage = "url(/img/upArrow.png)";
 
-    if (itemLen === 0) {
-        itemWrap.style.height = "163px";
-        showHideBtn.style.display = "none";
-        return;
-    }
-
-    if (itemLen <= maxCnt) {
-        showHideBtn.style.display = "none";
-    }
-
-    for (let i = maxCnt; i < itemLen; i++) {
-        items[i].style.display = "none";
-    }
-
-    let ableClickCnt = itemLen / maxCnt;
-
-    showHideBtn.onclick = () => {
-
-        if (!wrapIsShowed[idx]) {
-            wrapIsShowed[idx] = true;
-            wrapClickCnt[idx] += 1;
-
-            if (wrapClickCnt[idx] <= ableClickCnt) {
-                for (let i = maxCnt; i < itemLen; i++) {
-                    items[i].style.display = "block";
-                }
+            } else {
+                wrapIsShowed[index] = false;
+                communityContents[index].style.display = "none";
+                showHideBtns[index].style.backgroundImage = "url(/img/downArrow.png)";
             }
-
-            showHideBtn.textContent = "접기";
-            showHideBtn.style.backgroundImage = "url(/img/upArrow.png)";
-        } else {
-            wrapIsShowed[idx] = false;
-            wrapClickCnt[idx] = 0;
-
-            for (let i = maxCnt; i < itemLen; i++) {
-                items[i].style.display = "none";
-            }
-
-            showHideBtn.textContent = "모두 보기";
-            showHideBtn.style.backgroundImage = "url(/img/downArrow.png)";
         }
-
-    };
-}
-
-// 작성한 마켓 글
-const writeMarketWrap = document.querySelector("#write-market-wrap");
-const writeMarketItems = document.querySelectorAll("#write-market-wrap > div");
-showHideItems(writeMarketWrap, writeMarketItems, itemMaxCnt[0], showHideBtns[0], 0);
-
-// 작성한 맛집 게시판 글
-const writeFoodWrap = document.querySelector("#write-food-wrap");
-const writeFoodItems = document.querySelectorAll("#write-food-wrap > div");
-showHideItems(writeFoodWrap, writeFoodItems, itemMaxCnt[0], showHideBtns[1], 1);
-
-// 작성한 최애 게시판 글
-const writeFavoriteWrap = document.querySelector("#write-favorite-wrap");
-const writeFavoriteItems = document.querySelectorAll("#write-favorite-wrap > div");
-showHideItems(writeFavoriteWrap, writeFavoriteItems, itemMaxCnt[0], showHideBtns[2], 2);
-
-// 작성한 자유 게시판 글
-const writePostWrap = document.querySelector("#write-post-wrap");
-const writePostItems = document.querySelectorAll("#write-post-wrap > div");
-showHideItems(writePostWrap, writePostItems, itemMaxCnt[0], showHideBtns[3], 3);
-
-// 저장한 맛집
-const saveFoodWrap = document.querySelector("#save-food-wrap");
-const saveFoodItems = document.querySelectorAll("#save-food-wrap > div");
-showHideItems(saveFoodWrap, saveFoodItems, itemMaxCnt[1], showHideBtns[4], 4);
-
-// 마음에 든 사진
-const likeFavoriteWrap = document.querySelector("#like-favorite-wrap");
-const likeFavoriteItems = document.querySelectorAll("#like-favorite-wrap > div");
-showHideItems(likeFavoriteWrap, likeFavoriteItems, itemMaxCnt[2], showHideBtns[5], 5);
+    }
+})
 
 // User --------------------------------------------------------------------------
 if($userWrapper != null){

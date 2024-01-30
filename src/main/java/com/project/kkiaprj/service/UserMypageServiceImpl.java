@@ -49,8 +49,8 @@ public class UserMypageServiceImpl implements UserMypageService {
     @Override
     public void setMypage(String menu, Model model) {
         String menuValue = "";
-        if(menu.equals("커뮤니티")){
-            menuValue = "커뮤니티";
+        if(menu.equals("글 관리")){
+            menuValue = "글 관리";
         } else if(menu.equals("직관기록")) {
             menuValue = "직관기록";
         } else {

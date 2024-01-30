@@ -16,6 +16,17 @@ searchBtn.onclick = () => {
     }
 }
 
+// 검색 결과 없음
+const listWrapChild = document.querySelectorAll("#list-wrap a");
+if(listWrapChild.length <= 0) {
+    $("#list-wrap").text("검색 결과가 없습니다");
+    $("#list-wrap").css({"justify-content" : "center",
+                         "align-items" : "center",
+                         "font-size" : "20px" ,
+                         "font-weight" : "600"
+    });
+}
+
 // ====================================================================================================
 
 // 목록에서 최애 글 좋아요(하트)
