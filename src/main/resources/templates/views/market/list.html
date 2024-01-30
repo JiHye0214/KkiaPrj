@@ -37,7 +37,7 @@
                     <img class="product-img" th:src="@{'/upload/' + ${market.marketImgs[0].fileName}}" />
                     <div class="product-inform display-flex">
                         <div class="product-name" th:text="${market.product}"></div>
-                        <div class="product-price" th:text="${market.price}"></div>
+                        <div class="product-price" th:text="${market.price} + ' 원'"></div>
                         <div class="product-region" th:text="${market.region}"></div>
                     </div>
                 </a>

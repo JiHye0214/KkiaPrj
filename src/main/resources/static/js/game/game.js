@@ -69,7 +69,7 @@ const gameSetting = () => {
                 if(game.gameDate == that) { // 기록 있으면
                     setTeamCode = game.opponent;
                     url = `https://tigers.co.kr/game/schedule/view?type=major&gameKey=${dateComplete}${setTeamCode}0&gameDate=${dateComplete}`
-                    window.open(`${url}`);
+                    window.open(`${url}`, "_blank");
                 }
             })
 

@@ -133,21 +133,24 @@ function getListItem(index, places) {
     var itemStr =
         `<span class="markerbg marker_${index + 1}"></span>` +
         `<div class="info">` +
-        `<h5>${places.place_name}</h5>
+            `<h5>${places.place_name}</h5>
     `;
 
+    // road_address_name : 도로명 주소
+    // address_name : 지번 주소
     if (places.road_address_name) {
         itemStr +=
             `<span>${places.road_address_name}</span>` +
-            `<span class="jibun gray">${places.address_name}</span>` +
-            `<input type="hidden" class="lat" value="${places.y}" />` +
-            `<input type="hidden" class="lng" value="${places.x}" />
-        `;
+            `<span class="jibun gray">${places.address_name}</span>`;
     } else {
         itemStr += `<span class="jibun gray">${places.address_name}</span>`;
     }
 
-    itemStr += `</div>`;
+    itemStr +=
+            `<input type="hidden" class="lat" value="${places.y}" />` +
+            `<input type="hidden" class="lng" value="${places.x}" />` +
+        `</div>`
+    ;
 
     el.innerHTML = itemStr;
     el.className = "item";
