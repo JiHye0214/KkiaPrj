@@ -97,7 +97,6 @@ main {
     flex-wrap: wrap;
     column-gap: 20px;
     row-gap: 20px;
-    min-height: 420px;
 }
 .list-content {
     position: relative;
