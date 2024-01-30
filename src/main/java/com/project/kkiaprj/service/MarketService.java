@@ -30,5 +30,5 @@ public interface MarketService {
     List<MarketTalkList> getMarketTalkList(Long userId, Model model);
     // 채팅 내용
     List<MarketTalk> getMarketTalk(Long recipientId, Model model);
-    int writeTalk(MarketTalk marketTalk);
+    int writeTalk(MarketTalk marketTalk, Long marketTalkListId);
 }

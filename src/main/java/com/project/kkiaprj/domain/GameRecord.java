@@ -2,10 +2,7 @@ package com.project.kkiaprj.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -21,10 +18,6 @@ public class GameRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "userId")
-    private User user;
-
     @Column(nullable = false)
     private String recordDate;
 
@@ -35,4 +28,10 @@ public class GameRecord {
     private String recordResult;
 
     private String recordMemo;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "userId")
+    @ToString.Exclude
+    private User user;
+
 }

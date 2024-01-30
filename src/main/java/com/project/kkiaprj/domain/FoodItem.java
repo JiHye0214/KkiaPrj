@@ -28,8 +28,9 @@ public class FoodItem {
 
     private double lng;
 
-    @Column(name = "foodId") // food_item 테이블에 foodId 라는 외래키 생김
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "foodId")
     @ToString.Exclude
-    private Long foodId;
+    private Food food;
 
 }

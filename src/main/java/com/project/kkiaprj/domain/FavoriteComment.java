@@ -24,7 +24,8 @@ public class FavoriteComment extends BaseEntity {
     @ToString.Exclude
     private User user;
 
-    @Column(name = "favoriteId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "favoriteId")
     @ToString.Exclude
-    private Long favoriteId;
+    private Favorite favorite;
 }

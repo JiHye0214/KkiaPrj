@@ -322,7 +322,7 @@ INSERT INTO market_talk_list (name) VALUES
 ;
 
 -- 마켓 채팅
-INSERT INTO market_talk (content, recipientId, createdDate, userId, roomId) VALUES 
+INSERT INTO market_talk (content, recipientId, createdDate, userId, marketTalkListId) VALUES 
 ('안녕하세요', 4, now(), 2, 1),
 ('안녕하세요2', 4, now(), 2, 1),
 ('안녕하세요3', 4, now(), 2, 1),

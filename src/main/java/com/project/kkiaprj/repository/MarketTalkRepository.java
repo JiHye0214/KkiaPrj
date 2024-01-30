@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MarketTalkRepository extends JpaRepository<MarketTalk, Long> {
-    List<MarketTalk> findByRoomId(Long roomId);
+
+    List<MarketTalk> findByMarketTalkListId(Long marketTalkListId);
 
 }

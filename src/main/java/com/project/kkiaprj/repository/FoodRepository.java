@@ -10,16 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface FoodRepository extends JpaRepository<Food, Long> {
 
-    @Query(value = "DROP TABLE IF EXISTS food", nativeQuery = true)
-    @Modifying
-    @Transactional
-    int dropTable();
-
-    @Query(value = "ALTER TABLE food AUTO_INCREMENT = 1", nativeQuery = true)
-    @Modifying
-    @Transactional
-    int setIdAsOne();
-
     Page<Food> findByRegion(String region, Pageable pageable);
 
 }

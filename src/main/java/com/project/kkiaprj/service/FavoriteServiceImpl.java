@@ -198,7 +198,7 @@ public class FavoriteServiceImpl implements FavoriteService {
             favorite = favoriteRepository.saveAndFlush(favorite);
 
             // 이미지 파일들 저장
-            addImgs(files, favorite.getId());
+            addImgs(favorite, files);
 
             result = 1;
         }
@@ -206,8 +206,8 @@ public class FavoriteServiceImpl implements FavoriteService {
         return result;
     }
 
-    // 이미 파일들 저장 함수
-    private void addImgs(Map<String, MultipartFile> files, Long favoriteId) {
+    // 이미지 파일들 저장 함수
+    private void addImgs(Favorite favorite, Map<String, MultipartFile> files) {
         for (Map.Entry<String, MultipartFile> e : files.entrySet()) {
             if (!e.getKey().startsWith("uploadImg")) continue;
 
@@ -216,7 +216,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
             // 각 file 확인해서 null 아니면(담긴 파일 있으면) DB 에도 저장
             if (favoriteImg != null) {
-                favoriteImg.setFavoriteId(favoriteId);
+                favoriteImg.setFavorite(favorite);
                 favoriteImgRepository.saveAndFlush(favoriteImg);
             }
         }
@@ -290,7 +290,7 @@ public class FavoriteServiceImpl implements FavoriteService {
             favoriteRepository.saveAndFlush(prevFavorite);
 
             // 새로운 이미지 파일들 저장
-            addImgs(files, favorite.getId());
+            addImgs(favorite, files);
 
             // 삭제 버튼 누른 이미지 파일들 삭제
             if (delfile != null) {

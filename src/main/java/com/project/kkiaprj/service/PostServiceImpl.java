@@ -4,9 +4,11 @@ import com.project.kkiaprj.Util.U;
 import com.project.kkiaprj.domain.Post;
 import com.project.kkiaprj.domain.PostComment;
 import com.project.kkiaprj.domain.PostImg;
+import com.project.kkiaprj.domain.User;
 import com.project.kkiaprj.repository.PostCommentRepository;
 import com.project.kkiaprj.repository.PostImgRepository;
 import com.project.kkiaprj.repository.PostRepository;
+import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -34,6 +36,8 @@ public class PostServiceImpl implements PostService {
     @Value("${app.upload.path}")
     private String uploadDir;
 
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private PostRepository postRepository;
     @Autowired
@@ -131,7 +135,7 @@ public class PostServiceImpl implements PostService {
             for(Long fileId : delFile) {
                 PostImg img = postImgRepository.findById(fileId).orElse(null);
                 if(img != null) {
-                    img.setPostId(post.getId());
+                    img.setPost(post);
                     deleteImgs(img); // upload 삭제
                     postImgRepository.delete(img); // db 삭제
                 }
@@ -173,7 +177,7 @@ public class PostServiceImpl implements PostService {
 
             // 하나씩) DB 저장
             if(postImg != null) {
-                postImg.setPostId(post.getId());
+                postImg.setPost(post);
                 postImgRepository.saveAndFlush(postImg);
             }
         }
@@ -240,9 +244,14 @@ public class PostServiceImpl implements PostService {
     // 댓글 작성
     @Override
     public int writePostComment(Long listItemId, PostComment postComment) {
-        postComment.setPostId(listItemId);
-        postComment.setUser(U.getLoggedUser());
+        User user = U.getLoggedUser();
+        user = userRepository.findById(user.getId()).orElse(null);
+        Post post = postRepository.findById(listItemId).orElse(null);
+
+        postComment.setUser(user);
+        postComment.setPost(post);
         postCommentRepository.saveAndFlush(postComment);
+
         return 1;
     }
 

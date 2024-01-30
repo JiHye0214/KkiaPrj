@@ -21,8 +21,9 @@ public class FavoriteImg {
     @Column(nullable = false)
     private String sourceName; // 원본 파일명
 
-    @Column(name = "favoriteId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "favoriteId")
     @ToString.Exclude
-    private Long favoriteId;
+    private Favorite favorite;
 
 }

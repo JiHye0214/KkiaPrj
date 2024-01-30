@@ -40,18 +40,15 @@ public class Favorite extends BaseEntity {
     @ToString.Exclude
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "favoriteId")
+    @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<FavoriteImg> favoriteImgs = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "favoriteId")
+    @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<FavoriteComment> comments = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "favoriteId")
+    @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<FavoriteLike> favoriteLikes = new ArrayList<>();
 

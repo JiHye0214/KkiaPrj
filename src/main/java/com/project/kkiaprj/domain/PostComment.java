@@ -22,7 +22,9 @@ public class PostComment extends BaseEntity {
     @ToString.Exclude
     private User user;
 
-    @Column(name = "postId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "postId")
     @ToString.Exclude
-    private Long postId;
+    private Post post;
+
 }

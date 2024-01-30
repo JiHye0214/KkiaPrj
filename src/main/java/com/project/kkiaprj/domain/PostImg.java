@@ -21,7 +21,9 @@ public class PostImg {
     @Column(nullable = false)
     private String sourceName; // 원본
 
-    @Column(name = "postId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "postId")
     @ToString.Exclude
-    private Long postId;
+    private Post post;
+
 }

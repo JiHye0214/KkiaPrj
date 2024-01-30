@@ -189,6 +189,7 @@ public class FoodServiceImpl implements FoodService {
                     .address(address.get(i))
                     .lat(lat.get(i))
                     .lng(lng.get(i))
+                    .food(food)
                     .build();
 
             foodItems.add(foodItem);
@@ -230,6 +231,7 @@ public class FoodServiceImpl implements FoodService {
                     .address(address.get(i))
                     .lat(lat.get(i))
                     .lng(lng.get(i))
+                    .food(food)
                     .build();
 
             foodItems.add(foodItem);

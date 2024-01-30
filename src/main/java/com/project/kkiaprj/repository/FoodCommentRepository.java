@@ -11,15 +11,4 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface FoodCommentRepository extends JpaRepository<FoodComment, Long> {
-
-    @Query(value = "DROP TABLE IF EXISTS food_comment", nativeQuery = true)
-    @Modifying
-    @Transactional
-    int dropTable();
-
-    @Query(value = "ALTER TABLE food_comment AUTO_INCREMENT = 1", nativeQuery = true)
-    @Modifying
-    @Transactional
-    int setIdAsOne();
-
 }

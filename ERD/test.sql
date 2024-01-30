@@ -2,8 +2,12 @@ SELECT *
 FROM user;
 
 SELECT *
-FROM food
-WHERE userId = 2;
+FROM favorite_comment 
+WHERE favoriteId = 1;
+
+SELECT *
+FROM favorite_img 
+WHERE favoriteId = 1;
 
 SELECT *
 FROM food_save  

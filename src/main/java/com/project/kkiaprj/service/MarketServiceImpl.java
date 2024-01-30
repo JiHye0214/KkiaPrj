@@ -131,7 +131,7 @@ public class MarketServiceImpl implements MarketService {
             for(Long fileId : delFiles) {
                 MarketImg img = marketImgRepository.findById(fileId).orElse(null);
                 if(img != null) {
-                    img.setMarketId(market.getId());
+                    img.setMarket(market);
                     deleteImgs(img); // upload 삭제
                     marketImgRepository.delete(img); // db 삭제
                 }
@@ -190,7 +190,7 @@ public class MarketServiceImpl implements MarketService {
             MarketImg marketImg = upload(e.getValue()); // 함수가 UserImg 타입을 반환
 
             if(marketImg != null) {
-                marketImg.setMarketId(market.getId());
+                marketImg.setMarket(market);
                 marketImgRepository.saveAndFlush(marketImg);
             }
         }
@@ -239,9 +239,9 @@ public class MarketServiceImpl implements MarketService {
         }
 
         marketImg = MarketImg.builder()
-                    .fileName(fileName)
-                    .sourceName(sourceName)
-                    .build();
+                .fileName(fileName)
+                .sourceName(sourceName)
+                .build();
 
         return marketImg;
     }
@@ -324,25 +324,31 @@ public class MarketServiceImpl implements MarketService {
         // 방 없으면 새로 파
         if(talkRoom == null) {
             MarketTalkList marketList = MarketTalkList.builder()
-                        .name(roomName1)
-                        .build();
+                    .name(roomName1)
+                    .build();
             talkRoom = marketTalkListRepository.saveAndFlush(marketList);
         } else {
             // 방 있으면 내용 가져오기
-            talks = marketTalkRepository.findByRoomId(talkRoom.getId());
+            talks = marketTalkRepository.findByMarketTalkListId(talkRoom.getId());
         }
 
         model.addAttribute("recipient", userRepository.findById(recipientId).orElse(null));
         model.addAttribute("talkList", talks);
-        model.addAttribute("roomId", talkRoom.getId());
+        model.addAttribute("marketTalkListId", talkRoom.getId());
 
         return talks;
     }
 
     @Override
-    public int writeTalk(MarketTalk marketTalk) {
-        marketTalk.setUser(U.getLoggedUser());
+    public int writeTalk(MarketTalk marketTalk, Long marketTalkListId) {
+        User user = U.getLoggedUser();
+        user = userRepository.findById(user.getId()).orElse(null);
+        MarketTalkList marketTalkList = marketTalkListRepository.findById(marketTalkListId).orElse(null);
+
+        marketTalk.setUser(user);
+        marketTalk.setMarketTalkList(marketTalkList);
         marketTalkRepository.saveAndFlush(marketTalk);
+
         return 1;
     }
 }

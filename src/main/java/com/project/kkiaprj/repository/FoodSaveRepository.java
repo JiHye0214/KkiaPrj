@@ -10,16 +10,6 @@ import java.util.List;
 
 public interface FoodSaveRepository extends JpaRepository<FoodSave, Long> {
 
-    @Query(value = "DROP TABLE IF EXISTS food_save", nativeQuery = true)
-    @Modifying
-    @Transactional
-    int dropTable();
-
-    @Query(value = "ALTER TABLE food_save AUTO_INCREMENT = 1", nativeQuery = true)
-    @Modifying
-    @Transactional
-    int setIdAsOne();
-
     FoodSave findByUserIdAndFoodId(Long userId, Long foodId);
 
 }

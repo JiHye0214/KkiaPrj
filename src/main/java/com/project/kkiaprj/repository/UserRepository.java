@@ -11,20 +11,13 @@ import java.time.LocalDate;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByNameAndEmail(String name, String email);
+
     User findByNameAndLoginId(String name, String loginId);
 
     User findByLoginId(String loginId);
+
     User findByNickname(String nickname);
+
     User findByEmail(String email);
-
-    @Query(value = "DROP TABLE IF EXISTS user", nativeQuery = true)
-    @Modifying
-    @Transactional
-    int dropTable();
-
-    @Query(value = "ALTER TABLE user AUTO_INCREMENT = 1", nativeQuery = true)
-    @Modifying
-    @Transactional
-    int setIdAsOne();
 
 }

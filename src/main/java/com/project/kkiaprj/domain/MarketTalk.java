@@ -25,7 +25,9 @@ public class MarketTalk extends BaseEntity{
     @Column(nullable = false)
     private Long recipientId; // 받는 사람
 
-    @Column(name = "roomId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "marketTalkListId")
     @ToString.Exclude
-    private Long roomId; // 톡방 id
+    private MarketTalkList marketTalkList; // 톡방
+
 }

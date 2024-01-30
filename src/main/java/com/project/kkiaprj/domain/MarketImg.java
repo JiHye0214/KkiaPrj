@@ -21,7 +21,9 @@ public class MarketImg {
     @Column(nullable = false)
     private String sourceName; // 원본
 
-    @Column(name = "marketId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "marketId")
     @ToString.Exclude
-    private Long marketId;
+    private Market market;
+
 }

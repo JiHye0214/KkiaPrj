@@ -1,9 +1,11 @@
 package com.project.kkiaprj.service;
 
 import com.project.kkiaprj.Util.U;
+import com.project.kkiaprj.domain.Food;
 import com.project.kkiaprj.domain.FoodComment;
 import com.project.kkiaprj.domain.User;
 import com.project.kkiaprj.repository.FoodCommentRepository;
+import com.project.kkiaprj.repository.FoodRepository;
 import com.project.kkiaprj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class FoodCommentServiceImpl implements FoodCommentService {
     private UserRepository userRepository;
 
     @Autowired
+    private FoodRepository foodRepository;
+
+    @Autowired
     private FoodCommentRepository foodCommentRepository;
 
     // 맛집 글 댓글 작성
@@ -24,10 +29,11 @@ public class FoodCommentServiceImpl implements FoodCommentService {
 
         User user = U.getLoggedUser();
         user = userRepository.findById(user.getId()).orElse(null);
+        Food food = foodRepository.findById(foodId).orElse(null);
 
         if (user != null) {
             foodComment.setUser(user);
-            foodComment.setFoodId(foodId);
+            foodComment.setFood(food);
             foodCommentRepository.saveAndFlush(foodComment);
 
             result = 1;

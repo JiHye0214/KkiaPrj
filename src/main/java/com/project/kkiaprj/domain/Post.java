@@ -35,13 +35,12 @@ public class Post extends BaseEntity{
     @ToString.Exclude
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "postId")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<PostImg> postImgs = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "postId")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<PostComment> comments = new ArrayList<>();
+
 }

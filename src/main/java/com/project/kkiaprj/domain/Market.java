@@ -40,9 +40,8 @@ public class Market extends BaseEntity {
     @ToString.Exclude
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "marketId")
+    @OneToMany(mappedBy = "market", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<MarketImg> marketImgs = new ArrayList<>(); // 이거는 db에 없네?
+    private List<MarketImg> marketImgs = new ArrayList<>();
 
 }

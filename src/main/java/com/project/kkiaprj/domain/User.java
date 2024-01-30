@@ -53,38 +53,56 @@ public class User extends BaseEntity {
     // 따라서 해당 타입들의 데이터 가져와야 함
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userImgId") // 부모 : user_img / 자식 : user
+    @JoinColumn(name = "userImgId")
     @ToString.Exclude
     private UserImg userImg;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId") // 부모 : user / 자식 : market
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Market> markets;
+    private List<LiveChat> liveChats = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId") // 부모 : user / 자식 : food
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Food> foods;
+    private List<GameRecord> gameRecords = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId") // 부모 : user / 자식 : favorite
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Favorite> favorites;
+    private List<Market> markets = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId") // 부모 : user / 자식 : post
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Post> posts;
+    private List<MarketTalk> marketTalks = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId") // 부모 : user / 자식 : food_save
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Food> foods = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<FoodComment> foodComments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<FoodSave> foodSaves = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId") // 부모 : user / 자식 : favorite_like
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Favorite> favorites = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<FavoriteComment> favoriteComments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<FavoriteLike> favoriteLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<PostComment> postComments = new ArrayList<>();
 
 }
