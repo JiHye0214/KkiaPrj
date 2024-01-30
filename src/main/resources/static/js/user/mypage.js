@@ -99,17 +99,17 @@ if($userWrapper != null){
 
         if (pwValidMode) {
             if (count < 3) {
-                $userErrMsg[0].innerHTML = `* 세 칸 모두 입력해 주세요`;
+                $userErrMsg[1].innerHTML = `* 세 칸 모두 입력해 주세요`;
                 return true;
             }
             if ($passwordInputArr[1].value.length < 6) {
-                $userErrMsg[0].innerHTML = `* 비밀번호는 6자리 이상으로 입력해 주세요`;
+                $userErrMsg[1].innerHTML = `* 비밀번호는 6자리 이상으로 입력해 주세요`;
                 return true;
             }
             if ($passwordInputArr[1].value == $passwordInputArr[2].value) {
                 pwValid = true;
             } else {
-                $userErrMsg[0].innerHTML = `* 신규 비밀번호와 비밀번호 확인이 같지 않습니다`;
+                $userErrMsg[1].innerHTML = `* 신규 비밀번호와 비밀번호 확인이 같지 않습니다`;
             }
         }
 

@@ -89,13 +89,9 @@ public class UserMypageServiceImpl implements UserMypageService {
     // 회원정보 변경
     @Override
     public void setNickname(String nickname, RedirectAttributes redirectAttrs) {
-        if(userRepository.findByNickname(nickname) != null){ // 중복 있으면
-            redirectAttrs.addFlashAttribute("nicknameErr", "nicknameErr");
-        } else {
-            User origin = U.getLoggedUser();
-            origin.setNickname(nickname);
-            userRepository.saveAndFlush(origin);
-        }
+        User origin = U.getLoggedUser();
+        origin.setNickname(nickname);
+        userRepository.saveAndFlush(origin);
     }
 
     @Override

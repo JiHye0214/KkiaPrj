@@ -258,7 +258,7 @@
                                     </label>
                                 </div>
                                 <label class="user-inform-items">
-                                    <div class="error-msg" th:if="${nicknameErr}">* 중복된 닉네임입니다</div>
+                                    <div class="error-msg" th:text="${nicknameErr}"></div>
                                     <div class="user-inform-title">닉네임</div>
                                     <input name="nickname" type="text" th:placeholder="${logged_user.nickname}" th:value="${logged_user.nickname}" />
                                 </label>

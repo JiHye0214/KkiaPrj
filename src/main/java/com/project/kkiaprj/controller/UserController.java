@@ -200,7 +200,11 @@ public class UserController {
 
         // 닉네임, 생일, 비번, 성별, 프사
         if(!Objects.equals(user.getNickname(), origin.getNickname())) { // 이전과 다르면
-            userMypageService.setNickname(user.getNickname(), redirectAttrs);
+            if(userService.isExistNn(user.getNickname())) {
+                redirectAttrs.addFlashAttribute("nicknameErr", "* 중복된 닉네임입니다");
+            } else {
+                userMypageService.setNickname(user.getNickname(), redirectAttrs);
+            }
         }
         if(!Objects.equals(user.getBirth(), origin.getBirth())) { // 이전과 다르면
             userMypageService.setBirth(user.getBirth());
